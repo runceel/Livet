@@ -1,0 +1,91 @@
+﻿<#@ template language="C#" #>
+<#
+// You can remove full path from generated code in Visual Studio.
+// 1. Show [Find and Replace] dialog (generally ctrl+shift+H).
+// 2. Enter '{\#line [1-9]+} ".+\\{[^\\]+\.tt}"' to finding string text box (without single quots).
+// 3. Enter '\1 "\2"' to replacement string text box (without single quots).
+// 4. Specify search condition as 'Regular expressions'
+// 5. Click [Replace All]
+#>
+//このコードはT4 Templateによって自動生成されています。
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Windows.Design.Metadata;
+using Microsoft.Windows.Design;
+
+using Livet.Behaviors.ControlBinding.OneWay;
+using Livet.Design.Properties;
+using System.ComponentModel;
+
+namespace Livet.Design
+{
+    public partial class MetaData
+    {
+        private void AddGenerateCodeAttributes(ref AttributeTableBuilder builder)
+        {
+
+<#
+foreach(var generateTypeName in GeneratedTypeNames)
+{
+#>
+<#
+	if(generateTypeName.IndexOf("ToSourceAction") != -1)
+	{
+#>
+			builder.AddCustomAttributes(
+                        typeof(<#=generateTypeName#>),
+                        new ToolboxCategoryAttribute(Resources.ToolBoxCategory_ControlBindingSupport_OneWayToSource));
+			
+			builder.AddCustomAttributes(
+                    typeof(<#=generateTypeName#>),
+                    new DescriptionAttribute(Resources.ControlBindingSupport_OneWayToSource_Description));
+
+			builder.AddCustomAttributes(
+                    typeof(<#=generateTypeName#>),
+                    "Property",
+                    new DescriptionAttribute(Resources.ControlBindingSupport_OneWayToSource_Property_Description));
+
+			builder.AddCustomAttributes(
+                    typeof(<#=generateTypeName#>),
+                    "Source",
+                    new DescriptionAttribute(Resources.ControlBindingSupport_OneWayToSource_Source_Description));
+
+<#
+	}
+#>
+<#
+	else
+	{
+#>
+			builder.AddCustomAttributes(
+                        typeof(<#=generateTypeName#>),
+                        new ToolboxCategoryAttribute(Resources.ToolBoxCategory_ControlBindingSupport_OneWayToControl));
+			
+			builder.AddCustomAttributes(
+                    typeof(<#=generateTypeName#>),
+                    new DescriptionAttribute(Resources.ControlBindingSupport_OneWayToControl_Description));
+
+			builder.AddCustomAttributes(
+                    typeof(<#=generateTypeName#>),
+                    "Property",
+                    new DescriptionAttribute(Resources.ControlBindingSupport_OneWayToControl_Property_Description));
+
+			builder.AddCustomAttributes(
+                    typeof(<#=generateTypeName#>),
+                    "Source",
+                    new DescriptionAttribute(Resources.ControlBindingSupport_OneWayToControl_Source_Description));
+
+
+<#
+	}
+#>  
+<#
+}
+#>
+
+        }
+    }
+}

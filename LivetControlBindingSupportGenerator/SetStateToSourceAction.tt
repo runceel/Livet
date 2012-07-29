@@ -1,0 +1,102 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#
+// You can remove full path from generated code in Visual Studio.
+// 1. Show [Find and Replace] dialog (generally ctrl+shift+H).
+// 2. Enter '{\#line [1-9]+} ".+\\{[^\\]+\.tt}"' to finding string text box (without single quots).
+// 3. Enter '\1 "\2"' to replacement string text box (without single quots).
+// 4. Specify search condition as 'Regular expressions'
+// 5. Click [Replace All]
+#>
+
+//このコードはT4 Templateによって自動生成されています。
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Interactivity;
+using System.Windows.Controls.Primitives;
+using System.ComponentModel;
+using System.Windows.Interop;
+
+namespace Livet.Behaviors.ControlBinding.OneWay
+{
+	/// <summary>
+	/// <#=TypeName#>クラスの、標準ではバインドできないプロパティを表します。
+	/// </summary>
+	public enum <#=TypeName#>UnbindableCanReadProperty
+	{
+<# 
+foreach(var key in GetterHavingTargetProperties.Keys)
+{
+#>
+		<#=key#><#if(key != GetterHavingTargetProperties.Keys.Last()){#>,
+<#}#>
+<#
+}
+#>
+
+	}
+
+	/// <summary>
+	/// <#=TypeName#>クラスのバインドできないプロパティから、値を指定されたソースに反映するためのアクションです。
+	/// </summary>
+	public class <#=TypeName#>SetStateToSourceAction : TriggerAction<<#=TypeName#>>
+	{
+		public <#=TypeName#>SetStateToSourceAction()
+		{
+		}
+
+		/// <summary>
+		/// 値を設定したいプロパティを取得または設定します。
+		/// </summary>
+		public <#=TypeName#>UnbindableCanReadProperty Property
+        {
+            get { return (<#=TypeName#>UnbindableCanReadProperty)GetValue(PropertyProperty); }
+            set { SetValue(PropertyProperty, value); }
+        }
+
+        public static readonly DependencyProperty PropertyProperty =
+            DependencyProperty.Register("Property", typeof(<#=TypeName#>UnbindableCanReadProperty), typeof(<#=TypeName#>SetStateToSourceAction), new PropertyMetadata());
+
+		/// <summary>
+		/// Propertyプロパティで指定されたプロパティから値が設定されるソースを取得または設定します。
+		/// </summary>
+		[Bindable(BindableSupport.Default,BindingDirection.TwoWay)]
+		public object Source
+        {
+            get { return (object)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
+        }
+
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register("Source", typeof(object), typeof(<#=TypeName#>SetStateToSourceAction), new PropertyMetadata(null));
+
+        protected override void Invoke(object parameter)
+        {
+            switch (Property)
+            {
+<#
+foreach(var key in GetterHavingTargetProperties.Keys)
+{
+#>
+                case <#=TypeName#>UnbindableCanReadProperty.<#=key#>:
+					if((<#=GetterHavingTargetProperties[key]#>)Source != AssociatedObject.<#=key#>)
+					{
+						Source = AssociatedObject.<#=key#>;
+					}
+                    break;
+<#
+}
+#>
+            }
+        }
+	}
+}

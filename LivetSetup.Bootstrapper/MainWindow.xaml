@@ -1,0 +1,33 @@
+﻿<Window x:Class="LivetSetup.Bootstrapper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Livet Setup"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        Topmost="True"
+        ContentRendered="mainWindow_ContentRendered"
+        x:Name="mainWindow">
+    <Window.Background>
+        <ImageBrush ImageSource="/LivetSetup;component/LivetBootstrapper.png" />
+    </Window.Background>
+    <Grid Width="340" Height="120" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Foreground="White" VerticalAlignment="Center">Please Select a language...</TextBlock>
+        <ComboBox Grid.Row="1" VerticalAlignment="Center" x:Name="mainComboBox" SelectedIndex="0" VerticalContentAlignment="Center" Height="26" Width="158" HorizontalAlignment="Left">
+            <ComboBox.Items>
+                <ComboBoxItem>日本語 (ja-JP)</ComboBoxItem>
+                <ComboBoxItem>English (en-US)</ComboBoxItem>
+            </ComboBox.Items>
+        </ComboBox>
+        <StackPanel Margin="0,0,0,0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Button Width="75" Height="25" Margin="0,3,5,3" x:Name="okButton" Click="okButton_Click">OK</Button>
+            <Button Width="75" Height="25" Margin="3,3,0,3" x:Name="cancelButton" Click="cancelButton_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

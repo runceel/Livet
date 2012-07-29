@@ -1,0 +1,126 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#
+// You can remove full path from generated code in Visual Studio.
+// 1. Show [Find and Replace] dialog (generally ctrl+shift+H).
+// 2. Enter '{\#line [1-9]+} ".+\\{[^\\]+\.tt}"' to finding string text box (without single quots).
+// 3. Enter '\1 "\2"' to replacement string text box (without single quots).
+// 4. Specify search condition as 'Regular expressions'
+// 5. Click [Replace All]
+#>
+
+//このコードはT4 Templateによって自動生成されています。
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Interactivity;
+using System.Windows.Controls.Primitives;
+using System.Windows.Interop;
+using System.ComponentModel;
+
+namespace Livet.Behaviors.ControlBinding.OneWay
+{
+	/// <summary>
+	/// <#=TypeName#>クラスの、標準ではバインドできないプロパティで書き込み可能なものを表します。
+	/// </summary>
+	public enum <#=TypeName#>UnbindableCanWriteProperty
+	{
+<# 
+foreach(var key in SetterHavingTargetProperties.Keys)
+{
+#>
+		<#=key#><#if(key != SetterHavingTargetProperties.Keys.Last()){#>,
+<#}#>
+<#
+}
+#>
+
+	}
+
+	/// <summary>
+	/// <#=TypeName#>クラスのバインディングできないプロパティに、指定されたソースから値を設定するためのビヘイビアです。
+	/// </summary>
+	public class <#=TypeName#>SetStateToControlBehavior : Behavior<<#=TypeName#>>
+	{
+		public <#=TypeName#>SetStateToControlBehavior()
+		{
+		}
+
+		/// <summary>
+		/// 値を設定したいプロパティを取得または設定します。
+		/// </summary>
+		public <#=TypeName#>UnbindableCanWriteProperty Property
+        {
+            get { return (<#=TypeName#>UnbindableCanWriteProperty)GetValue(PropertyProperty); }
+            set { SetValue(PropertyProperty, value); }
+        }
+
+        public static readonly DependencyProperty PropertyProperty =
+            DependencyProperty.Register("Property", typeof(<#=TypeName#>UnbindableCanWriteProperty), typeof(<#=TypeName#>SetStateToControlBehavior), new PropertyMetadata());
+
+		/// <summary>
+		/// Propertyプロパティで指定されたプロパティに値を設定するソースを取得または設定します。
+		/// </summary>
+		[Bindable(BindableSupport.Default,BindingDirection.OneWay)]
+		public object Source
+        {
+            get { return (object)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
+        }
+
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register("Source", typeof(object), typeof(<#=TypeName#>SetStateToControlBehavior), new PropertyMetadata(null,new PropertyChangedCallback(SourceChanged)));
+
+        private static void SourceChanged(DependencyObject sender,DependencyPropertyChangedEventArgs e)
+        {
+			var thisObject = (<#=TypeName#>SetStateToControlBehavior)sender;
+			
+			if(thisObject.AssociatedObject == null)
+			{
+				return;
+			}
+
+            switch (thisObject.Property)
+            {
+<#
+foreach(var key in SetterHavingTargetProperties.Keys)
+{
+#>
+                case <#=TypeName#>UnbindableCanWriteProperty.<#=key#>:
+					if(e.NewValue == null)
+					{
+						return;
+					}
+					if(e.OldValue != null)
+					{
+						if((<#=SetterHavingTargetProperties[key]#>)e.OldValue == (<#=SetterHavingTargetProperties[key]#>)e.NewValue)
+						{
+							return;
+						}
+					}
+					thisObject.AssociatedObject.<#=key#> = (<#=SetterHavingTargetProperties[key]#>)thisObject.Source;
+                    break;
+<#
+}
+#>
+
+            }
+        }
+
+		protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            //Attatch時の評価
+            SourceChanged(this, new DependencyPropertyChangedEventArgs(SourceProperty, null, Source));
+        }
+	}
+}

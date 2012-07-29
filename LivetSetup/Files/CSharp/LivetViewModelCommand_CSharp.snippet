@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2008/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Livet ViewModelCommand</Title>
+      <Shortcut>lvcom</Shortcut>
+      <Author>Livet Project</Author>
+      <Description>ViewModelCommandを作成します</Description>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>Livet.Commands</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>コマンド名</ToolTip>
+          <Default>Do</Default>
+        </Literal>
+        <Literal Editable="false">
+          <ID>ViewModelCommand</ID>
+          <Function>SimpleTypeName(global::Livet.Commands.ViewModelCommand)</Function> 
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+<![CDATA[
+#region $name$Command
+private $ViewModelCommand$ _$name$Command;
+
+public $ViewModelCommand$ $name$Command
+{
+get
+{
+if (_$name$Command == null)
+{
+_$name$Command = new $ViewModelCommand$($name$, Can$name$);
+}
+return _$name$Command;
+}
+}
+
+public bool Can$name$()
+{
+}
+
+public void $name$()
+{
+$end$
+}
+#endregion
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
