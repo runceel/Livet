@@ -82,7 +82,7 @@
     <None Include="Livet.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Livet\Livet.csproj">
+    <ProjectReference Include="..\.NET4.0\Livet(.NET4.0)\Livet(.NET4.0).csproj">
       <Project>{0EF98261-40BF-45A5-B990-8DAC1DE43D67}</Project>
       <Name>Livet</Name>
     </ProjectReference>

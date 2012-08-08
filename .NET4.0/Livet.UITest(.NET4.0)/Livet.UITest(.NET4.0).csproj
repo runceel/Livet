@@ -118,11 +118,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Livet.Extensions\Livet.Extensions.csproj">
+    <ProjectReference Include="..\..\Livet.Extensions\Livet.Extensions.csproj">
       <Project>{8FB79215-A524-4D4E-8944-A984CB65610D}</Project>
       <Name>Livet.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Livet\Livet.csproj">
+    <ProjectReference Include="..\Livet(.NET4.0)\Livet(.NET4.0).csproj">
       <Project>{0EF98261-40BF-45A5-B990-8DAC1DE43D67}</Project>
       <Name>Livet</Name>
     </ProjectReference>

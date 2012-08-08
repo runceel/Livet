@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{78C97B
 		Images\LivetInstallBanner.design = Images\LivetInstallBanner.design
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet", "Livet\Livet.csproj", "{0EF98261-40BF-45A5-B990-8DAC1DE43D67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet(.NET4.0)", ".NET4.0\Livet(.NET4.0)\Livet(.NET4.0).csproj", "{0EF98261-40BF-45A5-B990-8DAC1DE43D67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Design", "Livet.Design\Livet.Design.csproj", "{D3C58359-8430-4A51-A77E-4E78E1E0A7D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Design(.NET4.0)", ".NET4.0\Livet.Design(.NET4.0)\Livet.Design(.NET4.0).csproj", "{D3C58359-8430-4A51-A77E-4E78E1E0A7D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetControlBindingSupportGenerator", "LivetControlBindingSupportGenerator\LivetControlBindingSupportGenerator.csproj", "{CD564616-032A-4FB5-BCBD-B942A99864D8}"
 EndProject
@@ -41,9 +41,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snk", "Snk", "{5AE51B18-D01
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Extensions", "Livet.Extensions\Livet.Extensions.csproj", "{8FB79215-A524-4D4E-8944-A984CB65610D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.NUnit", "Livet.NUnit\Livet.NUnit.csproj", "{7F52E397-3959-4D6C-B04C-10A2951F21A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.NUnit(.NET4.0)", ".NET4.0\Livet.NUnit(.NET4.0)\Livet.NUnit(.NET4.0).csproj", "{7F52E397-3959-4D6C-B04C-10A2951F21A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.UITest", "Livet.UITest\Livet.UITest.csproj", "{FC88031F-A2B9-4283-975A-1DD341CE433C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.UITest(.NET4.0)", ".NET4.0Livet.UITest(.NET4.0)\Livet.UITest(.NET4.0).csproj", "{FC88031F-A2B9-4283-975A-1DD341CE433C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetEnumAndBooleanConverterGenerator", "LivetEnumAndBooleanConverterGenerator\LivetEnumAndBooleanConverterGenerator.csproj", "{1AB1F5D2-BD71-47A7-A5F7-1C199DC1AD52}"
 EndProject
