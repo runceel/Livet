@@ -3,6 +3,6 @@ bin
 obj
 _ReSharper.Livet
 *.DotSettings.user
-
+*.suo
 # mstest test results
 TestResults
