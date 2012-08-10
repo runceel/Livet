@@ -35,52 +35,6 @@ namespace Livet.Messaging
         }
 
         /// <summary>
-        /// 指定された相互作用メッセージを非同期で送信します。
-        /// </summary>
-        /// <param name="message">相互作用メッセージ</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
-        public void RaiseAsync(InteractionMessage message)
-        {
-            if (message == null)
-            {
-                throw new ArgumentException("messageはnullにできません");
-            }
-
-            if (!message.IsFrozen)
-            {
-                message.Freeze();
-            }
-
-            var task = Task.Factory.StartNew(() => Raise(message), CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
-            task.ContinueWith(t =>
-                {
-                    var e = new AsyncMessageFailedEventArgs(t.Exception);
-                    OnAsyncMessageFailed(e);
-                    t.Exception.Handle(ex => true);
-                }, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
-        }
-
-        /// <summary>
-        /// 非同期で発信された相互作用メッセージが失敗した際に発生するイベントです。
-        /// </summary>
-        public event EventHandler<AsyncMessageFailedEventArgs> AsyncMessageFailed;
-
-        protected virtual void OnAsyncMessageFailed( AsyncMessageFailedEventArgs e )
-        {
-            if ( e == null )
-            {
-                throw new ArgumentNullException( "e" );
-            }
-
-            var threadSafeHandler = Interlocked.CompareExchange( ref AsyncMessageFailed, null, null );
-
-            if (threadSafeHandler != null)
-            {
-               threadSafeHandler(this, e);
-            }
-         }
-
-        /// <summary>
         /// 指定された、戻り値情報のある相互作用メッセージを同期的に送信します。
         /// </summary>
         /// <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
@@ -111,6 +65,38 @@ namespace Livet.Messaging
         }
 
         /// <summary>
+        /// 相互作用メッセージが送信された時に発生するイベントです。
+        /// </summary>
+        public event EventHandler<InteractionMessageRaisedEventArgs> Raised;
+
+#if NET4
+        /// <summary>
+        /// 指定された相互作用メッセージを非同期で送信します。
+        /// </summary>
+        /// <param name="message">相互作用メッセージ</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+        public void RaiseAsync(InteractionMessage message)
+        {
+            if (message == null)
+            {
+                throw new ArgumentException("messageはnullにできません");
+            }
+
+            if (!message.IsFrozen)
+            {
+                message.Freeze();
+            }
+
+            var task = Task.Factory.StartNew(() => Raise(message), CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            task.ContinueWith(t =>
+                {
+                    var e = new AsyncMessageFailedEventArgs(t.Exception);
+                    OnAsyncMessageFailed(e);
+                    t.Exception.Handle(ex => true);
+                }, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
+        }
+
+        /// <summary>
         /// 指定された、戻り値情報のある相互作用メッセージを非同期で送信します。
         /// </summary>
         /// <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
@@ -132,19 +118,77 @@ namespace Livet.Messaging
             var task = Task<T>.Factory.StartNew(() => GetResponse(message));
 
             task.ContinueWith(t =>
-            {
-                var e = new AsyncMessageFailedEventArgs(t.Exception);
-                OnAsyncMessageFailed(e);
-                t.Exception.Handle(ex => true);
-            }, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
+                {
+                    var e = new AsyncMessageFailedEventArgs(t.Exception);
+                    OnAsyncMessageFailed(e);
+                    t.Exception.Handle(ex => true);
+                }, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
 
             task.ContinueWith(t => callback(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
         }
 
         /// <summary>
-        /// 相互作用メッセージが送信された時に発生するイベントです。
+        /// 非同期で発信された相互作用メッセージが失敗した際に発生するイベントです。
         /// </summary>
-        public event EventHandler<InteractionMessageRaisedEventArgs> Raised;
+        public event EventHandler<AsyncMessageFailedEventArgs> AsyncMessageFailed;
+
+        protected virtual void OnAsyncMessageFailed( AsyncMessageFailedEventArgs e )
+        {
+            if ( e == null )
+            {
+                throw new ArgumentNullException( "e" );
+            }
+
+            var threadSafeHandler = Interlocked.CompareExchange( ref AsyncMessageFailed, null, null );
+
+            if (threadSafeHandler != null)
+            {
+                threadSafeHandler(this, e);
+            }
+        }
+#elif NET45
+        /// <summary>
+        /// 指定された相互作用メッセージを非同期で送信します。
+        /// </summary>
+        /// <param name="message">相互作用メッセージ</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+        public async Task RaiseAsync(InteractionMessage message)
+        {
+            if (message == null)
+            {
+                throw new ArgumentException("messageはnullにできません");
+            }
+
+            if (!message.IsFrozen)
+            {
+                message.Freeze();
+            }
+
+            await Task.Factory.StartNew(() => Raise(message));
+        }
+
+        /// <summary>
+        /// 指定された、戻り値情報のある相互作用メッセージを非同期で送信します。
+        /// </summary>
+        /// <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
+        /// <param name="message">戻り値情報のある相互作用メッセージ</param>
+        /// <param name="callback">コールバック</param>
+        public async Task<T> GetResponseAsync<T>(T message, Action<T> callback)
+            where T : ResponsiveInteractionMessage
+        {
+            if (message == null)
+            {
+                throw new ArgumentException("messageはnullにできません");
+            }
+
+            if (!message.IsFrozen)
+            {
+                message.Freeze();
+            }
+
+            return await Task<T>.Factory.StartNew(() => GetResponse(message));
+        }
+#endif
     }
 
 
@@ -172,6 +216,7 @@ namespace Livet.Messaging
         }
     }
 
+#if NET4
     /// <summary>
     /// 非同期メッセージ失敗イベント用のイベント引数です。
     /// </summary>
@@ -193,4 +238,5 @@ namespace Livet.Messaging
 
         public AggregateException Exception { get; private set; }
     }
+#endif
 }

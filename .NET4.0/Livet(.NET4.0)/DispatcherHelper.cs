@@ -36,6 +36,9 @@ namespace Livet
         /// </summary>
         /// <param name="action">アクション</param>
         /// <exception cref="InvalidOperationException">UIDispatcherインスタンスがApp.StartUpなどで確保されていません。</exception>
+#if NET45
+        [Obsolete]
+#endif
         public static void BeginInvoke(Action action)
         {
             if (UIDispatcher == null)
@@ -52,6 +55,9 @@ namespace Livet
         /// <param name="action">アクション</param>
         /// <param name="priority">DispatcherPriority</param>
         /// <exception cref="InvalidOperationException">UIDispatcherインスタンスがApp.StartUpなどで確保されていません。</exception>
+#if NET45
+        [Obsolete]
+#endif
         public static void BeginInvoke(Action action, DispatcherPriority priority)
         {
             if (UIDispatcher == null)

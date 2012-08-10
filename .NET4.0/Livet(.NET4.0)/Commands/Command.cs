@@ -46,7 +46,11 @@ namespace Livet.Commands
 
                 if (handlerWeakReference.TryGetTarget(out result))
                 {
+#if NET4
                     DispatcherHelper.BeginInvoke(() => result(this, EventArgs.Empty));
+#elif NET45
+                    DispatcherHelper.UIDispatcher.InvokeAsync(() => result(this, EventArgs.Empty));
+#endif
                 }
                 else
                 {

@@ -33,7 +33,11 @@ namespace Livet.UITest
                 if (EqualityComparer<bool>.Default.Equals(_CanClose, value))
                     return;
                 _CanClose = value;
+#if NET4
                 RaisePropertyChanged("CanClose");
+#elif NET45
+                RaisePropertyChanged();
+#endif
             }
         }
         #endregion
@@ -50,7 +54,11 @@ namespace Livet.UITest
                 if (EqualityComparer<bool>.Default.Equals(_Maximize, value))
                     return;
                 _Maximize = value;
+#if NET4
                 RaisePropertyChanged("Maximize");
+#elif NET45
+                RaisePropertyChanged();
+#endif
             }
         }
         #endregion
@@ -67,7 +75,11 @@ namespace Livet.UITest
                 if (EqualityComparer<FolderSelectionDialogPreference>.Default.Equals(_FolderDialogKind, value))
                     return;
                 _FolderDialogKind = value;
+#if NET4
                 RaisePropertyChanged("FolderDialogKind");
+#elif NET45
+                RaisePropertyChanged();
+#endif
             }
         }
         #endregion

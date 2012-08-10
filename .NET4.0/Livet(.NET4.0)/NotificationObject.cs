@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace Livet
@@ -40,7 +41,11 @@ namespace Livet
         /// </summary>
         /// <param name="propertyName">プロパティ名</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+#if NET4
         protected virtual void RaisePropertyChanged(string propertyName)
+#elif NET45
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName="")
+#endif
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged,null,null);
             if (threadSafeHandler != null)
