@@ -37,21 +37,23 @@
     <StartupObject>Livet.UITest.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceAssemblies\Microsoft.Expression.Interactions.dll</HintPath>
+      <HintPath>..\..\ReferenceAssemblies\.NET4.5\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack">
-      <HintPath>..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
-      <HintPath>..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceAssemblies\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\ReferenceAssemblies\.NET4.5\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,10 +97,6 @@
     <ProjectReference Include="..\Livet%28.NET4.5%29\Livet%28.NET4.5%29.csproj">
       <Project>{93990e82-b8e1-41e8-b6f5-9a6c87674221}</Project>
       <Name>Livet%28.NET4.5%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Livet.Extensions\Livet.Extensions.csproj">
-      <Project>{8fb79215-a524-4d4e-8944-a984cb65610d}</Project>
-      <Name>Livet.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

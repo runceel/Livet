@@ -63,26 +63,26 @@ namespace Livet.UITest
         }
         #endregion
 
-        #region FolderDialogKind変更通知プロパティ
-        private FolderSelectionDialogPreference _FolderDialogKind;
+//        #region FolderDialogKind変更通知プロパティ
+//        private FolderSelectionDialogPreference _FolderDialogKind;
 
-        public FolderSelectionDialogPreference FolderDialogKind
-        {
-            get
-            { return _FolderDialogKind; }
-            set
-            { 
-                if (EqualityComparer<FolderSelectionDialogPreference>.Default.Equals(_FolderDialogKind, value))
-                    return;
-                _FolderDialogKind = value;
-#if NET4
-                RaisePropertyChanged("FolderDialogKind");
-#elif NET45
-                RaisePropertyChanged();
-#endif
-            }
-        }
-        #endregion
+//        public FolderSelectionDialogPreference FolderDialogKind
+//        {
+//            get
+//            { return _FolderDialogKind; }
+//            set
+//            { 
+//                if (EqualityComparer<FolderSelectionDialogPreference>.Default.Equals(_FolderDialogKind, value))
+//                    return;
+//                _FolderDialogKind = value;
+//#if NET4
+//                RaisePropertyChanged("FolderDialogKind");
+//#elif NET45
+//                RaisePropertyChanged();
+//#endif
+//            }
+//        }
+//        #endregion
 
         public void RequestClose(ConfirmationMessage message)
         {
@@ -108,12 +108,12 @@ namespace Livet.UITest
             Maximize = !Maximize;
         }
 
-        public void FolderSelected(FolderSelectionMessage message)
-        {
-            if (!string.IsNullOrEmpty(message.Response))
-            {
-                Messenger.RaiseAsync(new InformationMessage(message.Response + " が選択されました！","情報",System.Windows.MessageBoxImage.Information,"Info"));
-            }
-        }
+        //public void FolderSelected(FolderSelectionMessage message)
+        //{
+        //    if (!string.IsNullOrEmpty(message.Response))
+        //    {
+        //        Messenger.RaiseAsync(new InformationMessage(message.Response + " が選択されました！","情報",System.Windows.MessageBoxImage.Information,"Info"));
+        //    }
+        //}
     }
 }

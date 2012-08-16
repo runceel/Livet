@@ -40,7 +40,7 @@ using System;
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.4.0")]
+[assembly: AssemblyVersion("1.0.5.0")]
 
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet")]
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet.Commands")]

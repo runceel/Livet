@@ -71,7 +71,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <Button Content="フォルダーの選択(自動選択)" Width="330" Height="30" Margin="5" HorizontalAlignment="Left" Padding="3" HorizontalContentAlignment="Left">
+        <!--<Button Content="フォルダーの選択(自動選択)" Width="330" Height="30" Margin="5" HorizontalAlignment="Left" Padding="3" HorizontalContentAlignment="Left">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:FolderBrowserDialogInteractionMessageAction>
@@ -103,7 +103,7 @@
                     </l:FolderBrowserDialogInteractionMessageAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-        </Button>
+        </Button>-->
         <Button Content="ControlBinding検証用Windowへ遷移" Width="300" Height="30" Margin="5" HorizontalAlignment="Left">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">

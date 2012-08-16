@@ -4,57 +4,22 @@
         <name>Livet.Extensions</name>
     </assembly>
     <members>
-        <member name="T:Livet.Properties.Resources">
+        <member name="T:Livet.Behaviors.Messaging.IO.FolderBrowserDialogInteractionMessageAction">
             <summary>
-              ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
+            	Show folder browser dialog.
+            	<see cref="T:Livet.Behaviors.Messaging.InteractionMessageAction`1"/> for <see cref="T:Livet.Messaging.IO.FolderSelectionMessage"/>.
+            	This object must be hosted by <see cref="T:System.Windows.FrameworkElement"/>.
             </summary>
         </member>
-        <member name="P:Livet.Properties.Resources.ResourceManager">
+        <member name="M:Livet.Behaviors.Messaging.IO.FolderBrowserDialogInteractionMessageAction.InvokeAction(Livet.Messaging.InteractionMessage)">
             <summary>
-              このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
+            	Invokes the action related to this class.
             </summary>
+            <param name="m"><see cref="T:Livet.Messaging.IO.FolderSelectionMessage"/> specified to <see cref="T:Livet.Messaging.InteractionMessenger"/> in the client.</param>
         </member>
-        <member name="P:Livet.Properties.Resources.Culture">
+        <member name="T:Livet.Dialogs.CommonOpenFileFolderSelectionDialog">
             <summary>
-              厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
-              現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
-            </summary>
-        </member>
-        <member name="P:Livet.Properties.Resources.FolderSelectionDialogFactory_CommonItemDialogIsSupportedFromWindowsNT6">
-            <summary>
-              Common Item Dialog is supported from Windows Vista/Windows Server 2008. に類似しているローカライズされた文字列を検索します。
-            </summary>
-        </member>
-        <member name="P:Livet.Properties.Resources.UnsupportedEnumValue">
-            <summary>
-              Unsupported &apos;{0}&apos; value &apos;{1}&apos;({2},0x{2:x8}). に類似しているローカライズされた文字列を検索します。
-            </summary>
-        </member>
-        <member name="T:Livet.Messaging.IO.FolderSelectionDialogPreference">
-            <summary>
-            	Specify preferred selection dialog implementation.
-            </summary>
-            <remarks>
-            	When you have to use specific dialog implementation
-            	regardless of underlying platform then specify this value explicitly.
-            </remarks>
-        </member>
-        <member name="F:Livet.Messaging.IO.FolderSelectionDialogPreference.None">
-            <summary>
-            	Do not specify any preference.
-            	Livet selects most appropriate options for current platform.
-            </summary>
-        </member>
-        <member name="F:Livet.Messaging.IO.FolderSelectionDialogPreference.FolderBrowser">
-            <summary>
-            	Specifies using always <see cref="T:System.Windows.Forms.FolderBrowserDialog"/>.
-            </summary>
-        </member>
-        <member name="F:Livet.Messaging.IO.FolderSelectionDialogPreference.CommonItemDialog">
-            <summary>
-            	Specifies using Win32 Common Item Dialog (namely, IFileOpenDialig).
-            	When the platform is prior to Windows Vista/Windows Server 2008,
-            	<see cref="T:System.PlatformNotSupportedException"/> is thrown.
+            	<see cref="T:Livet.Dialogs.FolderSelectionDialog"/> implementation based on Win32 Common Item Dialog.
             </summary>
         </member>
         <member name="T:Livet.Dialogs.FolderSelectionDialog">
@@ -124,6 +89,50 @@
             	The <c>null</c> or empty indicates using default title.
             </value>
         </member>
+        <member name="M:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Livet.Dialogs.CommonOpenFileFolderSelectionDialog"/> class.
+            </summary>
+        </member>
+        <member name="M:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.ShowDialogCore(System.Windows.Window)">
+            <summary>
+            Shows the dialog with specified <see cref="T:System.Windows.Window"/> as host window.
+            </summary>
+            <param name="hostWindow">The host window which will host this dialog. This value will not be <c>null</c>.</param>
+            <returns>
+            The result of the dialog.
+            </returns>
+        </member>
+        <member name="P:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.Title">
+            <summary>
+            	Gets or sets the title of the dialog.
+            </summary>
+            <value>
+            	The title of the dialog.
+            	Some dialog cannot support this value.
+            	The <c>null</c> or empty indicates using default title.
+            </value>
+        </member>
+        <member name="P:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.Description">
+            <summary>
+            	This property is not supported.
+            </summary>
+            <value>Always <see cref="F:String.Empty"/>.</value>
+        </member>
+        <member name="P:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.SelectedPath">
+            <summary>
+            Gets or sets the selected path.
+            </summary>
+            <value>
+            The selected path. This will be default path when the dialog is opened.
+            </value>
+        </member>
         <member name="T:Livet.Dialogs.FolderBrowserFolderSelectionDialog">
             <summary>
             	<see cref="T:Livet.Dialogs.FolderSelectionDialog"/> implementation using WinForm's <see cref="T:System.Windows.Forms.FolderBrowserDialog"/>.
@@ -189,6 +198,58 @@
             <returns>
             	A handle to the window represented by the implementer.
             </returns>
+        </member>
+        <member name="T:Livet.Dialogs.FolderSelectionDialogFactory">
+            <summary>
+            	The factory to abstract concrete implementation of <see cref="T:Livet.Dialogs.FolderSelectionDialog"/>.
+            </summary>
+        </member>
+        <member name="M:Livet.Dialogs.FolderSelectionDialogFactory.CreateDialog(Livet.Messaging.IO.FolderSelectionDialogPreference)">
+            <summary>
+            	Creates the appropriate <see cref="T:Livet.Dialogs.FolderSelectionDialog"/> for running platform.
+            </summary>
+            <param name="preference">Folder selection dialog impementation preference.</param>
+            <returns>
+            	The appropriate <see cref="T:Livet.Dialogs.FolderSelectionDialog"/> for running platform.
+            </returns>
+            <remarks>
+            	The return value is determined with running platform and <paramref name="preference"/>.
+            </remarks>
+        </member>
+        <member name="P:Livet.Dialogs.FolderSelectionDialogFactory.CanUseCommonItemDialog">
+            <summary>
+            	Gets a value indicating whether this platform can use Win32 Common Item Dialog.
+            </summary>
+            <value>
+            	<c>true</c> if this platform can use Win32 Common Item Dialog; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Livet.Messaging.IO.FolderSelectionDialogPreference">
+            <summary>
+            	Specify preferred selection dialog implementation.
+            </summary>
+            <remarks>
+            	When you have to use specific dialog implementation
+            	regardless of underlying platform then specify this value explicitly.
+            </remarks>
+        </member>
+        <member name="F:Livet.Messaging.IO.FolderSelectionDialogPreference.None">
+            <summary>
+            	Do not specify any preference.
+            	Livet selects most appropriate options for current platform.
+            </summary>
+        </member>
+        <member name="F:Livet.Messaging.IO.FolderSelectionDialogPreference.FolderBrowser">
+            <summary>
+            	Specifies using always <see cref="T:System.Windows.Forms.FolderBrowserDialog"/>.
+            </summary>
+        </member>
+        <member name="F:Livet.Messaging.IO.FolderSelectionDialogPreference.CommonItemDialog">
+            <summary>
+            	Specifies using Win32 Common Item Dialog (namely, IFileOpenDialig).
+            	When the platform is prior to Windows Vista/Windows Server 2008,
+            	<see cref="T:System.PlatformNotSupportedException"/> is thrown.
+            </summary>
         </member>
         <member name="T:Livet.Messaging.IO.FolderSelectionMessage">
             <summary>
@@ -290,92 +351,31 @@
             	The dialog preference. Default is <see cref="F:Livet.Messaging.IO.FolderSelectionDialogPreference.None"/>.
             </value>
         </member>
-        <member name="T:Livet.Dialogs.FolderSelectionDialogFactory">
+        <member name="T:Livet.Properties.Resources">
             <summary>
-            	The factory to abstract concrete implementation of <see cref="T:Livet.Dialogs.FolderSelectionDialog"/>.
+              ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
             </summary>
         </member>
-        <member name="M:Livet.Dialogs.FolderSelectionDialogFactory.CreateDialog(Livet.Messaging.IO.FolderSelectionDialogPreference)">
+        <member name="P:Livet.Properties.Resources.ResourceManager">
             <summary>
-            	Creates the appropriate <see cref="T:Livet.Dialogs.FolderSelectionDialog"/> for running platform.
-            </summary>
-            <param name="preference">Folder selection dialog impementation preference.</param>
-            <returns>
-            	The appropriate <see cref="T:Livet.Dialogs.FolderSelectionDialog"/> for running platform.
-            </returns>
-            <remarks>
-            	The return value is determined with running platform and <paramref name="preference"/>.
-            </remarks>
-        </member>
-        <member name="P:Livet.Dialogs.FolderSelectionDialogFactory.CanUseCommonItemDialog">
-            <summary>
-            	Gets a value indicating whether this platform can use Win32 Common Item Dialog.
-            </summary>
-            <value>
-            	<c>true</c> if this platform can use Win32 Common Item Dialog; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="T:Livet.Dialogs.CommonOpenFileFolderSelectionDialog">
-            <summary>
-            	<see cref="T:Livet.Dialogs.FolderSelectionDialog"/> implementation based on Win32 Common Item Dialog.
+              このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
             </summary>
         </member>
-        <member name="M:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.#ctor">
+        <member name="P:Livet.Properties.Resources.Culture">
             <summary>
-            Initializes a new instance of the <see cref="T:Livet.Dialogs.CommonOpenFileFolderSelectionDialog"/> class.
+              厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+              現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
             </summary>
         </member>
-        <member name="M:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.Dispose(System.Boolean)">
+        <member name="P:Livet.Properties.Resources.FolderSelectionDialogFactory_CommonItemDialogIsSupportedFromWindowsNT6">
             <summary>
-            Releases unmanaged and - optionally - managed resources
-            </summary>
-            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        </member>
-        <member name="M:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.ShowDialogCore(System.Windows.Window)">
-            <summary>
-            Shows the dialog with specified <see cref="T:System.Windows.Window"/> as host window.
-            </summary>
-            <param name="hostWindow">The host window which will host this dialog. This value will not be <c>null</c>.</param>
-            <returns>
-            The result of the dialog.
-            </returns>
-        </member>
-        <member name="P:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.Title">
-            <summary>
-            	Gets or sets the title of the dialog.
-            </summary>
-            <value>
-            	The title of the dialog.
-            	Some dialog cannot support this value.
-            	The <c>null</c> or empty indicates using default title.
-            </value>
-        </member>
-        <member name="P:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.Description">
-            <summary>
-            	This property is not supported.
-            </summary>
-            <value>Always <see cref="F:String.Empty"/>.</value>
-        </member>
-        <member name="P:Livet.Dialogs.CommonOpenFileFolderSelectionDialog.SelectedPath">
-            <summary>
-            Gets or sets the selected path.
-            </summary>
-            <value>
-            The selected path. This will be default path when the dialog is opened.
-            </value>
-        </member>
-        <member name="T:Livet.Behaviors.Messaging.IO.FolderBrowserDialogInteractionMessageAction">
-            <summary>
-            	Show folder browser dialog.
-            	<see cref="T:Livet.Behaviors.Messaging.InteractionMessageAction`1"/> for <see cref="T:Livet.Messaging.IO.FolderSelectionMessage"/>.
-            	This object must be hosted by <see cref="T:System.Windows.FrameworkElement"/>.
+              Common Item Dialog is supported from Windows Vista/Windows Server 2008. に類似しているローカライズされた文字列を検索します。
             </summary>
         </member>
-        <member name="M:Livet.Behaviors.Messaging.IO.FolderBrowserDialogInteractionMessageAction.InvokeAction(Livet.Messaging.InteractionMessage)">
+        <member name="P:Livet.Properties.Resources.UnsupportedEnumValue">
             <summary>
-            	Invokes the action related to this class.
+              Unsupported &apos;{0}&apos; value &apos;{1}&apos;({2},0x{2:x8}). に類似しているローカライズされた文字列を検索します。
             </summary>
-            <param name="m"><see cref="T:Livet.Messaging.IO.FolderSelectionMessage"/> specified to <see cref="T:Livet.Messaging.InteractionMessenger"/> in the client.</param>
         </member>
     </members>
 </doc>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2213440F-B566-4730-9040-B0CC58681B8B}</ProjectGuid>
+    <ProjectGuid>{75A6EAEE-E95B-457B-A3D0-E8356BC167D1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Livet.Design</RootNamespace>
-    <AssemblyName>Livet.Design</AssemblyName>
+    <RootNamespace>Livet.Extensions</RootNamespace>
+    <AssemblyName>Livet.Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -28,7 +28,6 @@
     <DefineConstants>TRACE;NET45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -41,54 +40,74 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ReferenceAssemblies\.NET4.5\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.Windows.Design.Extensibility.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.Windows.Design.Interaction.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ReferenceAssemblies\.NET4.5\System.Windows.Interactivity.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\.NET4.0\Livet.Design%28.NET4.0%29\MetaData.cs">
-      <Link>MetaData.cs</Link>
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Behaviors\Messaging\IO\FolderBrowserDialogInteractionMessageAction.cs">
+      <Link>Behaviors\Messaging\IO\FolderBrowserDialogInteractionMessageAction.cs</Link>
     </Compile>
-    <Compile Include="..\..\.NET4.0\Livet.Design%28.NET4.0%29\MetaData.generated.cs">
-      <Link>MetaData.generated.cs</Link>
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Dialogs\CommonOpenFileFolderSelectionDialog.cs">
+      <Link>Dialogs\CommonOpenFileFolderSelectionDialog.cs</Link>
     </Compile>
-    <Compile Include="..\..\.NET4.0\Livet.Design%28.NET4.0%29\Properties\AssemblyInfo.cs">
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Dialogs\FolderBrowserFolderSelectionDialog.cs">
+      <Link>Dialogs\FolderBrowserFolderSelectionDialog.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Dialogs\FolderSelectionDialog.cs">
+      <Link>Dialogs\FolderSelectionDialog.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Dialogs\FolderSelectionDialogFactory.cs">
+      <Link>Dialogs\FolderSelectionDialogFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Messaging\IO\FolderSelectionDialogPreference.cs">
+      <Link>Messaging\IO\FolderSelectionDialogPreference.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Messaging\IO\FolderSelectionMessage.cs">
+      <Link>Messaging\IO\FolderSelectionMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\.NET4.0\Livet.Design%28.NET4.0%29\Properties\Resources.Designer.cs">
+    <Compile Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Properties\Resources.Designer.cs">
       <Link>Properties\Resources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Livet%28.NET4.5%29\Livet%28.NET4.5%29.csproj">
-      <Project>{93990e82-b8e1-41e8-b6f5-9a6c87674221}</Project>
-      <Name>Livet%28.NET4.5%29</Name>
-    </ProjectReference>
+    <None Include="Livet.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\.NET4.0\Livet.Design%28.NET4.0%29\Properties\Resources.resx">
+    <EmbeddedResource Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Properties\Resources.ja.resx">
+      <Link>Properties\Resources.ja.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\.NET4.0\Livet.Extensions%28.NET4.0%29\Properties\Resources.resx">
       <Link>Properties\Resources.resx</Link>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Livet.snk" />
+    <ProjectReference Include="..\Livet%28.NET4.5%29\Livet%28.NET4.5%29.csproj">
+      <Project>{93990e82-b8e1-41e8-b6f5-9a6c87674221}</Project>
+      <Name>Livet%28.NET4.5%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

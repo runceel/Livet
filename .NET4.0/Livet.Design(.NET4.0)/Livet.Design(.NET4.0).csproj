@@ -40,7 +40,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceAssemblies\Microsoft.Expression.Interactions.dll</HintPath>
+      <HintPath>..\..\ReferenceAssemblies\.NET4.0\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -49,7 +49,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceAssemblies\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\ReferenceAssemblies\.NET4.0\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
