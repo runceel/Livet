@@ -65,6 +65,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.NUnit(.NET4.5)", ".NE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.UITest(.NET4.5)", ".NET4.5\Livet.UITest(.NET4.5)\Livet.UITest(.NET4.5).csproj", "{438BE11E-78B2-4B1C-9304-54A4C49D820D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4537ECF7-CF34-4721-9384-CBF3A326E8D3}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Livet.vsmdi
