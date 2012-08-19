@@ -27,7 +27,9 @@ namespace Livet.Behaviors
             if (targetObject == null) throw new ArgumentNullException("targetObject");
             if (methodName == null) throw new ArgumentNullException("methodName");
 
-            if (_targetObjectType == targetObject.GetType() && _methodName == methodName)
+            var newTargetObjectType = targetObject.GetType();
+
+            if (_targetObjectType == newTargetObjectType && _methodName == methodName)
             {
                 if (_method != null)
                 {
@@ -48,7 +50,7 @@ namespace Livet.Behaviors
                 }
             }
 
-            _targetObjectType = targetObject.GetType();
+            _targetObjectType = newTargetObjectType;
             _methodName = methodName;
 
             if (TryGetCacheFromMethodCacheDictionary(out _method))

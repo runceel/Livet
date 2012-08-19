@@ -28,9 +28,12 @@ namespace Livet.Behaviors
             if (targetObject == null) throw new ArgumentNullException("targetObject");
             if (methodName == null) throw new ArgumentNullException("methodName");
 
-            if (_targetObjectType == targetObject.GetType() && 
+            var newTargetObjectType = targetObject.GetType();
+            var newArgumentType = argument.GetType();
+
+            if (_targetObjectType == newTargetObjectType && 
                 _methodName == methodName &&
-                _argumentType == argument.GetType())
+                _argumentType == newArgumentType)
             {
                 if (_method != null)
                 {
@@ -51,8 +54,8 @@ namespace Livet.Behaviors
                 }
             }
 
-            _targetObjectType = targetObject.GetType();
-            _argumentType = argument.GetType();
+            _targetObjectType = newTargetObjectType;
+            _argumentType = newArgumentType;
             _methodName = methodName;
 
             if (TryGetCacheFromMethodCacheDictionary(out _method))
@@ -70,7 +73,9 @@ namespace Livet.Behaviors
 
                     if (parameters.Length != 1) return false;
 
-                    if (!_argumentType.IsAssignableFrom(parameters[0].ParameterType)) return false;
+                    //if (!_argumentType.IsAssignableFrom(parameters[0].ParameterType)) return false;
+
+                    if (!parameters[0].ParameterType.IsInstanceOfType(_argumentType)) return false;
 
                     return method.ReturnType == typeof(void);
                 });

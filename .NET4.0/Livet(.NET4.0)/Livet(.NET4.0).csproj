@@ -204,6 +204,7 @@
     <Compile Include="Behaviors\Messaging\Windows\WindowInteractionMessageAction.cs" />
     <Compile Include="Behaviors\MethodBinder.cs" />
     <Compile Include="Behaviors\MethodBinderWithArgument.cs" />
+    <Compile Include="Behaviors\MethodCache.cs" />
     <Compile Include="Behaviors\RoutedEventTrigger.cs" />
     <Compile Include="Behaviors\SetFocusAction.cs" />
     <Compile Include="Behaviors\WindowCloseCancelBehavior.cs" />
