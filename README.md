@@ -9,7 +9,7 @@ Livet is a very powerful MVVM Infrastructure for WPF, and developped by Japanese
 ---
 We're welcoming anyone who loves WPF and MVVM for our project. Don't hesitate to fork, send pull requests, and post issues.
 
-In addition, since Livet is developped by Japanese, there are few English documents (and none written in any other languages, of course). So we're looking for contributors who translate our Japanese Documents into English. 
+In addition, since Livet is developped by Japanese, there are few English documents (and none of any other languages, of course). So we're looking for contributors who translate our Japanese Documents into English. 
 
 
 ##Licensing
