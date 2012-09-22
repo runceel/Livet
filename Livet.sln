@@ -3,10 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReferenceAssemblies", "ReferenceAssemblies", "{2A9295C6-FB3D-41DF-967B-60BCE5934B51}"
 	ProjectSection(SolutionItems) = preProject
-		ReferenceAssemblies\Microsoft.Expression.Interactions.dll = ReferenceAssemblies\Microsoft.Expression.Interactions.dll
 		ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll = ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll
 		ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll = ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll
-		ReferenceAssemblies\System.Windows.Interactivity.dll = ReferenceAssemblies\System.Windows.Interactivity.dll
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{78C97B3C-F7BC-4F3C-8594-993F12BF2B4C}"

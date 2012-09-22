@@ -66,9 +66,11 @@ namespace Livet.EventListeners
 
             if (!result) return;
 
-            if (_handlerDictionary.ContainsKey(e.Action))
+            ConcurrentBag<NotifyCollectionChangedEventHandler> list;
+            _handlerDictionary.TryGetValue(e.Action, out list);
+            if(list != null)
             {
-                foreach (var handler in _handlerDictionary[e.Action])
+                foreach (var handler in list)
                 {
                     handler(sourceResult, e);
                 }

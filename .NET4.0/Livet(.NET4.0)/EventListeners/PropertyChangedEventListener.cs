@@ -85,17 +85,25 @@ namespace Livet.EventListeners
 
             if (!result) return;
 
-            if (e.PropertyName != null && _handlerDictionary.ContainsKey(e.PropertyName))
+            if(e.PropertyName != null)
             {
-                foreach (var handler in _handlerDictionary[e.PropertyName])
+                ConcurrentBag<PropertyChangedEventHandler> list;
+                _handlerDictionary.TryGetValue(e.PropertyName, out list);
+
+                if(list != null)
                 {
-                    handler(sourceResult, e);
+                    foreach (var handler in list)
+                    {
+                        handler(sourceResult, e);
+                    }
                 }
             }
 
-            if (_handlerDictionary.ContainsKey(string.Empty))
+            ConcurrentBag<PropertyChangedEventHandler> allList;
+            _handlerDictionary.TryGetValue(string.Empty, out allList);
+            if(allList != null)
             {
-                foreach (var handler in _handlerDictionary[string.Empty])
+                foreach (var handler in allList)
                 {
                     handler(sourceResult, e);
                 }
