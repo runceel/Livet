@@ -73,9 +73,9 @@ namespace Livet.Behaviors
 
                     if (parameters.Length != 1) return false;
 
-                    //if (!_argumentType.IsAssignableFrom(parameters[0].ParameterType)) return false;
+                    if (!_argumentType.IsAssignableFrom(parameters[0].ParameterType)) return false;
 
-                    if (!parameters[0].ParameterType.IsInstanceOfType(_argumentType)) return false;
+                    //if (!parameters[0].ParameterType.IsInstanceOfType(_argumentType)) return false;
 
                     return method.ReturnType == typeof(void);
                 });
