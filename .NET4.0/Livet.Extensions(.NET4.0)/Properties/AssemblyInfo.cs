@@ -30,3 +30,9 @@ using System.Runtime.CompilerServices;
 
 [assembly: XmlnsDefinition( "http://schemas.livet-mvvm.net/2011/wpf", "Livet.Messaging.IO" )]
 [assembly: XmlnsDefinition( "http://schemas.livet-mvvm.net/2011/wpf", "Livet.Behaviors.Messaging.IO" )]
+
+#if NET4
+[assembly: AssemblyFileVersion("1.0.3.4")]
+#elif NET45
+[assembly: AssemblyFileVersion("1.0.3.45")]
+#endif

@@ -54,3 +54,9 @@ using System;
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet.Behaviors.Messaging.Windows")]
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet.Behaviors.ControlBinding")]
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet.Behaviors.ControlBinding.OneWay")]
+
+#if NET4
+[assembly: AssemblyFileVersion("1.0.5.4")]
+#elif NET45
+[assembly: AssemblyFileVersion("1.0.5.45")]
+#endif

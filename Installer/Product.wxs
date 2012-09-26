@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <Product Id="FDE77749-23C6-4943-AC1D-B850675B438F"
+           Name="Livet"
+           Language='!(loc.language)'
+           Codepage='932'
+           Version="1.0.5"
+           Manufacturer="Livet Project"
+           UpgradeCode="C88BA8DB-7A63-405F-BBD3-0366A43C5047"
+           >
+
+    <Package InstallerVersion="200"
+             Languages='!(loc.language)'
+             SummaryCodepage='932'
+             Compressed="yes"
+             InstallPrivileges="elevated"
+             InstallScope="perMachine"
+             Manufacturer="Livet Project"
+             Id="*"/>
+
+    <Upgrade Id='C88BA8DB-7A63-405F-BBD3-0366A43C5047'>
+      <UpgradeVersion OnlyDetect='no' Property='PREVIOUSFOUND'
+                      Maximum='1.0.4' IncludeMaximum='no' />
+      <UpgradeVersion OnlyDetect='yes' Property='SELFFOUND'
+                      Minimum='1.0.4' IncludeMinimum='yes'
+                      Maximum='1.0.4' IncludeMaximum='yes' />
+      <UpgradeVersion OnlyDetect='yes' Property='NEWERFOUND'
+                      Minimum='1.0.4' IncludeMinimum='no'/>
+    </Upgrade>
+
+    <Media Id="1" Cabinet="LivetMedia.cab" EmbedCab="yes" />
+
+    <WixVariable Id="WixUILicenseRtf" Value="Files/license-en.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="Files/LivetInstallBanner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Files/LivetInstallDialog.bmp" />
+
+    <Icon Id="icon.ico" SourceFile="Files/Livet.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+    <PropertyRef Id="VS2010_ROOT_FOLDER"/>
+    <PropertyRef Id="VS2010_ITEMTEMPLATES_DIR"/>
+    <PropertyRef Id="VS2010_PROJECTTEMPLATES_DIR"/>
+    <PropertyRef Id="VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED"/>
+    <PropertyRef Id="VS2010_IDE_VB_PROJECTSYSTEM_INSTALLED"/>
+    
+    <PropertyRef Id="VCSHARP2010EXPRESS_IDE"/>
+    <PropertyRef Id="VB2010EXPRESS_IDE"/>
+    
+    <PropertyRef Id="VS2012_ROOT_FOLDER"/>
+    <PropertyRef Id="VS2012_ITEMTEMPLATES_DIR"/>
+    <PropertyRef Id="VS2012_PROJECTTEMPLATES_DIR"/>
+    <PropertyRef Id="VS2012_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED"/>
+    <PropertyRef Id="VS2012_IDE_VB_PROJECTSYSTEM_INSTALLED"/>
+
+    <Property Id="VWDEXPRESS_IDE">
+      <RegistrySearch
+          Id="VWDEXPRESS_IDE_SEARCH"
+			    Root="HKLM"
+			    Key="SOFTWARE\Wow6432Node\Microsoft\WDExpress\11.0"
+			    Name="ShellFolder"
+          Type="directory"/>
+    </Property>
+
+    <Property Id="VCSHARP2010EXPRESS_PROJECT_TEMPLATE">
+      <RegistrySearch
+          Id="VCSHARP2010EXPRESS_PROJECT_TEMPLATE_SEARCH"
+			    Root="HKLM"
+			    Key="Software\Microsoft\VCSExpress\10.0\VSTemplate\Project"
+			    Name="UserFolder"
+          Type="directory"/>
+    </Property>
+
+    <Property Id="VCSHARP2010EXPRESS_ITEM_TEMPLATE">
+      <RegistrySearch
+          Id="VCSHARP2010EXPRESS_ITEM_TEMPLATE_SEARCH"
+          Root="HKLM"
+          Key="Software\Microsoft\VCSExpress\10.0\VSTemplate\Item"
+          Name="UserFolder"
+          Type="directory"/>
+    </Property>
+
+    <Property Id="VB2010EXPRESS_PROJECT_TEMPLATE">
+      <RegistrySearch
+          Id="VB2010EXPRESS_PROJECT_TEMPLATE_SEARCH"
+			    Root="HKLM"
+			    Key="Software\Microsoft\VBExpress\10.0\VSTemplate\Project"
+			    Name="UserFolder"
+          Type="directory"/>
+    </Property>
+
+    <Property Id="VB2010EXPRESS_ITEM_TEMPLATE">
+      <RegistrySearch
+          Id="VB2010EXPRESS_ITEM_TEMPLATE_SEARCH"
+          Root="HKLM"
+          Key="Software\Microsoft\VBExpress\10.0\VSTemplate\Item"
+          Name="UserFolder"
+          Type="directory"/>
+    </Property>
+
+    <Property Id="VS2012EXPRESS_IDE">
+      <RegistrySearch
+          Id="VS2012EXPRESS_IDE_SEARCH"
+          Root="HKLM"
+          Key="SOFTWARE\Microsoft\WDExpress\11.0"
+          Name="InstallDir"
+          Type="directory"/>
+    </Property>
+
+    <Property Id="RESHARPER7">
+      <RegistrySearch
+          Id="RESHARPER7_SEARCH"
+          Root="HKLM"
+          Key="Software\JetBrains\ReSharper\v7.0"
+          Name="InstallDir"
+          Type="directory"/>
+    </Property>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONFOLDER" Name="Livet">
+
+          <!--Item Template Extension-->
+          <Directory Id="WindowsFolder">
+            <Directory Id="AssemblyFolder">
+
+              <Component Id="GACDeploymentItemTemplateExtension" Guid="4081B4F2-5E16-4259-8F89-D5DBE589890B">
+                <File Assembly=".net"
+                      KeyPath="yes"
+                      Source="Files/Livet.ItemTemplateExtension.dll"/>
+              </Component>
+
+            </Directory>
+          </Directory>
+
+          <!--Document-->
+          <Component Id="LicenseEn" Guid="2E2422E6-626A-4BD7-A751-5FB0CEA267D8">
+            <File Compressed="default" Source="Files/license-en.rtf"/>
+          </Component>
+          <Component Id="LicenseJp" Guid="5BE2D2FA-F481-4393-9B59-33E146CE4E23">
+            <File Compressed="default" Source="Files/license-jp.rtf"/>
+          </Component>
+
+          <!--Binary-->
+          <Directory Id="Binaries" Name="Binaries">
+            
+            <Directory Id="NET4.0" Name="NET4.0">
+              
+              <Component Id="LivetMain4" Guid="8015A701-CF54-5699-8B0C-3241F0DAAA14">
+                <File Id="LivetMain4File" Compressed="default" Source="Files/Binaries/NET4.0/Livet.dll" KeyPath="yes"/>
+              </Component>
+              <Component Id="LivetMainXmlDocument4" Guid="EAB7D920-791D-5E00-A528-7174FC5A7632">
+                <File Id="LivetMainXmlDocument4File" Compressed="default" Source="Files/Binaries/NET4.0/Livet.xml"/>
+              </Component>
+              <Component Id="LivetExtensions4" Guid="0997408E-D93B-4F53-BCEA-2C2E8EA262FA">
+                <File Id="LivetExtensions4File" Compressed="default" Source="Files/Binaries/NET4.0/Livet.Extensions.dll"/>
+              </Component>
+              <Component Id="LivetExtensionsXmlDocument4" Guid="7845A7E2-F09B-4CC0-BF96-6719FACBFEE2">
+                <File Id="LivetExtensionsXmlDocument4File" Compressed="default" Source="Files/Binaries/NET4.0/Livet.Extensions.xml"/>
+              </Component>
+
+              <Component Id="SystemWindowsInteractivity4" Guid="18CC9366-7256-4D7A-BC89-6CA5F658006F">
+                <File Id="SystemWindowsInteractivity4File" Compressed="default" Source="Files/Binaries/NET4.0/System.Windows.Interactivity.dll"/>
+              </Component>
+              <Component Id="MicrosoftExpressionInteractions4" Guid="59179140-7C67-4CD6-9E1F-9B3041840B8C">
+                <File Id="MicrosoftExpressionInteractions4File" Compressed="default" Source="Files/Binaries/NET4.0/Microsoft.Expression.Interactions.dll"/>
+              </Component>
+              
+              <Directory Id="Design4" Name="Design">
+                <Component Id="LivetMainDesign4" Guid="6D50F384-EA17-5406-A23B-E95EB6DE0A4D">
+                  <File Id="LivetMainDesign4File" Compressed="default" Source="Files/Binaries/NET4.0/Livet.Design.dll" KeyPath="yes"/>
+                </Component>
+              </Directory>
+              
+            </Directory>
+            
+            <Directory Id="NET4.5" Name="NET4.5">
+              
+              <Component Id="LivetMain45" Guid="EA0466ED-3762-47B2-BFC3-43719E0F8F10">
+                <File Id="LivetMain45File" Compressed="default" Source="Files/Binaries/NET4.5/Livet.dll" KeyPath="yes"/>
+              </Component>
+              <Component Id="LivetMainXmlDocument45" Guid="E3CE9C6A-C2A1-438C-9B1B-53039AC363FD">
+                <File Id="LivetMainXmlDocument45File" Compressed="default" Source="Files/Binaries/NET4.5/Livet.xml"/>
+              </Component>
+              <Component Id="LivetExtensions45" Guid="3A7A1048-97B5-4D74-BE46-2B3CFD0B641F">
+                <File Id="LivetExtensions45File" Compressed="default" Source="Files/Binaries/NET4.5/Livet.Extensions.dll"/>
+              </Component>
+              <Component Id="LivetExtensionsXmlDocument45" Guid="473842D7-5046-488C-A9E9-CB72363514CE">
+                <File Id="LivetExtensionsXmlDocument45File" Compressed="default" Source="Files/Binaries/NET4.5/Livet.Extensions.xml"/>
+              </Component>
+
+              <Component Id="SystemWindowsInteractivity45" Guid="1B98DC6E-F4E6-4528-89B3-5ADE37E13A1E">
+                <File Id="SystemWindowsInteractivity45File" Compressed="default" Source="Files/Binaries/NET4.5/System.Windows.Interactivity.dll"/>
+              </Component>
+              <Component Id="MicrosoftExpressionInteractions45" Guid="E07CB091-92C7-4A81-8D5A-5CD7D7852C4E">
+                <File Id="MicrosoftExpressionInteractions45File" Compressed="default" Source="Files/Binaries/NET4.5/Microsoft.Expression.Interactions.dll"/>
+              </Component>
+              
+              <Directory Id="Design45" Name="Design">
+                <Component Id="LivetMainDesign45" Guid="23227855-73B0-4CB3-B5C7-19B3EDF03428">
+                  <File Id="LivetMainDesign45File" Compressed="default" Source="Files/Binaries/NET4.5/Livet.Design.dll" KeyPath="yes"/>
+                </Component>
+              </Directory>
+            
+            </Directory>
+            
+            <Component Id="MicrosoftWindowsAPICodePack" Guid="A508613D-777F-43DC-8A8C-826276A3B6F4">
+              <File Compressed="default" Source="Files/Binaries/Microsoft.WindowsAPICodePack.dll"/>
+            </Component>
+            
+            <Component Id="MicrosoftWindowsAPICodePackShell" Guid="1037B1D0-C4F0-4A77-B8EF-57A80AF536A1">
+              <File Compressed="default" Source="Files/Binaries/Microsoft.WindowsAPICodePack.Shell.dll"/>
+            </Component>
+          
+          </Directory>
+
+          <!--Snippet-->
+          <Directory Id="VS2010_ROOT_FOLDER">
+            <Directory Id="VS2010_CSHARP" Name="VC#">
+              <Directory Id ="VS2010_CSHARP_SNIPPETS" Name="Snippets">
+                <Directory Id="SNIPPETS_2010_LCID_CSHARP" Name='!(loc.language)'>
+                  <Directory Id="SNIPPETS_2010_CSHARP" Name="Visual C#">
+
+                    <Component Id="Snippets_2010_CSharp" Guid="7BE08894-1847-4EAA-8151-457AEEE80AC8">
+                      <File Id="LivetViewModelCommand_CSharp_2010.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommand_CSharp.snippet" />
+                      <File Id="LivetViewModelCommandNoCanExecute_CSharp_2010.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommandNoCanExecute_CSharp.snippet" />
+                      <File Id="LivetListenerCommand_CSharp.snippet_2010" Compressed="default" Source="Files/Snippets/LivetListenerCommand_CSharp.snippet" />
+                      <File Id="LivetListenerCommandNoCanExecute_CSharp_2010.snippet" Compressed="default" Source="Files/Snippets/LivetListenerCommandNoCanExecute_CSharp.snippet" />
+                      <File Id="LivetProperty4_CSharp_2010.snippet" Compressed="default" Source="Files/Snippets/LivetProperty_NET4_CSharp.snippet" />
+                    </Component>
+
+                  </Directory>
+                </Directory>
+              </Directory>
+            </Directory>
+
+            <Directory Id="VS2010_VB" Name="VB">
+              <Directory Id ="VS2010_VB_SNIPPETS" Name="Snippets">
+                <Directory Id="SNIPPETS_2010_LCID_VB" Name='!(loc.language)'>
+                  <Directory Id="SNIPPETS_2010_VB" Name="application">
+
+                    <Component Id="Snippets_2010_VB" Guid="3E89A294-F411-494A-881B-4E54F5ACCD6E">
+                      <File Id="LivetViewModelCommand_VB_2010.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommand_VB.snippet" />
+                      <File Id="LivetViewModelCommandNoCanExecute_VB_2010.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommandNoCanExecute_VB.snippet" />
+                      <File Id="LivetListenerCommand_VB_2010.snippet" Compressed="default" Source="Files/Snippets/LivetListenerCommand_VB.snippet" />
+                      <File Id="LivetListenerCommandNoCanExecute_VB_2010.snippet" Compressed="default" Source="Files/Snippets/LivetListenerCommandNoCanExecute_VB.snippet" />
+                      <File Id="LivetProperty4_VB_2010.snippet" Compressed="default" Source="Files/Snippets/LivetProperty_NET4_VB.snippet" />
+                    </Component>
+
+                  </Directory>
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+          
+          <Directory Id="VS2012_ROOT_FOLDER">
+            <Directory Id="VS2012_CSHARP" Name="VC#">
+              <Directory Id ="VS2012_CSHARP_SNIPPETS" Name="Snippets">
+                <Directory Id="SNIPPETS_2012_LCID_CSHARP" Name='!(loc.language)'>
+                  <Directory Id="SNIPPETS_2012_CSHARP" Name="Visual C#">
+
+                    <Component Id="Snippets_2012_CSharp" Guid="9F7D1151-EE20-4ED7-BBFC-8E7EADC7F127">
+                      <File Id="LivetViewModelCommand_CSharp_2012.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommand_CSharp.snippet" />
+                      <File Id="LivetViewModelCommandNoCanExecute_CSharp_2012.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommandNoCanExecute_CSharp.snippet" />
+                      <File Id="LivetListenerCommand_CSharp_2012.snippet" Compressed="default" Source="Files/Snippets/LivetListenerCommand_CSharp.snippet" />
+                      <File Id="LivetListenerCommandNoCanExecute_CSharp_2012.snippet" Compressed="default" Source="Files/Snippets/LivetListenerCommandNoCanExecute_CSharp.snippet" />
+                      <File Id="LivetProperty4_CSharp_2012.snippet" Compressed="default" Source="Files/Snippets/LivetProperty_NET4_CSharp.snippet" />
+                      <File Id="LivetProperty45_CSharp_2012.snippet" Compressed="default" Source="Files/Snippets/LivetProperty_NET45_CSharp.snippet" />
+                    </Component>
+
+                  </Directory>
+                </Directory>
+              </Directory>
+            </Directory>
+
+            <Directory Id="VS2012_VB" Name="VB">
+              <Directory Id ="VS2012_VB_SNIPPETS" Name="Snippets">
+                <Directory Id="SNIPPETS_2012_LCID_VB" Name='!(loc.language)'>
+                  <Directory Id="SNIPPETS_2012_VB" Name="application">
+
+                    <Component Id="Snippets_2012_VB" Guid="AACF36ED-57FA-47A5-9753-421832C6CBB1">
+                      <File Id="LivetViewModelCommand_VB_2012.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommand_VB.snippet" />
+                      <File Id="LivetViewModelCommandNoCanExecute_VB_2012.snippet" Compressed="default" Source="Files/Snippets/LivetViewModelCommandNoCanExecute_VB.snippet" />
+                      <File Id="LivetListenerCommand_VB_2012.snippet" Compressed="default" Source="Files/Snippets/LivetListenerCommand_VB.snippet" />
+                      <File Id="LivetListenerCommandNoCanExecute_VB_2012.snippet" Compressed="default" Source="Files/Snippets/LivetListenerCommandNoCanExecute_VB.snippet" />
+                      <File Id="LivetProperty4_VB_2012.snippet" Compressed="default" Source="Files/Snippets/LivetProperty_NET4_VB.snippet" />
+                      <File Id="LivetProperty45_VB_2012.snippet" Compressed="default" Source="Files/Snippets/LivetProperty_NET45_VB.snippet" />
+                    </Component>
+
+                  </Directory>
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+
+          <!--Project Template for VS 2010-->
+          <Directory Id="VS2010_PROJECTTEMPLATES_DIR">
+
+            <Directory Id="CSHARP_PROJECTTEMPLATES" Name="CSharp">
+              <Directory Id="CSHARP_PROJECTTEMPLATES_WINDOWS" Name="Windows">
+                <Directory Id="CSHARP_PROJECTTEMPLATES_WINDOWS_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetProjectTemplateForVs_2010_CSharp" Guid="5E624672-E662-4B83-A19D-8DA1C056F046">
+                    <File Id="LivetProjectTemplate_VS2010_CSharp" Compressed="default" Source="Files/Templates/Livet_WPF4.0_CSharp.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+
+            <Directory Id="VB_PROJECTTEMPLATES" Name="VisualBasic">
+              <Directory Id="VB_PROJECTTEMPLATES_WINDOWS" Name="Windows">
+                <Directory Id="VB_PROJECTTEMPLATES_WINDOWS_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetProjectTemplateForVs_2010_VB" Guid="30C96854-49F3-4924-A691-D75B552544AD">
+                    <File Id="LivetProjectTemplate_VS2010_VB" Compressed="default" Source="Files/Templates/Livet_WPF4.0_VB.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+          
+          <!--Project Template for VS 2012-->
+          <Directory Id="VS2012_PROJECTTEMPLATES_DIR">
+
+            <Directory Id="CSHARP_2012_PROJECTTEMPLATES" Name="CSharp">
+              <Directory Id="CSHARP_2012_PROJECTTEMPLATES_WINDOWS" Name="Windows">
+                <Directory Id="CSHARP_2012_PROJECTTEMPLATES_WINDOWS_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetProjectTemplateForVs_2012_CSharp" Guid="C80061F8-BAD9-4515-9538-28F2C8B59554">
+                    <File Id="LivetProjectTemplate4_VS2012_CSharp" Compressed="default" Source="Files/Templates/Livet_WPF4.0_CSharp.zip" />
+                    <File Id="LivetProjectTemplate45_VS2012_CSharp" Compressed="default" Source="Files/Templates/Livet_WPF4.5_CSharp.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+
+            <Directory Id="VB_2012_PROJECTTEMPLATES" Name="VisualBasic">
+              <Directory Id="VB_2012_PROJECTTEMPLATES_WINDOWS" Name="Windows">
+                <Directory Id="VB_2012_PROJECTTEMPLATES_WINDOWS_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetProjectTemplateForVs_2012_VB" Guid="16D2DC7F-0359-4EA4-BE44-1108D7C34FEA">
+                    <File Id="LivetProjectTemplate4_VS2012_VB" Compressed="default" Source="Files/Templates/Livet_WPF4.0_VB.zip" />
+                    <File Id="LivetProjectTemplate45_VS2012_VB" Compressed="default" Source="Files/Templates/Livet_WPF4.5_VB.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+
+          <!--Project Template for Express C# 2010-->
+          <Directory Id="VCSHARP2010EXPRESS_PROJECT_TEMPLATE">
+            <Directory Id="VCSHARP2010EXPRESS_PROJECT_TEMPLATE_LCID" Name='!(loc.language)'>
+
+              <Component Id="LivetProjectTemplateForExpress_CSharp" Guid="6EA26F63-DAF2-4489-B7DB-F1886708EC61">
+                <File Id="LivetProjectTemplate_Express2010_CSharp" Compressed="default" Source="Files/Templates/Livet_WPF4.0_CSharp.zip" />
+              </Component>
+
+            </Directory>
+          </Directory>
+
+          <!--Project Template for Express VB 2010-->
+          <Directory Id="VB2010EXPRESS_PROJECT_TEMPLATE">
+            <Directory Id="VB2010EXPRESS_PROJECT_TEMPLATE_LCID" Name='!(loc.language)'>
+
+              <Component Id="LivetProjectTemplateForExpress_VB" Guid="F7D85281-3A43-4E6C-B17A-68942D2412F6">
+                <File Id="LivetProjectTemplate_Express2010_VB" Compressed="default" Source="Files/Templates/Livet_WPF4.0_VB.zip" />
+              </Component>
+
+            </Directory>
+          </Directory>
+
+          <!--Item Templates for VS 2010-->
+          <Directory Id="VS2010_ITEMTEMPLATES_DIR">
+            <Directory Id="CSHARP_ITEMTEMPLATES" Name="CSharp">
+              <Directory Id="CSHARP_ITEMTEMPLATES_WPF" Name="WPF">
+                <Directory Id="CSHARP_ITEMTEMPLATES_WPF_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetItemTemplatesForVs_2010_CSharp" Guid="E6D4A67C-6390-4A42-9A13-4222D2093B9C">
+                    <File Id="LivetWindow_CSharp_2010" Compressed="default" Source="Files/Templates/LivetWindow_CSharp.zip" />
+                    <File Id="LivetViewModel_CSharp_2010" Compressed="default" Source="Files/Templates/LivetViewModel_CSharp.zip" />
+                    <File Id="LivetModel_CSharp_2010" Compressed="default" Source="Files/Templates/LivetModel_CSharp.zip" />
+                    <File Id="LivetMessage_CSharp_2010" Compressed="default" Source="Files/Templates/LivetMessage_CSharp.zip" />
+                    <File Id="LivetInteractionMessageAction_CSharp_2010" Compressed="default" Source="Files/Templates/LivetInteractionMessageAction_CSharp.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+
+            <Directory Id="VB_ITEMTEMPLATES" Name="VisualBasic">
+              <Directory Id="VB_ITEMTEMPLATES_WPF" Name="WPF">
+                <Directory Id="VB_ITEMTEMPLATES_WPF_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetItemTemplatesForVs_2010_VB" Guid="53683FBF-D38C-43E1-ACA6-F75C1C498959">
+                    <File Id="LivetWindow_VB_2010" Compressed="default" Source="Files/Templates/LivetWindow_VB.zip" />
+                    <File Id="LivetViewModel_VB_2010" Compressed="default" Source="Files/Templates/LivetViewModel_VB.zip" />
+                    <File Id="LivetModel_VB_2010" Compressed="default" Source="Files/Templates/LivetModel_VB.zip" />
+                    <File Id="LivetMessage_VB_2010" Compressed="default" Source="Files/Templates/LivetMessage_VB.zip" />
+                    <File Id="LivetInteractionMessageAction_VB_2010" Compressed="default" Source="Files/Templates/LivetInteractionMessageAction_VB.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+          
+          <!--Item Templates for VS 2012-->
+          <Directory Id="VS2012_ITEMTEMPLATES_DIR">
+            <Directory Id="CSHARP_2012_ITEMTEMPLATES" Name="CSharp">
+              <Directory Id="CSHARP_2012_ITEMTEMPLATES_WPF" Name="WPF">
+                <Directory Id="CSHARP_2012_ITEMTEMPLATES_WPF_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetItemTemplatesForVs_2012_CSharp" Guid="897FC61D-E0E9-4025-B005-E768290ECB26">
+                    <File Id="LivetWindow_CSharp_2012" Compressed="default" Source="Files/Templates/LivetWindow_CSharp.zip" />
+                    <File Id="LivetViewModel_CSharp_2012" Compressed="default" Source="Files/Templates/LivetViewModel_CSharp.zip" />
+                    <File Id="LivetModel_CSharp_2012" Compressed="default" Source="Files/Templates/LivetModel_CSharp.zip" />
+                    <File Id="LivetMessage_CSharp_2012" Compressed="default" Source="Files/Templates/LivetMessage_CSharp.zip" />
+                    <File Id="LivetInteractionMessageAction_CSharp_2012" Compressed="default" Source="Files/Templates/LivetInteractionMessageAction_CSharp.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+
+            <Directory Id="VB_2012_ITEMTEMPLATES" Name="VisualBasic">
+              <Directory Id="VB_2012_ITEMTEMPLATES_WPF" Name="WPF">
+                <Directory Id="VB_2012_ITEMTEMPLATES_WPF_LCID" Name='!(loc.language)'>
+
+                  <Component Id="LivetItemTemplatesForVs_2012_VB" Guid="318D90EC-B1AA-49C7-B926-8653F444E35D">
+                    <File Id="LivetWindow_VB_2012" Compressed="default" Source="Files/Templates/LivetWindow_VB.zip" />
+                    <File Id="LivetViewModel_VB_2012" Compressed="default" Source="Files/Templates/LivetViewModel_VB.zip" />
+                    <File Id="LivetModel_VB_2012" Compressed="default" Source="Files/Templates/LivetModel_VB.zip" />
+                    <File Id="LivetMessage_VB_2012" Compressed="default" Source="Files/Templates/LivetMessage_VB.zip" />
+                    <File Id="LivetInteractionMessageAction_VB_2012" Compressed="default" Source="Files/Templates/LivetInteractionMessageAction_VB.zip" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+
+          <!--Item Template for Express C# 2010-->
+          <Directory Id="VCSHARP2010EXPRESS_ITEM_TEMPLATE">
+            <Directory Id="VCSHARP2010EXPRESS_ITEM_TEMPLATE_LCID" Name='!(loc.language)'>
+
+              <Component Id="LivetItemTemplatesForExpress_CSharp" Guid="AC7DCF36-D22F-45CE-8B54-B04AF29E2998">
+                <File Id="LivetWindow_CSharp_2010Express" Compressed="default" Source="Files/Templates/LivetWindow_CSharp.zip" />
+                <File Id="LivetViewModel_CSharp_2010Express" Compressed="default" Source="Files/Templates/LivetViewModel_CSharp.zip" />
+                <File Id="LivetModel_CSharp_2010Express" Compressed="default" Source="Files/Templates/LivetModel_CSharp.zip" />
+                <File Id="LivetMessage_CSharp_2010Express" Compressed="default" Source="Files/Templates/LivetMessage_CSharp.zip" />
+                <File Id="LivetInteractionMessageAction_CSharp_2010Express" Compressed="default" Source="Files/Templates/LivetInteractionMessageAction_CSharp.zip" />
+              </Component>
+
+            </Directory>
+          </Directory>
+
+          <!--Item Template for Express VB 2010-->
+          <Directory Id="VB2010EXPRESS_ITEM_TEMPLATE">
+            <Directory Id="VB2010EXPRESS_ITEM_TEMPLATE_LCID" Name='!(loc.language)'>
+
+              <Component Id="LivetItemTemplatesForExpress_VB" Guid="749BD9E6-180F-4435-8643-BA396D392737">
+                <File Id="LivetWindow_VB_2010Express" Compressed="default" Source="Files/Templates/LivetWindow_VB.zip" />
+                <File Id="LivetViewModel_VB_2010Express" Compressed="default" Source="Files/Templates/LivetViewModel_VB.zip" />
+                <File Id="LivetModel_VB_2010Express" Compressed="default" Source="Files/Templates/LivetModel_VB.zip" />
+                <File Id="LivetMessage_VB_2010Express" Compressed="default" Source="Files/Templates/LivetMessage_VB.zip" />
+                <File Id="LivetInteractionMessageAction_VB_2010Express" Compressed="default" Source="Files/Templates/LivetInteractionMessageAction_VB.zip" />
+              </Component>
+
+            </Directory>
+          </Directory>
+
+          <!--INotifyPropertyChangedSupport for ReSharper7-->
+          <Directory Id="RESHARPER7">
+            <Directory Id="ExternalAnnotations" Name="ExternalAnnotations">
+              <Directory Id="Livet" Name="Livet">
+                <Component Id="LivetForReSharper" Guid="CEF24ED1-4E7F-42EB-B9B9-1204BE128B52">
+                  <File Id="LivetForReSharperXML" Compressed="default" Source="Files/ReSharper/Livet.xml" />
+                </Component>
+              </Directory>
+            </Directory>
+          </Directory>
+
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="ProductFeature"
+             Title='!(loc.ProductFeature_Title)'
+             Level="1"
+             Absent="disallow"
+             AllowAdvertise="no"
+             ConfigurableDirectory='APPLICATIONFOLDER'
+             Description='!(loc.ProductFeature_Description)'>
+      <ComponentRef Id="LivetMain4" />
+      <ComponentRef Id="LivetMainXmlDocument4" />
+      <ComponentRef Id="LivetMainDesign4" />
+      <ComponentRef Id="LivetExtensions4" />
+      <ComponentRef Id="LivetExtensionsXmlDocument4" />
+      <ComponentRef Id="SystemWindowsInteractivity4" />
+      <ComponentRef Id="MicrosoftExpressionInteractions4" />
+      <ComponentRef Id="LivetMain45" />
+      <ComponentRef Id="LivetMainXmlDocument45" />
+      <ComponentRef Id="LivetMainDesign45" />
+      <ComponentRef Id="LivetExtensions45" />
+      <ComponentRef Id="LivetExtensionsXmlDocument45" />
+      <ComponentRef Id="SystemWindowsInteractivity45" />
+      <ComponentRef Id="MicrosoftExpressionInteractions45" />
+      <ComponentRef Id="MicrosoftWindowsAPICodePack" />
+      <ComponentRef Id="MicrosoftWindowsAPICodePackShell" />
+      <ComponentRef Id="LicenseEn" />
+      <ComponentRef Id="LicenseJp" />
+    </Feature>
+
+    <Feature Id="VisualStudio_2010_CSharp"
+             Title='!(loc.VisualStudio_2010_Title_CSharp)'
+             Level="1"
+             Display="expand"
+             AllowAdvertise="no"
+             Description='!(loc.VisualStudio_2010_Description)'>
+
+      <Condition Level="1">
+        <![CDATA[(VCSHARP2010EXPRESS_IDE<>"") OR VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+      </Condition>
+
+      <Condition Level="0">
+        <![CDATA[(VCSHARP2010EXPRESS_IDE="") AND (NOT VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED)]]>
+      </Condition>
+
+      <Feature Id="Snippets_2010_CSharp"
+               Title='!(loc.Snippets_2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.Snippets_2010_Description)'>
+        <ComponentRef Id="Snippets_2010_CSharp" />
+      </Feature>
+
+      <Feature Id="ProjectTemplate_2010_CSharp"
+               Title='!(loc.ProjectTemplate_2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ProjectTemplate_2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[NOT VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <ComponentRef Id="LivetProjectTemplateForVs_2010_CSharp"/>
+      </Feature>
+
+      <Feature Id="ItemTemplate_2010_CSharp"
+               Title='!(loc.ItemTemplate_2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ItemTemplate_2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[NOT VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <ComponentRef Id="LivetItemTemplatesForVs_2010_CSharp"/>
+
+      </Feature>
+      
+      
+
+      <Feature Id="ProjectTemplate_Express2010_CSharp"
+               Title='!(loc.ProjectTemplate_Express2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ProjectTemplate_Express2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VCSHARP2010EXPRESS_IDE<>""]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[VCSHARP2010EXPRESS_IDE=""]]>
+        </Condition>
+
+        <ComponentRef Id="LivetProjectTemplateForExpress_CSharp"/>
+      </Feature>
+
+      <Feature Id="ItemTemplate_Express2010_CSharp"
+               Title='!(loc.ItemTemplate_Express2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ItemTemplate_Express2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VCSHARP2010EXPRESS_IDE<>""]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[VCSHARP2010EXPRESS_IDE=""]]>
+        </Condition>
+
+        <ComponentRef Id="LivetItemTemplatesForExpress_CSharp"/>
+      </Feature>
+
+      <ComponentRef Id="GACDeploymentItemTemplateExtension" />
+
+    </Feature>
+    
+    <Feature Id="VisualStudio_2010_VB"
+         Title='!(loc.VisualStudio_2010_Title_VB)'
+         Level="1"
+         Display="expand"
+         AllowAdvertise="no"
+         Description='!(loc.VisualStudio_2010_Description)'>
+
+      <Condition Level="1">
+        <![CDATA[(VB2010EXPRESS_IDE<>"") OR VS2010_IDE_VB_PROJECTSYSTEM_INSTALLED]]>
+      </Condition>
+
+      <Condition Level="0">
+        <![CDATA[(VB2010EXPRESS_IDE="") AND (NOT VS2010_IDE_VB_PROJECTSYSTEM_INSTALLED)]]>
+      </Condition>
+
+      <Feature Id="Snippets_2010_VB"
+               Title='!(loc.Snippets_2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.Snippets_2010_Description)'>
+        <ComponentRef Id="Snippets_2010_VB" />
+      </Feature>
+
+      <Feature Id="ProjectTemplate_2010_VB"
+               Title='!(loc.ProjectTemplate_2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ProjectTemplate_2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[NOT VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <ComponentRef Id="LivetProjectTemplateForVs_2010_VB"/>
+      </Feature>
+
+      <Feature Id="ItemTemplate_2010_VB"
+               Title='!(loc.ItemTemplate_2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ItemTemplate_2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[NOT VS2010_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED]]>
+        </Condition>
+
+        <ComponentRef Id="LivetItemTemplatesForVs_2010_VB"/>
+
+      </Feature>
+
+      <Feature Id="ProjectTemplate_Express2010_VB"
+               Title='!(loc.ProjectTemplate_Express2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ProjectTemplate_Express2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VB2010EXPRESS_IDE<>""]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[VB2010EXPRESS_IDE=""]]>
+        </Condition>
+
+        <ComponentRef Id="LivetProjectTemplateForExpress_VB"/>
+      </Feature>
+
+      <Feature Id="ItemTemplate_Express2010_VB"
+               Title='!(loc.ItemTemplate_Express2010_Title)'
+               Level="1"
+               AllowAdvertise="no"
+               Description='!(loc.ItemTemplate_Express2010_Description)'>
+
+        <Condition Level="1">
+          <![CDATA[VB2010EXPRESS_IDE<>""]]>
+        </Condition>
+
+        <Condition Level="0">
+          <![CDATA[VB2010EXPRESS_IDE=""]]>
+        </Condition>
+
+        <ComponentRef Id="LivetItemTemplatesForExpress_VB"/>
+      </Feature>
+
+      <ComponentRef Id="GACDeploymentItemTemplateExtension" />
+
+    </Feature>
+
+    <Feature Id="VisualStudio_2012"
+                 Title='!(loc.VisualStudio_2012_Title)'
+                 Level="1"
+                 Display="expand"
+                 AllowAdvertise="no"
+                 Description='!(loc.VisualStudio_2012_Description)'>
+
+      <Condition Level="1">
+        <![CDATA[(VS2012EXPRESS_IDE<>"") OR (VS2012_ROOT_FOLDER<>"")]]>
+      </Condition>
+
+      <Condition Level="0">
+        <![CDATA[(VS2012EXPRESS_IDE="") OR (VS2012_ROOT_FOLDER="")]]>
+      </Condition>
+
+      <ComponentRef Id="Snippets_2012_CSharp" />
+      <ComponentRef Id="Snippets_2012_VB" />
+      <ComponentRef Id="LivetProjectTemplateForVs_2012_CSharp"/>
+      <ComponentRef Id="LivetProjectTemplateForVs_2012_VB"/>
+      <ComponentRef Id="LivetItemTemplatesForVs_2012_CSharp"/>
+      <ComponentRef Id="LivetItemTemplatesForVs_2012_VB"/>
+
+      <ComponentRef Id="GACDeploymentItemTemplateExtension" />
+
+    </Feature>
+
+    <Feature Id="ReSharper7"
+             Title='!(loc.ReSharper7_Title)'
+             Level="1"
+             Display="expand"
+             AllowAdvertise="no"
+             Description='!(loc.ReSharper7_Description)'>
+      <Condition Level="1">
+        <![CDATA[RESHARPER7<>""]]>
+      </Condition>
+
+      <Condition Level="0">
+        <![CDATA[RESHARPER7=""]]>
+      </Condition>
+
+      <ComponentRef Id="LivetForReSharper"/>
+    </Feature>
+    
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <UIRef Id="WixUI_FeatureTree" />
+
+    <InstallExecuteSequence>
+
+      <RemoveExistingProducts After="InstallInitialize"/>
+
+      <Custom Action='NoDowngrade' After='FindRelatedProducts'>NEWERFOUND</Custom>
+
+      <Custom Action="VS2010InstallVSTemplates" Before="InstallFinalize">
+        <![CDATA[VS2010_ROOT_FOLDER<>""]]>
+      </Custom>
+      <Custom Action="VS2012InstallVSTemplates" Before="InstallFinalize">
+        <![CDATA[VS2012_ROOT_FOLDER<>""]]>
+      </Custom>
+
+      <Custom Action="VCSHARP2010InstallVSTemplates" Before="InstallFinalize">
+        <![CDATA[VCSHARP2010EXPRESS_IDE<>""]]>
+      </Custom>
+
+      <Custom Action="VB2010InstallVSTemplates" Before="InstallFinalize">
+        <![CDATA[VB2010EXPRESS_IDE<>""]]>
+      </Custom>
+
+    </InstallExecuteSequence>
+
+    <CustomAction Id='NoDowngrade'
+                Error='!(loc.NoDowngrade)' />
+  </Product>
+</Wix>

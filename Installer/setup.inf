@@ -1,0 +1,23 @@
+;*** BEGIN **********************************************************
+;**                                                                **
+;** Automatically generated on: Thu Sep 27 05:49:22 2012           **
+;**                                                                **
+;** MakeCAB Version: 6.2.9200.16384                                 **
+;**                                                                **
+;*** BEGIN **********************************************************
+[disk list]
+1,Disk 1
+[cabinet list]
+1,1,1.cab
+[file list]
+1,1,ja-JP.mst,61440
+1,1,LivetSetup_en_US.msi,9799508
+1,1,LivetSetup_en_US.wixpdb,636323
+1,1,LivetSetup_ja_JP.msi,9802875
+1,1,LivetSetup_ja_JP.wixpdb,654739
+1,1,Product.wixobj,129796
+;*** END ************************************************************
+;**                                                                **
+;** Automatically generated on: Thu Sep 27 05:49:22 2012           **
+;**                                                                **
+;*** END ************************************************************
