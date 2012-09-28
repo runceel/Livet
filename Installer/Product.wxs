@@ -51,16 +51,7 @@
     <PropertyRef Id="VS2012_PROJECTTEMPLATES_DIR"/>
     <PropertyRef Id="VS2012_IDE_VCSHARP_PROJECTSYSTEM_INSTALLED"/>
     <PropertyRef Id="VS2012_IDE_VB_PROJECTSYSTEM_INSTALLED"/>
-
-    <Property Id="VWDEXPRESS_IDE">
-      <RegistrySearch
-          Id="VWDEXPRESS_IDE_SEARCH"
-			    Root="HKLM"
-			    Key="SOFTWARE\Wow6432Node\Microsoft\WDExpress\11.0"
-			    Name="ShellFolder"
-          Type="directory"/>
-    </Property>
-
+    
     <Property Id="VCSHARP2010EXPRESS_PROJECT_TEMPLATE">
       <RegistrySearch
           Id="VCSHARP2010EXPRESS_PROJECT_TEMPLATE_SEARCH"
@@ -105,6 +96,18 @@
           Name="InstallDir"
           Type="directory"/>
     </Property>
+
+    <Property Id="VS2012EXPRESS_IDE_PATH" Secure="yes">
+      <RegistrySearch
+          Id="VS2012EXPRESS_IDE_SEARCH_R"
+          Root="HKLM"
+          Key="SOFTWARE\Microsoft\WDExpress\11.0"
+          Name="InstallDir"
+          Type="directory">
+        <FileSearch Id="VS2012EXPRESS_IDE_PATH_SEARCH" Name="WDExpress.exe"/>
+      </RegistrySearch>
+  </Property>
+
 
     <Property Id="RESHARPER7">
       <RegistrySearch
@@ -931,6 +934,11 @@
     
     <UIRef Id="WixUI_ErrorProgressText" />
     <UIRef Id="WixUI_FeatureTree" />
+    
+    <CustomAction Id="VS2012ExpressInstallVSTemplates"
+                  Property="VS2012EXPRESS_IDE_PATH"
+                  Execute="commit"
+                  ExeCommand="/InstallVSTemplates"/>
 
     <InstallExecuteSequence>
 
@@ -951,6 +959,10 @@
 
       <Custom Action="VB2010InstallVSTemplates" Before="InstallFinalize">
         <![CDATA[VB2010EXPRESS_IDE<>""]]>
+      </Custom>
+      
+      <Custom Action="VS2012ExpressInstallVSTemplates" Before="InstallFinalize">
+        <![CDATA[VS2012EXPRESS_IDE<>""]]>
       </Custom>
 
     </InstallExecuteSequence>

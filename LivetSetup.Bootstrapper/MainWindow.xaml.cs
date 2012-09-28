@@ -62,8 +62,8 @@ namespace LivetSetup.Bootstrapper
             //インストール
 
             var selectedCulture = ((ComboBoxItem)mainComboBox.SelectedItem).Content.ToString();
-            var msiExecArgument = selectedCulture == "English (en-US)" ? string.Format(@"/i ""{0}""", tempFoldername + "\\LivetSetup_en_US.msi")
-                : string.Format(@"/i ""{0}""", tempFoldername + "\\LivetSetup_ja_JP.msi");
+            var msiExecArgument = selectedCulture == "English (en-US)" ? string.Format(@"/i ""{0}""  /l logfile.txt", tempFoldername + "\\LivetSetup_en_US.msi")
+                : string.Format(@"/i ""{0}""  /l logfile.txt", tempFoldername + "\\LivetSetup_ja_JP.msi");
 
             var msiExecStartInfo = new ProcessStartInfo() { FileName = "msiexec", Arguments = msiExecArgument };
 
