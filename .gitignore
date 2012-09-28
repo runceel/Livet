@@ -6,3 +6,4 @@ _ReSharper.Livet
 *.suo
 # mstest test results
 TestResults
+Installer\Files\Binaries

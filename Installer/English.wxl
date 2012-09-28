@@ -11,9 +11,11 @@
   <String Overridable="yes" Id="VisualStudio_2012_Description">This feture provides Livet Visual Studio 2012 Integrated fetures.</String>
   <String Overridable="yes" Id="Snippets_2010_Title">Livet Code Snippets</String>
   <String Overridable="yes" Id="Snippets_2010_Description">This feture provides Livet Code Snippets.</String>
-  <String Overridable="yes" Id="ProjectTemplate_2010_Title">Livet Project Template</String>
+  <String Overridable="yes" Id="ProjectTemplate_2010_Title_CSharp">Livet Project Template(C#)</String>
+  <String Overridable="yes" Id="ProjectTemplate_2010_Title_VB">Livet Project Template(Visual Basic)</String>
   <String Overridable="yes" Id="ProjectTemplate_2010_Description">This feture provides Livet Project Template.</String>
-  <String Overridable="yes" Id="ItemTemplate_2010_Title">Livet Item Templates</String>
+  <String Overridable="yes" Id="ItemTemplate_2010_Title_CSharp">Livet Item Templates(C#)</String>
+  <String Overridable="yes" Id="ItemTemplate_2010_Title_VB">Livet Item Templates(Visual Basic)</String>
   <String Overridable="yes" Id="ItemTemplate_2010_Description">This feture provides Livet Item Templates.</String>
   <String Overridable="yes" Id="ProjectTemplate_Express2010_Title">Livet Project Template(Express)</String>
   <String Overridable="yes" Id="ProjectTemplate_Express2010_Description">This feture provides Livet Project Template.(Express)</String>
