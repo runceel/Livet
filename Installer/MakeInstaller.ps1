@@ -15,6 +15,10 @@ $WixBinFolder = "C:\Program Files (x86)\WiX Toolset v3.6\bin"
 
 function CopyBinaries([string] $frameworkVersion=""){
 
+    if(-not (Test-Path ".\Files\Binaries\NET$frameworkVersion")){
+        New-Item ".\Files\Binaries\NET$frameworkVersion" -Force -itemType Directory
+    }
+
 	# Copy Binaries
 	Copy-Item "../.NET$frameworkVersion\Livet(.NET$frameworkVersion)\bin\Release\Livet.dll" "./Files\Binaries\NET$frameworkVersion" -Force;
 	Copy-Item "../.NET$frameworkVersion\Livet(.NET$frameworkVersion)\bin\Release\Livet.xml" "./Files\Binaries\NET$frameworkVersion" -Force;
@@ -48,6 +52,15 @@ function Cleanup(){
     if(Test-Path ".\out"){
     Remove-Item ".\out" -Force -Recurse
     }
+    if(Test-Path ".\setup.inf"){
+    Remove-Item ".\setup.inf" -Force -Recurse
+    }
+    if(Test-Path ".\setup.rpt"){
+    Remove-Item ".\setup.rpt" -Force -Recurse
+    }
+    if(Test-Path ".\Files\Binaries"){
+    Remove-Item ".\Files\Binaries" -Force -Recurse
+    }
 
     Get-ChildItem -Path "./Files\Templates\*" -Include *.zip | Remove-Item
 }
@@ -73,12 +86,15 @@ Cleanup
 # Copy Binaries
 
 echo "●Start --- CopyBinaries"
-CopyBinaries "4.0"
-CopyBinaries "4.5"
-
+if(-not (Test-Path ".\Files\Binaries")){
+        New-Item ".\Files\Binaries" -Force -itemType Directory
+}
 Copy-Item "../ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" "./Files\Binaries" -Force;
 Copy-Item "../ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" "./Files\Binaries" -Force
 Copy-Item "../Livet.ItemTemplateExtension\bin\Release\Livet.ItemTemplateExtension.dll" "./Files" -Force
+
+CopyBinaries "4.0"
+CopyBinaries "4.5"
 echo "●End --- CopyBinaries"
 
 
@@ -101,12 +117,10 @@ echo "●End --- Compress Templates"
 echo "●Start --- Make msi"
 Start-Process -NoNewWindow -Wait -FilePath "$WixBinFolder\candle.exe" -ArgumentList "Product.wxs -ext `"$WixBinFolder\WixUtilExtension.dll`" -ext `"$WixBinFolder\WixVSExtension.dll`" -ext `"$WixBinFolder\WixUIExtension.dll`" -out `"out\Product.wixobj`""
 ProcessErrorHandling "candle.exe"
-Start-Process -NoNewWindow -Wait -FilePath "$WixBinFolder\light.exe" -ArgumentList "`"out\Product.wixobj`" -cultures:en-US -sice:ICE30  -ext `"$WixBinFolder\WixUtilExtension.dll`" -ext `"$WixBinFolder\WixVSExtension.dll`" -ext `"$WixBinFolder\WixUIExtension.dll`" -loc English.wxl -out `"out\LivetSetup_en_US.msi`""
+Start-Process -NoNewWindow -Wait -FilePath "$WixBinFolder\light.exe" -ArgumentList "`"out\Product.wixobj`" -cultures:en-US -dWixUILicenseRtf=`"Files/license-en.rtf`"  -sice:ICE30  -ext `"$WixBinFolder\WixUtilExtension.dll`" -ext `"$WixBinFolder\WixVSExtension.dll`" -ext `"$WixBinFolder\WixUIExtension.dll`" -loc English.wxl -out `"out\LivetSetup_en_US.msi`""
 ProcessErrorHandling "light(en-US).exe"
-Start-Process -NoNewWindow -Wait -FilePath "$WixBinFolder\light.exe" -ArgumentList "`"out\Product.wixobj`" -cultures:ja-JP -sice:ICE30  -ext `"$WixBinFolder\WixUtilExtension.dll`" -ext `"$WixBinFolder\WixVSExtension.dll`" -ext `"$WixBinFolder\WixUIExtension.dll`" -loc Japanese.wxl -out `"out\LivetSetup_ja_JP.msi`""
+Start-Process -NoNewWindow -Wait -FilePath "$WixBinFolder\light.exe" -ArgumentList "`"out\Product.wixobj`" -cultures:ja-JP -dWixUILicenseRtf=`"Files/license-jp.rtf`"  -sice:ICE30  -ext `"$WixBinFolder\WixUtilExtension.dll`" -ext `"$WixBinFolder\WixVSExtension.dll`" -ext `"$WixBinFolder\WixUIExtension.dll`" -loc Japanese.wxl -out `"out\LivetSetup_ja_JP.msi`""
 ProcessErrorHandling "light(ja-JP).exe"
-Start-Process -NoNewWindow -Wait -FilePath "$WixBinFolder\torch.exe" -ArgumentList "-p -t language `"out\LivetSetup_en_US.msi`" `"out\LivetSetup_ja_JP.msi`" -out `"out\ja-JP.mst`""
-ProcessErrorHandling "torch.exe"
 echo "●End --- Make msi"
 
 echo "●Start --- Make cab"
