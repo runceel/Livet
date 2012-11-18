@@ -172,8 +172,7 @@ namespace Livet.Messaging
         /// </summary>
         /// <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
         /// <param name="message">戻り値情報のある相互作用メッセージ</param>
-        /// <param name="callback">コールバック</param>
-        public async Task<T> GetResponseAsync<T>(T message, Action<T> callback)
+        public async Task<T> GetResponseAsync<T>(T message)
             where T : ResponsiveInteractionMessage
         {
             if (message == null)
@@ -187,6 +186,34 @@ namespace Livet.Messaging
             }
 
             return await Task<T>.Factory.StartNew(() => GetResponse(message));
+        }
+
+        /// <summary>
+        /// 指定された、戻り値情報のある相互作用メッセージを非同期で送信します。
+        /// </summary>
+        /// <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
+        /// <param name="message">戻り値情報のある相互作用メッセージ</param>
+        /// <param name="callback">コールバック</param>
+        [Obsolete("callbackを取らないオーバーロードの使用を検討してください。")]
+        public async Task<T> GetResponseAsync<T>(T message, Action<T> callback)
+            where T : ResponsiveInteractionMessage
+        {
+            if (message == null)
+            {
+                throw new ArgumentException("messageはnullにできません");
+            }
+
+            if (!message.IsFrozen)
+            {
+                message.Freeze();
+            }
+
+            var msg = await Task<T>.Factory.StartNew(() => GetResponse(message));
+            if (callback != null)
+            {
+                callback(msg);
+            }
+            return msg;
         }
 #endif
     }
