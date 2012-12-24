@@ -48,24 +48,26 @@ namespace Livet
                     switch (e.Action)
                     {
                         case NotifyCollectionChangedAction.Add:
-                            target.Insert(e.NewStartingIndex, converter((TModel)e.NewItems[0]));
+                            var vm = converter((TModel) e.NewItems[0]);
+                            InvokeOnDispatcher(() => target.Insert(e.NewStartingIndex, vm));
                             break;
                         case NotifyCollectionChangedAction.Move:
-                            target.Move(e.OldStartingIndex, e.NewStartingIndex);
+                            InvokeOnDispatcher(() => target.Move(e.OldStartingIndex, e.NewStartingIndex));
                             break;
                         case NotifyCollectionChangedAction.Remove:
-                            if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
+                            if (typeof (IDisposable).IsAssignableFrom(typeof (TViewModel)))
                             {
-                                ((IDisposable)target[e.OldStartingIndex]).Dispose();
+                                ((IDisposable) target[e.OldStartingIndex]).Dispose();
                             }
-                            target.RemoveAt(e.OldStartingIndex);
+                            InvokeOnDispatcher(() => target.RemoveAt(e.OldStartingIndex));
                             break;
                         case NotifyCollectionChangedAction.Replace:
                             if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
                             {
                                 ((IDisposable)target[e.NewStartingIndex]).Dispose();
                             }
-                            target[e.NewStartingIndex] = converter((TModel)e.NewItems[0]);
+                            var replaceVm = converter((TModel) e.NewItems[0]);
+                            InvokeOnDispatcher(() => target[e.NewStartingIndex] = replaceVm);
                             break;
                         case NotifyCollectionChangedAction.Reset:
                             if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
@@ -75,7 +77,7 @@ namespace Livet
                                     item.Dispose();
                                 }
                             }
-                            target.Clear();
+                            InvokeOnDispatcher(target.Clear);
                             break;
                         default:
                             throw new ArgumentException();
@@ -83,6 +85,11 @@ namespace Livet
                 });
 
             return result;
+        }
+
+        private static void InvokeOnDispatcher(Action action)
+        {
+            DispatcherHelper.UIDispatcher.Invoke(action);
         }
     }
 }
