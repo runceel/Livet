@@ -9,7 +9,7 @@ namespace Livet.Behaviors.Messaging
     /// <summary>
     /// ViewModelからの相互作用メッセージを受信し、アクションを実行します。
     /// </summary>
-    public class InteractionMessageTrigger : TriggerBase<FrameworkElement>,IDisposable
+    public class InteractionMessageTrigger : TriggerBase<FrameworkElement>, IDisposable
     {
         private LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>, InteractionMessageRaisedEventArgs> _listener;
         private bool _disposed;
@@ -58,7 +58,7 @@ namespace Livet.Behaviors.Messaging
         public static readonly DependencyProperty IsEnableProperty =
             DependencyProperty.Register("IsEnable", typeof(bool), typeof(InteractionMessageTrigger), new PropertyMetadata(true));
 
-        
+
 
         /// <summary>
         /// このトリガーが反応する相互作用メッセージのメッセージキーを指定、または取得します。<br/>
@@ -95,11 +95,11 @@ namespace Livet.Behaviors.Messaging
                     h => h,
                     h => newMessenger.Raised += h,
                     h => newMessenger.Raised -= h,
-                    thisReference.MessageRecieved);
+                    thisReference.MessageReceived);
             }
         }
 
-        private void MessageRecieved(object sender,InteractionMessageRaisedEventArgs e)
+        private void MessageReceived(object sender, InteractionMessageRaisedEventArgs e)
         {
             var message = e.Message;
 
@@ -131,9 +131,11 @@ namespace Livet.Behaviors.Messaging
 
             var responsiveMessage = message as ResponsiveInteractionMessage;
 
-            if (responsiveMessage != null)
+            object response;
+            if (responsiveMessage != null &&
+                (response = ((ResponsiveInteractionMessage)cloneMessage).Response) != null)
             {
-                responsiveMessage.Response = ((ResponsiveInteractionMessage)cloneMessage).Response;
+                responsiveMessage.Response = response;
             }
         }
 
