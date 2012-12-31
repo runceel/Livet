@@ -9,6 +9,7 @@ namespace Livet.EventListeners
     public class EventListener<THandler> : IDisposable where THandler : class
     {
         private THandler _handler;
+        private Action<THandler> _add;
         private Action<THandler> _remove;
         private bool _disposed;
 
@@ -39,6 +40,7 @@ namespace Livet.EventListeners
             if (remove == null) throw new ArgumentNullException("remove");
             if (handler == null) throw new ArgumentNullException("handler");
 
+            _add = add;
             _handler = handler;
             _remove = remove;
             add(handler);
@@ -68,6 +70,9 @@ namespace Livet.EventListeners
             if (disposing)
             {
                 _remove(_handler);
+                _add = null;
+                _remove = null;
+                _handler = null;
             }
             _disposed = true;
         }

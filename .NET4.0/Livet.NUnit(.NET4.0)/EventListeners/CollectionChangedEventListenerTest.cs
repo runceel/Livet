@@ -187,7 +187,7 @@ namespace Livet.NUnit.EventListeners
             publisherStrongReference.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
 
             handler1Success.Is(true);
-
+            listener.Dispose();
             publisherStrongReference = null;
 
             GC.Collect();

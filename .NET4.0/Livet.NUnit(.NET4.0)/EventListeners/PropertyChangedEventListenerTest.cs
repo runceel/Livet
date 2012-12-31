@@ -260,6 +260,7 @@ namespace Livet.NUnit.EventListeners
 
             handler1Called.Is(true);
 
+            listener.Dispose();
             publisherStrongReference = null;
 
             GC.Collect();
