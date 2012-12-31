@@ -49,17 +49,17 @@ namespace Livet
                     {
                         case NotifyCollectionChangedAction.Add:
                             var vm = converter((TModel) e.NewItems[0]);
-                            InvokeOnDispatcher(() => target.Insert(e.NewStartingIndex, vm));
+                            InvokeOnDispatcher(() => target.Insert(e.NewStartingIndex, vm),dispatcher);
                             break;
                         case NotifyCollectionChangedAction.Move:
-                            InvokeOnDispatcher(() => target.Move(e.OldStartingIndex, e.NewStartingIndex));
+                            InvokeOnDispatcher(() => target.Move(e.OldStartingIndex, e.NewStartingIndex), dispatcher);
                             break;
                         case NotifyCollectionChangedAction.Remove:
                             if (typeof (IDisposable).IsAssignableFrom(typeof (TViewModel)))
                             {
                                 ((IDisposable) target[e.OldStartingIndex]).Dispose();
                             }
-                            InvokeOnDispatcher(() => target.RemoveAt(e.OldStartingIndex));
+                            InvokeOnDispatcher(() => target.RemoveAt(e.OldStartingIndex), dispatcher);
                             break;
                         case NotifyCollectionChangedAction.Replace:
                             if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
@@ -67,7 +67,7 @@ namespace Livet
                                 ((IDisposable)target[e.NewStartingIndex]).Dispose();
                             }
                             var replaceVm = converter((TModel) e.NewItems[0]);
-                            InvokeOnDispatcher(() => target[e.NewStartingIndex] = replaceVm);
+                            InvokeOnDispatcher(() => target[e.NewStartingIndex] = replaceVm, dispatcher);
                             break;
                         case NotifyCollectionChangedAction.Reset:
                             if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
@@ -77,7 +77,7 @@ namespace Livet
                                     item.Dispose();
                                 }
                             }
-                            InvokeOnDispatcher(target.Clear);
+                            InvokeOnDispatcher(target.Clear, dispatcher);
                             break;
                         default:
                             throw new ArgumentException();
@@ -87,9 +87,9 @@ namespace Livet
             return result;
         }
 
-        private static void InvokeOnDispatcher(Action action)
+        private static void InvokeOnDispatcher(Action action,Dispatcher dispatcher)
         {
-            DispatcherHelper.UIDispatcher.Invoke(action);
+            dispatcher.Invoke(action);
         }
     }
 }
