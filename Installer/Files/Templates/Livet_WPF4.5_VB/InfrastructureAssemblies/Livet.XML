@@ -16126,6 +16126,13 @@
             </summary>
             <param name="message">相互作用メッセージ</param>
         </member>
+        <member name="M:Livet.Messaging.InteractionMessenger.GetResponseAsync``1(``0)">
+            <summary>
+            指定された、戻り値情報のある相互作用メッセージを非同期で送信します。
+            </summary>
+            <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
+            <param name="message">戻り値情報のある相互作用メッセージ</param>
+        </member>
         <member name="M:Livet.Messaging.InteractionMessenger.GetResponseAsync``1(``0,System.Action{``0})">
             <summary>
             指定された、戻り値情報のある相互作用メッセージを非同期で送信します。
