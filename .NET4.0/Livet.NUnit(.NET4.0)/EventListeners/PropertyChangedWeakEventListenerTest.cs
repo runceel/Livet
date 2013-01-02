@@ -1,14 +1,15 @@
-﻿using Livet.EventListeners;
-using System;
-using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Livet.EventListeners.WeakEvents;
 using NUnit.Framework;
-using Livet.NUnit;
 
 namespace Livet.NUnit.EventListeners
 {
     [TestFixture()]
-    public class CollectionChangedEventListenerTest
+    public class PropertyChangedWeakEventListenerTest
     {
         [Test()]
         public void BasicConstructorLifeCycleTest()
@@ -17,12 +18,12 @@ namespace Livet.NUnit.EventListeners
 
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher, (sender, e) => listenerSuccess = true);
+            var listener = new PropertyChangedWeakEventListener(publisher, (sender, e) => listenerSuccess = true);
 
             //------------------
             listenerSuccess.Is(false);
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged(string.Empty);
 
             listenerSuccess.Is(true);
 
@@ -30,7 +31,7 @@ namespace Livet.NUnit.EventListeners
             listenerSuccess = false;
 
             listener.Dispose();
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged(string.Empty);
 
             listenerSuccess.Is(false);
 
@@ -42,6 +43,7 @@ namespace Livet.NUnit.EventListeners
             {
                 e.GetType().Is(typeof(ObjectDisposedException));
             }
+
         }
 
         [Test()]
@@ -52,13 +54,13 @@ namespace Livet.NUnit.EventListeners
 
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher);
+            var listener = new PropertyChangedWeakEventListener(publisher);
 
             //------------------
             handler1Success.Is(false);
             handler2Success.Is(false);
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged(string.Empty);
 
             handler1Success.Is(false);
             handler2Success.Is(false);
@@ -66,7 +68,7 @@ namespace Livet.NUnit.EventListeners
             //------------------
             listener.RegisterHandler((sender, e) => handler1Success = true);
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged(string.Empty);
 
             handler1Success.Is(true);
             handler2Success.Is(false);
@@ -77,7 +79,7 @@ namespace Livet.NUnit.EventListeners
 
             listener.RegisterHandler((sender, e) => handler2Success = true);
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged(string.Empty);
 
             handler1Success.Is(true);
             handler2Success.Is(true);
@@ -87,7 +89,7 @@ namespace Livet.NUnit.EventListeners
             handler2Success = false;
 
             listener.Dispose();
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged(string.Empty);
 
             handler1Success.Is(false);
             handler2Success.Is(false);
@@ -102,15 +104,14 @@ namespace Livet.NUnit.EventListeners
 
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher);
+            var listener = new PropertyChangedWeakEventListener(publisher);
 
-            //------------------
-            listener.RegisterHandler(NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handler1Called = true; });
-            listener.RegisterHandler(NotifyCollectionChangedAction.Remove, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Remove); handler2Called = true; });
-            listener.RegisterHandler(NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handler3Called = true; });
+            listener.RegisterHandler("Dummy1", (sender, e) => { e.PropertyName.Is("Dummy1"); handler1Called = true; });
+            listener.RegisterHandler("Dummy2", (sender, e) => { e.PropertyName.Is("Dummy2"); handler2Called = true; });
+            listener.RegisterHandler("Dummy1", (sender, e) => { e.PropertyName.Is("Dummy1"); handler3Called = true; });
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Remove, null);
+            publisher.RaisePropertyChanged("Dummy1");
+            publisher.RaisePropertyChanged("Dummy2");
 
             handler1Called.Is(true);
             handler2Called.Is(true);
@@ -122,8 +123,8 @@ namespace Livet.NUnit.EventListeners
             handler3Called = false;
 
             listener.Dispose();
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Remove, null);
+            publisher.RaisePropertyChanged("Dummy1");
+            publisher.RaisePropertyChanged("Dummy2");
 
             handler1Called.Is(false);
             handler2Called.Is(false);
@@ -140,18 +141,18 @@ namespace Livet.NUnit.EventListeners
             var handler5Called = false;
 
             var publisher = new TestEventPublisher();
-            var listener1 = new CollectionChangedEventListener(publisher)
+            var listener1 = new PropertyChangedWeakEventListener(publisher)
             {
-                {NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handler1Called = true; }},
-                {NotifyCollectionChangedAction.Remove, 
-                        (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Remove); handler2Called = true;},
-                        (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Remove); handler3Called = true;}
+                {"Dummy1", (sender, e) => { e.PropertyName.Is("Dummy1"); handler1Called = true; }},
+                {() => publisher.Dummy2, 
+                        (sender, e) => { e.PropertyName.Is("Dummy2"); handler2Called = true;},
+                        (sender, e) => { e.PropertyName.Is("Dummy2"); handler3Called = true;}
                 },
                 (sender,e) => handler4Called = true,
-                {NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handler5Called = true; }}
+                {"Dummy1", (sender, e) => { e.PropertyName.Is("Dummy1"); handler5Called = true; }}
             };
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Reset,null);
+            publisher.RaisePropertyChanged(null);
 
             handler1Called.Is(false);
             handler2Called.Is(false);
@@ -161,7 +162,7 @@ namespace Livet.NUnit.EventListeners
 
             handler4Called = false;
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged("Dummy1");
 
             handler1Called.Is(true);
             handler2Called.Is(false);
@@ -173,7 +174,7 @@ namespace Livet.NUnit.EventListeners
             handler4Called = false;
             handler5Called = false;
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Remove, null);
+            publisher.RaisePropertyChanged("Dummy2");
 
             handler1Called.Is(false);
             handler2Called.Is(true);
@@ -189,8 +190,8 @@ namespace Livet.NUnit.EventListeners
 
             listener1.Dispose();
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Remove, null);
+            publisher.RaisePropertyChanged("Dummy1");
+            publisher.RaisePropertyChanged("Dummy2");
 
             handler1Called.Is(false);
             handler2Called.Is(false);
@@ -205,7 +206,7 @@ namespace Livet.NUnit.EventListeners
         {
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher);
+            var listener = new PropertyChangedWeakEventListener(publisher);
 
             var handlerCalledCount = 0;
 
@@ -219,7 +220,7 @@ namespace Livet.NUnit.EventListeners
                     {
                         for (int f = 0; f < 500; f++)
                         {
-                            listener.RegisterHandler(NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handlerCalledCount++; });
+                            listener.RegisterHandler("Dummy1", (sender, e) => { e.PropertyName.Is("Dummy1"); handlerCalledCount++; });
                         }
 
                     });
@@ -231,14 +232,14 @@ namespace Livet.NUnit.EventListeners
 
             handlerCalledCount.Is(0);
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged("Dummy1");
 
             handlerCalledCount.Is(25000);
 
             handlerCalledCount = 0;
 
             listener.Dispose();
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisher.RaisePropertyChanged("Dummy1");
 
             handlerCalledCount.Is(0);
         }
@@ -246,17 +247,18 @@ namespace Livet.NUnit.EventListeners
         [Test()]
         public void SourceReferenceMemoryLeakTest()
         {
-            var handler1Success = false;
+            var handler1Called = false;
 
             var publisherStrongReference = new TestEventPublisher();
             var publisherWeakReference = new WeakReference<TestEventPublisher>(publisherStrongReference);
 
-            var listener = new CollectionChangedEventListener(publisherStrongReference);
-            listener.RegisterHandler((sender, e) => handler1Success = true);
+            var listener = new PropertyChangedWeakEventListener(publisherStrongReference);
+            listener.RegisterHandler("Dummy1", (sender, e) => { e.PropertyName.Is("Dummy1"); handler1Called = true; });
 
-            publisherStrongReference.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+            publisherStrongReference.RaisePropertyChanged("Dummy1");
 
-            handler1Success.Is(true);
+            handler1Called.Is(true);
+
             listener.Dispose();
             publisherStrongReference = null;
 
@@ -267,6 +269,38 @@ namespace Livet.NUnit.EventListeners
             TestEventPublisher resultPublisher = null;
             publisherWeakReference.TryGetTarget(out resultPublisher).Is(false);
             resultPublisher.IsNull();
+        }
+
+        [Test()]
+        public void WeakEventTest()
+        {
+            var listener1Success = false;
+
+            var eventPublisher = new TestEventPublisher();
+
+            var listener1 = new PropertyChangedWeakEventListener(eventPublisher, (sender, e) => listener1Success = true);
+
+            var listenerWeakReference = new WeakReference(listener1);
+
+            //------------------
+            listener1Success.Is(false);
+
+            eventPublisher.RaisePropertyChanged(null);
+
+            listener1Success.Is(true);
+
+            //------------------
+            listener1Success = false;
+
+            listener1 = null;
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
+            eventPublisher.RaisePropertyChanged(null);
+
+            listener1Success.Is(false);
         }
     }
 }

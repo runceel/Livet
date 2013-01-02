@@ -1,14 +1,16 @@
-﻿using Livet.EventListeners;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Livet.EventListeners.WeakEvents;
 using NUnit.Framework;
-using Livet.NUnit;
 
 namespace Livet.NUnit.EventListeners
 {
     [TestFixture()]
-    public class CollectionChangedEventListenerTest
+    public class CollectionChangedWeakEventListenerTest
     {
         [Test()]
         public void BasicConstructorLifeCycleTest()
@@ -17,7 +19,7 @@ namespace Livet.NUnit.EventListeners
 
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher, (sender, e) => listenerSuccess = true);
+            var listener = new CollectionChangedWeakEventListener(publisher, (sender, e) => listenerSuccess = true);
 
             //------------------
             listenerSuccess.Is(false);
@@ -52,7 +54,7 @@ namespace Livet.NUnit.EventListeners
 
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher);
+            var listener = new CollectionChangedWeakEventListener(publisher);
 
             //------------------
             handler1Success.Is(false);
@@ -102,7 +104,7 @@ namespace Livet.NUnit.EventListeners
 
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher);
+            var listener = new CollectionChangedWeakEventListener(publisher);
 
             //------------------
             listener.RegisterHandler(NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handler1Called = true; });
@@ -140,7 +142,7 @@ namespace Livet.NUnit.EventListeners
             var handler5Called = false;
 
             var publisher = new TestEventPublisher();
-            var listener1 = new CollectionChangedEventListener(publisher)
+            var listener1 = new CollectionChangedWeakEventListener(publisher)
             {
                 {NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handler1Called = true; }},
                 {NotifyCollectionChangedAction.Remove, 
@@ -151,7 +153,7 @@ namespace Livet.NUnit.EventListeners
                 {NotifyCollectionChangedAction.Add, (sender, e) => { e.Action.Is(NotifyCollectionChangedAction.Add); handler5Called = true; }}
             };
 
-            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Reset,null);
+            publisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Reset, null);
 
             handler1Called.Is(false);
             handler2Called.Is(false);
@@ -205,7 +207,7 @@ namespace Livet.NUnit.EventListeners
         {
             var publisher = new TestEventPublisher();
 
-            var listener = new CollectionChangedEventListener(publisher);
+            var listener = new CollectionChangedWeakEventListener(publisher);
 
             var handlerCalledCount = 0;
 
@@ -251,7 +253,7 @@ namespace Livet.NUnit.EventListeners
             var publisherStrongReference = new TestEventPublisher();
             var publisherWeakReference = new WeakReference<TestEventPublisher>(publisherStrongReference);
 
-            var listener = new CollectionChangedEventListener(publisherStrongReference);
+            var listener = new CollectionChangedWeakEventListener(publisherStrongReference);
             listener.RegisterHandler((sender, e) => handler1Success = true);
 
             publisherStrongReference.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
@@ -267,6 +269,39 @@ namespace Livet.NUnit.EventListeners
             TestEventPublisher resultPublisher = null;
             publisherWeakReference.TryGetTarget(out resultPublisher).Is(false);
             resultPublisher.IsNull();
+        }
+
+        [Test()]
+        public void WeakEventTest()
+        {
+            var listener1Success = false;
+
+            var eventPublisher = new TestEventPublisher();
+
+            var listener1 = new CollectionChangedWeakEventListener(eventPublisher,
+                                                                   (sender, e) => listener1Success = true);
+
+            var listenerWeakReference = new WeakReference(listener1);
+
+            //------------------
+            listener1Success.Is(false);
+
+            eventPublisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+
+            listener1Success.Is(true);
+
+            //------------------
+            listener1Success = false;
+
+            listener1 = null;
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
+            eventPublisher.RaiseCollectionChanged(NotifyCollectionChangedAction.Add, null);
+
+            listener1Success.Is(false);
         }
     }
 }

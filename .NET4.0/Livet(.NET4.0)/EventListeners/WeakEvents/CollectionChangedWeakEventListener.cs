@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections.Specialized;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
 
-namespace Livet.EventListeners
+namespace Livet.EventListeners.WeakEvents
 {
     /// <summary>
-    /// INotifyCollectionChanged.NotifyCollectionChangedを受信するためのイベントリスナです。
+    /// INotifyCollectionChanged.NotifyCollectionChangedを受信するためのWeakイベントリスナです。
     /// </summary>
-    public sealed class CollectionChangedEventListener : EventListener<NotifyCollectionChangedEventHandler>, IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>
+    public sealed class CollectionChangedWeakEventListener : LivetWeakEventListener<NotifyCollectionChangedEventHandler, NotifyCollectionChangedEventArgs>, IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>
     {
         private AnonymousCollectionChangedEventHandlerBag _bag;
 
@@ -18,10 +19,14 @@ namespace Livet.EventListeners
         /// コンストラクタ
         /// </summary>
         /// <param name="source">INotifyCollectionChangedオブジェクト</param>
-        public CollectionChangedEventListener(INotifyCollectionChanged source)
+        public CollectionChangedWeakEventListener(INotifyCollectionChanged source)
         {
             _bag = new AnonymousCollectionChangedEventHandlerBag(source);
-            Initialize(h => source.CollectionChanged += h, h => source.CollectionChanged -= h, (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => new NotifyCollectionChangedEventHandler(h), 
+                h => source.CollectionChanged += h, 
+                h => source.CollectionChanged -= h, 
+                (sender, e) => _bag.ExecuteHandler(e));
         }
 
         /// <summary>
@@ -29,10 +34,14 @@ namespace Livet.EventListeners
         /// </summary>
         /// <param name="source">INotifyCollectionChangedオブジェクト</param>
         /// <param name="handler">NotifyCollectionChangedイベントハンドラ</param>
-        public CollectionChangedEventListener(INotifyCollectionChanged source, NotifyCollectionChangedEventHandler handler)
+        public CollectionChangedWeakEventListener(INotifyCollectionChanged source, NotifyCollectionChangedEventHandler handler)
         {
-            _bag = new AnonymousCollectionChangedEventHandlerBag(source,handler);
-            Initialize(h => source.CollectionChanged += h, h => source.CollectionChanged -= h, (sender, e) => _bag.ExecuteHandler(e));
+            _bag = new AnonymousCollectionChangedEventHandlerBag(source, handler);
+            Initialize(
+                h => new NotifyCollectionChangedEventHandler(h),
+                h => source.CollectionChanged += h,
+                h => source.CollectionChanged -= h,
+                (sender, e) => _bag.ExecuteHandler(e));
         }
 
         /// <summary>
@@ -53,7 +62,7 @@ namespace Livet.EventListeners
         public void RegisterHandler(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
         {
             ThrowExceptionIfDisposed();
-            _bag.RegisterHandler(action,handler);
+            _bag.RegisterHandler(action, handler);
         }
 
         IEnumerator<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>> IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>.GetEnumerator()
@@ -80,13 +89,13 @@ namespace Livet.EventListeners
 
         public void Add(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
         {
-            _bag.Add(action,handler);
+            _bag.Add(action, handler);
         }
 
 
         public void Add(NotifyCollectionChangedAction action, params NotifyCollectionChangedEventHandler[] handlers)
         {
-            _bag.Add(action,handlers);
+            _bag.Add(action, handlers);
         }
     }
 }

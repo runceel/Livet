@@ -51,9 +51,12 @@
     <Compile Include="Behaviors\MethodBinderTest.cs" />
     <Compile Include="Commands\CommandTest.cs" />
     <Compile Include="EventListeners\CollectionChangedEventListenerTest.cs" />
+    <Compile Include="EventListeners\CollectionChangedWeakEventListenerTest.cs" />
     <Compile Include="EventListeners\EventListenerTest.cs" />
     <Compile Include="EventListeners\PropertyChangedEventListenerTest.cs" />
     <Compile Include="EventListeners\LivetWeakEventListenerTest.cs" />
+    <Compile Include="EventListeners\PropertyChangedWeakEventListenerTest.cs" />
+    <Compile Include="Messaging\MessageListenerTest.cs" />
     <Compile Include="TestInfrastructures\TestEventPublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestInfrastructures\ChainingAssertion.NUnit.cs" />

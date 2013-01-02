@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Collections.Concurrent;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
-namespace Livet.EventListeners
+namespace Livet.EventListeners.WeakEvents
 {
     /// <summary>
-    /// INotifyPropertyChanged.PropertyChangedを受信するためのイベントリスナです。
+    /// INotifyPropertyChanged.PropertyChangedを受信するためのWeakイベントリスナです。
     /// </summary>
-    public sealed class PropertyChangedEventListener : EventListener<PropertyChangedEventHandler>,IEnumerable<KeyValuePair<string,ConcurrentBag<PropertyChangedEventHandler>>>
+    public sealed class PropertyChangedWeakEventListener : LivetWeakEventListener<PropertyChangedEventHandler,PropertyChangedEventArgs>,IEnumerable<KeyValuePair<string,ConcurrentBag<PropertyChangedEventHandler>>>
     {
-        private AnonymousPropertyChangedEventHandlerBag _bag;
+         private AnonymousPropertyChangedEventHandlerBag _bag;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="source">INotifyPropertyChangedオブジェクト</param>
-        public PropertyChangedEventListener(INotifyPropertyChanged source)
+        public PropertyChangedWeakEventListener(INotifyPropertyChanged source)
         {
             _bag = new AnonymousPropertyChangedEventHandlerBag(source);
-            Initialize(h => source.PropertyChanged += h, h => source.PropertyChanged -= h, (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => new PropertyChangedEventHandler(h), 
+                h => source.PropertyChanged += h, 
+                h => source.PropertyChanged -= h, 
+                (sender, e) => _bag.ExecuteHandler(e));
         }
 
         /// <summary>
@@ -29,10 +35,14 @@ namespace Livet.EventListeners
         /// </summary>
         /// <param name="source">INotifyPropertyChangedオブジェクト</param>
         /// <param name="handler">PropertyChangedイベントハンドラ</param>
-        public PropertyChangedEventListener(INotifyPropertyChanged source, PropertyChangedEventHandler handler)
+        public PropertyChangedWeakEventListener(INotifyPropertyChanged source, PropertyChangedEventHandler handler)
         {
            _bag = new AnonymousPropertyChangedEventHandlerBag(source,handler);
-           Initialize(h => source.PropertyChanged += h, h => source.PropertyChanged -= h, (sender, e) => _bag.ExecuteHandler(e));
+           Initialize(
+                h => new PropertyChangedEventHandler(h), 
+                h => source.PropertyChanged += h, 
+                h => source.PropertyChanged -= h, 
+                (sender, e) => _bag.ExecuteHandler(e));
         }
 
         /// <summary>
@@ -113,5 +123,4 @@ namespace Livet.EventListeners
             _bag.Add(propertyExpression,handlers);
         }
     }
-
 }

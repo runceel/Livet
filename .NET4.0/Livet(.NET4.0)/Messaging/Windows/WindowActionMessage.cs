@@ -16,20 +16,25 @@ namespace Livet.Messaging.Windows
         /// </summary>
         /// <param name="messageKey">メッセージキー</param>
         public WindowActionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
+            : base(messageKey) { }
 
         /// <summary>
         /// メッセージキーとWindowが遷移すべき状態を定義して、新しい相互作用メッセージのインスタンスを生成します。
         /// </summary>
-        /// <param name="messageKey">メッセージキー</param>
         /// <param name="action">Windowが遷移すべき状態を表すWindowAction列挙体</param>
-        public WindowActionMessage(string messageKey, WindowAction action)
+        /// <param name="messageKey">メッセージキー</param>
+        public WindowActionMessage(WindowAction action,string messageKey)
             :this(messageKey)
         {
             Action = action;
         }
+
+        /// <summary>
+        /// Windowが遷移すべき状態を定義して、新しい相互作用メッセージのインスタンスを生成します。
+        /// </summary>
+        /// <param name="action">Windowが遷移すべき状態を表すWindowAction列挙体</param>
+        public WindowActionMessage(WindowAction action)
+            : this(action,null) { }
 
         /// <summary>
         /// 派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>

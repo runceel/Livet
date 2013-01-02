@@ -89,7 +89,7 @@ namespace Livet.UITest
             if (message.Response.HasValue && message.Response.Value)
             {
                 CanClose = true;
-                Messenger.Raise(new WindowActionMessage("Close", WindowAction.Close));
+                Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
             }
         }
 

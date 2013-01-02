@@ -429,10 +429,17 @@
     <Compile Include="Converters\WritingProgressChangeLevelAndBooleanConverter.generated.cs" />
     <Compile Include="Converters\XamlWriterModeAndBooleanConverter.generated.cs" />
     <Compile Include="Converters\XamlWriterStateAndBooleanConverter.generated.cs" />
+    <Compile Include="EventListeners\AnonymousCollectionChangedEventHandlerBag.cs" />
+    <Compile Include="EventListeners\AnonymousPropertyChangedEventHandlerBag.cs" />
+    <Compile Include="EventListeners\WeakEvents\CollectionChangedWeakEventListener.cs" />
+    <Compile Include="EventListeners\WeakEvents\PropertyChangedWeakEventListener.cs" />
     <Compile Include="LivetCompositeDisposable.cs" />
     <Compile Include="EventListeners\CollectionChangedEventListener.cs" />
     <Compile Include="EventListeners\EventListener.cs" />
     <Compile Include="EventListeners\PropertyChangedEventListener.cs" />
+    <Compile Include="Messaging\GenericInteractionMessage.cs" />
+    <Compile Include="Messaging\GenericResponsiveInteractionMessage.cs" />
+    <Compile Include="Messaging\MessageListener.cs" />
     <Compile Include="ObservableSynchronizedCollection.cs" />
     <Compile Include="DispatcherCollection.cs" />
     <Compile Include="Messaging\TransitionMode.cs" />

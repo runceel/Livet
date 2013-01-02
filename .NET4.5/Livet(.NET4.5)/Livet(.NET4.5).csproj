@@ -1175,6 +1175,12 @@
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventArgsFactory.cs">
       <Link>EventArgsFactory.cs</Link>
     </Compile>
+    <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventListeners\AnonymousCollectionChangedEventHandlerBag.cs">
+      <Link>EventListeners\AnonymousCollectionChangedEventHandlerBag.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventListeners\AnonymousPropertyChangedEventHandlerBag.cs">
+      <Link>EventListeners\AnonymousPropertyChangedEventHandlerBag.cs</Link>
+    </Compile>
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventListeners\CollectionChangedEventListener.cs">
       <Link>EventListeners\CollectionChangedEventListener.cs</Link>
     </Compile>
@@ -1184,14 +1190,26 @@
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventListeners\PropertyChangedEventListener.cs">
       <Link>EventListeners\PropertyChangedEventListener.cs</Link>
     </Compile>
+    <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventListeners\WeakEvents\CollectionChangedWeakEventListener.cs">
+      <Link>EventListeners\WeakEvents\CollectionChangedWeakEventListener.cs</Link>
+    </Compile>
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventListeners\WeakEvents\LivetWeakEventListener.cs">
       <Link>EventListeners\WeakEvents\LivetWeakEventListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\EventListeners\WeakEvents\PropertyChangedWeakEventListener.cs">
+      <Link>EventListeners\WeakEvents\PropertyChangedWeakEventListener.cs</Link>
     </Compile>
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\LivetCompositeDisposable.cs">
       <Link>LivetCompositeDisposable.cs</Link>
     </Compile>
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\Messaging\ConfirmationMessage.cs">
       <Link>Messaging\ConfirmationMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\Messaging\GenericInteractionMessage.cs">
+      <Link>Messaging\GenericInteractionMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\Messaging\GenericResponsiveInteractionMessage.cs">
+      <Link>Messaging\GenericResponsiveInteractionMessage.cs</Link>
     </Compile>
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\Messaging\InformationMessage.cs">
       <Link>Messaging\InformationMessage.cs</Link>
@@ -1210,6 +1228,9 @@
     </Compile>
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\Messaging\IO\SavingFileSelectionMessage.cs">
       <Link>Messaging\IO\SavingFileSelectionMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\Messaging\MessageListener.cs">
+      <Link>Messaging\MessageListener.cs</Link>
     </Compile>
     <Compile Include="..\..\.NET4.0\Livet%28.NET4.0%29\Messaging\ResponsiveInteractionMessage.cs">
       <Link>Messaging\ResponsiveInteractionMessage.cs</Link>

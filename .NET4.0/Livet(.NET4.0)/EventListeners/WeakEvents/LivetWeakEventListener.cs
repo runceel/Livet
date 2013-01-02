@@ -14,6 +14,7 @@ namespace Livet.EventListeners.WeakEvents
         private EventHandler<TEventArgs> _handler;
         private THandler _resultHandler;
         private Action<THandler> _remove;
+        private bool _initialized;
 
         private static void ReceiveEvent(WeakReference<LivetWeakEventListener<THandler, TEventArgs>> listenerWeakReference, object sender, TEventArgs args)
         {
@@ -35,16 +36,15 @@ namespace Livet.EventListeners.WeakEvents
             return conversion((sender, e) => ReceiveEvent(listenerWeakReference, sender, e));
         }
 
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="conversion">ジェネリックイベントハンドラ型をTHandler方に変換するFunc</param>
-        /// <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
-        /// <param name="remove">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
-        /// <param name="handler">イベントを受信した際に行いたいアクション</param>
-        public LivetWeakEventListener(Func<EventHandler<TEventArgs>, THandler> conversion, Action<THandler> add, Action<THandler> remove, EventHandler<TEventArgs> handler)
+        protected LivetWeakEventListener()
         {
+
+        }
+
+        protected void Initialize(Func<EventHandler<TEventArgs>, THandler> conversion, Action<THandler> add, Action<THandler> remove, EventHandler<TEventArgs> handler)
+        {
+            if (_initialized) return;
+
             if (conversion == null) throw new ArgumentNullException("conversion");
             if (add == null) throw new ArgumentNullException("add");
             if (remove == null) throw new ArgumentNullException("remove");
@@ -56,6 +56,28 @@ namespace Livet.EventListeners.WeakEvents
             _resultHandler = GetStaticHandler(new WeakReference<LivetWeakEventListener<THandler, TEventArgs>>(this), conversion);
 
             add(_resultHandler);
+        }
+
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="conversion">ジェネリックイベントハンドラ型をTHandler方に変換するFunc</param>
+        /// <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
+        /// <param name="remove">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
+        /// <param name="handler">イベントを受信した際に行いたいアクション</param>
+        public LivetWeakEventListener(Func<EventHandler<TEventArgs>, THandler> conversion, Action<THandler> add, Action<THandler> remove, EventHandler<TEventArgs> handler)
+        {
+            Initialize(conversion,add,remove,handler);
+            _initialized = true;
+        }
+
+        protected void ThrowExceptionIfDisposed()
+        {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException("LivetWeakEventListener");
+            }
         }
 
         /// <summary>
@@ -74,6 +96,9 @@ namespace Livet.EventListeners.WeakEvents
             if (disposing)
             {
                 _remove(_resultHandler);
+                _handler = null;
+                _resultHandler = default(THandler);
+                _remove = null;
             }
             _disposed = true;
         }

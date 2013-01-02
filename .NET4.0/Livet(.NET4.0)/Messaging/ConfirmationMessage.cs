@@ -7,36 +7,6 @@ namespace Livet.Messaging
     /// </summary>
     public class ConfirmationMessage : ResponsiveInteractionMessage<bool?>
     {
-        public ConfirmationMessage()
-        {
-        }
-
-        /// <summary>
-        /// 表示するメッセージ・キャプション・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
-        /// </summary>
-        /// <param name="text">表示するメッセージ</param>
-        /// <param name="caption">キャプション</param>
-        /// <param name="messageKey">メッセージキー</param>
-        public ConfirmationMessage(string text,string caption,string messageKey):base(messageKey)
-        {
-            Text = text;
-            Caption = caption;
-        }
-
-        /// <summary>
-        /// 表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
-        /// </summary>
-        /// <param name="text">表示するメッセージ</param>
-        /// <param name="caption">キャプション</param>
-        /// <param name="image">メッセージボックスイメージ</param>
-        /// <param name="messageKey">メッセージキー</param>
-        public ConfirmationMessage(string text, string caption,MessageBoxImage image, string messageKey)
-            : base(messageKey)
-        {
-            Text = text;
-            Caption = caption;
-            Image = image;
-        }
 
         /// <summary>
         /// 表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージボックスボタン・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
@@ -54,6 +24,35 @@ namespace Livet.Messaging
             Image = image;
             Button = button;
         }
+
+        /// <summary>
+        /// 表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
+        /// </summary>
+        /// <param name="text">表示するメッセージ</param>
+        /// <param name="caption">キャプション</param>
+        /// <param name="image">メッセージボックスイメージ</param>
+        /// <param name="messageKey">メッセージキー</param>
+        public ConfirmationMessage(string text, string caption, MessageBoxImage image, string messageKey)
+            : this(text, caption, image, MessageBoxButton.OK, messageKey) { }
+
+        /// <summary>
+        /// 表示するメッセージ・キャプション・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
+        /// </summary>
+        /// <param name="text">表示するメッセージ</param>
+        /// <param name="caption">キャプション</param>
+        /// <param name="messageKey">メッセージキー</param>
+        public ConfirmationMessage(string text, string caption, string messageKey)
+            : this(text, caption, MessageBoxImage.None, messageKey) { }
+
+        /// <summary>
+        /// 表示するメッセージ・キャプションを指定して、新しい相互作用メッセージのインスタンスを生成します。
+        /// </summary>
+        /// <param name="text">表示するメッセージ</param>
+        /// <param name="caption">キャプション</param>
+        public ConfirmationMessage(string text, string caption)
+            : this(text, caption, null) { }
+
+        public ConfirmationMessage() { }
 
         /// <summary>
         /// 派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
