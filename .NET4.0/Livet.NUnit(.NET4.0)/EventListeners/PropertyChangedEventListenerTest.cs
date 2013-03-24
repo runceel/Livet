@@ -6,6 +6,7 @@ using System.Linq;
 using NUnit.Framework;
 using Livet.NUnit;
 using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace Livet.NUnit.EventListeners
 {
@@ -270,6 +271,46 @@ namespace Livet.NUnit.EventListeners
             TestEventPublisher resultPublisher = null;
             publisherWeakReference.TryGetTarget(out resultPublisher).Is(false);
             resultPublisher.IsNull();
+        }
+
+
+        private class HandlerMemoryLeakTestClass : IDisposable
+        {
+            public readonly PropertyChangedEventListener Listener;
+
+            public HandlerMemoryLeakTestClass(INotifyPropertyChanged publisher)
+            {
+                Listener = new PropertyChangedEventListener(publisher);
+
+                // This handler refers "this".
+                PropertyChangedEventHandler handler = (sender, e) => { ToString(); };
+                Listener.RegisterHandler(handler);
+                Listener.RegisterHandler("Dummy1", handler);
+            }
+
+            public void Dispose()
+            {
+                Listener.Dispose();
+            }
+        }
+
+        [Test()]
+        public void HandlerMemoryLeakTest()
+        {
+            var publisher = new TestEventPublisher();
+
+            var testObject = new HandlerMemoryLeakTestClass(publisher);
+            var dummyWeakReference = new WeakReference<HandlerMemoryLeakTestClass>(testObject);
+
+            testObject.Dispose();
+            testObject = null;
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            HandlerMemoryLeakTestClass result = null;
+            dummyWeakReference.TryGetTarget(out result).Is(false);
+            result.IsNull();
         }
     }
 }

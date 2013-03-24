@@ -268,5 +268,44 @@ namespace Livet.NUnit.EventListeners
             publisherWeakReference.TryGetTarget(out resultPublisher).Is(false);
             resultPublisher.IsNull();
         }
+
+        private class HandlerMemoryLeakTestClass : IDisposable
+        {
+            public readonly CollectionChangedEventListener Listener;
+
+            public HandlerMemoryLeakTestClass(INotifyCollectionChanged publisher)
+            {
+                Listener = new CollectionChangedEventListener(publisher);
+
+                // This handler refers "this".
+                NotifyCollectionChangedEventHandler handler = (sender, e) => { ToString(); };
+                Listener.RegisterHandler(handler);
+                Listener.RegisterHandler(NotifyCollectionChangedAction.Reset, handler);
+            }
+
+            public void Dispose()
+            {
+                Listener.Dispose();
+            }
+        }
+
+        [Test()]
+        public void HandlerMemoryLeakTest()
+        {
+            var publisher = new TestEventPublisher();
+
+            var testObject = new HandlerMemoryLeakTestClass(publisher);
+            var dummyWeakReference = new WeakReference<HandlerMemoryLeakTestClass>(testObject);
+
+            testObject.Dispose();
+            testObject = null;
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            HandlerMemoryLeakTestClass result = null;
+            dummyWeakReference.TryGetTarget(out result).Is(false);
+            result.IsNull();
+        }
     }
 }
