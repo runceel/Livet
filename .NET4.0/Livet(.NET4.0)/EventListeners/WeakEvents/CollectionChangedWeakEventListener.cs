@@ -92,10 +92,15 @@ namespace Livet.EventListeners.WeakEvents
             _bag.Add(action, handler);
         }
 
-
         public void Add(NotifyCollectionChangedAction action, params NotifyCollectionChangedEventHandler[] handlers)
         {
             _bag.Add(action, handlers);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _bag.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

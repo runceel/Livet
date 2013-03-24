@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Livet.EventListeners
 {
-    internal class AnonymousCollectionChangedEventHandlerBag : IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>
+    internal class AnonymousCollectionChangedEventHandlerBag : IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>, IDisposable
     {
         private ConcurrentDictionary<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>> _handlerDictionary = new ConcurrentDictionary<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>();
         private WeakReference<INotifyCollectionChanged> _source;
@@ -89,6 +89,26 @@ namespace Livet.EventListeners
             {
                 RegisterHandler(action, handler);
             }
+        }
+
+        private void DisposeConcurrentBag(ConcurrentBag<NotifyCollectionChangedEventHandler> bag)
+        {
+            NotifyCollectionChangedEventHandler dummy;
+            while (!bag.IsEmpty)
+            {
+                bag.TryTake(out dummy);
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach (var bag in _handlerDictionary.Values)
+            {
+                DisposeConcurrentBag(bag);
+            }
+            _handlerDictionary.Clear();
+
+            DisposeConcurrentBag(_allHandlerList);
         }
     }
 }

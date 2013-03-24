@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Livet.EventListeners
 {
-    internal class AnonymousPropertyChangedEventHandlerBag: IEnumerable<KeyValuePair<string,ConcurrentBag<PropertyChangedEventHandler>>>
+    internal class AnonymousPropertyChangedEventHandlerBag: IEnumerable<KeyValuePair<string,ConcurrentBag<PropertyChangedEventHandler>>>, IDisposable
     {
         private ConcurrentDictionary<string, ConcurrentBag<PropertyChangedEventHandler>> _handlerDictionary = new ConcurrentDictionary<string, ConcurrentBag<PropertyChangedEventHandler>>();
         private WeakReference<INotifyPropertyChanged> _source;
@@ -130,6 +130,19 @@ namespace Livet.EventListeners
             var memberExpression = (MemberExpression)propertyExpression.Body;
 
             Add(memberExpression.Member.Name, handlers);
+        }
+
+        public void Dispose()
+        {
+            PropertyChangedEventHandler dummy;
+            foreach (var bag in _handlerDictionary.Values)
+            {
+                while (!bag.IsEmpty)
+                {
+                    bag.TryTake(out dummy);
+                }
+            }
+            _handlerDictionary.Clear();
         }
     }
 }

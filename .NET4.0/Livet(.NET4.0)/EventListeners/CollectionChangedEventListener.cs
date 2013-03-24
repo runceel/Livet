@@ -11,6 +11,7 @@ namespace Livet.EventListeners
     /// INotifyCollectionChanged.NotifyCollectionChangedを受信するためのイベントリスナです。
     /// </summary>
     public sealed class CollectionChangedEventListener : EventListener<NotifyCollectionChangedEventHandler>, IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>
+
     {
         private AnonymousCollectionChangedEventHandlerBag _bag;
 
@@ -87,6 +88,12 @@ namespace Livet.EventListeners
         public void Add(NotifyCollectionChangedAction action, params NotifyCollectionChangedEventHandler[] handlers)
         {
             _bag.Add(action,handlers);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _bag.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

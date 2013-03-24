@@ -112,6 +112,12 @@ namespace Livet.EventListeners
             ThrowExceptionIfDisposed();
             _bag.Add(propertyExpression,handlers);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            _bag.Dispose();
+            base.Dispose(disposing);
+        }
     }
 
 }
