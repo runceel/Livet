@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Livet.EventListeners.WeakEvents;
 using NUnit.Framework;
+using System.ComponentModel;
 
 namespace Livet.NUnit.EventListeners
 {
@@ -301,6 +302,45 @@ namespace Livet.NUnit.EventListeners
             eventPublisher.RaisePropertyChanged(null);
 
             listener1Success.Is(false);
+        }
+
+        private class HandlerMemoryLeakTestClass : IDisposable
+        {
+            public readonly PropertyChangedWeakEventListener Listener;
+
+            public HandlerMemoryLeakTestClass(INotifyPropertyChanged publisher)
+            {
+                Listener = new PropertyChangedWeakEventListener(publisher);
+
+                // This handler refers "this".
+                PropertyChangedEventHandler handler = (sender, e) => { ToString(); };
+                Listener.RegisterHandler(handler);
+                Listener.RegisterHandler("Dummy1", handler);
+            }
+
+            public void Dispose()
+            {
+                Listener.Dispose();
+            }
+        }
+
+        [Test()]
+        public void HandlerMemoryLeakTest()
+        {
+            var publisher = new TestEventPublisher();
+
+            var testObject = new HandlerMemoryLeakTestClass(publisher);
+            var dummyWeakReference = new WeakReference<HandlerMemoryLeakTestClass>(testObject);
+
+            testObject.Dispose();
+            testObject = null;
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            HandlerMemoryLeakTestClass result = null;
+            dummyWeakReference.TryGetTarget(out result).Is(false);
+            result.IsNull();
         }
     }
 }
