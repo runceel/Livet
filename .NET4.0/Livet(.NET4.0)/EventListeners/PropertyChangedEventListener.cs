@@ -10,7 +10,7 @@ namespace Livet.EventListeners
     /// <summary>
     /// INotifyPropertyChanged.PropertyChangedを受信するためのイベントリスナです。
     /// </summary>
-    public sealed class PropertyChangedEventListener : EventListener<PropertyChangedEventHandler>,IEnumerable<KeyValuePair<string,ConcurrentBag<PropertyChangedEventHandler>>>
+    public sealed class PropertyChangedEventListener : EventListener<PropertyChangedEventHandler>,IEnumerable<KeyValuePair<string,List<PropertyChangedEventHandler>>>
     {
         private AnonymousPropertyChangedEventHandlerBag _bag;
 
@@ -67,18 +67,18 @@ namespace Livet.EventListeners
             _bag.RegisterHandler(propertyExpression,handler);
         }
 
-        IEnumerator<KeyValuePair<string, ConcurrentBag<PropertyChangedEventHandler>>> IEnumerable<KeyValuePair<string, ConcurrentBag<PropertyChangedEventHandler>>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>> IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>.GetEnumerator()
         {
             ThrowExceptionIfDisposed();
             return
-                ((IEnumerable<KeyValuePair<string, ConcurrentBag<PropertyChangedEventHandler>>>) _bag)
+                ((IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>) _bag)
                     .GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             ThrowExceptionIfDisposed();
-            return ((IEnumerable<KeyValuePair<string, ConcurrentBag<PropertyChangedEventHandler>>>)_bag).GetEnumerator();
+            return ((IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>)_bag).GetEnumerator();
         }
 
         public void Add(PropertyChangedEventHandler handler)
@@ -111,6 +111,11 @@ namespace Livet.EventListeners
         {
             ThrowExceptionIfDisposed();
             _bag.Add(propertyExpression,handlers);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
     }
 

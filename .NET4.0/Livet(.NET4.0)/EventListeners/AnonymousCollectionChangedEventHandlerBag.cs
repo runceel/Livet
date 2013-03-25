@@ -7,12 +7,16 @@ using System.Text;
 
 namespace Livet.EventListeners
 {
-    internal class AnonymousCollectionChangedEventHandlerBag : IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>
+    internal class AnonymousCollectionChangedEventHandlerBag : IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
     {
-        private ConcurrentDictionary<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>> _handlerDictionary = new ConcurrentDictionary<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>();
+        //private class Enumerator : IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
+        //{
+        //}
+
+        private Dictionary<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>> _handlerDictionary = new Dictionary<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>();
         private WeakReference<INotifyCollectionChanged> _source;
 
-        private ConcurrentBag<NotifyCollectionChangedEventHandler> _allHandlerList = new ConcurrentBag<NotifyCollectionChangedEventHandler>();
+        private List<NotifyCollectionChangedEventHandler> _allHandlerList = new List<NotifyCollectionChangedEventHandler>();
 
         internal AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source)
         {
@@ -28,12 +32,24 @@ namespace Livet.EventListeners
 
         internal void RegisterHandler(NotifyCollectionChangedEventHandler handler)
         {
-            _allHandlerList.Add(handler);
+            lock (_allHandlerList)
+            {
+                _allHandlerList.Add(handler);
+            }
         }
 
         internal void RegisterHandler(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
         {
-            _handlerDictionary.GetOrAdd(action, _ => new ConcurrentBag<NotifyCollectionChangedEventHandler>()).Add(handler);
+            lock (_handlerDictionary)
+            {
+                List<NotifyCollectionChangedEventHandler> bag;
+                if (!_handlerDictionary.TryGetValue(action, out bag))
+                {
+                    bag = new List<NotifyCollectionChangedEventHandler>();
+                    _handlerDictionary[action] = bag;
+                }
+                bag.Add(handler);
+            }
         }
 
         internal void ExecuteHandler(NotifyCollectionChangedEventArgs e)
@@ -43,26 +59,35 @@ namespace Livet.EventListeners
 
             if (!result) return;
 
-            ConcurrentBag<NotifyCollectionChangedEventHandler> list;
-            _handlerDictionary.TryGetValue(e.Action, out list);
+            List<NotifyCollectionChangedEventHandler> list;
+            lock (_handlerDictionary)
+            {
+                _handlerDictionary.TryGetValue(e.Action, out list);
+            }
             if (list != null)
             {
-                foreach (var handler in list)
+                lock (list)
                 {
-                    handler(sourceResult, e);
+                    foreach (var handler in list)
+                    {
+                        handler(sourceResult, e);
+                    }
                 }
             }
 
-            if (_allHandlerList.Any())
+            lock (_allHandlerList)
             {
-                foreach (var handler in _allHandlerList)
+                if (_allHandlerList.Any())
                 {
-                    handler(sourceResult, e);
+                    foreach (var handler in _allHandlerList)
+                    {
+                        handler(sourceResult, e);
+                    }
                 }
             }
         }
 
-        IEnumerator<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>> IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>.GetEnumerator()
+        IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>> IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>.GetEnumerator()
         {
             return _handlerDictionary.GetEnumerator();
         }
@@ -88,6 +113,15 @@ namespace Livet.EventListeners
             foreach (var handler in handlers)
             {
                 RegisterHandler(action, handler);
+            }
+        }
+
+        private void DisposeConcurrentBag(ConcurrentBag<NotifyCollectionChangedEventHandler> bag)
+        {
+            NotifyCollectionChangedEventHandler dummy;
+            while (!bag.IsEmpty)
+            {
+                bag.TryTake(out dummy);
             }
         }
     }

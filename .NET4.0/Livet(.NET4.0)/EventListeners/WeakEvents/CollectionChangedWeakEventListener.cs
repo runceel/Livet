@@ -11,7 +11,7 @@ namespace Livet.EventListeners.WeakEvents
     /// <summary>
     /// INotifyCollectionChanged.NotifyCollectionChangedを受信するためのWeakイベントリスナです。
     /// </summary>
-    public sealed class CollectionChangedWeakEventListener : LivetWeakEventListener<NotifyCollectionChangedEventHandler, NotifyCollectionChangedEventArgs>, IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>
+    public sealed class CollectionChangedWeakEventListener : LivetWeakEventListener<NotifyCollectionChangedEventHandler, NotifyCollectionChangedEventArgs>, IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
     {
         private AnonymousCollectionChangedEventHandlerBag _bag;
 
@@ -65,12 +65,12 @@ namespace Livet.EventListeners.WeakEvents
             _bag.RegisterHandler(action, handler);
         }
 
-        IEnumerator<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>> IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>.GetEnumerator()
+        IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>> IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>.GetEnumerator()
         {
             return
                 ((
                  IEnumerable
-                     <KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>)
+                     <KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>)
                  _bag).GetEnumerator();
         }
 
@@ -78,7 +78,7 @@ namespace Livet.EventListeners.WeakEvents
         {
             return ((
                  IEnumerable
-                     <KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>)
+                     <KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>)
                  _bag).GetEnumerator();
         }
 
@@ -91,7 +91,6 @@ namespace Livet.EventListeners.WeakEvents
         {
             _bag.Add(action, handler);
         }
-
 
         public void Add(NotifyCollectionChangedAction action, params NotifyCollectionChangedEventHandler[] handlers)
         {
