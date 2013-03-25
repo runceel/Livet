@@ -8,9 +8,9 @@ using System.Text;
 
 namespace Livet.EventListeners
 {
-    internal class AnonymousPropertyChangedEventHandlerBag: IEnumerable<KeyValuePair<string,ConcurrentBag<PropertyChangedEventHandler>>>, IDisposable
+    internal class AnonymousPropertyChangedEventHandlerBag: IEnumerable<KeyValuePair<string,List<PropertyChangedEventHandler>>>
     {
-        private ConcurrentDictionary<string, ConcurrentBag<PropertyChangedEventHandler>> _handlerDictionary = new ConcurrentDictionary<string, ConcurrentBag<PropertyChangedEventHandler>>();
+        private Dictionary<string, List<PropertyChangedEventHandler>> _handlerDictionary = new Dictionary<string, List<PropertyChangedEventHandler>>();
         private WeakReference<INotifyPropertyChanged> _source;
 
         internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source)
@@ -29,12 +29,21 @@ namespace Livet.EventListeners
 
         internal void RegisterHandler(PropertyChangedEventHandler handler)
         {
-            _handlerDictionary.GetOrAdd(string.Empty, _ => new ConcurrentBag<PropertyChangedEventHandler>()).Add(handler);
+            RegisterHandler(string.Empty, handler);
         }
 
         internal void RegisterHandler(string propertyName, PropertyChangedEventHandler handler)
         {
-            _handlerDictionary.GetOrAdd(propertyName, _ => new ConcurrentBag<PropertyChangedEventHandler>()).Add(handler);
+            lock (_handlerDictionary)
+            {
+                List<PropertyChangedEventHandler> bag;
+                if (!_handlerDictionary.TryGetValue(propertyName, out bag))
+                {
+                    bag = new List<PropertyChangedEventHandler>();
+                    _handlerDictionary[propertyName] = bag;
+                }
+                bag.Add(handler);
+            }
         }
 
         internal void RegisterHandler<T>(Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
@@ -57,30 +66,42 @@ namespace Livet.EventListeners
 
             if (e.PropertyName != null)
             {
-                ConcurrentBag<PropertyChangedEventHandler> list;
-                _handlerDictionary.TryGetValue(e.PropertyName, out list);
+                List<PropertyChangedEventHandler> list;
+                lock (_handlerDictionary)
+                {
+                    _handlerDictionary.TryGetValue(e.PropertyName, out list);
+                }
 
                 if (list != null)
                 {
-                    foreach (var handler in list)
+                    lock (list)
                     {
-                        handler(sourceResult, e);
+                        foreach (var handler in list)
+                        {
+                            handler(sourceResult, e);
+                        }
                     }
                 }
             }
 
-            ConcurrentBag<PropertyChangedEventHandler> allList;
-            _handlerDictionary.TryGetValue(string.Empty, out allList);
-            if (allList != null)
+            List<PropertyChangedEventHandler> allList;
+            lock (_handlerDictionary)
             {
-                foreach (var handler in allList)
+                _handlerDictionary.TryGetValue(string.Empty, out allList);
+                if (allList != null)
                 {
-                    handler(sourceResult, e);
+                    lock (allList)
+                    {
+                        foreach (var handler in allList)
+                        {
+                            handler(sourceResult, e);
+                        }
+                    }
                 }
             }
         }
 
-        IEnumerator<KeyValuePair<string, ConcurrentBag<PropertyChangedEventHandler>>> IEnumerable<KeyValuePair<string, ConcurrentBag<PropertyChangedEventHandler>>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>> IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>.GetEnumerator()
         {
             return _handlerDictionary.GetEnumerator();
         }
@@ -130,19 +151,6 @@ namespace Livet.EventListeners
             var memberExpression = (MemberExpression)propertyExpression.Body;
 
             Add(memberExpression.Member.Name, handlers);
-        }
-
-        public void Dispose()
-        {
-            PropertyChangedEventHandler dummy;
-            foreach (var bag in _handlerDictionary.Values)
-            {
-                while (!bag.IsEmpty)
-                {
-                    bag.TryTake(out dummy);
-                }
-            }
-            _handlerDictionary.Clear();
         }
     }
 }

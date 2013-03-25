@@ -10,7 +10,7 @@ namespace Livet.EventListeners
     /// <summary>
     /// INotifyCollectionChanged.NotifyCollectionChangedを受信するためのイベントリスナです。
     /// </summary>
-    public sealed class CollectionChangedEventListener : EventListener<NotifyCollectionChangedEventHandler>, IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>
+    public sealed class CollectionChangedEventListener : EventListener<NotifyCollectionChangedEventHandler>, IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
 
     {
         private AnonymousCollectionChangedEventHandlerBag _bag;
@@ -57,12 +57,12 @@ namespace Livet.EventListeners
             _bag.RegisterHandler(action,handler);
         }
 
-        IEnumerator<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>> IEnumerable<KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>.GetEnumerator()
+        IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>> IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>.GetEnumerator()
         {
             return
                 ((
                  IEnumerable
-                     <KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>)
+                     <KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>)
                  _bag).GetEnumerator();
         }
 
@@ -70,7 +70,7 @@ namespace Livet.EventListeners
         {
             return ((
                  IEnumerable
-                     <KeyValuePair<NotifyCollectionChangedAction, ConcurrentBag<NotifyCollectionChangedEventHandler>>>)
+                     <KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>)
                  _bag).GetEnumerator();
         }
 
@@ -88,12 +88,6 @@ namespace Livet.EventListeners
         public void Add(NotifyCollectionChangedAction action, params NotifyCollectionChangedEventHandler[] handlers)
         {
             _bag.Add(action,handlers);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _bag.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
