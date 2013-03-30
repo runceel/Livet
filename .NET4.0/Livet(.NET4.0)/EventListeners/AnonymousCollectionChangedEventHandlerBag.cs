@@ -9,14 +9,15 @@ namespace Livet.EventListeners
 {
     internal class AnonymousCollectionChangedEventHandlerBag : IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
     {
-        //private class Enumerator : IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
-        //{
-        //}
-
         private Dictionary<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>> _handlerDictionary = new Dictionary<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>();
         private WeakReference<INotifyCollectionChanged> _source;
 
         private List<NotifyCollectionChangedEventHandler> _allHandlerList = new List<NotifyCollectionChangedEventHandler>();
+        
+        private Dictionary<List<NotifyCollectionChangedEventHandler>,object> _lockObjectDictionary = new Dictionary<List<NotifyCollectionChangedEventHandler>, object>();
+
+        private object _handlerDictionaryLockObject = new object();
+        private object _allHandlerListLockObject = new object();
 
         internal AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source)
         {
@@ -32,7 +33,7 @@ namespace Livet.EventListeners
 
         internal void RegisterHandler(NotifyCollectionChangedEventHandler handler)
         {
-            lock (_allHandlerList)
+            lock (_allHandlerListLockObject)
             {
                 _allHandlerList.Add(handler);
             }
@@ -40,12 +41,13 @@ namespace Livet.EventListeners
 
         internal void RegisterHandler(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
         {
-            lock (_handlerDictionary)
+            lock (_handlerDictionaryLockObject)
             {
                 List<NotifyCollectionChangedEventHandler> bag;
                 if (!_handlerDictionary.TryGetValue(action, out bag))
                 {
                     bag = new List<NotifyCollectionChangedEventHandler>();
+                    _lockObjectDictionary.Add(bag,new object());
                     _handlerDictionary[action] = bag;
                 }
                 bag.Add(handler);
@@ -60,13 +62,13 @@ namespace Livet.EventListeners
             if (!result) return;
 
             List<NotifyCollectionChangedEventHandler> list;
-            lock (_handlerDictionary)
+            lock (_handlerDictionaryLockObject)
             {
                 _handlerDictionary.TryGetValue(e.Action, out list);
             }
             if (list != null)
             {
-                lock (list)
+                lock (_lockObjectDictionary[list])
                 {
                     foreach (var handler in list)
                     {
@@ -75,7 +77,7 @@ namespace Livet.EventListeners
                 }
             }
 
-            lock (_allHandlerList)
+            lock (_allHandlerListLockObject)
             {
                 if (_allHandlerList.Any())
                 {
@@ -113,15 +115,6 @@ namespace Livet.EventListeners
             foreach (var handler in handlers)
             {
                 RegisterHandler(action, handler);
-            }
-        }
-
-        private void DisposeConcurrentBag(ConcurrentBag<NotifyCollectionChangedEventHandler> bag)
-        {
-            NotifyCollectionChangedEventHandler dummy;
-            while (!bag.IsEmpty)
-            {
-                bag.TryTake(out dummy);
             }
         }
     }

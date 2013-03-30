@@ -13,6 +13,9 @@ namespace Livet.EventListeners
         private Dictionary<string, List<PropertyChangedEventHandler>> _handlerDictionary = new Dictionary<string, List<PropertyChangedEventHandler>>();
         private WeakReference<INotifyPropertyChanged> _source;
 
+        private object _handlerDictionaryLockObject = new object();
+        private Dictionary<List<PropertyChangedEventHandler>,object> _lockObjectDictionary = new Dictionary<List<PropertyChangedEventHandler>, object>();
+
         internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source)
         {
             if (source == null) throw new ArgumentNullException("source");
@@ -34,12 +37,13 @@ namespace Livet.EventListeners
 
         internal void RegisterHandler(string propertyName, PropertyChangedEventHandler handler)
         {
-            lock (_handlerDictionary)
+            lock (_handlerDictionaryLockObject)
             {
                 List<PropertyChangedEventHandler> bag;
                 if (!_handlerDictionary.TryGetValue(propertyName, out bag))
                 {
                     bag = new List<PropertyChangedEventHandler>();
+                    _lockObjectDictionary.Add(bag,new object());
                     _handlerDictionary[propertyName] = bag;
                 }
                 bag.Add(handler);
@@ -67,14 +71,14 @@ namespace Livet.EventListeners
             if (e.PropertyName != null)
             {
                 List<PropertyChangedEventHandler> list;
-                lock (_handlerDictionary)
+                lock (_handlerDictionaryLockObject)
                 {
                     _handlerDictionary.TryGetValue(e.PropertyName, out list);
                 }
 
                 if (list != null)
                 {
-                    lock (list)
+                    lock (_lockObjectDictionary[list])
                     {
                         foreach (var handler in list)
                         {
@@ -85,12 +89,12 @@ namespace Livet.EventListeners
             }
 
             List<PropertyChangedEventHandler> allList;
-            lock (_handlerDictionary)
+            lock (_handlerDictionaryLockObject)
             {
                 _handlerDictionary.TryGetValue(string.Empty, out allList);
                 if (allList != null)
                 {
-                    lock (allList)
+                    lock (_lockObjectDictionary[allList])
                     {
                         foreach (var handler in allList)
                         {
