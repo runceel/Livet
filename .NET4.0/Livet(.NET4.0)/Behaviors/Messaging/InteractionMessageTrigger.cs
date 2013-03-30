@@ -31,7 +31,7 @@ namespace Livet.Behaviors.Messaging
 
 
         /// <summary>
-        /// アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはtrueです。
+        /// アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはfalseです。
         /// </summary>
         public bool InvokeActionsOnlyWhileAttatchedObjectLoaded
         {
@@ -41,7 +41,7 @@ namespace Livet.Behaviors.Messaging
 
         // Using a DependencyProperty as the backing store for FireActionsOnlyWhileAttatchedObjectLoading.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InvokeActionsOnlyWhileAttatchedObjectLoadedProperty =
-            DependencyProperty.Register("InvokeActionsOnlyWhileAttatchedObjectLoaded", typeof(bool), typeof(InteractionMessageTrigger), new PropertyMetadata(true));
+            DependencyProperty.Register("InvokeActionsOnlyWhileAttatchedObjectLoaded", typeof(bool), typeof(InteractionMessageTrigger), new PropertyMetadata(false));
 
 
 

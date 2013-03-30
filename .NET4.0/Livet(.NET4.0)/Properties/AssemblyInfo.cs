@@ -13,7 +13,7 @@ using System;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Livet Project")]
 [assembly: AssemblyProduct("Livet")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2012 Livet Project All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2013 Livet Project All Rights Reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -40,7 +40,7 @@ using System;
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.6.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
 
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet")]
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet.Commands")]
@@ -56,7 +56,7 @@ using System;
 [assembly: XmlnsDefinition("http://schemas.livet-mvvm.net/2011/wpf", "Livet.Behaviors.ControlBinding.OneWay")]
 
 #if NET4
-[assembly: AssemblyFileVersion("1.0.6.4")]
+[assembly: AssemblyFileVersion("1.1.0.4")]
 #elif NET45
-[assembly: AssemblyFileVersion("1.0.6.45")]
+[assembly: AssemblyFileVersion("1.1.0.45")]
 #endif

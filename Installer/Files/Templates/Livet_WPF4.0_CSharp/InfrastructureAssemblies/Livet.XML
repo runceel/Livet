@@ -2687,7 +2687,7 @@
         </member>
         <member name="P:Livet.Behaviors.Messaging.InteractionMessageAction`1.InvokeActionOnlyWhenWindowIsActive">
             <summary>
-            Windowがアクティブな時のみアクションを実行するかどうかを指定、または取得します。初期値はtrueです。
+            Windowがアクティブな時のみアクションを実行するかどうかを指定、または取得します。初期値はfalseです。
             </summary>
         </member>
         <member name="T:Livet.Behaviors.Messaging.IO.SaveFileDialogInteractionMessageAction">
@@ -2717,7 +2717,7 @@
         </member>
         <member name="P:Livet.Behaviors.Messaging.InteractionMessageTrigger.InvokeActionsOnlyWhileAttatchedObjectLoaded">
             <summary>
-            アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはtrueです。
+            アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはfalseです。
             </summary>
         </member>
         <member name="P:Livet.Behaviors.Messaging.InteractionMessageTrigger.IsEnable">
@@ -15593,6 +15593,96 @@
             この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
             </summary>
         </member>
+        <member name="T:Livet.EventListeners.WeakEvents.CollectionChangedWeakEventListener">
+            <summary>
+            INotifyCollectionChanged.NotifyCollectionChangedを受信するためのWeakイベントリスナです。
+            </summary>
+        </member>
+        <member name="T:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2">
+            <summary>
+            汎用WeakEventリスナオブジェクトです。
+            </summary>
+            <typeparam name="THandler">対象のイベントのイベントハンドラ型</typeparam>
+            <typeparam name="TEventArgs">対象のイベントのイベント引数型</typeparam>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.#ctor(System.Func{System.EventHandler{`1},`0},System.Action{`0},System.Action{`0},System.EventHandler{`1})">
+            <summary>
+            コンストラクタ
+            </summary>
+            <param name="conversion">ジェネリックイベントハンドラ型をTHandler方に変換するFunc</param>
+            <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
+            <param name="remove">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
+            <param name="handler">イベントを受信した際に行いたいアクション</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.Dispose">
+            <summary>
+            イベントソースとの接続を解除します。
+            </summary>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.CollectionChangedWeakEventListener.#ctor(System.Collections.Specialized.INotifyCollectionChanged)">
+            <summary>
+            コンストラクタ
+            </summary>
+            <param name="source">INotifyCollectionChangedオブジェクト</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.CollectionChangedWeakEventListener.#ctor(System.Collections.Specialized.INotifyCollectionChanged,System.Collections.Specialized.NotifyCollectionChangedEventHandler)">
+            <summary>
+            コンストラクタ。リスナのインスタンスの作成と同時にハンドラを一つ登録します。
+            </summary>
+            <param name="source">INotifyCollectionChangedオブジェクト</param>
+            <param name="handler">NotifyCollectionChangedイベントハンドラ</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.CollectionChangedWeakEventListener.RegisterHandler(System.Collections.Specialized.NotifyCollectionChangedEventHandler)">
+            <summary>
+            このリスナインスタンスに新たなハンドラを追加します。
+            </summary>
+            <param name="handler">NotifyCollectionChangedイベントハンドラ</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.CollectionChangedWeakEventListener.RegisterHandler(System.Collections.Specialized.NotifyCollectionChangedAction,System.Collections.Specialized.NotifyCollectionChangedEventHandler)">
+            <summary>
+            このリスナインスタンスにプロパティ名でフィルタリング済のハンドラを追加します。
+            </summary>
+            <param name="action">ハンドラを登録したいNotifyCollectionChangedAction</param>
+            <param name="handler">actionで指定されたNotifyCollectionChangedActionに対応したNotifyCollectionChangedイベントハンドラ</param>
+        </member>
+        <member name="T:Livet.EventListeners.WeakEvents.PropertyChangedWeakEventListener">
+            <summary>
+            INotifyPropertyChanged.PropertyChangedを受信するためのWeakイベントリスナです。
+            </summary>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.PropertyChangedWeakEventListener.#ctor(System.ComponentModel.INotifyPropertyChanged)">
+            <summary>
+            コンストラクタ
+            </summary>
+            <param name="source">INotifyPropertyChangedオブジェクト</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.PropertyChangedWeakEventListener.#ctor(System.ComponentModel.INotifyPropertyChanged,System.ComponentModel.PropertyChangedEventHandler)">
+            <summary>
+            コンストラクタ。リスナのインスタンスの作成と同時にハンドラを一つ登録します。
+            </summary>
+            <param name="source">INotifyPropertyChangedオブジェクト</param>
+            <param name="handler">PropertyChangedイベントハンドラ</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.PropertyChangedWeakEventListener.RegisterHandler(System.ComponentModel.PropertyChangedEventHandler)">
+            <summary>
+            このリスナインスタンスに新たなハンドラを追加します。
+            </summary>
+            <param name="handler">PropertyChangedイベントハンドラ</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.PropertyChangedWeakEventListener.RegisterHandler(System.String,System.ComponentModel.PropertyChangedEventHandler)">
+            <summary>
+            このリスナインスタンスにプロパティ名でフィルタリング済のハンドラを追加します。
+            </summary>
+            <param name="propertyName">ハンドラを登録したいPropertyChagedEventArgs.PropertyNameの名前</param>
+            <param name="handler">propertyNameで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.PropertyChangedWeakEventListener.RegisterHandler``1(System.Linq.Expressions.Expression{System.Func{``0}},System.ComponentModel.PropertyChangedEventHandler)">
+            <summary>
+            このリスナインスタンスにプロパティ名でフィルタリング済のハンドラを追加します。
+            </summary>
+            <param name="propertyExpression">() => プロパティ形式のラムダ式</param>
+            <param name="handler">propertyExpressionで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
+        </member>
         <member name="T:Livet.LivetCompositeDisposable">
             <summary>
             複数のIDisposableオブジェクトをまとめて操作するための機能を提供します。
@@ -15767,6 +15857,59 @@
             </summary>
             <param name="propertyExpression">() => プロパティ形式のラムダ式</param>
             <param name="handler">propertyExpressionで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
+        </member>
+        <member name="T:Livet.Messaging.InteractionMessage">
+            <summary>
+            相互作用メッセージの基底クラスです。<br/>
+            Viewからのアクション実行後、戻り値情報が必要ない相互作用メッセージを作成する場合はこのクラスを継承して相互作用メッセージを作成します。
+            </summary>
+        </member>
+        <member name="M:Livet.Messaging.InteractionMessage.#ctor(System.String)">
+            <summary>
+            メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
+            </summary>
+            <param name="messageKey">メッセージキー</param>
+        </member>
+        <member name="M:Livet.Messaging.InteractionMessage.CreateInstanceCore">
+            <summary>
+            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
+            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
+            </summary>
+            <returns>自身の新しいインスタンス</returns>
+        </member>
+        <member name="P:Livet.Messaging.InteractionMessage.MessageKey">
+            <summary>
+            メッセージキーを指定、または取得します。
+            </summary>
+        </member>
+        <member name="T:Livet.Messaging.ResponsiveInteractionMessage`1">
+            <summary>
+            戻り値のある相互作用メッセージの基底クラスです。
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Livet.Messaging.ResponsiveInteractionMessage">
+            <summary>
+            戻り値のある相互作用メッセージの抽象基底クラスです。
+            </summary>
+        </member>
+        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.#ctor(System.String)">
+            <summary>
+            メッセージキーを使用して、戻り値のある新しい相互作用メッセージのインスタンスを生成します
+            </summary>
+            <param name="messageKey">メッセージキー</param>
+        </member>
+        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.CreateInstanceCore">
+            <summary>
+            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
+            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
+            </summary>
+            <returns>自身の新しいインスタンス</returns>
+        </member>
+        <member name="P:Livet.Messaging.ResponsiveInteractionMessage`1.Response">
+            <summary>
+            戻り値情報
+            </summary>
         </member>
         <member name="T:Livet.ObservableSynchronizedCollection`1">
             <summary>
@@ -16092,41 +16235,23 @@
             Windowを最大化・最小化・閉じる・通常化させるための相互作用メッセージです。
             </summary>
         </member>
-        <member name="T:Livet.Messaging.InteractionMessage">
-            <summary>
-            相互作用メッセージの基底クラスです。<br/>
-            Viewからのアクション実行後、戻り値情報が必要ない相互作用メッセージを作成する場合はこのクラスを継承して相互作用メッセージを作成します。
-            </summary>
-        </member>
-        <member name="M:Livet.Messaging.InteractionMessage.#ctor(System.String)">
-            <summary>
-            メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
-            </summary>
-            <param name="messageKey">メッセージキー</param>
-        </member>
-        <member name="M:Livet.Messaging.InteractionMessage.CreateInstanceCore">
-            <summary>
-            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
-            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
-            </summary>
-            <returns>自身の新しいインスタンス</returns>
-        </member>
-        <member name="P:Livet.Messaging.InteractionMessage.MessageKey">
-            <summary>
-            メッセージキーを指定、または取得します。
-            </summary>
-        </member>
         <member name="M:Livet.Messaging.Windows.WindowActionMessage.#ctor(System.String)">
             <summary>
             メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
             </summary>
             <param name="messageKey">メッセージキー</param>
         </member>
-        <member name="M:Livet.Messaging.Windows.WindowActionMessage.#ctor(System.String,Livet.Messaging.Windows.WindowAction)">
+        <member name="M:Livet.Messaging.Windows.WindowActionMessage.#ctor(Livet.Messaging.Windows.WindowAction,System.String)">
             <summary>
             メッセージキーとWindowが遷移すべき状態を定義して、新しい相互作用メッセージのインスタンスを生成します。
             </summary>
+            <param name="action">Windowが遷移すべき状態を表すWindowAction列挙体</param>
             <param name="messageKey">メッセージキー</param>
+        </member>
+        <member name="M:Livet.Messaging.Windows.WindowActionMessage.#ctor(Livet.Messaging.Windows.WindowAction)">
+            <summary>
+            Windowが遷移すべき状態を定義して、新しい相互作用メッセージのインスタンスを生成します。
+            </summary>
             <param name="action">Windowが遷移すべき状態を表すWindowAction列挙体</param>
         </member>
         <member name="M:Livet.Messaging.Windows.WindowActionMessage.CreateInstanceCore">
@@ -16169,41 +16294,14 @@
             確認相互作用メッセージを表します。
             </summary>
         </member>
-        <member name="T:Livet.Messaging.ResponsiveInteractionMessage`1">
+        <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
             <summary>
-            戻り値のある相互作用メッセージの基底クラスです。
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="T:Livet.Messaging.ResponsiveInteractionMessage">
-            <summary>
-            戻り値のある相互作用メッセージの抽象基底クラスです。
-            </summary>
-        </member>
-        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.#ctor(System.String)">
-            <summary>
-            メッセージキーを使用して、戻り値のある新しい相互作用メッセージのインスタンスを生成します
-            </summary>
-            <param name="messageKey">メッセージキー</param>
-        </member>
-        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.CreateInstanceCore">
-            <summary>
-            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
-            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
-            </summary>
-            <returns>自身の新しいインスタンス</returns>
-        </member>
-        <member name="P:Livet.Messaging.ResponsiveInteractionMessage`1.Response">
-            <summary>
-            戻り値情報
-            </summary>
-        </member>
-        <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String,System.String)">
-            <summary>
-            表示するメッセージ・キャプション・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
+            表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージボックスボタン・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
             </summary>
             <param name="text">表示するメッセージ</param>
             <param name="caption">キャプション</param>
+            <param name="image">メッセージボックスイメージ</param>
+            <param name="button">メッセージボックスボタン</param>
             <param name="messageKey">メッセージキー</param>
         </member>
         <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String,System.Windows.MessageBoxImage,System.String)">
@@ -16215,15 +16313,20 @@
             <param name="image">メッセージボックスイメージ</param>
             <param name="messageKey">メッセージキー</param>
         </member>
-        <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
+        <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String,System.String)">
             <summary>
-            表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージボックスボタン・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
+            表示するメッセージ・キャプション・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
             </summary>
             <param name="text">表示するメッセージ</param>
             <param name="caption">キャプション</param>
-            <param name="image">メッセージボックスイメージ</param>
-            <param name="button">メッセージボックスボタン</param>
             <param name="messageKey">メッセージキー</param>
+        </member>
+        <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String)">
+            <summary>
+            表示するメッセージ・キャプションを指定して、新しい相互作用メッセージのインスタンスを生成します。
+            </summary>
+            <param name="text">表示するメッセージ</param>
+            <param name="caption">キャプション</param>
         </member>
         <member name="M:Livet.Messaging.ConfirmationMessage.CreateInstanceCore">
             <summary>
@@ -16491,6 +16594,27 @@
             <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
             <param name="messageKey">メッセージキー</param>
         </member>
+        <member name="M:Livet.Messaging.TransitionMessage.#ctor(Livet.ViewModel)">
+            <summary>
+            新しいWindowのDataContextに設定するViewModelを指定して新しい相互作用メッセージのインスタンスを生成します。
+            </summary>
+            <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
+        </member>
+        <member name="M:Livet.Messaging.TransitionMessage.#ctor(Livet.ViewModel,Livet.Messaging.TransitionMode)">
+            <summary>
+            新しいWindowのDataContextに設定するViewModelと画面遷移モードを指定して新しい相互作用メッセージのインスタンスを生成します。
+            </summary>
+            <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
+            <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
+        </member>
+        <member name="M:Livet.Messaging.TransitionMessage.#ctor(System.Type,Livet.ViewModel,Livet.Messaging.TransitionMode)">
+            <summary>
+            新しいWindowの型と新しいWindowに設定するViewModel、画面遷移モードとメッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
+            </summary>
+            <param name="windowType">新しいWindowの型</param>
+            <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
+            <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
+        </member>
         <member name="M:Livet.Messaging.TransitionMessage.CreateInstanceCore">
             <summary>
             派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
@@ -16595,27 +16719,6 @@
         <member name="P:Livet.ViewModel.Messenger">
             <summary>
             このViewModelクラスの基本Messegerインスタンスです。
-            </summary>
-        </member>
-        <member name="T:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2">
-            <summary>
-            汎用WeakEventリスナオブジェクトです。
-            </summary>
-            <typeparam name="THandler">対象のイベントのイベントハンドラ型</typeparam>
-            <typeparam name="TEventArgs">対象のイベントのイベント引数型</typeparam>
-        </member>
-        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.#ctor(System.Func{System.EventHandler{`1},`0},System.Action{`0},System.Action{`0},System.EventHandler{`1})">
-            <summary>
-            コンストラクタ
-            </summary>
-            <param name="conversion">ジェネリックイベントハンドラ型をTHandler方に変換するFunc</param>
-            <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
-            <param name="remove">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
-            <param name="handler">イベントを受信した際に行いたいアクション</param>
-        </member>
-        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.Dispose">
-            <summary>
-            イベントソースとの接続を解除します。
             </summary>
         </member>
         <member name="T:Livet.ViewModelHelper">
