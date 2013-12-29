@@ -11,7 +11,7 @@
 # /LivetSetup.Bootstrapper/LivetSetup.cab
 # が更新されます。
 
-$WixBinFolder = "C:\Program Files (x86)\WiX Toolset v3.7\bin"
+$WixBinFolder = "C:\Program Files (x86)\WiX Toolset v3.8\bin"
 
 function CopyBinaries([string] $frameworkVersion=""){
 
