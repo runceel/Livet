@@ -151,6 +151,11 @@ namespace Livet.Behaviors.Messaging
                             window.Owner = Window.GetWindow(AssociatedObject);
                         }
                         window.Activate();
+                        // 最小化中なら戻す
+                        if (window.WindowState == WindowState.Minimized)
+                        {
+                            window.WindowState = WindowState.Normal;
+                        }
                         transitionMessage.Response = null;
                     }
 
