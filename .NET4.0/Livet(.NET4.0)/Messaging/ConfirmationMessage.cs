@@ -15,15 +15,28 @@ namespace Livet.Messaging
         /// <param name="caption">キャプション</param>
         /// <param name="image">メッセージボックスイメージ</param>
         /// <param name="button">メッセージボックスボタン</param>
+        /// <param name="defaultResult">既定の結果</param>
         /// <param name="messageKey">メッセージキー</param>
-        public ConfirmationMessage(string text, string caption, MessageBoxImage image,MessageBoxButton button, string messageKey)
+        public ConfirmationMessage(string text, string caption, MessageBoxImage image, MessageBoxButton button, MessageBoxResult defaultResult, string messageKey)
             : base(messageKey)
         {
             Text = text;
             Caption = caption;
             Image = image;
             Button = button;
+            DefaultResult = defaultResult;
         }
+
+        /// <summary>
+        /// 表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージボックスボタン・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
+        /// </summary>
+        /// <param name="text">表示するメッセージ</param>
+        /// <param name="caption">キャプション</param>
+        /// <param name="image">メッセージボックスイメージ</param>
+        /// <param name="button">メッセージボックスボタン</param>
+        /// <param name="messageKey">メッセージキー</param>
+        public ConfirmationMessage(string text, string caption, MessageBoxImage image,MessageBoxButton button, string messageKey)
+            : this(text, caption, image, button, MessageBoxResult.OK, messageKey) { }
 
         /// <summary>
         /// 表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
@@ -61,7 +74,7 @@ namespace Livet.Messaging
         /// <returns>自身の新しいインスタンス</returns>
         protected override Freezable CreateInstanceCore()
         {
-            return new ConfirmationMessage(Text,Caption,MessageKey);
+            return new ConfirmationMessage(Text, Caption, Image, Button, DefaultResult, MessageKey);
         }
 
         /// <summary>
@@ -119,5 +132,18 @@ namespace Livet.Messaging
         // Using a DependencyProperty as the backing store for Button.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonProperty =
             DependencyProperty.Register("Button", typeof(MessageBoxButton), typeof(ConfirmationMessage), new PropertyMetadata(MessageBoxButton.OKCancel));  
+
+        /// <summary>
+        /// メッセージボックスの既定の結果を指定、または取得します。
+        /// </summary>
+        public MessageBoxResult DefaultResult
+        {
+            get { return (MessageBoxResult)GetValue(DefaultResultProperty); }
+            set { SetValue(DefaultResultProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DefaultResult.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DefaultResultProperty =
+            DependencyProperty.Register("DefaultResult", typeof(MessageBoxResult), typeof(ConfirmationMessage), new PropertyMetadata(MessageBoxResult.OK));
     }
 }
