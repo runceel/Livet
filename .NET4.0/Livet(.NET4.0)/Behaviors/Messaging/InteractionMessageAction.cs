@@ -64,7 +64,7 @@ namespace Livet.Behaviors.Messaging
 
 
         /// <summary>
-        /// Windowがアクティブな時のみアクションを実行するかどうかを指定、または取得します。初期値はfalseです。
+        /// Windowがアクティブな時のみアクションを実行するかどうかを指定、または取得します。初期値はtrueです。
         /// </summary>
         public bool InvokeActionOnlyWhenWindowIsActive
         {
@@ -74,7 +74,7 @@ namespace Livet.Behaviors.Messaging
 
         // Using a DependencyProperty as the backing store for InvokeActionOnlyWhenWindowIsActive.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InvokeActionOnlyWhenWindowIsActiveProperty =
-            DependencyProperty.Register("InvokeActionOnlyWhenWindowIsActive", typeof(bool), typeof(InteractionMessageAction<T>), new PropertyMetadata(false));
+            DependencyProperty.Register("InvokeActionOnlyWhenWindowIsActive", typeof(bool), typeof(InteractionMessageAction<T>), new PropertyMetadata(true));
 
         
     }
