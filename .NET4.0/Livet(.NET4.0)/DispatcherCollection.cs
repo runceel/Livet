@@ -15,6 +15,9 @@ namespace Livet
     /// </summary>
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
     public class DispatcherCollection<T> : IList<T>,ICollection,INotifyCollectionChanged,INotifyPropertyChanged
+#if NET45
+        ,IReadOnlyList<T>
+#endif
     {
         private IList<T> _souceAsIList;
         private object _syncRoot = new object();

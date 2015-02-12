@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Specialized;
@@ -15,7 +16,7 @@ namespace Livet
     /// 変更通知を行います。
     /// </summary>
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
-    public class ReadOnlyDispatcherCollection<T> : ReadOnlyCollection<T>,INotifyCollectionChanged,INotifyPropertyChanged,IDisposable
+    public class ReadOnlyDispatcherCollection<T> : ReadOnlyCollection<T>,INotifyCollectionChanged,INotifyPropertyChanged, IDisposable
     {
         private DispatcherCollection<T> _list;
         private LivetCompositeDisposable _listeners = new LivetCompositeDisposable();
