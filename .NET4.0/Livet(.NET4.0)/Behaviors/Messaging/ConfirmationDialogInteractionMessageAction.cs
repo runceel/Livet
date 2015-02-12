@@ -18,7 +18,8 @@ namespace Livet.Behaviors.Messaging
                     confirmMessage.Text,
                     confirmMessage.Caption,
                     confirmMessage.Button,
-                    confirmMessage.Image
+                    confirmMessage.Image,
+                    confirmMessage.DefaultResult
                     );
 
                 if (result == MessageBoxResult.Yes || result == MessageBoxResult.OK)
