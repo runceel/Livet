@@ -123,7 +123,7 @@ namespace Livet.Behaviors.Messaging
                 case TransitionMode.NewOrActive:
                     var window = Application.Current.Windows
                         .OfType<Window>()
-                        .FirstOrDefault(w => w.GetType() == WindowType);
+                        .FirstOrDefault(w => w.GetType() == targetType);
 
                     if (window == null)
                     {
