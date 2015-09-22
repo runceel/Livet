@@ -1,0 +1,22 @@
+;*** BEGIN **********************************************************
+;**                                                                **
+;** Automatically generated on: Tue Sep 22 14:07:45 2015           **
+;**                                                                **
+;** MakeCAB Version: 10.0.10011.16384                                 **
+;**                                                                **
+;*** BEGIN **********************************************************
+[disk list]
+1,Disk 1
+[cabinet list]
+1,1,1.cab
+[file list]
+1,1,LivetSetup_en_US.msi,10228349
+1,1,LivetSetup_en_US.wixpdb,881862
+1,1,LivetSetup_ja_JP.msi,10231637
+1,1,LivetSetup_ja_JP.wixpdb,900993
+1,1,Product.wixobj,275517
+;*** END ************************************************************
+;**                                                                **
+;** Automatically generated on: Tue Sep 22 14:07:45 2015           **
+;**                                                                **
+;*** END ************************************************************

@@ -2645,23 +2645,6 @@
             確認ダイアログを表示するアクションです。<see cref="T:Livet.Messaging.ConfirmationMessage"/>に対応します。
             </summary>
         </member>
-        <member name="T:Livet.Behaviors.Messaging.InteractionMessageAction`1">
-            <summary>
-            ViewModelからの相互作用メッセージに対応するアクションの基底抽象クラスです<br/>
-            独自のアクションを定義する場合はこのクラスを継承してください。
-            </summary>
-            <typeparam name="T">このアクションがアタッチ可能な型を示します。</typeparam>
-        </member>
-        <member name="P:Livet.Behaviors.Messaging.InteractionMessageAction`1.DirectInteractionMessage">
-            <summary>
-            Viewで直接相互作用メッセージを定義する場合に使用する、DirectInteractionMessageを指定、または取得します。
-            </summary>
-        </member>
-        <member name="P:Livet.Behaviors.Messaging.InteractionMessageAction`1.InvokeActionOnlyWhenWindowIsActive">
-            <summary>
-            Windowがアクティブな時のみアクションを実行するかどうかを指定、または取得します。初期値はfalseです。
-            </summary>
-        </member>
         <member name="T:Livet.Behaviors.Messaging.DirectInteractionMessage">
             <summary>
             Viewから直接相互作用メッセージを定義する際に使用します。
@@ -2693,6 +2676,23 @@
         <member name="T:Livet.Behaviors.Messaging.InformationDialogInteractionMessageAction">
             <summary>
             情報ダイアログを表示するアクションです。InformationMessageに対応します。
+            </summary>
+        </member>
+        <member name="T:Livet.Behaviors.Messaging.InteractionMessageAction`1">
+            <summary>
+            ViewModelからの相互作用メッセージに対応するアクションの基底抽象クラスです<br/>
+            独自のアクションを定義する場合はこのクラスを継承してください。
+            </summary>
+            <typeparam name="T">このアクションがアタッチ可能な型を示します。</typeparam>
+        </member>
+        <member name="P:Livet.Behaviors.Messaging.InteractionMessageAction`1.DirectInteractionMessage">
+            <summary>
+            Viewで直接相互作用メッセージを定義する場合に使用する、DirectInteractionMessageを指定、または取得します。
+            </summary>
+        </member>
+        <member name="P:Livet.Behaviors.Messaging.InteractionMessageAction`1.InvokeActionOnlyWhenWindowIsActive">
+            <summary>
+            Windowがアクティブな時のみアクションを実行するかどうかを指定、または取得します。初期値はtrueです。
             </summary>
         </member>
         <member name="T:Livet.Behaviors.Messaging.InteractionMessageTrigger">
@@ -2809,14 +2809,14 @@
             Windowを閉じる処理がこのビヘイビアによってキャンセルされた場合に実行するメソッドの名前を取得、または設定します。
             </summary>
         </member>
-        <member name="M:Livet.Commands.Command.OnCanExecuteChanged">
-            <summary>
-            コマンドが実行可能かどうかが変化した時に呼び出されます。
-            </summary>
-        </member>
         <member name="E:Livet.Commands.Command.CanExecuteChanged">
             <summary>
             コマンドが実行可能かどうかが変化した時に発生します。
+            </summary>
+        </member>
+        <member name="M:Livet.Commands.Command.OnCanExecuteChanged">
+            <summary>
+            コマンドが実行可能かどうかが変化した時に呼び出されます。
             </summary>
         </member>
         <member name="T:Livet.Commands.ListenerCommand`1">
@@ -2838,25 +2838,25 @@
             <param name="execute">コマンドが実行するAction</param>
             <param name="canExecute">コマンドが実行可能かどうかをあらわすFunc&lt;bool&gt;</param>
         </member>
+        <member name="P:Livet.Commands.ListenerCommand`1.CanExecute">
+            <summary>
+            コマンドが実行可能かどうかを取得します。
+            </summary>
+        </member>
         <member name="M:Livet.Commands.ListenerCommand`1.Execute(`0)">
             <summary>
             コマンドを実行します。
             </summary>
             <param name="parameter">Viewから渡されたオブジェクト</param>
         </member>
-        <member name="M:Livet.Commands.ListenerCommand`1.RaiseCanExecuteChanged">
-            <summary>
-            コマンドが実行可能かどうかが変化したことを通知します。
-            </summary>
-        </member>
-        <member name="P:Livet.Commands.ListenerCommand`1.CanExecute">
-            <summary>
-            コマンドが実行可能かどうかを取得します。
-            </summary>
-        </member>
         <member name="E:Livet.Commands.ListenerCommand`1.PropertyChanged">
             <summary>
             コマンドが実行可能かどうかが変化した時に発生します。
+            </summary>
+        </member>
+        <member name="M:Livet.Commands.ListenerCommand`1.RaiseCanExecuteChanged">
+            <summary>
+            コマンドが実行可能かどうかが変化したことを通知します。
             </summary>
         </member>
         <member name="T:Livet.Commands.ViewModelCommand">
@@ -2877,24 +2877,24 @@
             <param name="execute">コマンドが実行するAction</param>
             <param name="canExecute">コマンドが実行可能かどうかをあらわすFunc&lt;bool&gt;</param>
         </member>
-        <member name="M:Livet.Commands.ViewModelCommand.Execute">
-            <summary>
-            コマンドを実行します。
-            </summary>
-        </member>
-        <member name="M:Livet.Commands.ViewModelCommand.RaiseCanExecuteChanged">
-            <summary>
-            コマンドが実行可能かどうかが変化したことを通知します。
-            </summary>
-        </member>
         <member name="P:Livet.Commands.ViewModelCommand.CanExecute">
             <summary>
             コマンドが実行可能かどうかを取得します。
             </summary>
         </member>
+        <member name="M:Livet.Commands.ViewModelCommand.Execute">
+            <summary>
+            コマンドを実行します。
+            </summary>
+        </member>
         <member name="E:Livet.Commands.ViewModelCommand.PropertyChanged">
             <summary>
             コマンドが実行可能かどうかが変化した時に発生します。
+            </summary>
+        </member>
+        <member name="M:Livet.Commands.ViewModelCommand.RaiseCanExecuteChanged">
+            <summary>
+            コマンドが実行可能かどうかが変化したことを通知します。
             </summary>
         </member>
         <member name="T:Livet.Converters.AlignmentXAndBooleanConverter">
@@ -15612,6 +15612,16 @@
             <param name="collection">元となるコレクション(IList(Of(T)とINotifyPropertyChangedも実装している必要があります)</param>
             <param name="dispatcher">UIDispatcher(通常はDispatcherHelper.UIDispatcher)</param>
         </member>
+        <member name="P:Livet.DispatcherCollection`1.Dispatcher">
+            <summary>
+            このコレクションに関連付けられたDispatcherを取得、または設定します。
+            </summary>
+        </member>
+        <member name="P:Livet.DispatcherCollection`1.CollectionChangedDispatcherPriority">
+            <summary>
+            コレクション変更通知時のDispatcherPriorityを指定、または取得します。
+            </summary>
+        </member>
         <member name="M:Livet.DispatcherCollection`1.IndexOf(`0)">
             <summary>
             指定したオブジェクトを検索し、最初に見つかった位置の 0 から始まるインデックスを返します。
@@ -15657,6 +15667,16 @@
             <param name="array">コピー先の配列</param>
             <param name="arrayIndex">コピー先の配列のどこからコピー操作をするかのインデックス</param>
         </member>
+        <member name="P:Livet.DispatcherCollection`1.Count">
+            <summary>
+            実際に格納されている要素の数を取得します。
+            </summary>
+        </member>
+        <member name="P:Livet.DispatcherCollection`1.IsReadOnly">
+            <summary>
+            このコレクションが読み取り専用かどうかを取得します。
+            </summary>
+        </member>
         <member name="M:Livet.DispatcherCollection`1.Remove(`0)">
             <summary>
             最初に見つかった特定のオブジェクトを削除します。
@@ -15678,32 +15698,6 @@
             <param name="array">コピー先の配列</param>
             <param name="index">コピー先の配列のどこからコピー操作をするかのインデックス</param>
         </member>
-        <member name="M:Livet.DispatcherCollection`1.GetEnumerator">
-            <summary>
-            反復処理するための列挙子を返します。
-            </summary>
-            <returns>列挙子</returns>
-        </member>
-        <member name="P:Livet.DispatcherCollection`1.Dispatcher">
-            <summary>
-            このコレクションに関連付けられたDispatcherを取得、または設定します。
-            </summary>
-        </member>
-        <member name="P:Livet.DispatcherCollection`1.CollectionChangedDispatcherPriority">
-            <summary>
-            コレクション変更通知時のDispatcherPriorityを指定、または取得します。
-            </summary>
-        </member>
-        <member name="P:Livet.DispatcherCollection`1.Count">
-            <summary>
-            実際に格納されている要素の数を取得します。
-            </summary>
-        </member>
-        <member name="P:Livet.DispatcherCollection`1.IsReadOnly">
-            <summary>
-            このコレクションが読み取り専用かどうかを取得します。
-            </summary>
-        </member>
         <member name="P:Livet.DispatcherCollection`1.IsSynchronized">
             <summary>
             このコレクションがスレッドセーフであるかどうかを取得します。
@@ -15713,6 +15707,12 @@
             <summary>
             このコレクションへのスレッドセーフなアクセスに使用できる同期オブジェクトを返します。
             </summary>
+        </member>
+        <member name="M:Livet.DispatcherCollection`1.GetEnumerator">
+            <summary>
+            反復処理するための列挙子を返します。
+            </summary>
+            <returns>列挙子</returns>
         </member>
         <member name="E:Livet.DispatcherCollection`1.CollectionChanged">
             <summary>
@@ -15727,6 +15727,11 @@
         <member name="T:Livet.DispatcherHelper">
             <summary>
             UIDispatcherへのアクセスを簡易化します。
+            </summary>
+        </member>
+        <member name="P:Livet.DispatcherHelper.UIDispatcher">
+            <summary>s
+            UIDispatcherを指定、または取得します。通常このプロパティはApp_StartUpで指定されます。
             </summary>
         </member>
         <member name="M:Livet.DispatcherHelper.BeginInvoke(System.Action)">
@@ -15744,33 +15749,9 @@
             <param name="priority">DispatcherPriority</param>
             <exception cref="T:System.InvalidOperationException">UIDispatcherインスタンスがApp.StartUpなどで確保されていません。</exception>
         </member>
-        <member name="P:Livet.DispatcherHelper.UIDispatcher">
-            <summary>s
-            UIDispatcherを指定、または取得します。通常このプロパティはApp_StartUpで指定されます。
-            </summary>
-        </member>
         <member name="T:Livet.EventListeners.CollectionChangedEventListener">
             <summary>
             INotifyCollectionChanged.NotifyCollectionChangedを受信するためのイベントリスナです。
-            </summary>
-        </member>
-        <member name="T:Livet.EventListeners.EventListener`1">
-            <summary>
-            汎用イベントリスナオブジェクトです。
-            </summary>
-            <typeparam name="THandler">イベントハンドラーの型</typeparam>
-        </member>
-        <member name="M:Livet.EventListeners.EventListener`1.#ctor(System.Action{`0},System.Action{`0},`0)">
-            <summary>
-            コンストラクタ
-            </summary>
-            <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
-            <param name="remove">h => obj.Event -= > h の様な形でイベントの購読を解除するためのAction。hはTHandler型です。</param>
-            <param name="handler">イベントを受信した際に行いたいアクション</param>
-        </member>
-        <member name="M:Livet.EventListeners.EventListener`1.Dispose">
-            <summary>
-            イベントハンドラの登録を解除します。
             </summary>
         </member>
         <member name="M:Livet.EventListeners.CollectionChangedEventListener.#ctor(System.Collections.Specialized.INotifyCollectionChanged)">
@@ -15798,6 +15779,25 @@
             </summary>
             <param name="action">ハンドラを登録したいNotifyCollectionChangedAction</param>
             <param name="handler">actionで指定されたNotifyCollectionChangedActionに対応したNotifyCollectionChangedイベントハンドラ</param>
+        </member>
+        <member name="T:Livet.EventListeners.EventListener`1">
+            <summary>
+            汎用イベントリスナオブジェクトです。
+            </summary>
+            <typeparam name="THandler">イベントハンドラーの型</typeparam>
+        </member>
+        <member name="M:Livet.EventListeners.EventListener`1.#ctor(System.Action{`0},System.Action{`0},`0)">
+            <summary>
+            コンストラクタ
+            </summary>
+            <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
+            <param name="remove">h => obj.Event -= > h の様な形でイベントの購読を解除するためのAction。hはTHandler型です。</param>
+            <param name="handler">イベントを受信した際に行いたいアクション</param>
+        </member>
+        <member name="M:Livet.EventListeners.EventListener`1.Dispose">
+            <summary>
+            イベントハンドラの登録を解除します。
+            </summary>
         </member>
         <member name="T:Livet.EventListeners.PropertyChangedEventListener">
             <summary>
@@ -15842,27 +15842,6 @@
             INotifyCollectionChanged.NotifyCollectionChangedを受信するためのWeakイベントリスナです。
             </summary>
         </member>
-        <member name="T:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2">
-            <summary>
-            汎用WeakEventリスナオブジェクトです。
-            </summary>
-            <typeparam name="THandler">対象のイベントのイベントハンドラ型</typeparam>
-            <typeparam name="TEventArgs">対象のイベントのイベント引数型</typeparam>
-        </member>
-        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.#ctor(System.Func{System.EventHandler{`1},`0},System.Action{`0},System.Action{`0},System.EventHandler{`1})">
-            <summary>
-            コンストラクタ
-            </summary>
-            <param name="conversion">ジェネリックイベントハンドラ型をTHandler方に変換するFunc</param>
-            <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
-            <param name="remove">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
-            <param name="handler">イベントを受信した際に行いたいアクション</param>
-        </member>
-        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.Dispose">
-            <summary>
-            イベントソースとの接続を解除します。
-            </summary>
-        </member>
         <member name="M:Livet.EventListeners.WeakEvents.CollectionChangedWeakEventListener.#ctor(System.Collections.Specialized.INotifyCollectionChanged)">
             <summary>
             コンストラクタ
@@ -15888,6 +15867,27 @@
             </summary>
             <param name="action">ハンドラを登録したいNotifyCollectionChangedAction</param>
             <param name="handler">actionで指定されたNotifyCollectionChangedActionに対応したNotifyCollectionChangedイベントハンドラ</param>
+        </member>
+        <member name="T:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2">
+            <summary>
+            汎用WeakEventリスナオブジェクトです。
+            </summary>
+            <typeparam name="THandler">対象のイベントのイベントハンドラ型</typeparam>
+            <typeparam name="TEventArgs">対象のイベントのイベント引数型</typeparam>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.#ctor(System.Func{System.EventHandler{`1},`0},System.Action{`0},System.Action{`0},System.EventHandler{`1})">
+            <summary>
+            コンストラクタ
+            </summary>
+            <param name="conversion">ジェネリックイベントハンドラ型をTHandler方に変換するFunc</param>
+            <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
+            <param name="remove">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
+            <param name="handler">イベントを受信した際に行いたいアクション</param>
+        </member>
+        <member name="M:Livet.EventListeners.WeakEvents.LivetWeakEventListener`2.Dispose">
+            <summary>
+            イベントソースとの接続を解除します。
+            </summary>
         </member>
         <member name="T:Livet.EventListeners.WeakEvents.PropertyChangedWeakEventListener">
             <summary>
@@ -15992,6 +15992,16 @@
             <param name="array">コピー先の配列</param>
             <param name="arrayIndex">コピー先の配列のどこからコピー操作をするかのインデックス</param>
         </member>
+        <member name="P:Livet.LivetCompositeDisposable.Count">
+            <summary>
+            実際に格納されている要素の数を取得します。
+            </summary>
+        </member>
+        <member name="P:Livet.LivetCompositeDisposable.IsReadOnly">
+            <summary>
+            このコレクションが読み取り専用かどうかを取得します。(常にfalseを返します)
+            </summary>
+        </member>
         <member name="M:Livet.LivetCompositeDisposable.Remove(System.IDisposable)">
             <summary>
             最初に見つかった特定のオブジェクトを削除します。
@@ -16004,73 +16014,21 @@
             このコレクションに含まれるすべての要素をDisposeします。
             </summary>
         </member>
-        <member name="P:Livet.LivetCompositeDisposable.Count">
-            <summary>
-            実際に格納されている要素の数を取得します。
-            </summary>
-        </member>
-        <member name="P:Livet.LivetCompositeDisposable.IsReadOnly">
-            <summary>
-            このコレクションが読み取り専用かどうかを取得します。(常にfalseを返します)
-            </summary>
-        </member>
         <member name="T:Livet.Messaging.ConfirmationMessage">
             <summary>
             確認相互作用メッセージを表します。
             </summary>
         </member>
-        <member name="T:Livet.Messaging.ResponsiveInteractionMessage`1">
+        <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.Windows.MessageBoxResult,System.String)">
             <summary>
-            戻り値のある相互作用メッセージの基底クラスです。
+            表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージボックスボタン・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
             </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="T:Livet.Messaging.ResponsiveInteractionMessage">
-            <summary>
-            戻り値のある相互作用メッセージの抽象基底クラスです。
-            </summary>
-        </member>
-        <member name="T:Livet.Messaging.InteractionMessage">
-            <summary>
-            相互作用メッセージの基底クラスです。<br/>
-            Viewからのアクション実行後、戻り値情報が必要ない相互作用メッセージを作成する場合はこのクラスを継承して相互作用メッセージを作成します。
-            </summary>
-        </member>
-        <member name="M:Livet.Messaging.InteractionMessage.#ctor(System.String)">
-            <summary>
-            メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
-            </summary>
+            <param name="text">表示するメッセージ</param>
+            <param name="caption">キャプション</param>
+            <param name="image">メッセージボックスイメージ</param>
+            <param name="button">メッセージボックスボタン</param>
+            <param name="defaultResult">既定の結果</param>
             <param name="messageKey">メッセージキー</param>
-        </member>
-        <member name="M:Livet.Messaging.InteractionMessage.CreateInstanceCore">
-            <summary>
-            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
-            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
-            </summary>
-            <returns>自身の新しいインスタンス</returns>
-        </member>
-        <member name="P:Livet.Messaging.InteractionMessage.MessageKey">
-            <summary>
-            メッセージキーを指定、または取得します。
-            </summary>
-        </member>
-        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.#ctor(System.String)">
-            <summary>
-            メッセージキーを使用して、戻り値のある新しい相互作用メッセージのインスタンスを生成します
-            </summary>
-            <param name="messageKey">メッセージキー</param>
-        </member>
-        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.CreateInstanceCore">
-            <summary>
-            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
-            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
-            </summary>
-            <returns>自身の新しいインスタンス</returns>
-        </member>
-        <member name="P:Livet.Messaging.ResponsiveInteractionMessage`1.Response">
-            <summary>
-            戻り値情報
-            </summary>
         </member>
         <member name="M:Livet.Messaging.ConfirmationMessage.#ctor(System.String,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
             <summary>
@@ -16133,6 +16091,11 @@
             メッセージボックスボタンを指定、または取得します。
             </summary>
         </member>
+        <member name="P:Livet.Messaging.ConfirmationMessage.DefaultResult">
+            <summary>
+            メッセージボックスの既定の結果を指定、または取得します。
+            </summary>
+        </member>
         <member name="T:Livet.Messaging.InformationMessage">
             <summary>
             情報をViewに通知するためのメッセージです。
@@ -16177,6 +16140,30 @@
             メッセージボックスイメージを指定、または取得します。
             </summary>
         </member>
+        <member name="T:Livet.Messaging.InteractionMessage">
+            <summary>
+            相互作用メッセージの基底クラスです。<br/>
+            Viewからのアクション実行後、戻り値情報が必要ない相互作用メッセージを作成する場合はこのクラスを継承して相互作用メッセージを作成します。
+            </summary>
+        </member>
+        <member name="M:Livet.Messaging.InteractionMessage.#ctor(System.String)">
+            <summary>
+            メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
+            </summary>
+            <param name="messageKey">メッセージキー</param>
+        </member>
+        <member name="P:Livet.Messaging.InteractionMessage.MessageKey">
+            <summary>
+            メッセージキーを指定、または取得します。
+            </summary>
+        </member>
+        <member name="M:Livet.Messaging.InteractionMessage.CreateInstanceCore">
+            <summary>
+            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
+            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
+            </summary>
+            <returns>自身の新しいインスタンス</returns>
+        </member>
         <member name="T:Livet.Messaging.InteractionMessenger">
             <summary>
             ViewModelで使用するMessengerクラスです。
@@ -16195,6 +16182,11 @@
             <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
             <param name="message">戻り値情報のある相互作用メッセージ</param>
             <returns>アクション実行後に、戻り情報を含んだ相互作用メッセージ</returns>
+        </member>
+        <member name="E:Livet.Messaging.InteractionMessenger.Raised">
+            <summary>
+            相互作用メッセージが送信された時に発生するイベントです。
+            </summary>
         </member>
         <member name="M:Livet.Messaging.InteractionMessenger.RaiseAsync(Livet.Messaging.InteractionMessage)">
             <summary>
@@ -16216,11 +16208,6 @@
             <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
             <param name="message">戻り値情報のある相互作用メッセージ</param>
             <param name="callback">コールバック</param>
-        </member>
-        <member name="E:Livet.Messaging.InteractionMessenger.Raised">
-            <summary>
-            相互作用メッセージが送信された時に発生するイベントです。
-            </summary>
         </member>
         <member name="T:Livet.Messaging.InteractionMessageRaisedEventArgs">
             <summary>
@@ -16328,6 +16315,35 @@
             ユーザーが指定したファイルが存在する場合、上書き確認メッセージを表示するかどうかを指定、または取得します。デフォルトはtrueです。
             </summary>
         </member>
+        <member name="T:Livet.Messaging.ResponsiveInteractionMessage">
+            <summary>
+            戻り値のある相互作用メッセージの抽象基底クラスです。
+            </summary>
+        </member>
+        <member name="T:Livet.Messaging.ResponsiveInteractionMessage`1">
+            <summary>
+            戻り値のある相互作用メッセージの基底クラスです。
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.#ctor(System.String)">
+            <summary>
+            メッセージキーを使用して、戻り値のある新しい相互作用メッセージのインスタンスを生成します
+            </summary>
+            <param name="messageKey">メッセージキー</param>
+        </member>
+        <member name="M:Livet.Messaging.ResponsiveInteractionMessage`1.CreateInstanceCore">
+            <summary>
+            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
+            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
+            </summary>
+            <returns>自身の新しいインスタンス</returns>
+        </member>
+        <member name="P:Livet.Messaging.ResponsiveInteractionMessage`1.Response">
+            <summary>
+            戻り値情報
+            </summary>
+        </member>
         <member name="T:Livet.Messaging.TransitionMessage">
             <summary>
             画面遷移アクション用の相互作用メッセージです。
@@ -16384,13 +16400,6 @@
             <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
             <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
         </member>
-        <member name="M:Livet.Messaging.TransitionMessage.CreateInstanceCore">
-            <summary>
-            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
-            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
-            </summary>
-            <returns>自身の新しいインスタンス</returns>
-        </member>
         <member name="P:Livet.Messaging.TransitionMessage.TransitionViewModel">
             <summary>
             新しいWindowのDataContextに設定するViewModelを指定、または取得します。
@@ -16406,6 +16415,13 @@
             <summary>
             新しいWindowの型を指定、または取得します。
             </summary>
+        </member>
+        <member name="M:Livet.Messaging.TransitionMessage.CreateInstanceCore">
+            <summary>
+            派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
+            通常このメソッドは、自身の新しいインスタンスを返すように実装します。
+            </summary>
+            <returns>自身の新しいインスタンス</returns>
         </member>
         <member name="F:Livet.Messaging.TransitionMode.Normal">
             <summary>
@@ -16499,23 +16515,23 @@
             変更通知オブジェクトの基底クラスです。
             </summary>
         </member>
+        <member name="E:Livet.NotificationObject.PropertyChanged">
+            <summary>
+            プロパティ変更通知イベントです。
+            </summary>
+        </member>
         <member name="M:Livet.NotificationObject.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
             プロパティ変更通知イベントを発生させます。
             </summary>
-            <param name="propertyExpression">() =&gt; プロパティ形式のラムダ式</param>
-            <exception cref="T:System.NotSupportedException">() =&gt; プロパティ 以外の形式のラムダ式が指定されました。</exception>
+            <param name="propertyExpression">() => プロパティ形式のラムダ式</param>
+            <exception cref="T:System.NotSupportedException">() => プロパティ 以外の形式のラムダ式が指定されました。</exception>
         </member>
         <member name="M:Livet.NotificationObject.RaisePropertyChanged(System.String)">
             <summary>
             プロパティ変更通知イベントを発生させます
             </summary>
             <param name="propertyName">プロパティ名</param>
-        </member>
-        <member name="E:Livet.NotificationObject.PropertyChanged">
-            <summary>
-            プロパティ変更通知イベントです。
-            </summary>
         </member>
         <member name="T:Livet.ObservableSynchronizedCollection`1">
             <summary>
@@ -16579,6 +16595,16 @@
             <param name="array">コピー先の配列</param>
             <param name="arrayIndex">コピー先の配列のどこからコピー操作をするかのインデックス</param>
         </member>
+        <member name="P:Livet.ObservableSynchronizedCollection`1.Count">
+            <summary>
+            実際に格納されている要素の数を取得します。
+            </summary>
+        </member>
+        <member name="P:Livet.ObservableSynchronizedCollection`1.IsReadOnly">
+            <summary>
+            このコレクションが読み取り専用かどうかを取得します。
+            </summary>
+        </member>
         <member name="M:Livet.ObservableSynchronizedCollection`1.Remove(`0)">
             <summary>
             最初に見つかった特定のオブジェクトを削除します。
@@ -16612,6 +16638,16 @@
             <param name="array">コピー先の配列</param>
             <param name="index">コピー先の配列のどこからコピー操作をするかのインデックス</param>
         </member>
+        <member name="P:Livet.ObservableSynchronizedCollection`1.IsSynchronized">
+            <summary>
+            このコレクションがスレッドセーフであるかどうかを取得します。(常にtrueを返します)
+            </summary>
+        </member>
+        <member name="P:Livet.ObservableSynchronizedCollection`1.SyncRoot">
+            <summary>
+            このコレクションへのスレッドセーフなアクセスに使用できる同期オブジェクトを返します。
+            </summary>
+        </member>
         <member name="M:Livet.ObservableSynchronizedCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
             <summary>
             CollectionChangedイベントを発生させます。
@@ -16623,26 +16659,6 @@
             PropertyChangedイベントを発生させます。
             </summary>
             <param name="propertyName">変更されたプロパティの名前</param>
-        </member>
-        <member name="P:Livet.ObservableSynchronizedCollection`1.Count">
-            <summary>
-            実際に格納されている要素の数を取得します。
-            </summary>
-        </member>
-        <member name="P:Livet.ObservableSynchronizedCollection`1.IsReadOnly">
-            <summary>
-            このコレクションが読み取り専用かどうかを取得します。
-            </summary>
-        </member>
-        <member name="P:Livet.ObservableSynchronizedCollection`1.IsSynchronized">
-            <summary>
-            このコレクションがスレッドセーフであるかどうかを取得します。(常にtrueを返します)
-            </summary>
-        </member>
-        <member name="P:Livet.ObservableSynchronizedCollection`1.SyncRoot">
-            <summary>
-            このコレクションへのスレッドセーフなアクセスに使用できる同期オブジェクトを返します。
-            </summary>
         </member>
         <member name="E:Livet.ObservableSynchronizedCollection`1.CollectionChanged">
             <summary>
@@ -16661,11 +16677,6 @@
             変更通知を行います。
             </summary>
             <typeparam name="T">コレクションアイテムの型</typeparam>
-        </member>
-        <member name="M:Livet.ReadOnlyDispatcherCollection`1.Dispose">
-            <summary>
-            ソースコレクションとの連動を解除します。
-            </summary>
         </member>
         <member name="P:Livet.ReadOnlyDispatcherCollection`1.Dispatcher">
             <summary>
@@ -16692,14 +16703,14 @@
             プロパティが変更された時に発生します。
             </summary>
         </member>
+        <member name="M:Livet.ReadOnlyDispatcherCollection`1.Dispose">
+            <summary>
+            ソースコレクションとの連動を解除します。
+            </summary>
+        </member>
         <member name="T:Livet.ViewModel">
             <summary>
             ViewModelの基底クラスです。
-            </summary>
-        </member>
-        <member name="M:Livet.ViewModel.Dispose">
-            <summary>
-            このインスタンスによって使用されているすべてのリソースを解放します。
             </summary>
         </member>
         <member name="P:Livet.ViewModel.CompositeDisposable">
@@ -16710,6 +16721,11 @@
         <member name="P:Livet.ViewModel.Messenger">
             <summary>
             このViewModelクラスの基本Messegerインスタンスです。
+            </summary>
+        </member>
+        <member name="M:Livet.ViewModel.Dispose">
+            <summary>
+            このインスタンスによって使用されているすべてのリソースを解放します。
             </summary>
         </member>
         <member name="T:Livet.ViewModelHelper">
