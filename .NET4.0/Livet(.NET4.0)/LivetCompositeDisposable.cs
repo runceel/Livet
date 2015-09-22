@@ -59,6 +59,8 @@ namespace Livet
         /// <param name="item">追加するオブジェクト</param>
         public void Add(IDisposable item)
         {
+            if (item == null) throw new ArgumentNullException("item");
+
             ThrowExceptionIfDisposed();
             lock (_lockObject)
             {
@@ -87,6 +89,8 @@ namespace Livet
         /// <param name="item">追加するオブジェクト</param>
         public void AddFirst(IDisposable item)
         {
+            if (item == null) throw new ArgumentNullException("item");
+
             ThrowExceptionIfDisposed();
             lock (_lockObject)
             {
@@ -128,6 +132,8 @@ namespace Livet
         /// <returns>このコレクションに含まれているかどうか</returns>
         public bool Contains(IDisposable item)
         {
+            if (item == null) throw new ArgumentNullException("item");
+
             ThrowExceptionIfDisposed();
             lock (_lockObject)
             {
@@ -184,6 +190,8 @@ namespace Livet
         /// <returns>削除できたかどうか</returns>
         public bool Remove(IDisposable item)
         {
+            if (item == null) throw new ArgumentNullException("item");
+
             ThrowExceptionIfDisposed();
 
             lock (_lockObject)
