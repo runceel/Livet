@@ -63,7 +63,8 @@ namespace Livet.Dialogs
 				{
 					// Set parent.
 					this._commonOpenFileDialog.DefaultFileName = asDirectory.Name;
-					this._commonOpenFileDialog.InitialDirectory = asDirectory.Parent.FullName;
+					this._commonOpenFileDialog.InitialDirectory = asDirectory.Parent?.FullName
+																?? "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";	// Set "My Computer", if drive root
 				}
 			}
 		}
