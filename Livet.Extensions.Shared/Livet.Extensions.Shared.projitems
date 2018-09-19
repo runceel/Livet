@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>825f403b-88f1-4bd2-87f6-2eae406be053</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Livet.Extensions.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\Messaging\IO\FolderBrowserDialogInteractionMessageAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dialogs\CommonOpenFileFolderSelectionDialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dialogs\FolderBrowserFolderSelectionDialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dialogs\FolderSelectionDialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dialogs\FolderSelectionDialogFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Messaging\IO\FolderSelectionDialogPreference.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messaging\IO\FolderSelectionMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Properties\Resources.resx">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

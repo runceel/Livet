@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>LivetExtensions</id>
+        <version>1.1.0.0</version>
+        <title>Livet.Extensions</title>
+        <authors>Livet Project</authors>
+        <owners />
+        <licenseUrl>http://ugaya40.net/Publish/license-jp.rtf</licenseUrl>
+        <projectUrl>http://ugaya40.net/livet</projectUrl>
+        <iconUrl>http://ugaya40.net/Publish/LivetCask.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Livet拡張機能アセンブリです。現状ではフォルダーブラウザ関連機能のみを提供しています。</description>
+        <summary>Folder Browser Extension for Livet.</summary>
+        <copyright>Copyright (c) 2010-2012 Livet Project</copyright>
+        <language>ja-JP</language>
+        <tags>MVVM,WPF,Livet</tags>
+        <dependencies>
+            <dependency id="LivetCask" version="1.1.0.0" />
+        </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Xaml" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+            <frameworkAssembly assemblyName="WindowsBase" targetFramework="" />
+            <frameworkAssembly assemblyName="PresentationCore" targetFramework="" />
+            <frameworkAssembly assemblyName="PresentationFramework" targetFramework="" />
+        </frameworkAssemblies>
+        <references>
+            <reference file="Livet.Extensions.dll" />
+            <reference file="Microsoft.WindowsAPICodePack.dll" />
+            <reference file="Microsoft.WindowsAPICodePack.Shell.dll" />
+        </references>
+    </metadata>
+</package>
