@@ -2,36 +2,38 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>LivetExtensions</id>
-        <version>1.1.0.0</version>
+        <version>2.0.0-pre1</version>
         <title>Livet.Extensions</title>
         <authors>Livet Project</authors>
         <owners />
-        <licenseUrl>http://ugaya40.net/Publish/license-jp.rtf</licenseUrl>
+        <licenseUrl>https://github.com/ugaya40/Livet/blob/master/license-jp.txt</licenseUrl>
         <projectUrl>http://ugaya40.net/livet</projectUrl>
         <iconUrl>http://ugaya40.net/Publish/LivetCask.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Livet拡張機能アセンブリです。現状ではフォルダーブラウザ関連機能のみを提供しています。</description>
         <summary>Folder Browser Extension for Livet.</summary>
-        <copyright>Copyright (c) 2010-2012 Livet Project</copyright>
+        <copyright>Copyright (c) 2010-2018 Livet Project</copyright>
         <language>ja-JP</language>
         <tags>MVVM,WPF,Livet</tags>
         <dependencies>
-            <dependency id="LivetCask" version="1.1.0.0" />
+          <dependency id="LivetCask" version="2.0.0-pre1" />
+          <dependency id="WindowsAPICodePack-Core" version="1.1.2" />
+          <dependency id="WindowsAPICodePack-Shell" version="1.1.1" />
         </dependencies>
         <frameworkAssemblies>
-            <frameworkAssembly assemblyName="System" targetFramework="" />
-            <frameworkAssembly assemblyName="System.Core" targetFramework="" />
-            <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework="" />
-            <frameworkAssembly assemblyName="System.Xaml" targetFramework="" />
-            <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
-            <frameworkAssembly assemblyName="WindowsBase" targetFramework="" />
-            <frameworkAssembly assemblyName="PresentationCore" targetFramework="" />
-            <frameworkAssembly assemblyName="PresentationFramework" targetFramework="" />
+            <frameworkAssembly assemblyName="System" />
+            <frameworkAssembly assemblyName="System.Core" />
+            <frameworkAssembly assemblyName="System.Windows.Forms" />
+            <frameworkAssembly assemblyName="System.Xaml" />
+            <frameworkAssembly assemblyName="System.Xml" />
+            <frameworkAssembly assemblyName="WindowsBase" />
+            <frameworkAssembly assemblyName="PresentationCore" />
+            <frameworkAssembly assemblyName="PresentationFramework" />
         </frameworkAssemblies>
-        <references>
-            <reference file="Livet.Extensions.dll" />
-            <reference file="Microsoft.WindowsAPICodePack.dll" />
-            <reference file="Microsoft.WindowsAPICodePack.Shell.dll" />
-        </references>
     </metadata>
-</package>
+    <files>
+      <file src="..\Livet.Extensions\bin\Release\Livet.Extensions.dll" target="lib\net452" />
+      <file src="..\Livet.Extensions\bin\Release\Livet.Extensions.pdb" target="lib\net452" />
+      <file src="..\Livet.Extensions\bin\Release\Livet.Extensions.xml" target="lib\net452" />
+    </files>
+  </package>
