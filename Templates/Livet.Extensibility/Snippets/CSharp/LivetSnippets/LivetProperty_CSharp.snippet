@@ -30,7 +30,6 @@
       </Declarations>
       <Code Language="csharp">
 <![CDATA[
-#region $name$変更通知プロパティ
 private $type$ _$name$;
 
 public $type$ $name$
@@ -42,10 +41,9 @@ set
 if(_$name$ == value)
 return; 
 _$name$ = value; 
-RaisePropertyChanged("$name$");
+RaisePropertyChanged();
 }
 }
-#endregion
 ]]>
       </Code>
     </Snippet>

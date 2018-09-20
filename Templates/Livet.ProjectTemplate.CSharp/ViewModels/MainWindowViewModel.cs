@@ -23,7 +23,7 @@ namespace $safeprojectname$.ViewModels
          *  lvcomn  : ViewModelCommand(CanExecute無)
          *  llcom   : ListenerCommand(パラメータ有のコマンド)
          *  llcomn  : ListenerCommand(パラメータ有のコマンド・CanExecute無)
-         *  lprop   : 変更通知プロパティ(.NET4.5ではlpropn)
+         *  lprop   : 変更通知プロパティ
          *  
          * を使用してください。
          * 
