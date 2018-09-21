@@ -4,6 +4,12 @@
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -66,6 +72,7 @@
     <Content Include="Snippets\CSharp\LivetSnippets\LivetViewModelCommand_CSharp.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="Livet.snk" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -78,6 +85,47 @@
     <Content Include="stylesheet.css" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ItemTemplates\Livet.ItemTemplateExtension\Livet.ItemTemplateExtension.csproj">
+      <Project>{37A0605C-C950-4446-9B2A-94E6B3D6C0B5}</Project>
+      <Name>Livet.ItemTemplateExtension</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
+    <ProjectReference Include="..\ItemTemplates\LivetInteractionMessageAction.CSharp\LivetInteractionMessageAction.CSharp.csproj">
+      <Project>{A05A0E54-4F4C-48E8-94C2-551F0B0C959A}</Project>
+      <Name>LivetInteractionMessageAction.CSharp</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\ItemTemplates\LivetMessage.CSharp\LivetMessage.CSharp.csproj">
+      <Project>{7E9AE206-6FE5-4B1F-9FEB-6ABF29C2A938}</Project>
+      <Name>LivetMessage.CSharp</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\ItemTemplates\LivetModel.CSharp\LivetModel.CSharp.csproj">
+      <Project>{AF7A7EAA-0999-4619-80FE-41BBC58FBBB0}</Project>
+      <Name>LivetModel.CSharp</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\ItemTemplates\LivetViewModel.CSharp\LivetViewModel.CSharp.csproj">
+      <Project>{7DE713E7-01C0-4223-AC06-CB53AC65A78C}</Project>
+      <Name>LivetViewModel.CSharp</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\ItemTemplates\LivetWindow.CSharp\LivetWindow.CSharp.csproj">
+      <Project>{794A2B28-E4AA-4CC8-BCD0-ACF3D2068CDE}</Project>
+      <Name>LivetWindow.CSharp</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\Livet.ProjectTemplate.CSharp\Livet.ProjectTemplate.CSharp.csproj">
       <Project>{7C69D055-0538-4F7C-A11F-623DFEEAB1A7}</Project>
       <Name>Livet.ProjectTemplate.CSharp</Name>
