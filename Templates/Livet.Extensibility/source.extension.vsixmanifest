@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Livet.Extensibility.084f01b5-62d7-4528-8c21-e58fe0e6ba24" Version="1.0" Language="ja-JP" Publisher="Kazuki Ota" />
+        <Identity Id="Livet.Extensibility.084f01b5-62d7-4528-8c21-e58fe0e6ba24" Version="0.0.2" Language="ja-JP" Publisher="Kazuki Ohta" />
         <DisplayName>Livet プロジェクトテンプレート・アイテムテンプレート・コードスニペット拡張機能</DisplayName>
-        <Description xml:space="preserve">Livet で開発するためのプロジェクトテンプレートやアイテムテンプレートや各種コードスニペットを提供します。</Description>
+        <Description xml:space="preserve">Provide a project template, item templates and code snippets for development WPF app using Livet and C#.</Description>
+        <MoreInfo>https://github.com/ugaya40/Livet</MoreInfo>
+        <License>license-jp.rtf</License>
         <Icon>Livet.ico</Icon>
-        <PreviewImage>Livet.ico</PreviewImage>
+        <PreviewImage>Livet.png</PreviewImage>
         <Tags>WPF, MVVM, Livet</Tags>
     </Metadata>
     <Installation>
