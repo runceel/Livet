@@ -14,13 +14,10 @@ namespace Livet
     /// コレクション変更通知を指定されたDisptcher経由で行うコレクションです。
     /// </summary>
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
-    public class DispatcherCollection<T> : IList<T>,ICollection,INotifyCollectionChanged,INotifyPropertyChanged
-#if NET45
-        ,IReadOnlyList<T>
-#endif
+    public class DispatcherCollection<T> : IList<T>,ICollection,INotifyCollectionChanged,INotifyPropertyChanged, IReadOnlyList<T>
     {
         private IList<T> _souceAsIList;
-        private object _syncRoot = new object();
+        private readonly object _syncRoot = new object();
 
         /// <summary>
         /// コンストラクタ

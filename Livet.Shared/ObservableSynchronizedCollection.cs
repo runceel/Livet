@@ -14,10 +14,7 @@ namespace Livet
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [Serializable]
-    public class ObservableSynchronizedCollection<T> : IList<T>,ICollection,INotifyCollectionChanged, INotifyPropertyChanged
-#if NET45
-, IReadOnlyList<T>
-#endif
+    public class ObservableSynchronizedCollection<T> : IList<T>,ICollection,INotifyCollectionChanged, INotifyPropertyChanged, IReadOnlyList<T>
     {
         private IList<T> _list;
         [NonSerialized]
