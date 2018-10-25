@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -15,7 +16,7 @@ namespace Livet
         /// <summary>
         /// プロパティ変更通知イベントです。
         /// </summary>
-        [field: NonSerialized]   
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -44,10 +45,10 @@ namespace Livet
 #if NET4
         protected virtual void RaisePropertyChanged(string propertyName)
 #elif NET45
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName="")
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = "")
 #endif
         {
-            var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged,null,null);
+            var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
             if (threadSafeHandler != null)
             {
                 var e = EventArgsFactory.GetPropertyChangedEventArgs(propertyName);
@@ -55,6 +56,28 @@ namespace Livet
             }
         }
 
-    }
+        /// <summary>
+        /// 前と値が違うなら変更してイベントを発行する
+        /// </summary>
+        /// <typeparam name="TResult">プロパティの型</typeparam>
+        /// <param name="source">元の値</param>
+        /// <param name="value">新しい値</param>
+        /// <param name="propertyName">プロパティ名/param>
+        /// <returns>値の変更有無</returns>
+#if NET4
+        protected bool RaisePropertyChangedIfSet<TResult>(ref TResult source, TResult value, string propertyName)
+#elif NET45
+        protected bool RaisePropertyChangedIfSet<TResult>(ref TResult source, TResult value, [CallerMemberName]string propertyName = null)
+#endif
+        {
+            //値が同じだったら何もしない
+            if (EqualityComparer<TResult>.Default.Equals(source, value))
+                return false;
 
+            source = value;
+            //イベント発行
+            RaisePropertyChanged(propertyName);
+            return true;
+        }
+    }
 }
