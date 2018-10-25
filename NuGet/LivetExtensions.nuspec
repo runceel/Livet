@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>LivetExtensions</id>
-        <version>2.0.0-pre1</version>
+        <version>2.0.0</version>
         <title>Livet.Extensions</title>
         <authors>Livet Project</authors>
         <owners />
@@ -16,7 +16,7 @@
         <language>ja-JP</language>
         <tags>MVVM,WPF,Livet</tags>
         <dependencies>
-          <dependency id="LivetCask" version="2.0.0-pre1" />
+          <dependency id="LivetCask" version="2.0.0" />
           <dependency id="WindowsAPICodePack-Core" version="1.1.2" />
           <dependency id="WindowsAPICodePack-Shell" version="1.1.1" />
         </dependencies>
