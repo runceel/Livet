@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="ja-JP" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Overridable="yes" Id="language">1041</String>
+  <String Overridable="yes" Id="codepage">932</String>
+  <String Overridable="yes" Id="ProductFeature_Title">Livetバイナリ</String>
+  <String Overridable="yes" Id="ProductFeature_Description">Livetのメインアセンブリとデザインアセンブリを含みます。</String>
+  <String Overridable="yes" Id="VisualStudio_2010_Title_CSharp">Livet VisualStudio2010統合機能(C#)</String>
+  <String Overridable="yes" Id="VisualStudio_2010_Title_VB">Livet VisualStudio2010統合機能(VisualBasic)</String>
+  <String Overridable="yes" Id="VisualStudio_2012_Title">Livet VisualStudio2012統合機能(C#/Visual Basic)</String>
+  <String Overridable="yes" Id="VisualStudio_2013_Title">Livet VisualStudio2013統合機能(C#/Visual Basic)</String>
+  <String Overridable="yes" Id="VisualStudio_2015_Title">Livet VisualStudio2015統合機能(C#/Visual Basic)</String>
+  <String Overridable="yes" Id="VisualStudio_2010_Description">Livetを用いて快適に開発を行うためのVisual Studio 2010用機能を提供します。C#専用です。インストール推奨。</String>
+  <String Overridable="yes" Id="VisualStudio_2012_Description">Livetを用いて快適に開発を行うためのVisual Studio 2012用機能(C#/VisualBasic)を提供します。インストール推奨。</String>
+  <String Overridable="yes" Id="VisualStudio_2013_Description">Livetを用いて快適に開発を行うためのVisual Studio 2013用機能(C#/VisualBasic)を提供します。インストール推奨。</String>
+  <String Overridable="yes" Id="VisualStudio_2015_Description">Livetを用いて快適に開発を行うためのVisual Studio 2015用機能(C#/VisualBasic)を提供します。インストール推奨。</String>
+  <String Overridable="yes" Id="Snippets_2010_Title">Livet コードスニペット</String>
+  <String Overridable="yes" Id="Snippets_2010_Description">Livet用のコードスニペットを提供します。</String>
+  <String Overridable="yes" Id="ProjectTemplate_2010_Title_CSharp">Livet プロジェクトテンプレート(C#)</String>
+  <String Overridable="yes" Id="ProjectTemplate_2010_Title_VB">Livet プロジェクトテンプレート(VisualBasic)</String>
+  <String Overridable="yes" Id="ProjectTemplate_2010_Description">Livet用のプロジェクトテンプレートを提供します。</String>
+  <String Overridable="yes" Id="ItemTemplate_2010_Title_CSharp">Livet アイテムテンプレート(C#)</String>
+  <String Overridable="yes" Id="ItemTemplate_2010_Title_VB">Livet アイテムテンプレート(VisualBasic)</String>
+  <String Overridable="yes" Id="ItemTemplate_2010_Description">Livet用のアイテムテンプレートを提供します。</String>
+  <String Overridable="yes" Id="ProjectTemplate_Express2010_Title">Livet プロジェクトテンプレート(Express)</String>
+  <String Overridable="yes" Id="ProjectTemplate_Express2010_Description">Livet用のプロジェクトテンプレートを提供します。(Express)</String>
+  <String Overridable="yes" Id="ItemTemplate_Express2010_Title">Livet アイテムテンプレート(Express)</String>
+  <String Overridable="yes" Id="ItemTemplate_Express2010_Description">Livet用のアイテムテンプレートを提供します。(Express)</String>
+  <String Overridable="yes" Id="ReSharper7_Title">ReSharper7 INotifyPropertyChangedサポート</String>
+  <String Overridable="yes" Id="ReSharper7_Description">ReSharper7のINotifyPropertyChangedサポート(Livet用)を提供します。</String>
+  <String Overridable="yes" Id="NoDowngrade">Livetの新しいバージョンが既にインストールされています。</String>
+  <String Overridable="yes" Id="LicenseFile">Files/license-jp.rtf</String>
+</WixLocalization>

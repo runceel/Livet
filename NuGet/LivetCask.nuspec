@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>LivetCask</id>
+    <version>2.0.0</version>
+    <title>Livet Cask</title>
+    <authors>Livet Project</authors>
+    <licenseUrl>https://github.com/ugaya40/Livet/blob/master/license-jp.txt</licenseUrl>
+    <projectUrl>http://ugaya40.hateblo.jp/entry/Livet</projectUrl>
+    <iconUrl>http://www.fastpic.jp/images.php?file=2936863850.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Livet(リベット)はWPFのためのMVVM(Model/View/ViewModel)パターン用インフラストラクチャです。
+      .NET Framework 4.5.2以上で動作し、zlib/libpngライセンスで提供しています。
+    </description>
+    <summary>WPF 4.5 MVVM Infrastructure.</summary>
+    <copyright>Copyright (c) 2010-2018 Livet Project</copyright>
+    <language>ja-JP</language>
+    <tags>MVVM,WPF</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="PresentationCore" />
+      <frameworkAssembly assemblyName="PresentationFramework" />
+      <frameworkAssembly assemblyName="System" />
+      <frameworkAssembly assemblyName="System.Core" />
+      <frameworkAssembly assemblyName="System.Xaml" />
+      <frameworkAssembly assemblyName="WindowsBase" />
+      <frameworkAssembly assemblyName="Microsoft.Expression.Interactions" />
+      <frameworkAssembly assemblyName="System.Windows.Interactivity" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="..\Livet\bin\Release\Livet.dll" target="lib\net452" />
+    <file src="..\Livet\bin\Release\Livet.pdb" target="lib\net452" />
+    <file src="..\Livet\bin\Release\Livet.xml" target="lib\net452" />
+  </files>
+</package>

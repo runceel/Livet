@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>    
+    <Name>Livet WPF4 相互作用メッセージ</Name>
+    <Description>MVVM 補助ライブラリ Livetを使用したWPF 4 MVVM アプリケーションの相互作用メッセージを作成します。</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>Windows</ProjectSubType>
+    <SortOrder>0</SortOrder>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <DefaultName>Message.cs</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <Icon>LivetMessage.ico</Icon>
+    <PreviewImage>Livet.png</PreviewImage>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem ReplaceParameters="true" SubType="Code" TargetFileName="$fileinputname$.cs">Message.cs</ProjectItem>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Livet.ItemTemplateExtension, Version=1.0.3.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb</Assembly>
+    <FullClassName>Livet.ItemTemplateExtension.ItemTemplateWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
