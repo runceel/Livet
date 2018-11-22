@@ -82,6 +82,7 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <None Include="Livet.snk" />
+    <Content Include="Snippets\CSharp\LivetSnippets\LivetShortProperty_CSharp.snippet" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
