@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -15,7 +16,7 @@ namespace Livet
         /// <summary>
         /// プロパティ変更通知イベントです。
         /// </summary>
-        [field: NonSerialized]   
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -41,9 +42,9 @@ namespace Livet
         /// </summary>
         /// <param name="propertyName">プロパティ名</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName="")
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
-            var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged,null,null);
+            var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
             if (threadSafeHandler != null)
             {
                 var e = EventArgsFactory.GetPropertyChangedEventArgs(propertyName);
@@ -51,6 +52,23 @@ namespace Livet
             }
         }
 
-    }
+        /// <summary>
+        /// 前と値が違うなら変更して、プロパティ変更通知イベントを発生させます
+        /// </summary>
+        /// <typeparam name="T">プロパティの型</typeparam>
+        /// <param name="source">元の値</param>
+        /// <param name="value">新しい値</param>
+        /// <param name="propertyName">プロパティ名/param>
+        /// <returns>値の変更有無</returns>
+        protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, [CallerMemberName]string propertyName = null)
+        {
+            //値が同じだったら何もしない
+            if (EqualityComparer<T>.Default.Equals(source, value))
+                return false;
 
+            source = value;
+            RaisePropertyChanged(propertyName);
+            return true;
+        }
+    }
 }
