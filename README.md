@@ -1,6 +1,17 @@
 # Livet, a MVVM Infrastructure for WPF
 ---
 
+## はじめかた
+
+以下の Visual Studio 拡張機能を導入するとプロジェクトテンプレートやアイテムテンプレートやコードスニペットが追加されます。
+
+[Livet プロジェクトテンプレート・アイテムテンプレート・コードスニペット拡張機能](https://marketplace.visualstudio.com/items?itemName=okazuki.livet)
+
+NuGet での導入も可能ですが、この場合はテンプレートやスニペットは導入されません。状況に合わせて使い分けてください。
+
+- [LivetCask](https://www.nuget.org/packages/LivetCask/)
+- [LivetExtensions](https://www.nuget.org/packages/LivetExtensions/)
+
 ## 使用方法
 
 基本的な使用方法は下記ブログ記事を参照してください。
