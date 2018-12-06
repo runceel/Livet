@@ -141,6 +141,13 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
+    <ProjectReference Include="..\Livet.ProjectTemplate.CSharp.NETCore\Livet.ProjectTemplate.CSharp.NETCore.csproj">
+      <Project>{E6999A6D-614B-4D41-BAE2-14FB16D1BD2C}</Project>
+      <Name>Livet.ProjectTemplate.CSharp.NETCore</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\Livet.ProjectTemplate.CSharp\Livet.ProjectTemplate.CSharp.csproj">
       <Project>{7C69D055-0538-4F7C-A11F-623DFEEAB1A7}</Project>
       <Name>Livet.ProjectTemplate.CSharp</Name>
