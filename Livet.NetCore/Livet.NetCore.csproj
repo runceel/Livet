@@ -5,4 +5,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <Import Project="..\Livet.Generated\Livet.Generated.projitems" Label="Shared" />
+
+  <Import Project="..\Livet.Shared\Livet.Shared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+  </ItemGroup>
 </Project>
