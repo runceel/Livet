@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>2.0.0-pre1</Version>
+    <Version>2.0.0-pre2</Version>
     <Authors>Livet project</Authors>
     <Company />
     <Product />
