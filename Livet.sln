@@ -1,24 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28315.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Shared", "Livet.Shared\Livet.Shared.shproj", "{9510F365-2314-40D9-928B-ED5520DCDD0E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet", "Livet\Livet.csproj", "{1E476A17-6C4D-4AD2-95B2-84BEF4C96D67}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LivetSnk", "LivetSnk", "{37550EC5-43CF-49E4-A463-85072B1C4B8D}"
 	ProjectSection(SolutionItems) = preProject
 		LivetSnk\Livet.snk = LivetSnk\Livet.snk
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetControlBindingSupportGenerator", "LivetControlBindingSupportGenerator\LivetControlBindingSupportGenerator.csproj", "{CD564616-032A-4FB5-BCBD-B942A99864D8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetEnumAndBooleanConverterGenerator", "LivetEnumAndBooleanConverterGenerator\LivetEnumAndBooleanConverterGenerator.csproj", "{1AB1F5D2-BD71-47A7-A5F7-1C199DC1AD52}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Extensions", "Livet.Extensions\Livet.Extensions.csproj", "{ECF2F532-F29A-455B-856F-F259C7939705}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Extensions.Shared", "Livet.Extensions.Shared\Livet.Extensions.Shared.shproj", "{825F403B-88F1-4BD2-87F6-2EAE406BE053}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8EE2D47-01D0-4F5E-9205-8D7B14E0560D}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,11 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Generated", "Livet.Generated\Livet.Generated.shproj", "{B55AE272-6941-4C19-B513-455C4989D9FA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C1429347-55CC-4FE8-B3F8-AFB5F4E87AD3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Tests", "Livet.Tests\Livet.Tests.csproj", "{F2FC8969-7230-4098-977F-9C6D78A89FA2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{E9939869-6A92-4752-ADA7-EA21AABA293B}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,11 +28,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{E9939869
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{CBDE45EE-37F3-48C9-82C5-6EE39D1BB960}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemTemplates", "ItemTemplates", "{A0C34745-F45D-4A6B-A359-FE89D41CE2B1}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Shared", "Livet.Shared\Livet.Shared.shproj", "{9510F365-2314-40D9-928B-ED5520DCDD0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet", "Livet\Livet.csproj", "{1E476A17-6C4D-4AD2-95B2-84BEF4C96D67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetControlBindingSupportGenerator", "LivetControlBindingSupportGenerator\LivetControlBindingSupportGenerator.csproj", "{CD564616-032A-4FB5-BCBD-B942A99864D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetEnumAndBooleanConverterGenerator", "LivetEnumAndBooleanConverterGenerator\LivetEnumAndBooleanConverterGenerator.csproj", "{1AB1F5D2-BD71-47A7-A5F7-1C199DC1AD52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Extensions", "Livet.Extensions\Livet.Extensions.csproj", "{ECF2F532-F29A-455B-856F-F259C7939705}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Extensions.Shared", "Livet.Extensions.Shared\Livet.Extensions.Shared.shproj", "{825F403B-88F1-4BD2-87F6-2EAE406BE053}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Generated", "Livet.Generated\Livet.Generated.shproj", "{B55AE272-6941-4C19-B513-455C4989D9FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Tests", "Livet.Tests\Livet.Tests.csproj", "{F2FC8969-7230-4098-977F-9C6D78A89FA2}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.ProjectTemplate.CSharp", "Templates\Livet.ProjectTemplate.CSharp\Livet.ProjectTemplate.CSharp.csproj", "{7C69D055-0538-4F7C-A11F-623DFEEAB1A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Extensibility", "Templates\Livet.Extensibility\Livet.Extensibility.csproj", "{1E6A8600-FAEE-4A7B-8118-7366EC8E0582}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemTemplates", "ItemTemplates", "{A0C34745-F45D-4A6B-A359-FE89D41CE2B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetInteractionMessageAction.CSharp", "Templates\ItemTemplates\LivetInteractionMessageAction.CSharp\LivetInteractionMessageAction.CSharp.csproj", "{A05A0E54-4F4C-48E8-94C2-551F0B0C959A}"
 EndProject
@@ -61,6 +61,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetWindow.CSharp", "Templates\ItemTemplates\LivetWindow.CSharp\LivetWindow.CSharp.csproj", "{794A2B28-E4AA-4CC8-BCD0-ACF3D2068CDE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.ItemTemplateExtension", "Templates\ItemTemplates\Livet.ItemTemplateExtension\Livet.ItemTemplateExtension.csproj", "{37A0605C-C950-4446-9B2A-94E6B3D6C0B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.NetCore", "Livet.NetCore\Livet.NetCore.csproj", "{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -178,16 +180,24 @@ Global
 		{37A0605C-C950-4446-9B2A-94E6B3D6C0B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37A0605C-C950-4446-9B2A-94E6B3D6C0B5}.Release|x86.ActiveCfg = Release|Any CPU
 		{37A0605C-C950-4446-9B2A-94E6B3D6C0B5}.Release|x86.Build.0 = Release|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Debug|x86.Build.0 = Debug|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Release|x86.ActiveCfg = Release|Any CPU
+		{32CF52B7-D8D1-4C4E-AA57-8F630D2C3FC4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A0C34745-F45D-4A6B-A359-FE89D41CE2B1} = {CBDE45EE-37F3-48C9-82C5-6EE39D1BB960}
 		{CD564616-032A-4FB5-BCBD-B942A99864D8} = {C1429347-55CC-4FE8-B3F8-AFB5F4E87AD3}
 		{1AB1F5D2-BD71-47A7-A5F7-1C199DC1AD52} = {C1429347-55CC-4FE8-B3F8-AFB5F4E87AD3}
 		{7C69D055-0538-4F7C-A11F-623DFEEAB1A7} = {CBDE45EE-37F3-48C9-82C5-6EE39D1BB960}
 		{1E6A8600-FAEE-4A7B-8118-7366EC8E0582} = {CBDE45EE-37F3-48C9-82C5-6EE39D1BB960}
-		{A0C34745-F45D-4A6B-A359-FE89D41CE2B1} = {CBDE45EE-37F3-48C9-82C5-6EE39D1BB960}
 		{A05A0E54-4F4C-48E8-94C2-551F0B0C959A} = {A0C34745-F45D-4A6B-A359-FE89D41CE2B1}
 		{7E9AE206-6FE5-4B1F-9FEB-6ABF29C2A938} = {A0C34745-F45D-4A6B-A359-FE89D41CE2B1}
 		{AF7A7EAA-0999-4619-80FE-41BBC58FBBB0} = {A0C34745-F45D-4A6B-A359-FE89D41CE2B1}
