@@ -19,11 +19,12 @@ namespace $safeprojectname$.ViewModels
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
-         *  lvcom   : ViewModelCommand
-         *  lvcomn  : ViewModelCommand(CanExecute無)
-         *  llcom   : ListenerCommand(パラメータ有のコマンド)
-         *  llcomn  : ListenerCommand(パラメータ有のコマンド・CanExecute無)
-         *  lprop   : 変更通知プロパティ
+         *  lvcom    : ViewModelCommand
+         *  lvcomn   : ViewModelCommand(CanExecute無)
+         *  llcom    : ListenerCommand(パラメータ有のコマンド)
+         *  llcomn   : ListenerCommand(パラメータ有のコマンド・CanExecute無)
+         *  lprop    : 変更通知プロパティ
+         *  lsprop   : 変更通知プロパティ(ショートバージョン)
          *  
          * を使用してください。
          * 
@@ -58,7 +59,7 @@ namespace $safeprojectname$.ViewModels
          * LivetのViewModelではプロパティ変更通知(RaisePropertyChanged)やDispatcherCollectionを使ったコレクション変更通知は
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
-         
+
         public void Initialize()
         {
         }
