@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LivetCask.NETCore" Version="2.0.0-pre2">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
