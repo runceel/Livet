@@ -195,8 +195,6 @@ Livet.Extensions のフォルダー選択メッセージとアクションの使
 </Button>
 ```
 
-TODO: Windows API Code Pack の署名されたバージョンが必要
-
 #### 汎用 EnumToBooleanConverter
 
 Livet では System.Windows 名前空間以下の全ての Enum 型を boolean と相互変換する IValueConverter を用意しています。
