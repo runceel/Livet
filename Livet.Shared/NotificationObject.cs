@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -27,7 +28,7 @@ namespace Livet
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        protected virtual void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
+        protected virtual void RaisePropertyChanged<T>(ref T source, Expression<Func<T>> propertyExpression)
         {
             if (propertyExpression == null) throw new ArgumentNullException("propertyExpression");
 
@@ -58,9 +59,10 @@ namespace Livet
         /// <typeparam name="T">プロパティの型</typeparam>
         /// <param name="source">元の値</param>
         /// <param name="value">新しい値</param>
+        /// <param name="relatedProperties">このプロパティが変更されたときに PropertyChanged イベントを発行するプロパティの名前の配列</param>
         /// <param name="propertyName">プロパティ名/param>
         /// <returns>値の変更有無</returns>
-        protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, [CallerMemberName]string propertyName = null)
+        protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, string[] relatedProperties = null, [CallerMemberName]string propertyName = null)
         {
             //値が同じだったら何もしない
             if (EqualityComparer<T>.Default.Equals(source, value))
@@ -68,7 +70,27 @@ namespace Livet
 
             source = value;
             RaisePropertyChanged(propertyName);
+            if (relatedProperties != null)
+            {
+                foreach (var p in relatedProperties)
+                {
+                    RaisePropertyChanged(p);
+                }
+            }
+
             return true;
         }
+
+        /// <summary>
+        /// 前と値が違うなら変更して、プロパティ変更通知イベントを発生させます
+        /// </summary>
+        /// <typeparam name="T">プロパティの型</typeparam>
+        /// <param name="source">元の値</param>
+        /// <param name="value">新しい値</param>
+        /// <param name="relatedProperty">このプロパティが変更されたときに PropertyChanged イベントを発行するプロパティの名前</param>
+        /// <param name="propertyName">プロパティ名/param>
+        /// <returns>値の変更有無</returns>
+        protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, string relatedProperty, [CallerMemberName]string propertyName = null)
+            => RaisePropertyChangedIfSet(ref source, value, new[] { relatedProperty }, propertyName);
     }
 }

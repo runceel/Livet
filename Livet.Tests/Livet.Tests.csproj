@@ -55,6 +55,7 @@
     <Compile Include="EventListeners\PropertyChangedEventListenerTest.cs" />
     <Compile Include="EventListeners\PropertyChangedWeakEventListenerTest.cs" />
     <Compile Include="Messaging\MessageListenerTest.cs" />
+    <Compile Include="NotificationObjectTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestInfrastructures\ChainingAssertion.NUnit.cs" />
     <Compile Include="TestInfrastructures\TestDispatcherContext.cs" />

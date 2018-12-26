@@ -1,0 +1,62 @@
+﻿<Window
+    x:Class="ViewLayerSupport.Views.SetStateToControlBehaviorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+    xmlns:v="clr-namespace:ViewLayerSupport.Views"
+    xmlns:vm="clr-namespace:ViewLayerSupport.ViewModels"
+    Title="SetStateToControlBehaviorWindow"
+    Width="525"
+    Height="350">
+
+    <Window.DataContext>
+        <vm:SetStateToControlBehaviorWindowViewModel />
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+
+        <!--  Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう  -->
+        <!--  Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります  -->
+        <!--  Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています  -->
+
+        <!--  WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます  -->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodName="Initialize" MethodTarget="{Binding}" />
+        </i:EventTrigger>
+
+        <!--  Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます  -->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction />
+        </i:EventTrigger>
+
+        <!--  WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください  -->
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding InputUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Grid.Column="1" Content="Navigate">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <l:LivetCallMethodAction MethodName="Navigate" MethodTarget="{Binding}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <WebBrowser Grid.Row="1" Grid.ColumnSpan="2">
+            <i:Interaction.Behaviors>
+                <!--  Source は本来バインディング出来ないプロパティ  -->
+                <l:WebBrowserSetStateToControlBehavior Source="{Binding Url}" Property="Source" />
+            </i:Interaction.Behaviors>
+        </WebBrowser>
+    </Grid>
+</Window>

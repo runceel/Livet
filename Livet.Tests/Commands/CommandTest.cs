@@ -60,7 +60,8 @@ namespace Livet.NUnit.Commands
         public void WeakHandlerTest()
         {
 #if DEBUG
-            Assert.Fail("This test case should run on release build.");
+            Assert.Warn("This test case should run on release build.");
+            return;
 #endif
             using (var dispatcher = new TestDispatcherContext())
             {
