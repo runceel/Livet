@@ -7,7 +7,7 @@
     <authors>Livet Project</authors>
     <licenseUrl>https://github.com/ugaya40/Livet/blob/master/license-jp.txt</licenseUrl>
     <projectUrl>https://github.com/ugaya40/Livet</projectUrl>
-    <iconUrl>http://www.fastpic.jp/images.php?file=2936863850.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/ugaya40/Livet/master/Images/Livet.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       Livet(リベット)はWPFのためのMVVM(Model/View/ViewModel)パターン用インフラストラクチャです。
