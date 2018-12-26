@@ -328,6 +328,82 @@ Model は MVVM の関心領域ではないため、Livet でも特に手厚い�
 ObservableSyncronizedCollection は Monitor ベースのスレッドセーフなコレクションではなく、ReaderWriterLockSlim によるスレッドセーフなコレクションであり、読み書きが等しく複数スレッドから煩雑に行われるシナリオにおいて、パフォーマンスと変更通知のタイミングの偏りのバランスが良い様に設計されています。
 前述した ViewModel の DispatcherCollection はただのラッパーであるため、Model では通常の ObservableCollection と ObservableSyncronizedCollection を用途に応じて使い分け、それを ViewModel では同様に扱う事ができます。
 
+NotificationObject にはプロパティの定義を簡略化するための以下のメソッドが定義されています。また、NotificationObject は ViewModel クラスにも継承されているため、ここで説明する内容は ViewModel でも使用できます。
+
+#### RaisePropertyChanged メソッド
+
+プロパティ名指定で PropertyChanged イベントを発行します。
+
+```cs
+private string _Name;
+public string Name
+{
+    get => _Name;
+    set
+    {
+        _Name = value;
+        RaisePropertyChanged(); // CallerMemberName により自動でプロパティ名が設定されます
+    }
+}
+```
+
+明示的に指定することも出来ます。
+
+```cs
+RaisePropertyChanged(nameof(Name));
+```
+
+#### RaisePropertyChangedIfSet メソッド
+
+フィールドの更新と PropertyChanged イベントの発行を行います。このメソッドを使うとプロパティの定義は以下のようになります。このプロパティの定義は、コードスニペットの lsprop で生成できます。
+
+```cs
+private string _Name;
+public string Name
+{
+    get => _Name;
+    set => RaisePropertyChangedIfSet(ref _Name, value);
+}
+```
+
+RaisePropertyChangedIfSet メソッドでは、第三引数に関連するプロパティ名を渡すことで、そのプロパティに対しても PropertyChanged イベントを発行出来ます。
+
+```cs
+private string _FirstName;
+public string FirstName
+{
+    get => _FirstName;
+    // FirstName の他に FullName の PropertyChanged イベントも発行する
+    set => RaisePropertyChangedIfSet(ref _FirstName, value, nameof(FullName));
+}
+
+private string _LastName;
+public string LastName
+{
+    get => _LastName;
+    // FirstName の他に FullName の PropertyChanged イベントも発行する
+    set => RaisePropertyChangedIfSet(ref _LastName, value, nameof(FullName));
+}
+
+public string FullName => $"{FirstName} {LastName}";
+```
+
+関連するプロパティが複数ある場合は配列で渡します。
+
+```cs
+public string _Hoge;
+public string Hoge
+{
+    get => _Hoge;
+    set => RaisePropertyChangedIfSet(ref _Hoge, value, new[]
+    {
+        nameof(Foo),
+        nameof(Bar),
+        nameof(Baz),
+    });
+}
+```
+
 ## オリジナルドキュメント
 
 本ドキュメントは下記のオリジナルドキュメントを元に加筆修正を行ったものです。
