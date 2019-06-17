@@ -16,7 +16,7 @@ namespace Livet
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
     public class DispatcherCollection<T> : IList<T>,ICollection,INotifyCollectionChanged,INotifyPropertyChanged, IReadOnlyList<T>
     {
-        private IList<T> _souceAsIList;
+        private IList<T> _sourceAsIList;
         private readonly object _syncRoot = new object();
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Livet
                 throw new ArgumentException("collectionはINotifyPropertyChangedを実装している必要があります");
             }
 
-            _souceAsIList = (IList<T>)collection;
+            _sourceAsIList = (IList<T>)collection;
 
             Dispatcher = dispatcher;
             CollectionChangedDispatcherPriority = DispatcherPriority.Normal;
@@ -102,7 +102,7 @@ namespace Livet
         /// <returns>最初に見つかった位置のインデックス</returns>
         public int IndexOf(T item)
         {
-            return _souceAsIList.IndexOf(item);
+            return _sourceAsIList.IndexOf(item);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Livet
         /// <param name="item">挿入するオブジェクト</param>
         public void Insert(int index, T item)
         {
-            _souceAsIList.Insert(index, item);
+            _sourceAsIList.Insert(index, item);
         }
 
         /// <summary>
@@ -121,18 +121,18 @@ namespace Livet
         /// <param name="index">指定するインデックス</param>
         public void RemoveAt(int index)
         {
-            _souceAsIList.RemoveAt(index);
+            _sourceAsIList.RemoveAt(index);
         }
 
         public T this[int index]
         {
             get
             {
-                return _souceAsIList[index];
+                return _sourceAsIList[index];
             }
             set
             {
-                _souceAsIList[index] = value;
+                _sourceAsIList[index] = value;
             }
         }
 
@@ -142,7 +142,7 @@ namespace Livet
         /// <param name="item">追加するオブジェクト</param>
         public void Add(T item)
         {
-            _souceAsIList.Add(item);
+            _sourceAsIList.Add(item);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Livet
         /// </summary>
         public void Clear()
         {
-            _souceAsIList.Clear();
+            _sourceAsIList.Clear();
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Livet
         /// <returns>このコレクションに含まれているかどうか</returns>
         public bool Contains(T item)
         {
-            return _souceAsIList.Contains(item);
+            return _sourceAsIList.Contains(item);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Livet
         /// <param name="arrayIndex">コピー先の配列のどこからコピー操作をするかのインデックス</param>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            _souceAsIList.CopyTo(array, arrayIndex);
+            _sourceAsIList.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Livet
         /// </summary>
         public int Count
         {
-            get { return _souceAsIList.Count; }
+            get { return _sourceAsIList.Count; }
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Livet
         /// </summary>
         public bool IsReadOnly
         {
-            get { return _souceAsIList.IsReadOnly; }
+            get { return _sourceAsIList.IsReadOnly; }
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Livet
         /// <returns>削除できたかどうか</returns>
         public bool Remove(T item)
         {
-            return _souceAsIList.Remove(item);
+            return _sourceAsIList.Remove(item);
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace Livet
         /// <param name="newIndex">移動先のインデックス</param>
         public void Move(int oldIndex, int newIndex)
         {
-            var sourceAsObservableCollection = _souceAsIList as ObservableCollection<T>;
+            var sourceAsObservableCollection = _sourceAsIList as ObservableCollection<T>;
 
             if (sourceAsObservableCollection != null)
             {
@@ -214,7 +214,7 @@ namespace Livet
             }
             else
             {
-                var sourceAsConcurrentObservableCollection = _souceAsIList as ObservableSynchronizedCollection<T>;
+                var sourceAsConcurrentObservableCollection = _sourceAsIList as ObservableSynchronizedCollection<T>;
 
                 if (sourceAsConcurrentObservableCollection != null)
                 {
@@ -240,7 +240,7 @@ namespace Livet
         {
             get 
             {
-                if (_souceAsIList is ObservableSynchronizedCollection<T>)
+                if (_sourceAsIList is ObservableSynchronizedCollection<T>)
                 {
                     return true;
                 }
@@ -262,12 +262,12 @@ namespace Livet
         /// <returns>列挙子</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return _souceAsIList.GetEnumerator();
+            return _sourceAsIList.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _souceAsIList.GetEnumerator();
+            return _sourceAsIList.GetEnumerator();
         }
 
         protected void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
