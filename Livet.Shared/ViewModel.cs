@@ -38,7 +38,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// このViewModelクラスの基本Messegerインスタンスです。
+        /// このViewModelクラスの基本Messengerインスタンスです。
         /// </summary>
         [XmlIgnore]
         public InteractionMessenger Messenger

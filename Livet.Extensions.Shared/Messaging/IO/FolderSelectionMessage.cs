@@ -21,7 +21,7 @@ namespace Livet.Messaging.IO
 	{
 		/// <summary>
 		///		Initializes a new instance of the <see cref="FolderSelectionMessage"/> class
-		///		wihtout message key.
+		///		without message key.
 		/// </summary>
 		public FolderSelectionMessage()
 		{
@@ -47,7 +47,7 @@ namespace Livet.Messaging.IO
 		}
 
 		/// <summary>
-		///		Defines <see cref="Description"/> depencendy property.
+		///		Defines <see cref="Description"/> dependency property.
 		/// </summary>
 		/// <value>
 		///		<see cref="DependencyProperty"/>.
@@ -68,7 +68,7 @@ namespace Livet.Messaging.IO
 		}
 
 		/// <summary>
-		///		Defines <see cref="Title"/> depencendy property.
+		///		Defines <see cref="Title"/> dependency property.
 		/// </summary>
 		/// <value>
 		///		<see cref="DependencyProperty"/>.
@@ -90,7 +90,7 @@ namespace Livet.Messaging.IO
 		}
 
 		/// <summary>
-		///		Defines <see cref="SelectedPath"/> depencendy property.
+		///		Defines <see cref="SelectedPath"/> dependency property.
 		/// </summary>
 		/// <value>
 		///		<see cref="DependencyProperty"/>.
@@ -112,7 +112,7 @@ namespace Livet.Messaging.IO
 		}
 
 		/// <summary>
-		///		Defines <see cref="SelectedPath"/> depencendy property.
+		///		Defines <see cref="SelectedPath"/> dependency property.
 		/// </summary>
 		/// <value>
 		///		<see cref="DependencyProperty"/>.

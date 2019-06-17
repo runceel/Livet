@@ -23,7 +23,7 @@ namespace Livet
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="sourceDisposableList">ソースとなるIDosposableコレクション</param>
+        /// <param name="sourceDisposableList">ソースとなるIDisposableコレクション</param>
         public LivetCompositeDisposable(IEnumerable<IDisposable> sourceDisposableList)
         {
             if (sourceDisposableList == null) throw new ArgumentNullException("sourceDisposableList");

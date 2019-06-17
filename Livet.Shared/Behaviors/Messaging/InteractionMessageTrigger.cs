@@ -39,7 +39,7 @@ namespace Livet.Behaviors.Messaging
             set { SetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for FireActionsOnlyWhileAttatchedObjectLoading.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for FireActionsOnlyWhileAttachedObjectLoading.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InvokeActionsOnlyWhileAttatchedObjectLoadedProperty =
             DependencyProperty.Register("InvokeActionsOnlyWhileAttatchedObjectLoaded", typeof(bool), typeof(InteractionMessageTrigger), new PropertyMetadata(false));
 

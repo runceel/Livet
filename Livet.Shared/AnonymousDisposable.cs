@@ -3,7 +3,7 @@
 namespace Livet
 {
     /// <summary>
-    /// 指定されたリソース解放用のActionをIDsposableとして扱います。
+    /// 指定されたリソース解放用のActionをIDisposableとして扱います。
     /// </summary>
     public class AnonymousDisposable : IDisposable
     {

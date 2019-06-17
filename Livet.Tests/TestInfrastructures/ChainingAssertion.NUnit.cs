@@ -446,7 +446,7 @@ namespace NUnit.Framework
 
                 if (!typedMethods.Any()) throw new ArgumentException(string.Format("\"{0}\" not match arguments : Type <{1}>", methodName, typeof(T).Name));
 
-                // nongeneric
+                // non-generic
                 var nongeneric = typedMethods.Where(a => a.TypeParameters == null).ToArray();
                 if (nongeneric.Length == 1) return nongeneric[0].MethodInfo;
 

@@ -11,7 +11,7 @@ using System.Windows.Threading;
 namespace Livet
 {
     /// <summary>
-    /// コレクション変更通知を指定されたDisptcher経由で行うコレクションです。
+    /// コレクション変更通知を指定されたDispatcher経由で行うコレクションです。
     /// </summary>
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
     public class DispatcherCollection<T> : IList<T>,ICollection,INotifyCollectionChanged,INotifyPropertyChanged, IReadOnlyList<T>
