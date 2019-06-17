@@ -277,7 +277,7 @@ foreach(var key in SetterHavingTargetProperties.Keys)
         {
             base.OnAttached();
 
-            //Attatch時の評価
+            //Attach時の評価
             SourceChanged(this, new DependencyPropertyChangedEventArgs(SourceProperty, null, Source));
         }
 	}
