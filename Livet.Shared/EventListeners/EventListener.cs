@@ -36,9 +36,9 @@ namespace Livet.EventListeners
         {
             if (_initialized) return;
 
-            if (add == null) throw new ArgumentNullException("add");
-            if (remove == null) throw new ArgumentNullException("remove");
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (add == null) throw new ArgumentNullException(nameof(add));
+            if (remove == null) throw new ArgumentNullException(nameof(remove));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             _add = add;
             _handler = handler;

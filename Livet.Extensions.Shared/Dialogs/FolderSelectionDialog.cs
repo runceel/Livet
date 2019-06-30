@@ -72,7 +72,7 @@ namespace Livet.Dialogs
 		{
 			if ( hostWindow == null )
 			{
-				throw new ArgumentNullException( "hostWindow" );
+				throw new ArgumentNullException( nameof(hostWindow) );
 			}
 
 			return this.ShowDialogCore( hostWindow );

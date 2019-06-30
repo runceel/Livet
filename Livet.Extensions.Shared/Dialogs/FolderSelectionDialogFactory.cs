@@ -64,7 +64,7 @@ namespace Livet.Dialogs
 				{
 					throw new ArgumentException(
 						String.Format( CultureInfo.CurrentCulture, Resources.UnsupportedEnumValue, typeof( FolderSelectionDialogPreference ), preference, ( int )preference ),
-						"preference"
+						nameof(preference)
 					);
 				}
 			}

@@ -30,7 +30,7 @@ namespace Livet
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         protected virtual void RaisePropertyChanged<T>(ref T source, Expression<Func<T>> propertyExpression)
         {
-            if (propertyExpression == null) throw new ArgumentNullException("propertyExpression");
+            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
 
             if (!(propertyExpression.Body is MemberExpression)) throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 

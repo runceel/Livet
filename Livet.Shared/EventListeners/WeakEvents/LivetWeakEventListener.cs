@@ -45,10 +45,10 @@ namespace Livet.EventListeners.WeakEvents
         {
             if (_initialized) return;
 
-            if (conversion == null) throw new ArgumentNullException("conversion");
-            if (add == null) throw new ArgumentNullException("add");
-            if (remove == null) throw new ArgumentNullException("remove");
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (conversion == null) throw new ArgumentNullException(nameof(conversion));
+            if (add == null) throw new ArgumentNullException(nameof(add));
+            if (remove == null) throw new ArgumentNullException(nameof(remove));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             _handler = handler;
             _remove = remove;

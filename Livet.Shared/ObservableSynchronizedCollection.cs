@@ -36,7 +36,7 @@ namespace Livet
         /// <param name="source">初期値となるソース</param>
         public ObservableSynchronizedCollection(IEnumerable<T> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
             _list = new List<T>(source);
         }
 

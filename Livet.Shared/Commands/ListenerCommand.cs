@@ -27,7 +27,7 @@ namespace Livet.Commands
         /// <param name="canExecute">コマンドが実行可能かどうかをあらわすFunc&lt;bool&gt;</param>
         public ListenerCommand(Action<T> execute, Func<bool> canExecute)
         {
-            if (execute == null) throw new ArgumentNullException("execute");
+            if (execute == null) throw new ArgumentNullException(nameof(execute));
 
             _execute = execute;
             _canExecute = canExecute;

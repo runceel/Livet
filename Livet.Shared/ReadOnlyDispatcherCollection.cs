@@ -23,7 +23,7 @@ namespace Livet
 
         public ReadOnlyDispatcherCollection(DispatcherCollection<T> collection) : base(collection) 
         {
-            if (collection == null) throw new ArgumentNullException("collection");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
 
             _list = collection;
 

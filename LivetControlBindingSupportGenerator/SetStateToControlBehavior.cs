@@ -466,7 +466,7 @@ foreach(var key in SetterHavingTargetProperties.Keys)
         {
             if ((indent == null))
             {
-                throw new global::System.ArgumentNullException("indent");
+                throw new global::System.ArgumentNullException(nameof(indent));
             }
             this.currentIndentField = (this.currentIndentField + indent);
             this.indentLengths.Add(indent.Length);
@@ -529,7 +529,7 @@ foreach(var key in SetterHavingTargetProperties.Keys)
             {
                 if ((objectToConvert == null))
                 {
-                    throw new global::System.ArgumentNullException("objectToConvert");
+                    throw new global::System.ArgumentNullException(nameof(objectToConvert));
                 }
                 System.Type t = objectToConvert.GetType();
                 System.Reflection.MethodInfo method = t.GetMethod("ToString", new System.Type[] {

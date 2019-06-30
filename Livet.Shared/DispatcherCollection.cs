@@ -32,8 +32,8 @@ namespace Livet
         /// <param name="dispatcher">UIDispatcher(通常はDispatcherHelper.UIDispatcher)</param>
         public DispatcherCollection(INotifyCollectionChanged collection, Dispatcher dispatcher)
         {
-            if (collection == null) throw new ArgumentNullException("collection");
-            if (dispatcher == null) throw new ArgumentNullException("dispatcher");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            if (dispatcher == null) throw new ArgumentNullException(nameof(dispatcher));
 
             if (!(collection is IList<T>))
             {

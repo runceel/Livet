@@ -15,7 +15,7 @@ namespace Livet.EventListeners
 
         internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             _source = new WeakReference<INotifyPropertyChanged>(source);
         }
@@ -23,7 +23,7 @@ namespace Livet.EventListeners
         internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source, PropertyChangedEventHandler handler)
             : this(source)
         {
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             RegisterHandler(handler);
         }
 
@@ -49,7 +49,7 @@ namespace Livet.EventListeners
 
         internal void RegisterHandler<T>(Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
         {
-            if (propertyExpression == null) throw new ArgumentNullException("propertyExpression");
+            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
 
             if (!(propertyExpression.Body is MemberExpression)) throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 
@@ -133,7 +133,7 @@ namespace Livet.EventListeners
 
         internal void Add<T>(Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
         {
-            if (propertyExpression == null) throw new ArgumentNullException("propertyExpression");
+            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
 
             if (!(propertyExpression.Body is MemberExpression)) throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 
@@ -145,7 +145,7 @@ namespace Livet.EventListeners
 
         internal void Add<T>(Expression<Func<T>> propertyExpression, params PropertyChangedEventHandler[] handlers)
         {
-            if (propertyExpression == null) throw new ArgumentNullException("propertyExpression");
+            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
 
             if (!(propertyExpression.Body is MemberExpression)) throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 

@@ -19,13 +19,13 @@ namespace Livet.EventListeners
 
         internal AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
             _source = new WeakReference<INotifyCollectionChanged>(source);
         }
 
         internal AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source,NotifyCollectionChangedEventHandler handler) : this(source)
         {
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             RegisterHandler(handler);
         }
 
