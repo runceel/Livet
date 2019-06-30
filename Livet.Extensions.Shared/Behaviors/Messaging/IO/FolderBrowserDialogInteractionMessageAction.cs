@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Livet.Dialogs;
 using Livet.Messaging;
 using Livet.Messaging.IO;

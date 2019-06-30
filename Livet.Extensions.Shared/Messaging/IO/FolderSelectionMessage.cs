@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Livet.Messaging;
 
 namespace Livet.Messaging.IO
 {

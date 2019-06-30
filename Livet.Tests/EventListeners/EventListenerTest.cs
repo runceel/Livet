@@ -1,7 +1,6 @@
 ﻿using Livet.EventListeners;
 using NUnit.Framework;
 using System;
-using Livet.NUnit;
 
 namespace Livet.NUnit.EventListeners
 {

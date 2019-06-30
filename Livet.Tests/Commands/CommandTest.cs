@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Livet.Commands;
 using System.Windows.Input;
 using System.Threading;
-using System.Diagnostics;
 
 namespace Livet.NUnit.Commands
 {

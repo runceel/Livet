@@ -3,7 +3,6 @@ using System;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Livet.NUnit;
 
 namespace Livet.NUnit.EventListeners
 {

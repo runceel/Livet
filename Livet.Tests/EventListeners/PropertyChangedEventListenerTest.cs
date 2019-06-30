@@ -2,11 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Linq;
 using NUnit.Framework;
-using Livet.NUnit;
-using System.Collections.Concurrent;
-using System.Reflection;
 
 namespace Livet.NUnit.EventListeners
 {
