@@ -33,7 +33,7 @@ namespace Livet.Behaviors.ControlBinding
             set { SetValue(SelectionLengthProperty, value); }
         }       
 
-        // Using a DependencyProperty as the backing store for SelectionLengh.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for SelectionLength.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectionLengthProperty =
             DependencyProperty.Register("SelectionLength", typeof(int), typeof(TextBoxBindingSupportBehavior), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SourceSelectionLengthChanged));
 

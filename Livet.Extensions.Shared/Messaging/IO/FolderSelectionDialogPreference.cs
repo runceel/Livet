@@ -23,7 +23,7 @@ namespace Livet.Messaging.IO
 		FolderBrowser,
 
 		/// <summary>
-		///		Specifies using Win32 Common Item Dialog (namely, IFileOpenDialig).
+		///		Specifies using Win32 Common Item Dialog (namely, IFileOpenDialog).
 		///		When the platform is prior to Windows Vista/Windows Server 2008,
 		///		<see cref="PlatformNotSupportedException"/> is thrown.
 		/// </summary>

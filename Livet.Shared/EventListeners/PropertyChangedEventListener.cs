@@ -48,7 +48,7 @@ namespace Livet.EventListeners
         /// <summary>
         /// このリスナインスタンスにプロパティ名でフィルタリング済のハンドラを追加します。
         /// </summary>
-        /// <param name="propertyName">ハンドラを登録したいPropertyChagedEventArgs.PropertyNameの名前</param>
+        /// <param name="propertyName">ハンドラを登録したいPropertyChangedEventArgs.PropertyNameの名前</param>
         /// <param name="handler">propertyNameで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
         public void RegisterHandler(string propertyName, PropertyChangedEventHandler handler)
         {

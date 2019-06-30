@@ -28,17 +28,17 @@ namespace Livet.ItemTemplateExtension
             {
                 var dte = (_DTE)automationObject;
                 var project = (Project)((object[])dte.ActiveSolutionProjects)[0];
-                string defaultNamespae = null;
+                string defaultNamespace = null;
 
                 foreach (Property property in project.Properties)
                 {
                     if (property.Name.ToLower() == "defaultnamespace")
                     {
-                        defaultNamespae = (string)property.Value;
+                        defaultNamespace = (string)property.Value;
                     }
                 }
 
-                replacementsDictionary.Add("$projectrootnamespace$", defaultNamespae);
+                replacementsDictionary.Add("$projectrootnamespace$", defaultNamespace);
             }
             catch { }
         }

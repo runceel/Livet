@@ -23,6 +23,7 @@ namespace Livet
         /// <summary>
         /// プロパティ変更通知イベントを発生させます。
         /// </summary>
+        /// <param name="source"></param>
         /// <param name="propertyExpression">() => プロパティ形式のラムダ式</param>
         /// <exception cref="NotSupportedException">() => プロパティ 以外の形式のラムダ式が指定されました。</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
@@ -60,7 +61,7 @@ namespace Livet
         /// <param name="source">元の値</param>
         /// <param name="value">新しい値</param>
         /// <param name="relatedProperties">このプロパティが変更されたときに PropertyChanged イベントを発行するプロパティの名前の配列</param>
-        /// <param name="propertyName">プロパティ名/param>
+        /// <param name="propertyName">プロパティ名</param>
         /// <returns>値の変更有無</returns>
         protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, string[] relatedProperties = null, [CallerMemberName]string propertyName = null)
         {
@@ -88,7 +89,7 @@ namespace Livet
         /// <param name="source">元の値</param>
         /// <param name="value">新しい値</param>
         /// <param name="relatedProperty">このプロパティが変更されたときに PropertyChanged イベントを発行するプロパティの名前</param>
-        /// <param name="propertyName">プロパティ名/param>
+        /// <param name="propertyName">プロパティ名</param>
         /// <returns>値の変更有無</returns>
         protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, string relatedProperty, [CallerMemberName]string propertyName = null)
             => RaisePropertyChangedIfSet(ref source, value, new[] { relatedProperty }, propertyName);

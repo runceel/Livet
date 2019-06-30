@@ -25,7 +25,7 @@ namespace Livet.Dialogs
 		/// <summary>
 		///		Creates the appropriate <see cref="FolderSelectionDialog"/> for running platform.
 		/// </summary>
-		/// <param name="preference">Folder selection dialog impementation preference.</param>
+		/// <param name="preference">Folder selection dialog implementation preference.</param>
 		/// <returns>
 		///		The appropriate <see cref="FolderSelectionDialog"/> for running platform.
 		/// </returns>
