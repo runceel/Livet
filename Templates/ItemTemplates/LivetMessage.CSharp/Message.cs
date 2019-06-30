@@ -9,18 +9,18 @@ using Livet.Messaging;
 namespace $rootnamespace$
 {
     /*
-     * 戻り値のある相互作用メッセージはResponsiveInteractionMessage<T>を継承して作成します。
-     * Tは戻り値の型です。
-     * 戻り値のない相互作用メッセージはInteractionMessageを継承して作成します。
+     * ResponsiveInteractionMessage<T> is for a message that has return value.
+     * The type parameter is a type of return value.
+     * If message doesn't have a return value, then please use InteractionMessage.
      */
     public class $safeitemname$ : ResponsiveInteractionMessage<string>
     {
-        //Viewでメッセージインスタンスを生成する時のためのコンストラクタ
+        // This is a constructor for to create this instance at View layer.
         public $safeitemname$()
         {
         }
 
-        //ViewModelからMessenger経由での発信目的でメッセージインスタンスを生成するためのコンストラクタ
+        // This is a construcot when using to create this instance at ViewModel layer to send it using Messenger class.
         public $safeitemname$(string messageKey)
             : base(messageKey)
         {
@@ -28,17 +28,13 @@ namespace $rootnamespace$
         }
 
         /*
-         * メッセージに保持させたい情報をプロパティとして定義してください。
-         * Viewでバインド可能なプロパティにするために依存関係プロパティとして定義する事をお勧めします。
-         * 通常依存関係プロパティはコードスニペット propdpを使用して定義します。
-         * もし普通のプロパティとして定義したい場合はコードスニペット propを使用して定義します。
+         * Define some properties if you need using propdp code snippets.
          */
 
         /// <summary>
-        /// 派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br/>
-        /// 通常このメソッドは、自身の新しいインスタンスを返すように実装します。
+        /// Please do not remove this method.
         /// </summary>
-        /// <returns>自身の新しいインスタンス</returns>
+        /// <returns>A new instance of this.</returns>
         protected override System.Windows.Freezable CreateInstanceCore()
         {
             return new $safeitemname$();

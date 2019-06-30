@@ -3,18 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>2.0.0-pre2</Version>
+    <Version>2.0.0-pre3</Version>
     <Authors>Livet project</Authors>
     <Company />
     <Product />
     <PackageId>LivetCask.NetCore</PackageId>
-    <Description>LivetCask package for .NET Core 3.0 preview 1</Description>
+    <Description>LivetCask package for .NET Core 3.0 preview</Description>
     <Copyright>Livet Project</Copyright>
     <PackageLicenseUrl>https://github.com/ugaya40/Livet/blob/master/license-en.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ugaya40/Livet</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/ugaya40/Livet/master/Templates/Livet.Extensibility/Livet.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/ugaya40/Livet</RepositoryUrl>
-    <PackageReleaseNotes>First release for .NET Core 3.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Livet for .NET Core 3.0</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 

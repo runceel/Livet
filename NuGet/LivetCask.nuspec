@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>LivetCask</id>
-    <version>2.2.0</version>
+    <version>2.2.1</version>
     <title>Livet Cask</title>
     <authors>Livet Project</authors>
     <licenseUrl>https://github.com/ugaya40/Livet/blob/master/license-jp.txt</licenseUrl>
@@ -10,12 +10,12 @@
     <iconUrl>https://raw.githubusercontent.com/ugaya40/Livet/master/Images/Livet.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Livet(リベット)はWPFのためのMVVM(Model/View/ViewModel)パターン用インフラストラクチャです。
-      .NET Framework 4.5.2以上で動作し、zlib/libpngライセンスで提供しています。
+      Livet is the infrastructure of MVVM pattern on WPF.
+      It supports .NET Framework 4.5.2 or lator, and licensed as zlib/libpng.
     </description>
     <summary>WPF 4.5 MVVM Infrastructure.</summary>
-    <copyright>Copyright (c) 2010-2018 Livet Project</copyright>
-    <language>ja-JP</language>
+    <copyright>Copyright (c) 2010-2019 Livet Project</copyright>
+    <language>en-US</language>
     <tags>MVVM,WPF</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="PresentationCore" />

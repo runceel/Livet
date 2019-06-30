@@ -21,18 +21,16 @@ using Livet.Behaviors.Messaging;
 
 namespace $rootnamespace$
 {
-	//Tはこのアクションがアタッチできる型を表します。
-	//この場合はこのアクションはFrameworkElementにアタッチできます。
     public class $safeitemname$ : InteractionMessageAction<FrameworkElement>
     {
         protected override void InvokeAction(Livet.Messaging.InteractionMessage m)
         {
-            ////このアクションが対応するメッセージに変換します。
+            //// Convert to a message expected by this action
             //var confirmMessage = m as ConfirmationMessage;
 
             //if (confirmMessage != null)
             //{
-            //    //受け取ったメッセージの情報を使用して実行したいアクションを実行します。
+            //    // Execute action using received the message
             //    var result = MessageBox.Show(
             //        confirmMessage.Text,
             //        confirmMessage.Caption,
@@ -40,7 +38,7 @@ namespace $rootnamespace$
             //        confirmMessage.Image
             //        );
 
-            //    //戻り値のあるメッセージの場合、戻り値を設定します。
+            //    // If message has a return value, then set a response
             //    if (result == MessageBoxResult.Yes || result == MessageBoxResult.OK)
             //    {
             //        confirmMessage.Response = true;

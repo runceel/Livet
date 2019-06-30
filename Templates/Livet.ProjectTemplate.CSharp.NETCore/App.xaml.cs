@@ -9,9 +9,6 @@ using Livet;
 
 namespace $safeprojectname$
 {
-    /// <summary>
-    /// App.xaml の相互作用ロジック
-    /// </summary>
     public partial class App : Application
     {
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -19,14 +16,14 @@ namespace $safeprojectname$
             DispatcherHelper.UIDispatcher = Dispatcher;
             //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
         }
-        
-        //集約エラーハンドラ
+
+        // Application level error handling
         //private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         //{
-        //    //TODO:ロギング処理など
+        //    //TODO: Logging
         //    MessageBox.Show(
-        //        "不明なエラーが発生しました。アプリケーションを終了します。",
-        //        "エラー",
+        //        "Something errors were occurred.",
+        //        "Error",
         //        MessageBoxButton.OK,
         //        MessageBoxImage.Error);
         //

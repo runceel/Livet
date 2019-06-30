@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
   <TemplateData>
-    <Name>Livet プロジェクトテンプレート (.NET Core 3.0 preview)(C#)</Name>
-    <Description>.NET Core 3.0 Preview の WPF で Livet を使用して MVVM アプリケーションを作成するためのテンプレートです。</Description>
+    <Name>Livet project template(.NET Core)(C#)</Name>
+    <Description>To create a MVVM application using Livet on WPF(.NET Core)</Description>
     <Icon>Livet.ProjectTemplate.CSharp.NETCore.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
