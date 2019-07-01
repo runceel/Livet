@@ -1,5 +1,7 @@
 [日本語はこちら](README_ja.md)
 
+Work in progress...
+
 # Livet
 
 ## About Livet
