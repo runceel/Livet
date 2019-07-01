@@ -104,12 +104,8 @@ Same as TextBox, Livet provides a behavior make non bindable Password property t
 
 #### Calling ViewModel's method from View's event
 
-In Livet, LivetCallMethodAction is provided
-
-#### View のイベントから ViewModel のメソッドを呼ぶアクション
-
-Livet ではコマンドをサポートしていないイベントに対してメソッド呼び出しをする LivetCallMethodAction を提供します。
-標準の CallMethodAction よりもパフォーマンスが良く、機能面でも MethodParameter プロパティを使用してメソッドに 1 つの引数を渡すことが出来ます。
+In Livet, LivetCallMethodAction is provided to invoke a ViewModel's method.
+It is better performance than standard CallMethodAction, and it is passing a parameter using MethodParameter.
 
 ```xml
 <TextBox x:Name="textBox">
@@ -125,6 +121,8 @@ Livet ではコマンドをサポートしていないイベントに対して�
 ```
 
 #### Messenger
+
+At Livet.Behaviors.Messaging namespace, 
 
 Livet.Behaviors.Messaging 名前空間には Livet の Messenger などから送られたメッセージを受け取ることの出来る Action が用意されています。この Action は Messenger からメッセージを受け取るだけではなく、EventTrigger などから Action を起動することが出来るようになっています。
 
