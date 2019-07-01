@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Livet.Extensibility.084f01b5-62d7-4528-8c21-e58fe0e6ba24" Version="2.4.2" Language="ja-JP" Publisher="Kazuki Ohta" />
-        <DisplayName>Livet extension</DisplayName>
+        <Identity Id="Livet.Extensibility.084f01b5-62d7-4528-8c21-e58fe0e6ba24" Version="2.4.6" Language="en-US" Publisher="Kazuki Ohta" />
+        <DisplayName>Livet</DisplayName>
         <Description xml:space="preserve">Provide a project template, item templates and code snippets for development WPF app using Livet and C#.</Description>
         <MoreInfo>https://github.com/ugaya40/Livet</MoreInfo>
         <License>license-jp.rtf</License>
@@ -11,7 +11,7 @@
         <Tags>WPF, MVVM, Livet</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.9)" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.3)" />
     </Installation>
     <Dependencies>
         <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
@@ -28,6 +28,6 @@
         <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="Livet.ProjectTemplate.CSharp.NETCore" d:TargetPath="|Livet.ProjectTemplate.CSharp.NETCore;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
     </Assets>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.1.28811.260,17.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0, 17.0)" DisplayName="Visual Studio core editor" />
     </Prerequisites>
 </PackageManifest>

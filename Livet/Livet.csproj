@@ -61,6 +61,11 @@
   <ItemGroup>
     <None Include="Livet.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="en\Livet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="..\Livet.Shared\Livet.Shared.projitems" Label="Shared" />
   <Import Project="..\Livet.Generated\Livet.Generated.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

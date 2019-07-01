@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
-    <Name>Livet WPF モデル</Name>
-    <Description>MVVM 補助ライブラリ Livetを使用したWPF MVVM アプリケーションのModelを作成します。</Description>
+    <Name>Livet WPF Model</Name>
+    <Description>Create a Model class for Livet.</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>Windows</ProjectSubType>
     <SortOrder>0</SortOrder>

@@ -32,5 +32,6 @@
     <file src="..\Livet\bin\Release\Livet.dll" target="lib\net452" />
     <file src="..\Livet\bin\Release\Livet.pdb" target="lib\net452" />
     <file src="..\Livet\bin\Release\Livet.xml" target="lib\net452" />
+    <file src="..\Livet\bin\Release\en\Livet.xml" target="lib\net452" />
   </files>
 </package>

@@ -1,41 +1,38 @@
-[日本語はこちら](README_ja.md)
-
 # Livet
 
-## About Livet
+## Livet とは
 
-Livet is an infrastructure for MVVM(Model/View/ViewModel) pattern on WPF.
-It is supporting .NET Framework 4.5.2 or lator and .NET Core 3.0(still in preview), and it is provided zlib/libpng license.
-At zlib/libpng licence, you don't need displaying copyright using just a library, when you publish a software with the library.
+Livet(リベット) は WPF のための MVVM(Model/View/ViewModel) パターン用インフラストラクチャです。
+.NET Framework 4.5.2 及び .NET Core 3.0(現在はプレビュー版です) 以上で動作し zlib/libpng ライセンスで提供しています。
+zlib/libpng ライセンスでは、ライブラリとしての利用にとどめるのであれば再配布時にも著作権表示などの義務はありません。
 
-At zlib/libpng licence, you don't need displaying copyright, when you publish a software with the library.
-However, if you changed the source code, you would have to need it.
+しかし、ソースコードを改変しての再配布にはその旨の明示が義務付けられます。
 
-## Introduction
+## 導入
 
-Livet can be used using an extension of Visual Studio 2017 / 2019. It provides a project template, item tempaltes and useful code snippets. It is designed the best when using it.
-The extension can be found searching Livet at online category on `Manage extensions`.
+Livet は Visual Studio 2017 / 2019 の拡張機能を使用することでプロジェクトテンプレートやアイテムテンプレートやコードスニペットが追加され生産性が一番高い状態で開発が出来るように設計されています。
+拡張機能は Visual Studio の拡張機能と更新プログラム でオンラインカテゴリーで Livet と検索するインストールすることが出来ます。
 
-![](images/2019-07-01-16-19-40.png)
+![](Images/2018-12-26-09-29-56.png)
 
-And the library is published on NuGet.
+また、ライブラリは以下 NuGet に公開しています。
 
 - [LivetCask](https://www.nuget.org/packages/LivetCask/)
 - [LivetExtensions](https://www.nuget.org/packages/LivetExtensions/)
 
-## Working with Visual Studio and Livet
+## Visual Studio との親和性
 
-Livet is designed to use on Visual Studio.
+Livet は極力 Visual Studio の機能を活かす作りにしています。
 
-#### Visual Studio features for Livet
+#### Visual Studio 対応
 
-Livet provides Project templates, Item templates and code snippets.
+Livet ではプロジェクトテンプレート、アイテムテンプレート、コードスニペットを提供しています。
 
-![Project templates](images/2019-07-01-16-24-39.png)
+![プロジェクトテンプレート](Images/2018-12-26-09-37-07.png)
 
-![Item templates](images/2019-07-01-16-25-38.png)
+![アイテムテンプレート](Images/2018-12-26-09-38-14.png)
 
-Code snippets are as below:
+コードスニペットは以下のものを提供しています。
 
 - lvcom : ViewModelCommand
 - lvcomn : ViewModelCommand(Non CanExecute)
@@ -44,26 +41,26 @@ Code snippets are as below:
 - lprop : Notification property
 - lsprop : Notification property(Short version)
 
-## View support features
+## View サポート
 
-Livet provides features to be able to use data binding any place at View layer.
+Livet では View レイヤーでデータバインディングが出来る箇所を可能な限り増やすように設計されています。
 
-#### Behaviors that make non bindable property to be bindable property.
+#### バインドできないプロパティをバインド可能にするビヘイビア
 
-WPF provides data binding feature for dependency properties, however, there aren't non bindable properties.
-So, we want to use data binding, but we are writing code to sync data at code behind.
+WPF では依存関係プロパティに対するデータバインディングがサポートされていますが、コントロールの全てのプロパティが依存関係プロパティとして定義されているわけではありません。
+そのため、データバインディングで実装したくても素直に出来ないためコードビハインドに手動で View と ViewModel のデータ同期のコードが必要になるケースがあります。
 
-Livet provides behaviors and actions to make non bindable properties to be able to bind ( excludes start with type of 'System.Windows').
+Livet では、すべてのコントロールの全ての（System.Windows で始まる型のプロパティは除く）依存関係プロパティではないプロパティの端方向のバインドを可能にするビヘイビアとアクションを提供しています。
 
 ```xml
-<Button Height="50" Content="Please mouse over here">
+<Button Height="50" Content="マウスを乗せてください">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseEnter">
-            <!-- Originally, IsMouseOver is not a bindable property -->
+            <!--  IsMouseOver は本来バインドできないプロパティ  -->
             <l:ButtonSetStateToSourceAction Source="{Binding ButtonMouseOver, Mode=TwoWay}" Property="IsMouseOver" />
         </i:EventTrigger>
         <i:EventTrigger EventName="MouseLeave">
-            <!--  Originally, IsMouseOver is a not bindable property  -->
+            <!--  IsMouseOver は本来バインドできないプロパティ  -->
             <l:ButtonSetStateToSourceAction Source="{Binding ButtonMouseOver, Mode=TwoWay}" Property="IsMouseOver" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
@@ -73,13 +70,13 @@ Livet provides behaviors and actions to make non bindable properties to be able 
 ```xml
 <WebBrowser Grid.Row="1" Grid.ColumnSpan="2">
     <i:Interaction.Behaviors>
-        <!--  Originally, Source is not a bindable property  -->
+        <!--  Source は本来バインディング出来ないプロパティ  -->
         <l:WebBrowserSetStateToControlBehavior Source="{Binding Url}" Property="Source" />
     </i:Interaction.Behaviors>
 </WebBrowser>
 ```
 
-And, Livet provides a behavior make non bindable properties SelectedText, SelectionLength and SelectionStart to be able to bind for TextBox.
+また、TextBox 用に本来バインディング出来ない SelectedText、SelectionLength、SelectionStart プロパティを双方向バインド可能にするビヘイビアを提供しています。
 
 ```xml
 <TextBox>
@@ -92,7 +89,7 @@ And, Livet provides a behavior make non bindable properties SelectedText, Select
 </TextBox>
 ```
 
-Same as TextBox, Livet provides a behavior make non bindable Password property to be able to bind for PasswordBox.
+TextBox と同様に PasswordBox 用に本来バインディング出来ない Password プロパティを双方向バインド可能にするビヘイビアを提供しています。
 
 ```xml
 <PasswordBox>
@@ -101,10 +98,6 @@ Same as TextBox, Livet provides a behavior make non bindable Password property t
     </i:Interaction.Behaviors>
 </PasswordBox>
 ```
-
-#### Calling ViewModel's method from View's event
-
-In Livet, LivetCallMethodAction is provided
 
 #### View のイベントから ViewModel のメソッドを呼ぶアクション
 
