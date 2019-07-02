@@ -36,15 +36,10 @@ namespace Livet.Behaviors.Messaging.IO
 					dialog.Description = folderSelectionMessage.Description;
 					dialog.SelectedPath = folderSelectionMessage.SelectedPath;
 
-                    if (dialog.ShowDialog(hostWindow).GetValueOrDefault())
-                    {
-                        folderSelectionMessage.Response = dialog.SelectedPath;
-                    }
-                    else
-                    {
-                        folderSelectionMessage.Response = null;
-                    }
-				}
+                    folderSelectionMessage.Response = dialog.ShowDialog(hostWindow).GetValueOrDefault()
+                        ? dialog.SelectedPath
+                        : null;
+                }
 			}
 		}
 	}
