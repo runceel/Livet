@@ -19,7 +19,7 @@ namespace Livet.Dialogs
 		/// <value>
 		/// The descriptive text to instruct the operation.
 		/// </value>
-		public sealed override string Description
+		public override string Description
 		{
 			get { return this._folderBrowserDialog.Description; }
 			set { this._folderBrowserDialog.Description = value; }
@@ -31,7 +31,7 @@ namespace Livet.Dialogs
 		/// <value>
 		/// The selected path. This will be default path when the dialog is opened.
 		/// </value>
-		public sealed override string SelectedPath
+		public override string SelectedPath
 		{
 			get { return this._folderBrowserDialog.SelectedPath; }
 			set
@@ -52,7 +52,7 @@ namespace Livet.Dialogs
 		///		This property is not supported.
 		/// </summary>
 		/// <value>Always <see cref="F:String.Empty"/>.</value>
-		public sealed override string Title
+		public override string Title
 		{
 			get { return String.Empty; }
 			set { }
@@ -75,7 +75,7 @@ namespace Livet.Dialogs
 		/// Releases unmanaged and - optionally - managed resources
 		/// </summary>
 		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		protected sealed override void Dispose( bool disposing )
+		protected override void Dispose( bool disposing )
 		{
 			if ( disposing )
 			{
@@ -92,7 +92,7 @@ namespace Livet.Dialogs
 		/// <returns>
 		/// The result of the dialog.
 		/// </returns>
-		protected sealed override bool? ShowDialogCore( Window hostWindow )
+		protected override bool? ShowDialogCore( Window hostWindow )
 		{
 			switch ( this._folderBrowserDialog.ShowDialog( new WindowsFormsWin32Window( new WindowInteropHelper( hostWindow ).EnsureHandle() ) ) )
 			{

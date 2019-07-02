@@ -21,7 +21,7 @@ namespace Livet.Dialogs
 		///		Some dialog cannot support this value.
 		///		The <c>null</c> or empty indicates using default title.
 		/// </value>
-		public sealed override string Title
+		public override string Title
 		{
 			get { return this._commonOpenFileDialog.Title; }
 			set { this._commonOpenFileDialog.Title = String.IsNullOrEmpty( value ) ? this._defaultTitle : value; }
@@ -31,7 +31,7 @@ namespace Livet.Dialogs
 		///		This property is not supported.
 		/// </summary>
 		/// <value>Always <see cref="F:String.Empty"/>.</value>
-		public sealed override string Description
+		public override string Description
 		{
 			get { return String.Empty; }
 			set { }
@@ -43,7 +43,7 @@ namespace Livet.Dialogs
 		/// <value>
 		/// The selected path. This will be default path when the dialog is opened.
 		/// </value>
-		public sealed override string SelectedPath
+		public override string SelectedPath
 		{
 			get { return this._commonOpenFileDialog.FileName; }
 			set
@@ -87,7 +87,7 @@ namespace Livet.Dialogs
 		/// Releases unmanaged and - optionally - managed resources
 		/// </summary>
 		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		protected sealed override void Dispose( bool disposing )
+		protected override void Dispose( bool disposing )
 		{
 			if ( disposing )
 			{
@@ -103,7 +103,7 @@ namespace Livet.Dialogs
 		/// <returns>
 		/// The result of the dialog.
 		/// </returns>
-		protected sealed override bool? ShowDialogCore( Window hostWindow )
+		protected override bool? ShowDialogCore( Window hostWindow )
 		{
 			switch ( this._commonOpenFileDialog.ShowDialog( hostWindow ) )
 			{
