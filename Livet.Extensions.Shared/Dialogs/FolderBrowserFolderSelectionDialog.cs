@@ -21,8 +21,8 @@ namespace Livet.Dialogs
 		/// </value>
 		public override string Description
 		{
-			get { return this._folderBrowserDialog.Description; }
-			set { this._folderBrowserDialog.Description = value; }
+			get { return _folderBrowserDialog.Description; }
+			set { _folderBrowserDialog.Description = value; }
 		}
 
 		/// <summary>
@@ -33,17 +33,17 @@ namespace Livet.Dialogs
 		/// </value>
 		public override string SelectedPath
 		{
-			get { return this._folderBrowserDialog.SelectedPath; }
+			get { return _folderBrowserDialog.SelectedPath; }
 			set
 			{
 				// FolderBrowserDialog.SelectedPath must ends with Path.DirectorySeparatorChar.
 				if ( value != null && value.LastOrDefault() != Path.DirectorySeparatorChar )
 				{
-					this._folderBrowserDialog.SelectedPath = value + Path.DirectorySeparatorChar;
+					_folderBrowserDialog.SelectedPath = value + Path.DirectorySeparatorChar;
 				}
 				else
 				{
-					this._folderBrowserDialog.SelectedPath = value;
+					_folderBrowserDialog.SelectedPath = value;
 				}
 			}
 		}
@@ -63,7 +63,7 @@ namespace Livet.Dialogs
 		/// </summary>
 		public FolderBrowserFolderSelectionDialog()
 		{
-			this._folderBrowserDialog =
+			_folderBrowserDialog =
 				new System.Windows.Forms.FolderBrowserDialog()
 				{
 					ShowNewFolderButton = true,
@@ -79,7 +79,7 @@ namespace Livet.Dialogs
 		{
 			if ( disposing )
 			{
-				this._folderBrowserDialog.Dispose();
+				_folderBrowserDialog.Dispose();
 			}
 
 			base.Dispose( disposing );
@@ -94,7 +94,7 @@ namespace Livet.Dialogs
 		/// </returns>
 		protected override bool? ShowDialogCore( Window hostWindow )
 		{
-			switch ( this._folderBrowserDialog.ShowDialog( new WindowsFormsWin32Window( new WindowInteropHelper( hostWindow ).EnsureHandle() ) ) )
+			switch ( _folderBrowserDialog.ShowDialog( new WindowsFormsWin32Window( new WindowInteropHelper( hostWindow ).EnsureHandle() ) ) )
 			{
 				case System.Windows.Forms.DialogResult.OK:
 				case System.Windows.Forms.DialogResult.Yes:
@@ -123,7 +123,7 @@ namespace Livet.Dialogs
 			///	</returns>
 			public IntPtr Handle
 			{
-				get { return this._handle; }
+				get { return _handle; }
 			}
 
 			/// <summary>
@@ -132,7 +132,7 @@ namespace Livet.Dialogs
 			/// <param name="hwnd">The HWND.</param>
 			public WindowsFormsWin32Window( IntPtr hwnd )
 			{
-				this._handle = hwnd;
+				_handle = hwnd;
 			}
 		}
 	}

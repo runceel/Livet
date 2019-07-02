@@ -42,7 +42,7 @@ namespace Livet.Messaging.IO
 		/// <returns>The new <see cref="FolderSelectionMessage"/> which has identical properties to this instance.</returns>
 		protected override Freezable CreateInstanceCore()
 		{
-			return new FolderSelectionMessage( this.MessageKey );
+			return new FolderSelectionMessage( MessageKey );
 		}
 
 		/// <summary>

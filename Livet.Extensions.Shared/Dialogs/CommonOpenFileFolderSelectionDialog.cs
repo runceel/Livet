@@ -23,8 +23,8 @@ namespace Livet.Dialogs
 		/// </value>
 		public override string Title
 		{
-			get { return this._commonOpenFileDialog.Title; }
-			set { this._commonOpenFileDialog.Title = String.IsNullOrEmpty( value ) ? this._defaultTitle : value; }
+			get { return _commonOpenFileDialog.Title; }
+			set { _commonOpenFileDialog.Title = String.IsNullOrEmpty( value ) ? _defaultTitle : value; }
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Livet.Dialogs
 		/// </value>
 		public override string SelectedPath
 		{
-			get { return this._commonOpenFileDialog.FileName; }
+			get { return _commonOpenFileDialog.FileName; }
 			set
 			{
 				DirectoryInfo asDirectory = null;
@@ -57,13 +57,13 @@ namespace Livet.Dialogs
 
 				if ( asDirectory == null )
 				{
-					this._commonOpenFileDialog.DefaultFileName = value;
+					_commonOpenFileDialog.DefaultFileName = value;
 				}
 				else
 				{
 					// Set parent.
-					this._commonOpenFileDialog.DefaultFileName = asDirectory.Name;
-					this._commonOpenFileDialog.InitialDirectory = asDirectory.Parent?.FullName
+					_commonOpenFileDialog.DefaultFileName = asDirectory.Name;
+					_commonOpenFileDialog.InitialDirectory = asDirectory.Parent?.FullName
 																?? "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";	// Set "My Computer", if drive root
 				}
 			}
@@ -74,13 +74,13 @@ namespace Livet.Dialogs
 		/// </summary>
 		public CommonOpenFileFolderSelectionDialog()
 		{
-			this._commonOpenFileDialog =
+			_commonOpenFileDialog =
 				new CommonOpenFileDialog()
 				{
 					IsFolderPicker = true,
 					Multiselect = false,
 				};
-			this._defaultTitle = this._commonOpenFileDialog.Title;
+			_defaultTitle = _commonOpenFileDialog.Title;
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@ namespace Livet.Dialogs
 		{
 			if ( disposing )
 			{
-				this._commonOpenFileDialog.Dispose();
+				_commonOpenFileDialog.Dispose();
 			}
 			base.Dispose( disposing );
 		}
@@ -105,7 +105,7 @@ namespace Livet.Dialogs
 		/// </returns>
 		protected override bool? ShowDialogCore( Window hostWindow )
 		{
-			switch ( this._commonOpenFileDialog.ShowDialog( hostWindow ) )
+			switch ( _commonOpenFileDialog.ShowDialog( hostWindow ) )
 			{
 				case CommonFileDialogResult.Ok:
 				{
