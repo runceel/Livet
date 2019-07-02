@@ -81,10 +81,7 @@ namespace Livet.Behaviors.Messaging
 
             if (e.OldValue != null)
             {
-                if (thisReference._listener != null)
-                {
-                    thisReference._listener.Dispose();
-                }
+                thisReference._listener?.Dispose();
             }
 
             if (e.NewValue != null && thisReference != null)
@@ -174,9 +171,9 @@ namespace Livet.Behaviors.Messaging
 
         protected override void OnDetaching()
         {
-            if (Messenger != null && _listener != null)
+            if (Messenger != null)
             {
-                _listener.Dispose();
+                _listener?.Dispose();
             }
 
             if (AssociatedObject != null)

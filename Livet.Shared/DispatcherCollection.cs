@@ -214,10 +214,7 @@ namespace Livet
             {
                 var sourceAsConcurrentObservableCollection = _sourceAsIList as ObservableSynchronizedCollection<T>;
 
-                if (sourceAsConcurrentObservableCollection != null)
-                {
-                    sourceAsConcurrentObservableCollection.Move(oldIndex, newIndex);
-                }
+                sourceAsConcurrentObservableCollection?.Move(oldIndex, newIndex);
             }
         }
 
@@ -272,20 +269,14 @@ namespace Livet
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref CollectionChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, args);
-            }
+            threadSafeHandler?.Invoke(this, args);
         }
 
         protected void OnPropertyChanged(string propertyName)
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
-            }
+            threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>

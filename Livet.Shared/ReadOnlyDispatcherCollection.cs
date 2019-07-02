@@ -82,10 +82,7 @@ namespace Livet
             ThrowExceptionIfDisposed();
             var threadSafeHandler = Interlocked.CompareExchange(ref CollectionChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, args);
-            }
+            threadSafeHandler?.Invoke(this, args);
         }
 
         protected void OnPropertyChanged(PropertyChangedEventArgs args)
@@ -93,10 +90,7 @@ namespace Livet
             ThrowExceptionIfDisposed();
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, args);
-            }
+            threadSafeHandler?.Invoke(this, args);
         }
 
         /// <summary>

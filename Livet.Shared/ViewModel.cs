@@ -71,10 +71,7 @@ namespace Livet
             if (_disposed) return;
             if (disposing)
             {
-                if (_compositeDisposable != null)
-                {
-                    _compositeDisposable.Dispose();
-                }
+                _compositeDisposable?.Dispose();
             }
             _disposed = true;
         }

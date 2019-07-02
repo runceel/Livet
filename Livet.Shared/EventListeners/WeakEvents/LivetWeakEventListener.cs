@@ -24,10 +24,7 @@ namespace Livet.EventListeners.WeakEvents
             {
                 var handler = listenerResult._handler;
 
-                if (handler != null)
-                {
-                    handler(sender, args);
-                }
+                handler?.Invoke(sender, args);
             }
         }
 

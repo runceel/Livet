@@ -131,10 +131,7 @@ namespace Livet.Messaging
             }
 
             var msg = await Task<T>.Factory.StartNew(() => GetResponse(message));
-            if (callback != null)
-            {
-                callback(msg);
-            }
+            callback?.Invoke(msg);
             return msg;
         }
     }

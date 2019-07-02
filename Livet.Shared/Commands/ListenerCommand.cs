@@ -75,10 +75,7 @@ namespace Livet.Commands
         private void OnPropertyChanged()
         {
             var handler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
-            if (handler != null)
-            {
-                handler(this,EventArgsFactory.GetPropertyChangedEventArgs("CanExecute"));
-            }
+            handler?.Invoke(this,EventArgsFactory.GetPropertyChangedEventArgs("CanExecute"));
         }
 
         /// <summary>
