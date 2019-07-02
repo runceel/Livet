@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       Livet is the infrastructure of MVVM pattern on WPF.
-      It supports .NET Framework 4.5.2 or lator, and licensed as zlib/libpng.
+      It supports .NET Framework 4.5.2 or later, and licensed as zlib/libpng.
     </description>
     <summary>WPF 4.5 MVVM Infrastructure.</summary>
     <copyright>Copyright (c) 2010-2019 Livet Project</copyright>
