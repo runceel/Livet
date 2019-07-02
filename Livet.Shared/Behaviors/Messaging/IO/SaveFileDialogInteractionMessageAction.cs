@@ -13,9 +13,7 @@ namespace Livet.Behaviors.Messaging.IO
     {
         protected override void InvokeAction(InteractionMessage message)
         {
-            var saveFileMessage = message as SavingFileSelectionMessage;
-
-            if (saveFileMessage != null)
+            if (message is SavingFileSelectionMessage saveFileMessage)
             {
                 var dialog = new SaveFileDialog
                                             {

@@ -10,9 +10,7 @@ namespace Livet.Behaviors.Messaging
     {
         protected override void InvokeAction(InteractionMessage message)
         {
-            var informationMessage = message as InformationMessage;
-
-            if (informationMessage != null)
+            if (message is InformationMessage informationMessage)
             {
                 MessageBox.Show(
                     informationMessage.Text,

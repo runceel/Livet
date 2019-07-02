@@ -203,9 +203,7 @@ namespace Livet
         /// <param name="newIndex">移動先のインデックス</param>
         public void Move(int oldIndex, int newIndex)
         {
-            var sourceAsObservableCollection = _sourceAsIList as ObservableCollection<T>;
-
-            if (sourceAsObservableCollection != null)
+            if (_sourceAsIList is ObservableCollection<T> sourceAsObservableCollection)
             {
                 sourceAsObservableCollection.Move(oldIndex, newIndex);
             }

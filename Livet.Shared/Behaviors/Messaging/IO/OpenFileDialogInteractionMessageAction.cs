@@ -13,9 +13,7 @@ namespace Livet.Behaviors.Messaging.IO
     {
         protected override void InvokeAction(InteractionMessage message)
         {
-            var openFileMessage = message as OpeningFileSelectionMessage;
-
-            if (openFileMessage != null)
+            if (message is OpeningFileSelectionMessage openFileMessage)
             {
                 var dialog = new OpenFileDialog
                                  {

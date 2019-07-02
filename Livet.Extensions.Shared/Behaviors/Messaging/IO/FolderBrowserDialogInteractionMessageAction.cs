@@ -18,9 +18,7 @@ namespace Livet.Behaviors.Messaging.IO
 		/// <param name="m"><see cref="FolderSelectionMessage"/> specified to <see cref="InteractionMessenger"/> in the client.</param>
 		protected override void InvokeAction( InteractionMessage m )
 		{
-			var folderSelectionMessage = m as FolderSelectionMessage;
-
-			if ( folderSelectionMessage != null )
+            if ( m is FolderSelectionMessage folderSelectionMessage )
 			{
                 Window hostWindow = Window.GetWindow(AssociatedObject);
 				if ( hostWindow == null )
