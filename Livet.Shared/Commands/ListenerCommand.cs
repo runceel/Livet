@@ -36,7 +36,7 @@ namespace Livet.Commands
         /// </summary>
         public bool CanExecute
         {
-            get { return _canExecute == null ? true : _canExecute(); }
+            get { return _canExecute == null || _canExecute(); }
         }
 
         /// <summary>
