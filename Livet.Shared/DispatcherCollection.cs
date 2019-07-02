@@ -33,7 +33,6 @@ namespace Livet
         public DispatcherCollection(INotifyCollectionChanged collection, Dispatcher dispatcher)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (dispatcher == null) throw new ArgumentNullException(nameof(dispatcher));
 
             if (!(collection is IList<T>))
             {
@@ -47,7 +46,7 @@ namespace Livet
 
             _sourceAsIList = (IList<T>)collection;
 
-            Dispatcher = dispatcher;
+            Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
             CollectionChangedDispatcherPriority = DispatcherPriority.Normal;
 
             ((INotifyPropertyChanged)collection).PropertyChanged += (sender, e) =>

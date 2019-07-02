@@ -44,11 +44,9 @@ namespace Livet.EventListeners.WeakEvents
 
             if (conversion == null) throw new ArgumentNullException(nameof(conversion));
             if (add == null) throw new ArgumentNullException(nameof(add));
-            if (remove == null) throw new ArgumentNullException(nameof(remove));
-            if (handler == null) throw new ArgumentNullException(nameof(handler));
 
-            _handler = handler;
-            _remove = remove;
+            _handler = handler ?? throw new ArgumentNullException(nameof(handler));
+            _remove = remove ?? throw new ArgumentNullException(nameof(remove));
 
             _resultHandler = GetStaticHandler(new WeakReference<LivetWeakEventListener<THandler, TEventArgs>>(this), conversion);
 

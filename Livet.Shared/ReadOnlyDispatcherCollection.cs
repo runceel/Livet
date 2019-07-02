@@ -23,9 +23,7 @@ namespace Livet
 
         public ReadOnlyDispatcherCollection(DispatcherCollection<T> collection) : base(collection) 
         {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-
-            _list = collection;
+            _list = collection ?? throw new ArgumentNullException(nameof(collection));
 
             _listeners.Add(new PropertyChangedEventListener(_list,(sender, e) => OnPropertyChanged(e)));
             _listeners.Add(new CollectionChangedEventListener(_list,(sender,e) => OnCollectionChanged(e)));
