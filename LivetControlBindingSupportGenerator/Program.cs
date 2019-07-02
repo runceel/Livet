@@ -11,10 +11,8 @@ namespace LivetControlBindingSupportGenerator
     class Program
     {
 
-        private static Func<Type, bool> typeFilter = t => 
-        {
-            return t.IsSubclassOf(typeof(FrameworkElement)) && !t.IsAbstract && !t.IsGenericType && t.IsPublic;
-        };
+        private static Func<Type, bool> typeFilter =
+            t => t.IsSubclassOf(typeof(FrameworkElement)) && !t.IsAbstract && !t.IsGenericType && t.IsPublic;
 
         static void Main(string[] args)
         {
@@ -46,7 +44,7 @@ namespace LivetControlBindingSupportGenerator
                             return assemblyName;
                         }
                     )
-                ).Select(assemblyName => Assembly.Load(assemblyName))
+                ).Select(Assembly.Load)
                 .Select( a => { Console.WriteLine( a ); return a; } )
                 .ToArray();
 
