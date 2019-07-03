@@ -25,7 +25,8 @@ namespace Livet.Behaviors.Messaging.IO
                     Title = saveFileMessage.Title
                 };
 
-                saveFileMessage.Response = dialog.ShowDialog().Value ? dialog.FileNames : null;
+                var showDialog = dialog.ShowDialog() ?? false;
+                saveFileMessage.Response = showDialog ? dialog.FileNames : null;
             }
         }
     }

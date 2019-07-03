@@ -24,7 +24,8 @@ namespace Livet.Behaviors.Messaging.IO
                     Multiselect = openFileMessage.MultiSelect
                 };
 
-                openFileMessage.Response = dialog.ShowDialog().Value ? dialog.FileNames : null;
+                var showDialog = dialog.ShowDialog() ?? false;
+                openFileMessage.Response = showDialog ? dialog.FileNames : null;
             }
         }
     }
