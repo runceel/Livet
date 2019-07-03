@@ -108,8 +108,7 @@ namespace Livet.Behaviors
         {
             m = null;
             var foundAction = false;
-            ConcurrentDictionary<string, Action<object>> actionDictionary;
-            if (MethodCacheDictionary.TryGetValue(_targetObjectType, out actionDictionary))
+            if (MethodCacheDictionary.TryGetValue(_targetObjectType, out var actionDictionary))
                 foundAction = actionDictionary.TryGetValue(_methodName, out m);
 
             return foundAction;
