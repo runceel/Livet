@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Threading;
+using Livet.Annotations;
+
 namespace Livet.Messaging
 {
     /// <summary>
@@ -142,22 +144,25 @@ namespace Livet.Messaging
     /// </summary>
     public class InteractionMessageRaisedEventArgs : EventArgs
     {
+        [NotNull] private InteractionMessage _message;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="message">InteractionMessage</param>
-        public InteractionMessageRaisedEventArgs(InteractionMessage message)
+        public InteractionMessageRaisedEventArgs([NotNull] InteractionMessage message)
         {
-            Message = message;
+            _message = message ?? throw new ArgumentNullException(nameof(message));
         }
 
         /// <summary>
         /// 送信されたメッセージ
         /// </summary>
+        [NotNull]
         public InteractionMessage Message
         {
-            get;
-            set;
+            get { return _message; }
+            set { _message = value ?? throw new ArgumentNullException(nameof(value)); }
         }
     }
 }
