@@ -63,8 +63,7 @@ namespace Livet.EventListeners
         {
             lock (_handlerDictionaryLockObject)
             {
-                List<NotifyCollectionChangedEventHandler> bag;
-                if (!_handlerDictionary.TryGetValue(action, out bag))
+                if (!_handlerDictionary.TryGetValue(action, out var bag))
                 {
                     bag = new List<NotifyCollectionChangedEventHandler>();
                     _lockObjectDictionary.Add(bag, new object());
