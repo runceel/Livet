@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Livet.Annotations;
 
 namespace Livet
 {
     /// <summary>
-    /// 複数のIDisposableオブジェクトをまとめて操作するための機能を提供します。
+    ///     複数のIDisposableオブジェクトをまとめて操作するための機能を提供します。
     /// </summary>
-    public class LivetCompositeDisposable : IDisposable,ICollection<IDisposable>
+    public class LivetCompositeDisposable : IDisposable, ICollection<IDisposable>
     {
-        private List<IDisposable> _targetLists;
+        [NotNull] private readonly object _lockObject = new object();
+        [NotNull] private readonly List<IDisposable> _targetLists;
         private bool _disposed;
-        private object _lockObject = new object();
 
         /// <summary>
-        /// コンストラクタ
+        ///     コンストラクタ
         /// </summary>
         public LivetCompositeDisposable()
         {
@@ -21,10 +24,10 @@ namespace Livet
         }
 
         /// <summary>
-        /// コンストラクタ
+        ///     コンストラクタ
         /// </summary>
         /// <param name="sourceDisposableList">ソースとなるIDisposableコレクション</param>
-        public LivetCompositeDisposable(IEnumerable<IDisposable> sourceDisposableList)
+        public LivetCompositeDisposable([NotNull] IEnumerable<IDisposable> sourceDisposableList)
         {
             if (sourceDisposableList == null) throw new ArgumentNullException(nameof(sourceDisposableList));
 
@@ -32,7 +35,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// IDisposableコレクションの列挙子を取得します。
+        ///     IDisposableコレクションの列挙子を取得します。
         /// </summary>
         /// <returns>IDisposableコレクションの列挙子</returns>
         public IEnumerator<IDisposable> GetEnumerator()
@@ -40,21 +43,21 @@ namespace Livet
             ThrowExceptionIfDisposed();
             lock (_lockObject)
             {
-                return ((IEnumerable<IDisposable>)_targetLists.ToArray()).GetEnumerator();
+                return ((IEnumerable<IDisposable>) _targetLists.ToArray()).GetEnumerator();
             }
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             ThrowExceptionIfDisposed();
             lock (_lockObject)
             {
-                return ((IEnumerable<IDisposable>)_targetLists.ToArray()).GetEnumerator();
+                return ((IEnumerable<IDisposable>) _targetLists.ToArray()).GetEnumerator();
             }
         }
 
         /// <summary>
-        /// 末尾にオブジェクトを追加します。
+        ///     末尾にオブジェクトを追加します。
         /// </summary>
         /// <param name="item">追加するオブジェクト</param>
         public void Add(IDisposable item)
@@ -69,52 +72,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// IDisposableの代わりに、リソースを解放するActionを末尾に追加します。
-        /// </summary>
-        /// <param name="releaseAction">リソースを解放するためのAction</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
-        public void Add(Action releaseAction)
-        {
-            ThrowExceptionIfDisposed();
-            var disposable = new AnonymousDisposable(releaseAction);
-            lock (_lockObject)
-            {
-                _targetLists.Add(disposable);
-            }
-        }
-
-        /// <summary>
-        /// 先頭にオブジェクトを追加します。
-        /// </summary>
-        /// <param name="item">追加するオブジェクト</param>
-        public void AddFirst(IDisposable item)
-        {
-            if (item == null) throw new ArgumentNullException(nameof(item));
-
-            ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                _targetLists.Insert(0,item);
-            }
-        }
-
-        /// <summary>
-        /// IDisposableの代わりに、リソースを解放するActionを先頭に追加します。
-        /// </summary>
-        /// <param name="releaseAction">リソースを解放するためのAction</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
-        public void AddFirst(Action releaseAction)
-        {
-            ThrowExceptionIfDisposed();
-            var disposable = new AnonymousDisposable(releaseAction);
-            lock (_lockObject)
-            {
-                _targetLists.Insert(0,disposable);
-            }
-        }
-
-        /// <summary>
-        /// すべての要素を削除します。
+        ///     すべての要素を削除します。
         /// </summary>
         public void Clear()
         {
@@ -126,7 +84,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// ある要素がこのコレクションに含まれているかどうかを判断します。
+        ///     ある要素がこのコレクションに含まれているかどうかを判断します。
         /// </summary>
         /// <param name="item">コレクションに含まれているか判断したい要素</param>
         /// <returns>このコレクションに含まれているかどうか</returns>
@@ -142,7 +100,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// 全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
+        ///     全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
         /// </summary>
         /// <param name="array">コピー先の配列</param>
         /// <param name="arrayIndex">コピー先の配列のどこからコピー操作をするかのインデックス</param>
@@ -151,16 +109,16 @@ namespace Livet
             ThrowExceptionIfDisposed();
             lock (_lockObject)
             {
-                _targetLists.CopyTo(array,arrayIndex);
+                _targetLists.CopyTo(array, arrayIndex);
             }
         }
 
         /// <summary>
-        /// 実際に格納されている要素の数を取得します。
+        ///     実際に格納されている要素の数を取得します。
         /// </summary>
         public int Count
         {
-            get 
+            get
             {
                 ThrowExceptionIfDisposed();
                 lock (_lockObject)
@@ -171,20 +129,19 @@ namespace Livet
         }
 
         /// <summary>
-        /// このコレクションが読み取り専用かどうかを取得します。(常にfalseを返します)
+        ///     このコレクションが読み取り専用かどうかを取得します。(常にfalseを返します)
         /// </summary>
         public bool IsReadOnly
         {
-            get 
-            { 
-                ThrowExceptionIfDisposed(); 
-                return false; 
+            get
+            {
+                ThrowExceptionIfDisposed();
+                return false;
             }
-
         }
 
         /// <summary>
-        /// 最初に見つかった特定のオブジェクトを削除します。
+        ///     最初に見つかった特定のオブジェクトを削除します。
         /// </summary>
         /// <param name="item">削除したいオブジェクト</param>
         /// <returns>削除できたかどうか</returns>
@@ -201,7 +158,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// このコレクションに含まれるすべての要素をDisposeします。
+        ///     このコレクションに含まれるすべての要素をDisposeします。
         /// </summary>
         public void Dispose()
         {
@@ -209,26 +166,71 @@ namespace Livet
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        ///     IDisposableの代わりに、リソースを解放するActionを末尾に追加します。
+        /// </summary>
+        /// <param name="releaseAction">リソースを解放するためのAction</param>
+        [SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
+        public void Add([NotNull] Action releaseAction)
+        {
+            if (releaseAction == null) throw new ArgumentNullException(nameof(releaseAction));
+
+            ThrowExceptionIfDisposed();
+            var disposable = new AnonymousDisposable(releaseAction);
+            lock (_lockObject)
+            {
+                _targetLists.Add(disposable);
+            }
+        }
+
+        /// <summary>
+        ///     先頭にオブジェクトを追加します。
+        /// </summary>
+        /// <param name="item">追加するオブジェクト</param>
+        public void AddFirst(IDisposable item)
+        {
+            if (item == null) throw new ArgumentNullException(nameof(item));
+
+            ThrowExceptionIfDisposed();
+            lock (_lockObject)
+            {
+                _targetLists.Insert(0, item);
+            }
+        }
+
+        /// <summary>
+        ///     IDisposableの代わりに、リソースを解放するActionを先頭に追加します。
+        /// </summary>
+        /// <param name="releaseAction">リソースを解放するためのAction</param>
+        [SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
+        public void AddFirst([NotNull] Action releaseAction)
+        {
+            if (releaseAction == null) throw new ArgumentNullException(nameof(releaseAction));
+
+            ThrowExceptionIfDisposed();
+            var disposable = new AnonymousDisposable(releaseAction);
+            lock (_lockObject)
+            {
+                _targetLists.Insert(0, disposable);
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
 
             if (disposing)
-            {
                 lock (_lockObject)
                 {
                     _targetLists.ForEach(item => item.Dispose());
                 }
-            }
+
             _disposed = true;
         }
 
         protected void ThrowExceptionIfDisposed()
         {
-            if (_disposed)
-            {
-                throw new ObjectDisposedException("CompositeDisposable");
-            }
+            if (_disposed) throw new ObjectDisposedException("CompositeDisposable");
         }
     }
 }
