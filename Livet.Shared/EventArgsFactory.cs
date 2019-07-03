@@ -1,15 +1,21 @@
-﻿using System.ComponentModel;
+﻿using System;
 using System.Collections.Concurrent;
+using System.ComponentModel;
+using Livet.Annotations;
 
 namespace Livet
 {
     internal static class EventArgsFactory
     {
-        private static ConcurrentDictionary<string, PropertyChangedEventArgs> _propertyChangedEventArgsDictionary = new ConcurrentDictionary<string, PropertyChangedEventArgs>();
+        [NotNull] private static readonly ConcurrentDictionary<string, PropertyChangedEventArgs>
+            PropertyChangedEventArgsDictionary = new ConcurrentDictionary<string, PropertyChangedEventArgs>();
 
-        public static PropertyChangedEventArgs GetPropertyChangedEventArgs(string propertyName)
+        public static PropertyChangedEventArgs GetPropertyChangedEventArgs([NotNull] string propertyName)
         {
-            return _propertyChangedEventArgsDictionary.GetOrAdd(propertyName, name => new PropertyChangedEventArgs(name));
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+
+            return PropertyChangedEventArgsDictionary.GetOrAdd(propertyName,
+                name => new PropertyChangedEventArgs(name));
         }
     }
 }
