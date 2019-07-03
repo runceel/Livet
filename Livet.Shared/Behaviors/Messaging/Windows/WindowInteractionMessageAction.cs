@@ -1,11 +1,11 @@
 ﻿using System.Windows;
-using Livet.Messaging.Windows;
 using Livet.Messaging;
+using Livet.Messaging.Windows;
 
 namespace Livet.Behaviors.Messaging.Windows
 {
     /// <summary>
-    /// Windowの最小化・最大化・閉じるを行うアクションです。WindowActionMessageに対応します。
+    ///     Windowの最小化・最大化・閉じるを行うアクションです。WindowActionMessageに対応します。
     /// </summary>
     public class WindowInteractionMessageAction : InteractionMessageAction<FrameworkElement>
     {
@@ -16,7 +16,6 @@ namespace Livet.Behaviors.Messaging.Windows
                 var window = Window.GetWindow(AssociatedObject);
 
                 if (window != null)
-                {
                     switch (windowMessage.Action)
                     {
                         case WindowAction.Close:
@@ -35,7 +34,6 @@ namespace Livet.Behaviors.Messaging.Windows
                             window.Activate();
                             break;
                     }
-                }
             }
         }
     }
