@@ -1,17 +1,18 @@
 ﻿using System;
+using Livet.Annotations;
 
 namespace Livet
 {
     public class WeakReference<T> where T : class
     {
-        private WeakReference _targetWeakReference;
+        [NotNull] private readonly WeakReference _targetWeakReference;
 
-        public WeakReference(T target)
+        public WeakReference([CanBeNull] T target)
         {
             _targetWeakReference = new WeakReference(target);
         }
 
-        public bool TryGetTarget(out T target)
+        public bool TryGetTarget([CanBeNull] out T target)
         {
             var result = _targetWeakReference.Target as T;
 
