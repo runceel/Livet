@@ -1,26 +1,27 @@
 ﻿using System;
+using Livet.Annotations;
 
 namespace Livet
 {
     /// <summary>
-    /// 指定されたリソース解放用のActionをIDisposableとして扱います。
+    ///     指定されたリソース解放用のActionをIDisposableとして扱います。
     /// </summary>
     public class AnonymousDisposable : IDisposable
     {
-        private Action _releaseAction;
         private bool _disposed;
+        [NotNull] private readonly Action _releaseAction;
 
         /// <summary>
-        /// コンストラクタ
+        ///     コンストラクタ
         /// </summary>
         /// <param name="releaseAction">リソースを解放するためのアクション</param>
-        public AnonymousDisposable(Action releaseAction)
+        public AnonymousDisposable([NotNull] Action releaseAction)
         {
-            _releaseAction = releaseAction;
+            _releaseAction = releaseAction ?? throw new ArgumentNullException(nameof(releaseAction));
         }
 
         /// <summary>
-        /// コンストラクタで指定されたアクションを呼び出します。
+        ///     コンストラクタで指定されたアクションを呼び出します。
         /// </summary>
         public void Dispose()
         {
@@ -32,10 +33,7 @@ namespace Livet
         {
             if (_disposed) return;
 
-            if (disposing)
-            {
-                _releaseAction();
-            }
+            if (disposing) _releaseAction();
             _disposed = true;
         }
     }
