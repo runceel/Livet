@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows.Interactivity;
 using System.Windows;
+using System.Windows.Interactivity;
 
 namespace Livet.Behaviors
 {
     /// <summary>
-    /// アタッチしたオブジェクトのDataContextがIDisposableである場合、Disposeします。
+    ///     アタッチしたオブジェクトのDataContextがIDisposableである場合、Disposeします。
     /// </summary>
     public class DataContextDisposeAction : TriggerAction<FrameworkElement>
     {
