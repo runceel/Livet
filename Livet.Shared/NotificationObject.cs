@@ -30,6 +30,7 @@ namespace Livet
         [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        // ReSharper disable once UnusedParameter.Global
         protected virtual void RaisePropertyChanged<T>(ref T source, [NotNull] Expression<Func<T>> propertyExpression)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
@@ -47,8 +48,10 @@ namespace Livet
         /// <param name="propertyName">プロパティ名</param>
         [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         [NotifyPropertyChangedInvocator]
-        protected virtual void RaisePropertyChanged([CallerMemberName] [CanBeNull] string propertyName = "")
+        protected virtual void RaisePropertyChanged([CallerMemberName] [NotNull] string propertyName = "")
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
             if (threadSafeHandler != null)
             {
