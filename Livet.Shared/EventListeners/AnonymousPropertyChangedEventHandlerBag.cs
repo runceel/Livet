@@ -1,17 +1,24 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using Livet.Annotations;
 
 namespace Livet.EventListeners
 {
-    internal class AnonymousPropertyChangedEventHandlerBag: IEnumerable<KeyValuePair<string,List<PropertyChangedEventHandler>>>
+    internal class
+        AnonymousPropertyChangedEventHandlerBag : IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>
     {
-        private Dictionary<string, List<PropertyChangedEventHandler>> _handlerDictionary = new Dictionary<string, List<PropertyChangedEventHandler>>();
-        private WeakReference<INotifyPropertyChanged> _source;
+        [NotNull] private readonly Dictionary<string, List<PropertyChangedEventHandler>> _handlerDictionary =
+            new Dictionary<string, List<PropertyChangedEventHandler>>();
 
-        private object _handlerDictionaryLockObject = new object();
-        private Dictionary<List<PropertyChangedEventHandler>,object> _lockObjectDictionary = new Dictionary<List<PropertyChangedEventHandler>, object>();
+        [NotNull] private readonly object _handlerDictionaryLockObject = new object();
+
+        [NotNull] private readonly Dictionary<List<PropertyChangedEventHandler>, object> _lockObjectDictionary =
+            new Dictionary<List<PropertyChangedEventHandler>, object>();
+
+        [NotNull] private readonly WeakReference<INotifyPropertyChanged> _source;
 
         internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source)
         {
@@ -20,11 +27,23 @@ namespace Livet.EventListeners
             _source = new WeakReference<INotifyPropertyChanged>(source);
         }
 
-        internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source, PropertyChangedEventHandler handler)
+        internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source,
+            PropertyChangedEventHandler handler)
             : this(source)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
             RegisterHandler(handler);
+        }
+
+        IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>>
+            IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>.GetEnumerator()
+        {
+            return _handlerDictionary.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _handlerDictionary.GetEnumerator();
         }
 
         internal void RegisterHandler(PropertyChangedEventHandler handler)
@@ -32,28 +51,31 @@ namespace Livet.EventListeners
             RegisterHandler(string.Empty, handler);
         }
 
-        internal void RegisterHandler(string propertyName, PropertyChangedEventHandler handler)
+        internal void RegisterHandler([NotNull] string propertyName, PropertyChangedEventHandler handler)
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+
             lock (_handlerDictionaryLockObject)
             {
                 List<PropertyChangedEventHandler> bag;
                 if (!_handlerDictionary.TryGetValue(propertyName, out bag))
                 {
                     bag = new List<PropertyChangedEventHandler>();
-                    _lockObjectDictionary.Add(bag,new object());
+                    _lockObjectDictionary.Add(bag, new object());
                     _handlerDictionary[propertyName] = bag;
                 }
+
                 bag.Add(handler);
             }
         }
 
-        internal void RegisterHandler<T>(Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
+        internal void RegisterHandler<T>([NotNull] Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (!(propertyExpression.Body is MemberExpression))
+                throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 
-            if (!(propertyExpression.Body is MemberExpression)) throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
-
-            var memberExpression = (MemberExpression)propertyExpression.Body;
+            var memberExpression = (MemberExpression) propertyExpression.Body;
 
             RegisterHandler(memberExpression.Member.Name, handler);
         }
@@ -74,42 +96,21 @@ namespace Livet.EventListeners
                 }
 
                 if (list != null)
-                {
                     lock (_lockObjectDictionary[list])
                     {
-                        foreach (var handler in list)
-                        {
-                            handler(sourceResult, e);
-                        }
+                        foreach (var handler in list) handler(sourceResult, e);
                     }
-                }
             }
 
-            List<PropertyChangedEventHandler> allList;
             lock (_handlerDictionaryLockObject)
             {
-                _handlerDictionary.TryGetValue(string.Empty, out allList);
+                _handlerDictionary.TryGetValue(string.Empty, out var allList);
                 if (allList != null)
-                {
                     lock (_lockObjectDictionary[allList])
                     {
-                        foreach (var handler in allList)
-                        {
-                            handler(sourceResult, e);
-                        }
+                        foreach (var handler in allList) handler(sourceResult, e);
                     }
-                }
             }
-        }
-
-        IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>> IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>.GetEnumerator()
-        {
-            return _handlerDictionary.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return _handlerDictionary.GetEnumerator();
         }
 
         internal void Add(PropertyChangedEventHandler handler)
@@ -117,39 +118,43 @@ namespace Livet.EventListeners
             RegisterHandler(handler);
         }
 
-        internal void Add(string propertyName, PropertyChangedEventHandler handler)
+        internal void Add([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            
             RegisterHandler(propertyName, handler);
         }
 
 
-        internal void Add(string propertyName, params PropertyChangedEventHandler[] handlers)
+        internal void Add([NotNull] string propertyName, [NotNull] params PropertyChangedEventHandler[] handlers)
         {
-            foreach (var handler in handlers)
-            {
-                RegisterHandler(propertyName, handler);
-            }
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            if (handlers == null) throw new ArgumentNullException(nameof(handlers));
+
+            foreach (var handler in handlers) RegisterHandler(propertyName, handler);
         }
 
-        internal void Add<T>(Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
+        internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression, [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+            if (!(propertyExpression.Body is MemberExpression))
+                throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 
-            if (!(propertyExpression.Body is MemberExpression)) throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
-
-            var memberExpression = (MemberExpression)propertyExpression.Body;
+            var memberExpression = (MemberExpression) propertyExpression.Body;
 
             Add(memberExpression.Member.Name, handler);
         }
 
 
-        internal void Add<T>(Expression<Func<T>> propertyExpression, params PropertyChangedEventHandler[] handlers)
+        internal void Add<T>(Expression<Func<T>> propertyExpression, [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handlers == null) throw new ArgumentNullException(nameof(handlers));
+            if (!(propertyExpression.Body is MemberExpression))
+                throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 
-            if (!(propertyExpression.Body is MemberExpression)) throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
-
-            var memberExpression = (MemberExpression)propertyExpression.Body;
+            var memberExpression = (MemberExpression) propertyExpression.Body;
 
             Add(memberExpression.Member.Name, handlers);
         }
