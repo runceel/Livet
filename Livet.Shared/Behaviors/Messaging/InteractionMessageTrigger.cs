@@ -29,7 +29,7 @@ namespace Livet.Behaviors.Messaging
 
         private bool _disposed;
 
-        [NotNull] private LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
+        [CanBeNull] private LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
             InteractionMessageRaisedEventArgs> _listener;
 
         private bool _loaded = true;
@@ -78,23 +78,24 @@ namespace Livet.Behaviors.Messaging
 
         private static void MessengerChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            var thisReference = obj as InteractionMessageTrigger;
-
             if (e.OldValue == e.NewValue) return;
 
-            if (e.OldValue != null) thisReference._listener?.Dispose();
-
-            if (e.NewValue != null && thisReference != null)
+            if (obj is InteractionMessageTrigger thisReference)
             {
-                var newMessenger = (InteractionMessenger) e.NewValue;
+                if (e.OldValue != null) thisReference._listener?.Dispose();
 
-                thisReference._listener =
-                    new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
-                        InteractionMessageRaisedEventArgs>(
-                        h => h,
-                        h => newMessenger.Raised += h,
-                        h => newMessenger.Raised -= h,
-                        thisReference.MessageReceived);
+                if (e.NewValue != null)
+                {
+                    var newMessenger = (InteractionMessenger) e.NewValue;
+
+                    thisReference._listener =
+                        new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
+                            InteractionMessageRaisedEventArgs>(
+                            h => h,
+                            h => newMessenger.Raised += h,
+                            h => newMessenger.Raised -= h,
+                            thisReference.MessageReceived);
+                }
             }
         }
 
@@ -133,8 +134,10 @@ namespace Livet.Behaviors.Messaging
                 responsiveMessage.Response = response;
         }
 
-        private void DoActionOnDispatcher(Action action)
+        private void DoActionOnDispatcher([NotNull] Action action)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             if (Dispatcher.CheckAccess())
                 action();
             else
@@ -179,7 +182,7 @@ namespace Livet.Behaviors.Messaging
         {
             if (_disposed) return;
 
-            _listener.Dispose();
+            _listener?.Dispose();
             _disposed = true;
         }
     }
