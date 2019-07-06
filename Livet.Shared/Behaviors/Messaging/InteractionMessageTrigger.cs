@@ -1,98 +1,101 @@
 ﻿using System;
-using System.Windows.Interactivity;
 using System.Windows;
-using Livet.Messaging;
+using System.Windows.Interactivity;
+using Livet.Annotations;
 using Livet.EventListeners.WeakEvents;
+using Livet.Messaging;
 
 namespace Livet.Behaviors.Messaging
 {
     /// <summary>
-    /// ViewModelからの相互作用メッセージを受信し、アクションを実行します。
+    ///     ViewModelからの相互作用メッセージを受信し、アクションを実行します。
     /// </summary>
     public class InteractionMessageTrigger : TriggerBase<FrameworkElement>, IDisposable
     {
-        private LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>, InteractionMessageRaisedEventArgs> _listener;
+        // Using a DependencyProperty as the backing store for Messenger.  This enables animation, styling, binding, etc...
+        [NotNull] public static readonly DependencyProperty MessengerProperty =
+            DependencyProperty.Register("Messenger", typeof(InteractionMessenger), typeof(InteractionMessageTrigger),
+                new PropertyMetadata(MessengerChanged));
+
+        // Using a DependencyProperty as the backing store for FireActionsOnlyWhileAttachedObjectLoading.  This enables animation, styling, binding, etc...
+        [NotNull] public static readonly DependencyProperty InvokeActionsOnlyWhileAttatchedObjectLoadedProperty =
+            DependencyProperty.Register("InvokeActionsOnlyWhileAttatchedObjectLoaded", typeof(bool),
+                typeof(InteractionMessageTrigger), new PropertyMetadata(false));
+
+        // Using a DependencyProperty as the backing store for IsEnable.  This enables animation, styling, binding, etc...
+        [NotNull] public static readonly DependencyProperty IsEnableProperty =
+            DependencyProperty.Register("IsEnable", typeof(bool), typeof(InteractionMessageTrigger),
+                new PropertyMetadata(true));
+
         private bool _disposed;
+
+        [CanBeNull] private LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
+            InteractionMessageRaisedEventArgs> _listener;
+
         private bool _loaded = true;
 
         /// <summary>
-        /// ViewModelのMessengerを指定、または取得します。
+        ///     ViewModelのMessengerを指定、または取得します。
         /// </summary>
         public InteractionMessenger Messenger
         {
-            get { return (InteractionMessenger)GetValue(MessengerProperty); }
+            get { return (InteractionMessenger) GetValue(MessengerProperty); }
             set { SetValue(MessengerProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Messenger.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MessengerProperty =
-            DependencyProperty.Register("Messenger", typeof(InteractionMessenger), typeof(InteractionMessageTrigger),
-                                        new PropertyMetadata(MessengerChanged));
-
 
         /// <summary>
-        /// アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはfalseです。
+        ///     アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはfalseです。
         /// </summary>
         public bool InvokeActionsOnlyWhileAttatchedObjectLoaded
         {
-            get { return (bool)GetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty); }
+            get { return (bool) GetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty); }
             set { SetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for FireActionsOnlyWhileAttachedObjectLoading.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty InvokeActionsOnlyWhileAttatchedObjectLoadedProperty =
-            DependencyProperty.Register("InvokeActionsOnlyWhileAttatchedObjectLoaded", typeof(bool), typeof(InteractionMessageTrigger), new PropertyMetadata(false));
-
-
 
         /// <summary>
-        /// このトリガーが有効かどうかを指定、または取得します。デフォルトはtrueです。
+        ///     このトリガーが有効かどうかを指定、または取得します。デフォルトはtrueです。
         /// </summary>
         public bool IsEnable
         {
-            get { return (bool)GetValue(IsEnableProperty); }
+            get { return (bool) GetValue(IsEnableProperty); }
             set { SetValue(IsEnableProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsEnable.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsEnableProperty =
-            DependencyProperty.Register("IsEnable", typeof(bool), typeof(InteractionMessageTrigger), new PropertyMetadata(true));
-
-
 
         /// <summary>
-        /// このトリガーが反応する相互作用メッセージのメッセージキーを指定、または取得します。<br/>
-        /// このプロパティが指定されていない場合、このトリガーは全ての相互作用メッセージに反応します。
+        ///     このトリガーが反応する相互作用メッセージのメッセージキーを指定、または取得します。<br />
+        ///     このプロパティが指定されていない場合、このトリガーは全ての相互作用メッセージに反応します。
         /// </summary>
-        public string MessageKey
+        public string MessageKey { get; set; }
+
+        public void Dispose()
         {
-            get;
-            set;
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         private static void MessengerChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            var thisReference = obj as InteractionMessageTrigger;
+            if (e.OldValue == e.NewValue) return;
 
-            if (e.OldValue == e.NewValue)
+            if (obj is InteractionMessageTrigger thisReference)
             {
-                return;
-            }
+                if (e.OldValue != null) thisReference._listener?.Dispose();
 
-            if (e.OldValue != null)
-            {
-                thisReference._listener?.Dispose();
-            }
+                if (e.NewValue != null)
+                {
+                    var newMessenger = (InteractionMessenger) e.NewValue;
 
-            if (e.NewValue != null && thisReference != null)
-            {
-                var newMessenger = (InteractionMessenger)e.NewValue;
-
-                thisReference._listener = new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>, InteractionMessageRaisedEventArgs>(
-                    h => h,
-                    h => newMessenger.Raised += h,
-                    h => newMessenger.Raised -= h,
-                    thisReference.MessageReceived);
+                    thisReference._listener =
+                        new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
+                            InteractionMessageRaisedEventArgs>(
+                            h => h,
+                            h => newMessenger.Raised += h,
+                            h => newMessenger.Raised -= h,
+                            thisReference.MessageReceived);
+                }
             }
         }
 
@@ -100,29 +103,26 @@ namespace Livet.Behaviors.Messaging
         {
             var message = e.Message;
 
-            var cloneMessage = (InteractionMessage)message.Clone();
+            var cloneMessage = (InteractionMessage) message.Clone();
 
             cloneMessage.Freeze();
 
             var checkResult = false;
 
             Action checkAction = () =>
-                {
-                    if (!IsEnable) return;
+            {
+                if (!IsEnable) return;
 
-                    if (InvokeActionsOnlyWhileAttatchedObjectLoaded && (!_loaded)) return;
+                if (InvokeActionsOnlyWhileAttatchedObjectLoaded && !_loaded) return;
 
-                    if (!(string.IsNullOrEmpty(MessageKey) || MessageKey == cloneMessage.MessageKey)) return;
+                if (!(string.IsNullOrEmpty(MessageKey) || MessageKey == cloneMessage.MessageKey)) return;
 
-                    checkResult = true;
-                };
+                checkResult = true;
+            };
 
             DoActionOnDispatcher(checkAction);
 
-            if (!checkResult)
-            {
-                return;
-            }
+            if (!checkResult) return;
 
             DoActionOnDispatcher(() => InvokeActions(cloneMessage));
 
@@ -130,22 +130,18 @@ namespace Livet.Behaviors.Messaging
 
             object response;
             if (responsiveMessage != null &&
-                (response = ((ResponsiveInteractionMessage)cloneMessage).Response) != null)
-            {
+                (response = ((ResponsiveInteractionMessage) cloneMessage).Response) != null)
                 responsiveMessage.Response = response;
-            }
         }
 
-        private void DoActionOnDispatcher(Action action)
+        private void DoActionOnDispatcher([NotNull] Action action)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             if (Dispatcher.CheckAccess())
-            {
                 action();
-            }
             else
-            {
                 Dispatcher.Invoke(action);
-            }
         }
 
         protected override void OnAttached()
@@ -159,22 +155,19 @@ namespace Livet.Behaviors.Messaging
             }
         }
 
-        void AssociatedObjectLoaded(object sender, RoutedEventArgs e)
+        private void AssociatedObjectLoaded(object sender, RoutedEventArgs e)
         {
             _loaded = true;
         }
 
-        void AssociatedObjectUnloaded(object sender, RoutedEventArgs e)
+        private void AssociatedObjectUnloaded(object sender, RoutedEventArgs e)
         {
             _loaded = false;
         }
 
         protected override void OnDetaching()
         {
-            if (Messenger != null)
-            {
-                _listener?.Dispose();
-            }
+            if (Messenger != null) _listener?.Dispose();
 
             if (AssociatedObject != null)
             {
@@ -185,17 +178,11 @@ namespace Livet.Behaviors.Messaging
             base.OnDetaching();
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
 
-            _listener.Dispose();
+            _listener?.Dispose();
             _disposed = true;
         }
     }

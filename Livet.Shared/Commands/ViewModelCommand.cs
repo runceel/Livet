@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Input;
+using Livet.Annotations;
 
 namespace Livet.Commands
 {
@@ -10,21 +11,21 @@ namespace Livet.Commands
     /// </summary>
     public sealed class ViewModelCommand :Command, ICommand,INotifyPropertyChanged
     {
-        Action _execute;
-        Func<bool> _canExecute;
+        [NotNull] private readonly Action _execute;
+        [CanBeNull] private readonly Func<bool> _canExecute;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="execute">コマンドが実行するAction</param>
-        public ViewModelCommand(Action execute) : this(execute, null) { }
+        public ViewModelCommand([NotNull] Action execute) : this(execute, null) { }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="execute">コマンドが実行するAction</param>
         /// <param name="canExecute">コマンドが実行可能かどうかをあらわすFunc&lt;bool&gt;</param>
-        public ViewModelCommand(Action execute, Func<bool> canExecute)
+        public ViewModelCommand([NotNull] Action execute, [CanBeNull] Func<bool> canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -61,6 +62,7 @@ namespace Livet.Commands
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged()
         {
             Interlocked.CompareExchange(ref PropertyChanged, null, null)

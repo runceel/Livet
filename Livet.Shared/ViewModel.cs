@@ -1,64 +1,46 @@
 ﻿using System;
-using Livet.Messaging;
 using System.Xml.Serialization;
+using Livet.Annotations;
+using Livet.Messaging;
 
 namespace Livet
 {
     /// <summary>
-    /// ViewModelの基底クラスです。
+    ///     ViewModelの基底クラスです。
     /// </summary>
     [Serializable]
-    public abstract class ViewModel : NotificationObject,IDisposable
+    public abstract class ViewModel : NotificationObject, IDisposable
     {
-        [NonSerialized]
-        private bool _disposed;
-        [NonSerialized]
-        private InteractionMessenger _messenger;
-        [NonSerialized]
-        private LivetCompositeDisposable _compositeDisposable;
+        [NonSerialized] private LivetCompositeDisposable _compositeDisposable;
+
+        [NonSerialized] private bool _disposed;
+
+        [NonSerialized] private InteractionMessenger _messenger;
 
         /// <summary>
-        /// このViewModelクラスの基本CompositeDisposableです。
+        ///     このViewModelクラスの基本CompositeDisposableです。
         /// </summary>
         [XmlIgnore]
+        [NotNull]
         public LivetCompositeDisposable CompositeDisposable
         {
-            get
-            {
-                if (_compositeDisposable == null)
-                {
-                    _compositeDisposable = new LivetCompositeDisposable();
-                }
-                return _compositeDisposable;
-            }
-            set
-            {
-                _compositeDisposable = value;
-            }
+            get { return _compositeDisposable ?? (_compositeDisposable = new LivetCompositeDisposable()); }
+            set { _compositeDisposable = value; }
         }
 
         /// <summary>
-        /// このViewModelクラスの基本Messengerインスタンスです。
+        ///     このViewModelクラスの基本Messengerインスタンスです。
         /// </summary>
         [XmlIgnore]
+        [NotNull]
         public InteractionMessenger Messenger
         {
-            get
-            {
-                if (_messenger == null)
-                {
-                    _messenger = new InteractionMessenger();
-                }
-                return _messenger;
-            }
-            set
-            {
-                _messenger = value;
-            }
+            get { return _messenger ?? (_messenger = new InteractionMessenger()); }
+            set { _messenger = value; }
         }
 
         /// <summary>
-        /// このインスタンスによって使用されているすべてのリソースを解放します。
+        ///     このインスタンスによって使用されているすべてのリソースを解放します。
         /// </summary>
         public void Dispose()
         {
@@ -69,10 +51,7 @@ namespace Livet
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
-            if (disposing)
-            {
-                _compositeDisposable?.Dispose();
-            }
+            if (disposing) _compositeDisposable?.Dispose();
             _disposed = true;
         }
     }

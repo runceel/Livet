@@ -1,10 +1,10 @@
-﻿using System.Windows.Interactivity;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Interactivity;
 
 namespace Livet.Behaviors
 {
     /// <summary>
-    /// アタッチしているコントロールにフォーカスを試みます。
+    ///     アタッチしているコントロールにフォーカスを試みます。
     /// </summary>
     public class SetFocusAction : TriggerAction<FrameworkElement>
     {

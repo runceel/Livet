@@ -7,93 +7,107 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Threading;
+using Livet.Annotations;
 
 namespace Livet
 {
     /// <summary>
-    /// コレクション変更通知を指定されたDispatcher経由で行うコレクションです。
+    ///     コレクション変更通知を指定されたDispatcher経由で行うコレクションです。
     /// </summary>
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
-    public class DispatcherCollection<T> : IList<T>,ICollection,INotifyCollectionChanged,INotifyPropertyChanged, IReadOnlyList<T>
+    public class DispatcherCollection<T> : IList<T>, ICollection, INotifyCollectionChanged, INotifyPropertyChanged,
+        IReadOnlyList<T>
     {
-        private IList<T> _sourceAsIList;
-        private readonly object _syncRoot = new object();
+        [NotNull] private readonly IList<T> _sourceAsIList;
+        [NotNull] private Dispatcher _dispatcher;
 
         /// <summary>
-        /// コンストラクタ
+        ///     コンストラクタ
         /// </summary>
         /// <param name="dispatcher">UIDispatcher(通常はDispatcherHelper.UIDispatcher)</param>
-        public DispatcherCollection(Dispatcher dispatcher) : this(new ObservableCollection<T>(), dispatcher) { }
+        public DispatcherCollection([NotNull] Dispatcher dispatcher) : this(new ObservableCollection<T>(), dispatcher)
+        {
+        }
 
         /// <summary>
-        /// コンストラクタ
+        ///     コンストラクタ
         /// </summary>
         /// <param name="collection">元となるコレクション(IList(Of(T)とINotifyPropertyChangedも実装している必要があります)</param>
         /// <param name="dispatcher">UIDispatcher(通常はDispatcherHelper.UIDispatcher)</param>
-        public DispatcherCollection(INotifyCollectionChanged collection, Dispatcher dispatcher)
+        public DispatcherCollection([NotNull] INotifyCollectionChanged collection, [CanBeNull] Dispatcher dispatcher)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
-
-            if (!(collection is IList<T>))
-            {
-                throw new ArgumentException("collectionはIList<T>を実装している必要があります");
-            }
-
+            if (!(collection is IList<T>)) throw new ArgumentException("collectionはIList<T>を実装している必要があります");
             if (!(collection is INotifyPropertyChanged))
-            {
                 throw new ArgumentException("collectionはINotifyPropertyChangedを実装している必要があります");
-            }
 
-            _sourceAsIList = (IList<T>)collection;
+            _sourceAsIList = (IList<T>) collection;
 
-            Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
             CollectionChangedDispatcherPriority = DispatcherPriority.Normal;
 
-            ((INotifyPropertyChanged)collection).PropertyChanged += (sender, e) =>
+            ((INotifyPropertyChanged) collection).PropertyChanged += (sender, e) =>
             {
                 if (!Dispatcher.CheckAccess())
-                {
-                    Dispatcher.Invoke(CollectionChangedDispatcherPriority, (Action)(() => OnPropertyChanged(e.PropertyName)));
-                }
+                    Dispatcher.Invoke(CollectionChangedDispatcherPriority,
+                        (Action) (() => OnPropertyChanged(e.PropertyName)));
                 else
-                {
                     OnPropertyChanged(e.PropertyName);
-                }
             };
 
             collection.CollectionChanged += (sender, e) =>
             {
                 if (!Dispatcher.CheckAccess())
-                {
-                    Dispatcher.Invoke(CollectionChangedDispatcherPriority, (Action)(() => OnCollectionChanged(e)));
-                }
+                    Dispatcher.Invoke(CollectionChangedDispatcherPriority, (Action) (() => OnCollectionChanged(e)));
                 else
-                {
                     OnCollectionChanged(e);
-                }
             };
         }
 
         /// <summary>
-        /// このコレクションに関連付けられたDispatcherを取得、または設定します。
+        ///     このコレクションに関連付けられたDispatcherを取得、または設定します。
         /// </summary>
+        [NotNull]
         public Dispatcher Dispatcher
         {
-            get;
-            set;
+            get { return _dispatcher; }
+            set { _dispatcher = value ?? throw new ArgumentNullException(nameof(value)); }
         }
 
         /// <summary>
-        /// コレクション変更通知時のDispatcherPriorityを指定、または取得します。
+        ///     コレクション変更通知時のDispatcherPriorityを指定、または取得します。
         /// </summary>
-        public DispatcherPriority CollectionChangedDispatcherPriority
+        public DispatcherPriority CollectionChangedDispatcherPriority { get; set; }
+
+        /// <summary>
+        ///     全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
+        /// </summary>
+        /// <param name="array">コピー先の配列</param>
+        /// <param name="index">コピー先の配列のどこからコピー操作をするかのインデックス</param>
+        public void CopyTo(Array array, int index)
         {
-            get;
-            set;
+            CopyTo(array.Cast<T>().ToArray(), index);
         }
 
         /// <summary>
-        /// 指定したオブジェクトを検索し、最初に見つかった位置の 0 から始まるインデックスを返します。
+        ///     このコレクションがスレッドセーフであるかどうかを取得します。
+        /// </summary>
+        public bool IsSynchronized
+        {
+            get
+            {
+                if (_sourceAsIList is ObservableSynchronizedCollection<T>) return true;
+                return false;
+            }
+        }
+
+        /// <summary>
+        ///     このコレクションへのスレッドセーフなアクセスに使用できる同期オブジェクトを返します。
+        /// </summary>
+        public object SyncRoot { get; } = new object();
+
+        /// <summary>
+        ///     指定したオブジェクトを検索し、最初に見つかった位置の 0 から始まるインデックスを返します。
         /// </summary>
         /// <param name="item">検索するオブジェクト</param>
         /// <returns>最初に見つかった位置のインデックス</returns>
@@ -103,7 +117,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// 指定したインデックスの位置に要素を挿入します。
+        ///     指定したインデックスの位置に要素を挿入します。
         /// </summary>
         /// <param name="index">指定するインデックス</param>
         /// <param name="item">挿入するオブジェクト</param>
@@ -113,7 +127,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// 指定したインデックスにある要素を削除します。
+        ///     指定したインデックスにある要素を削除します。
         /// </summary>
         /// <param name="index">指定するインデックス</param>
         public void RemoveAt(int index)
@@ -123,18 +137,12 @@ namespace Livet
 
         public T this[int index]
         {
-            get
-            {
-                return _sourceAsIList[index];
-            }
-            set
-            {
-                _sourceAsIList[index] = value;
-            }
+            get { return _sourceAsIList[index]; }
+            set { _sourceAsIList[index] = value; }
         }
 
         /// <summary>
-        /// 末尾にオブジェクトを追加します。
+        ///     末尾にオブジェクトを追加します。
         /// </summary>
         /// <param name="item">追加するオブジェクト</param>
         public void Add(T item)
@@ -143,7 +151,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// すべての要素を削除します。
+        ///     すべての要素を削除します。
         /// </summary>
         public void Clear()
         {
@@ -151,7 +159,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// ある要素がこのコレクションに含まれているかどうかを判断します。
+        ///     ある要素がこのコレクションに含まれているかどうかを判断します。
         /// </summary>
         /// <param name="item">コレクションに含まれているか判断したい要素</param>
         /// <returns>このコレクションに含まれているかどうか</returns>
@@ -161,7 +169,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// 全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
+        ///     全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
         /// </summary>
         /// <param name="array">コピー先の配列</param>
         /// <param name="arrayIndex">コピー先の配列のどこからコピー操作をするかのインデックス</param>
@@ -171,7 +179,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// 実際に格納されている要素の数を取得します。
+        ///     実際に格納されている要素の数を取得します。
         /// </summary>
         public int Count
         {
@@ -179,7 +187,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// このコレクションが読み取り専用かどうかを取得します。
+        ///     このコレクションが読み取り専用かどうかを取得します。
         /// </summary>
         public bool IsReadOnly
         {
@@ -187,7 +195,7 @@ namespace Livet
         }
 
         /// <summary>
-        /// 最初に見つかった特定のオブジェクトを削除します。
+        ///     最初に見つかった特定のオブジェクトを削除します。
         /// </summary>
         /// <param name="item">削除したいオブジェクト</param>
         /// <returns>削除できたかどうか</returns>
@@ -197,7 +205,33 @@ namespace Livet
         }
 
         /// <summary>
-        /// 指定されたインデックスの要素を指定されたインデックスに移動します。
+        ///     反復処理するための列挙子を返します。
+        /// </summary>
+        /// <returns>列挙子</returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _sourceAsIList.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _sourceAsIList.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     プロパティが変更された際に発生するイベントです。
+        /// </summary>
+        [field: NonSerialized]
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        /// <summary>
+        ///     コレクションが変更された際に発生するイベントです。
+        /// </summary>
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        ///     指定されたインデックスの要素を指定されたインデックスに移動します。
         /// </summary>
         /// <param name="oldIndex">移動したい要素のインデックス</param>
         /// <param name="newIndex">移動先のインデックス</param>
@@ -215,53 +249,6 @@ namespace Livet
             }
         }
 
-        /// <summary>
-        /// 全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
-        /// </summary>
-        /// <param name="array">コピー先の配列</param>
-        /// <param name="index">コピー先の配列のどこからコピー操作をするかのインデックス</param>
-        public void CopyTo(Array array, int index)
-        {
-            CopyTo(array.Cast<T>().ToArray(), index);
-        }
-
-        /// <summary>
-        /// このコレクションがスレッドセーフであるかどうかを取得します。
-        /// </summary>
-        public bool IsSynchronized
-        {
-            get 
-            {
-                if (_sourceAsIList is ObservableSynchronizedCollection<T>)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// このコレクションへのスレッドセーフなアクセスに使用できる同期オブジェクトを返します。
-        /// </summary>
-        public object SyncRoot
-        {
-            get { return _syncRoot; }
-        }
-
-        /// <summary>
-        /// 反復処理するための列挙子を返します。
-        /// </summary>
-        /// <returns>列挙子</returns>
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _sourceAsIList.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _sourceAsIList.GetEnumerator();
-        }
-
         protected void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref CollectionChanged, null, null);
@@ -275,17 +262,5 @@ namespace Livet
 
             threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
-
-        /// <summary>
-        /// プロパティが変更された際に発生するイベントです。
-        /// </summary>
-        [field: NonSerialized]
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        /// <summary>
-        /// コレクションが変更された際に発生するイベントです。
-        /// </summary>
-        [field: NonSerialized]
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

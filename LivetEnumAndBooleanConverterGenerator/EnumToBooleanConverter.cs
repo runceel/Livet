@@ -7,6 +7,7 @@
 //     コードが再生成されると失われます。
 // </auto-generated>
 // ------------------------------------------------------------------------------
+// ReSharper disable All
 namespace LivetEnumAndBooleanConverterGenerator
 {
     /// <summary>
