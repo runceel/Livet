@@ -24,8 +24,8 @@ namespace Livet.Behaviors
 
         public void Invoke(object targetObject, string methodName)
         {
-            if (targetObject == null) throw new ArgumentNullException("targetObject");
-            if (methodName == null) throw new ArgumentNullException("methodName");
+            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
+            if (methodName == null) throw new ArgumentNullException(nameof(methodName));
 
             var newTargetObjectType = targetObject.GetType();
 

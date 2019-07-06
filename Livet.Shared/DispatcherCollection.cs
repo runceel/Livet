@@ -32,8 +32,7 @@ namespace Livet
         /// <param name="dispatcher">UIDispatcher(通常はDispatcherHelper.UIDispatcher)</param>
         public DispatcherCollection(INotifyCollectionChanged collection, Dispatcher dispatcher)
         {
-            if (collection == null) throw new ArgumentNullException("collection");
-            if (dispatcher == null) throw new ArgumentNullException("dispatcher");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
 
             if (!(collection is IList<T>))
             {
@@ -47,7 +46,7 @@ namespace Livet
 
             _sourceAsIList = (IList<T>)collection;
 
-            Dispatcher = dispatcher;
+            Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
             CollectionChangedDispatcherPriority = DispatcherPriority.Normal;
 
             ((INotifyPropertyChanged)collection).PropertyChanged += (sender, e) =>
@@ -204,9 +203,7 @@ namespace Livet
         /// <param name="newIndex">移動先のインデックス</param>
         public void Move(int oldIndex, int newIndex)
         {
-            var sourceAsObservableCollection = _sourceAsIList as ObservableCollection<T>;
-
-            if (sourceAsObservableCollection != null)
+            if (_sourceAsIList is ObservableCollection<T> sourceAsObservableCollection)
             {
                 sourceAsObservableCollection.Move(oldIndex, newIndex);
             }
@@ -214,10 +211,7 @@ namespace Livet
             {
                 var sourceAsConcurrentObservableCollection = _sourceAsIList as ObservableSynchronizedCollection<T>;
 
-                if (sourceAsConcurrentObservableCollection != null)
-                {
-                    sourceAsConcurrentObservableCollection.Move(oldIndex, newIndex);
-                }
+                sourceAsConcurrentObservableCollection?.Move(oldIndex, newIndex);
             }
         }
 
@@ -272,20 +266,14 @@ namespace Livet
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref CollectionChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, args);
-            }
+            threadSafeHandler?.Invoke(this, args);
         }
 
         protected void OnPropertyChanged(string propertyName)
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
-            }
+            threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>

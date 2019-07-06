@@ -69,16 +69,7 @@ namespace Livet.Behaviors.Messaging
 
             if (transitionMessage == null) return;
 
-            Type targetType;
-
-            if (transitionMessage.WindowType != null)
-            {
-                targetType = transitionMessage.WindowType;
-            }
-            else
-            {
-                targetType = WindowType;
-            }
+            var targetType = transitionMessage.WindowType != null ? transitionMessage.WindowType : WindowType;
 
             if (!IsValidWindowType(targetType))
             {

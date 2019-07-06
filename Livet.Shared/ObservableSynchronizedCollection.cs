@@ -36,7 +36,7 @@ namespace Livet
         /// <param name="source">初期値となるソース</param>
         public ObservableSynchronizedCollection(IEnumerable<T> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
             _list = new List<T>(source);
         }
 
@@ -280,10 +280,7 @@ namespace Livet
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref CollectionChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, args);
-            }
+            threadSafeHandler?.Invoke(this, args);
         }
 
         /// <summary>
@@ -294,10 +291,7 @@ namespace Livet
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
-            }
+            threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
 
 

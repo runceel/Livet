@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Livet.Dialogs;
 using Livet.Messaging;
 using Livet.Messaging.IO;
@@ -19,9 +18,7 @@ namespace Livet.Behaviors.Messaging.IO
 		/// <param name="m"><see cref="FolderSelectionMessage"/> specified to <see cref="InteractionMessenger"/> in the client.</param>
 		protected override void InvokeAction( InteractionMessage m )
 		{
-			var folderSelectionMessage = m as FolderSelectionMessage;
-
-			if ( folderSelectionMessage != null )
+            if ( m is FolderSelectionMessage folderSelectionMessage )
 			{
                 Window hostWindow = Window.GetWindow(AssociatedObject);
 				if ( hostWindow == null )
@@ -37,15 +34,10 @@ namespace Livet.Behaviors.Messaging.IO
 					dialog.Description = folderSelectionMessage.Description;
 					dialog.SelectedPath = folderSelectionMessage.SelectedPath;
 
-                    if (dialog.ShowDialog(hostWindow).GetValueOrDefault())
-                    {
-                        folderSelectionMessage.Response = dialog.SelectedPath;
-                    }
-                    else
-                    {
-                        folderSelectionMessage.Response = null;
-                    }
-				}
+                    folderSelectionMessage.Response = dialog.ShowDialog(hostWindow).GetValueOrDefault()
+                        ? dialog.SelectedPath
+                        : null;
+                }
 			}
 		}
 	}

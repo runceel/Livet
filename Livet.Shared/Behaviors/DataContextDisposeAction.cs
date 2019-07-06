@@ -13,10 +13,7 @@ namespace Livet.Behaviors
         {
             var disposable = AssociatedObject.DataContext as IDisposable;
 
-            if (disposable != null)
-            {
-                disposable.Dispose();
-            }
+            disposable?.Dispose();
         }
     }
 }

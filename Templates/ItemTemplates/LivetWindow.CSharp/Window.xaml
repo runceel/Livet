@@ -23,7 +23,7 @@
             <l:DataContextDisposeAction/>
         </i:EventTrigger>
 
-        <!-- If you make user choose 'OK or Cancel' closing Window, then please use Window Close nacel Behavior. -->
+        <!-- If you make user choose 'OK or Cancel' closing Window, then please use Window Close cancel Behavior. -->
 
     </i:Interaction.Triggers>
 

@@ -21,17 +21,17 @@ namespace Livet.Dialogs
 		///		Some dialog cannot support this value.
 		///		The <c>null</c> or empty indicates using default title.
 		/// </value>
-		public sealed override string Title
+		public override string Title
 		{
-			get { return this._commonOpenFileDialog.Title; }
-			set { this._commonOpenFileDialog.Title = String.IsNullOrEmpty( value ) ? this._defaultTitle : value; }
+			get { return _commonOpenFileDialog.Title; }
+			set { _commonOpenFileDialog.Title = String.IsNullOrEmpty( value ) ? _defaultTitle : value; }
 		}
 
 		/// <summary>
 		///		This property is not supported.
 		/// </summary>
 		/// <value>Always <see cref="F:String.Empty"/>.</value>
-		public sealed override string Description
+		public override string Description
 		{
 			get { return String.Empty; }
 			set { }
@@ -43,9 +43,9 @@ namespace Livet.Dialogs
 		/// <value>
 		/// The selected path. This will be default path when the dialog is opened.
 		/// </value>
-		public sealed override string SelectedPath
+		public override string SelectedPath
 		{
-			get { return this._commonOpenFileDialog.FileName; }
+			get { return _commonOpenFileDialog.FileName; }
 			set
 			{
 				DirectoryInfo asDirectory = null;
@@ -57,13 +57,13 @@ namespace Livet.Dialogs
 
 				if ( asDirectory == null )
 				{
-					this._commonOpenFileDialog.DefaultFileName = value;
+					_commonOpenFileDialog.DefaultFileName = value;
 				}
 				else
 				{
 					// Set parent.
-					this._commonOpenFileDialog.DefaultFileName = asDirectory.Name;
-					this._commonOpenFileDialog.InitialDirectory = asDirectory.Parent?.FullName
+					_commonOpenFileDialog.DefaultFileName = asDirectory.Name;
+					_commonOpenFileDialog.InitialDirectory = asDirectory.Parent?.FullName
 																?? "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";	// Set "My Computer", if drive root
 				}
 			}
@@ -74,24 +74,24 @@ namespace Livet.Dialogs
 		/// </summary>
 		public CommonOpenFileFolderSelectionDialog()
 		{
-			this._commonOpenFileDialog =
+			_commonOpenFileDialog =
 				new CommonOpenFileDialog()
 				{
 					IsFolderPicker = true,
 					Multiselect = false,
 				};
-			this._defaultTitle = this._commonOpenFileDialog.Title;
+			_defaultTitle = _commonOpenFileDialog.Title;
 		}
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources
 		/// </summary>
 		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		protected sealed override void Dispose( bool disposing )
+		protected override void Dispose( bool disposing )
 		{
 			if ( disposing )
 			{
-				this._commonOpenFileDialog.Dispose();
+				_commonOpenFileDialog.Dispose();
 			}
 			base.Dispose( disposing );
 		}
@@ -103,9 +103,9 @@ namespace Livet.Dialogs
 		/// <returns>
 		/// The result of the dialog.
 		/// </returns>
-		protected sealed override bool? ShowDialogCore( Window hostWindow )
+		protected override bool? ShowDialogCore( Window hostWindow )
 		{
-			switch ( this._commonOpenFileDialog.ShowDialog( hostWindow ) )
+			switch ( _commonOpenFileDialog.ShowDialog( hostWindow ) )
 			{
 				case CommonFileDialogResult.Ok:
 				{

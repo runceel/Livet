@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Specialized;
@@ -24,9 +23,7 @@ namespace Livet
 
         public ReadOnlyDispatcherCollection(DispatcherCollection<T> collection) : base(collection) 
         {
-            if (collection == null) throw new ArgumentNullException("collection");
-
-            _list = collection;
+            _list = collection ?? throw new ArgumentNullException(nameof(collection));
 
             _listeners.Add(new PropertyChangedEventListener(_list,(sender, e) => OnPropertyChanged(e)));
             _listeners.Add(new CollectionChangedEventListener(_list,(sender,e) => OnCollectionChanged(e)));
@@ -83,10 +80,7 @@ namespace Livet
             ThrowExceptionIfDisposed();
             var threadSafeHandler = Interlocked.CompareExchange(ref CollectionChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, args);
-            }
+            threadSafeHandler?.Invoke(this, args);
         }
 
         protected void OnPropertyChanged(PropertyChangedEventArgs args)
@@ -94,10 +88,7 @@ namespace Livet
             ThrowExceptionIfDisposed();
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
 
-            if (threadSafeHandler != null)
-            {
-                threadSafeHandler(this, args);
-            }
+            threadSafeHandler?.Invoke(this, args);
         }
 
         /// <summary>

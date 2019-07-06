@@ -3,8 +3,6 @@ using System.Windows.Threading;
 using Livet.EventListeners.WeakEvents;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Livet.Messaging
 {

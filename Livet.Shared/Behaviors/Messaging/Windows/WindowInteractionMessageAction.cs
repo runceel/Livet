@@ -11,9 +11,7 @@ namespace Livet.Behaviors.Messaging.Windows
     {
         protected override void InvokeAction(InteractionMessage message)
         {
-            var windowMessage = message as WindowActionMessage;
-
-            if (windowMessage != null)
+            if (message is WindowActionMessage windowMessage)
             {
                 var window = Window.GetWindow(AssociatedObject);
 

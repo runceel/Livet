@@ -10,9 +10,7 @@ namespace Livet.Behaviors.Messaging
     {
         protected override void InvokeAction(InteractionMessage message)
         {
-            var confirmMessage = message as ConfirmationMessage;
-
-            if (confirmMessage != null)
+            if (message is ConfirmationMessage confirmMessage)
             {
                 var result = MessageBox.Show(
                     confirmMessage.Text,

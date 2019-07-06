@@ -24,9 +24,9 @@ namespace Livet
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
         public static ReadOnlyDispatcherCollection<TViewModel> CreateReadOnlyDispatcherCollection<TModel, TViewModel>(IList<TModel> source, Func<TModel, TViewModel> converter, Dispatcher dispatcher)
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (converter == null) throw new ArgumentNullException("converter");
-            if (dispatcher == null) throw new ArgumentNullException("dispatcher");
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (converter == null) throw new ArgumentNullException(nameof(converter));
+            if (dispatcher == null) throw new ArgumentNullException(nameof(dispatcher));
 
             var sourceAsNotifyCollection = source as INotifyCollectionChanged;
             if (sourceAsNotifyCollection == null) throw new ArgumentException("sourceがINotifyCollectionChangedを実装していません");

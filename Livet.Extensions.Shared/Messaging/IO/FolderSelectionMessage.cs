@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Livet.Messaging;
 
 namespace Livet.Messaging.IO
 {
@@ -41,9 +40,9 @@ namespace Livet.Messaging.IO
 		///		Creates the new instance of this class.
 		/// </summary>
 		/// <returns>The new <see cref="FolderSelectionMessage"/> which has identical properties to this instance.</returns>
-		protected sealed override Freezable CreateInstanceCore()
+		protected override Freezable CreateInstanceCore()
 		{
-			return new FolderSelectionMessage( this.MessageKey );
+			return new FolderSelectionMessage( MessageKey );
 		}
 
 		/// <summary>

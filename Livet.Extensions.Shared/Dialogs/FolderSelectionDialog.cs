@@ -46,7 +46,7 @@ namespace Livet.Dialogs
 		/// </summary>
 		public void Dispose()
 		{
-			this.Dispose( true );
+			Dispose( true );
 			GC.SuppressFinalize( this );
 		}
 
@@ -72,10 +72,10 @@ namespace Livet.Dialogs
 		{
 			if ( hostWindow == null )
 			{
-				throw new ArgumentNullException( "hostWindow" );
+				throw new ArgumentNullException( nameof(hostWindow) );
 			}
 
-			return this.ShowDialogCore( hostWindow );
+			return ShowDialogCore( hostWindow );
 		}
 
 		/// <summary>

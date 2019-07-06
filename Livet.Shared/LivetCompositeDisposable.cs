@@ -26,7 +26,7 @@ namespace Livet
         /// <param name="sourceDisposableList">ソースとなるIDisposableコレクション</param>
         public LivetCompositeDisposable(IEnumerable<IDisposable> sourceDisposableList)
         {
-            if (sourceDisposableList == null) throw new ArgumentNullException("sourceDisposableList");
+            if (sourceDisposableList == null) throw new ArgumentNullException(nameof(sourceDisposableList));
 
             _targetLists = new List<IDisposable>(sourceDisposableList);
         }
@@ -59,7 +59,7 @@ namespace Livet
         /// <param name="item">追加するオブジェクト</param>
         public void Add(IDisposable item)
         {
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
 
             ThrowExceptionIfDisposed();
             lock (_lockObject)
@@ -89,7 +89,7 @@ namespace Livet
         /// <param name="item">追加するオブジェクト</param>
         public void AddFirst(IDisposable item)
         {
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
 
             ThrowExceptionIfDisposed();
             lock (_lockObject)
@@ -132,7 +132,7 @@ namespace Livet
         /// <returns>このコレクションに含まれているかどうか</returns>
         public bool Contains(IDisposable item)
         {
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
 
             ThrowExceptionIfDisposed();
             lock (_lockObject)
@@ -190,7 +190,7 @@ namespace Livet
         /// <returns>削除できたかどうか</returns>
         public bool Remove(IDisposable item)
         {
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
 
             ThrowExceptionIfDisposed();
 

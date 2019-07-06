@@ -53,7 +53,7 @@ namespace Livet.Messaging
             {
                 if (!windowType.IsSubclassOf(typeof(Window)))
                 {
-                    throw new ArgumentException("Windowの派生クラスを指定してください。", "windowType");
+                    throw new ArgumentException("Windowの派生クラスを指定してください。", nameof(windowType));
                 }
             }
 

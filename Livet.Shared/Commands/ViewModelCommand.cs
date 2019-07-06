@@ -26,8 +26,7 @@ namespace Livet.Commands
         /// <param name="canExecute">コマンドが実行可能かどうかをあらわすFunc&lt;bool&gt;</param>
         public ViewModelCommand(Action execute, Func<bool> canExecute)
         {
-            if (execute == null) throw new ArgumentNullException("execute");
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
@@ -36,7 +35,7 @@ namespace Livet.Commands
         /// </summary>
         public bool CanExecute
         {
-            get { return _canExecute == null ? true : _canExecute(); }
+            get { return _canExecute?.Invoke() ?? true; }
         }
 
         /// <summary>

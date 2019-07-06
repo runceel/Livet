@@ -39,10 +39,7 @@ namespace Livet.Behaviors.Messaging
             {
                 InvokeAction(message);
 
-                if (DirectInteractionMessage != null)
-                {
-                    DirectInteractionMessage.InvokeCallbacks(message);
-                }
+                DirectInteractionMessage?.InvokeCallbacks(message);
             }
 
         }

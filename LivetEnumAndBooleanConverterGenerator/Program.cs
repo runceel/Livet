@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -26,7 +25,7 @@ namespace LivetEnumAndBooleanConverterGenerator
                     assemblyName.ProcessorArchitecture = ProcessorArchitecture.None;
                     return assemblyName;
                 }
-                ).Select(assemblyName => Assembly.Load(assemblyName))
+                ).Select(Assembly.Load)
                 .Select(a => { Console.WriteLine(a); return a; })
                 .ToArray();
 

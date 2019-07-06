@@ -27,9 +27,7 @@ namespace Livet.Commands
         /// <param name="canExecute">コマンドが実行可能かどうかをあらわすFunc&lt;bool&gt;</param>
         public ListenerCommand(Action<T> execute, Func<bool> canExecute)
         {
-            if (execute == null) throw new ArgumentNullException("execute");
-
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
@@ -38,7 +36,7 @@ namespace Livet.Commands
         /// </summary>
         public bool CanExecute
         {
-            get { return _canExecute == null ? true : _canExecute(); }
+            get { return _canExecute == null || _canExecute(); }
         }
 
         /// <summary>
@@ -75,10 +73,7 @@ namespace Livet.Commands
         private void OnPropertyChanged()
         {
             var handler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
-            if (handler != null)
-            {
-                handler(this,EventArgsFactory.GetPropertyChangedEventArgs("CanExecute"));
-            }
+            handler?.Invoke(this,EventArgsFactory.GetPropertyChangedEventArgs("CanExecute"));
         }
 
         /// <summary>
