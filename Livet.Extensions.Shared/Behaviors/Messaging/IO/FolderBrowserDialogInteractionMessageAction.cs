@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Livet.Dialogs;
 using Livet.Messaging;
 using Livet.Messaging.IO;
@@ -23,10 +24,10 @@ namespace Livet.Behaviors.Messaging.IO
                 var hostWindow = Window.GetWindow(AssociatedObject);
                 if (hostWindow == null) return;
 
-                using (var dialog =
-                    FolderSelectionDialogFactory.CreateDialog(folderSelectionMessage.DialogPreference)
-                )
+                using (var dialog = FolderSelectionDialogFactory.CreateDialog(folderSelectionMessage.DialogPreference))
                 {
+                    if (dialog == null) throw new InvalidOperationException();
+
                     dialog.Title = folderSelectionMessage.Title;
                     dialog.Description = folderSelectionMessage.Description;
                     dialog.SelectedPath = folderSelectionMessage.SelectedPath;
