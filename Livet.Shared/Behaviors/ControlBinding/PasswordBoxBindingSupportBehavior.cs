@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
+using Livet.Annotations;
 
 namespace Livet.Behaviors.ControlBinding
 {
@@ -10,9 +12,11 @@ namespace Livet.Behaviors.ControlBinding
     public class PasswordBoxBindingSupportBehavior : Behavior<PasswordBox>
     {
         // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PasswordProperty =
+        [NotNull] public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.Register("Password", typeof(string), typeof(PasswordBoxBindingSupportBehavior),
-                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                new FrameworkPropertyMetadata(
+                    string.Empty,
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                     SourcePasswordChanged));
 
         /// <summary>
@@ -31,15 +35,16 @@ namespace Livet.Behaviors.ControlBinding
                 if (thisObject.AssociatedObject == null) return;
 
                 if (thisObject.AssociatedObject.Password != (string) e.NewValue)
-                    thisObject.AssociatedObject.Password = (string) e.NewValue;
+                    thisObject.AssociatedObject.Password = (string) e.NewValue ?? string.Empty;
             }
         }
 
         private void ControlPasswordChanged(object sender, RoutedEventArgs e)
         {
-            var passwordBox = (PasswordBox) sender;
+            var pb = sender as PasswordBox
+                     ?? throw new ArgumentException($"{nameof(sender)} is not a {nameof(PasswordBox)}.");
 
-            if (Password != passwordBox.Password) Password = passwordBox.Password;
+            if (Password != pb.Password) Password = pb.Password;
         }
 
         protected override void OnAttached()
@@ -48,7 +53,7 @@ namespace Livet.Behaviors.ControlBinding
 
             SourcePasswordChanged(this, new DependencyPropertyChangedEventArgs(PasswordProperty, null, Password));
 
-            AssociatedObject.PasswordChanged += ControlPasswordChanged;
+            if (AssociatedObject != null) AssociatedObject.PasswordChanged += ControlPasswordChanged;
         }
     }
 }
