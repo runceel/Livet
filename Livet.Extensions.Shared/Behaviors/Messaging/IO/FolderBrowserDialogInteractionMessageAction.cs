@@ -21,7 +21,7 @@ namespace Livet.Behaviors.Messaging.IO
         {
             if (m is FolderSelectionMessage folderSelectionMessage)
             {
-                var hostWindow = Window.GetWindow(AssociatedObject);
+                var hostWindow = Window.GetWindow(AssociatedObject ?? throw new InvalidOperationException());
                 if (hostWindow == null) return;
 
                 using (var dialog = FolderSelectionDialogFactory.CreateDialog(folderSelectionMessage.DialogPreference))
