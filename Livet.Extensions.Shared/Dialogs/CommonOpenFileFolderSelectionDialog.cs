@@ -18,12 +18,7 @@ namespace Livet.Dialogs
         /// </summary>
         public CommonOpenFileFolderSelectionDialog()
         {
-            _commonOpenFileDialog =
-                new CommonOpenFileDialog
-                {
-                    IsFolderPicker = true,
-                    Multiselect = false
-                };
+            _commonOpenFileDialog = new CommonOpenFileDialog {IsFolderPicker = true, Multiselect = false};
             _defaultTitle = _commonOpenFileDialog.Title;
         }
 
@@ -65,7 +60,7 @@ namespace Livet.Dialogs
                 DirectoryInfo asDirectory = null;
                 try
                 {
-                    asDirectory = new DirectoryInfo(value);
+                    asDirectory = value != null ? new DirectoryInfo(value) : null;
                 }
                 catch (ArgumentException)
                 {
@@ -77,11 +72,12 @@ namespace Livet.Dialogs
                 }
                 else
                 {
-                    // Set parent.
+                    //// Set parent.
                     _commonOpenFileDialog.DefaultFileName = asDirectory.Name;
+
+                    //// Set "My Computer", if drive root
                     _commonOpenFileDialog.InitialDirectory = asDirectory.Parent?.FullName
-                                                             ??
-                                                             "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}"; // Set "My Computer", if drive root
+                                                             ?? "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";
                 }
             }
         }
@@ -111,14 +107,9 @@ namespace Livet.Dialogs
             switch (_commonOpenFileDialog.ShowDialog(hostWindow))
             {
                 case CommonFileDialogResult.Ok:
-                {
                     return true;
-                }
-
                 default:
-                {
                     return null;
-                }
             }
         }
     }
