@@ -37,7 +37,7 @@ namespace Livet.Behaviors
                     return;
                 }
 
-                if (TryGetCacheFromMethodCacheDictionary(out _method))
+                if (TryGetCacheFromMethodCacheDictionary(out _method) && _method != null)
                 {
                     _method(targetObject);
                     return;
@@ -53,29 +53,23 @@ namespace Livet.Behaviors
             _targetObjectType = newTargetObjectType;
             _methodName = methodName;
 
-            if (TryGetCacheFromMethodCacheDictionary(out _method))
+            if (TryGetCacheFromMethodCacheDictionary(out _method) && _method != null)
             {
                 _method(targetObject);
                 return;
             }
 
-            _methodInfo = _targetObjectType.GetMethods()
-                .FirstOrDefault(method =>
-                {
-                    if (method.Name != methodName) return false;
-
-                    var parameters = method.GetParameters();
-
-                    if (parameters.Length != 0) return false;
-
-                    return method.ReturnType == typeof(void);
-                });
+            _methodInfo = _targetObjectType?
+                .GetMethods()
+                .FirstOrDefault(method => method.Name == methodName
+                                          && method.GetParameters().Length == 0
+                                          && method.ReturnType == typeof(void));
 
             if (_methodInfo == null)
-                throw new ArgumentException(string.Format(
-                    "{0} 型に 引数を持たないメソッド {1} が見つかりません。",
-                    _targetObjectType.Name,
-                    methodName));
+            {
+                var message = $"{_targetObjectType?.Name} 型に 引数を持たないメソッド {methodName} が見つかりません。";
+                throw new ArgumentException(message);
+            }
 
             _methodInfo.Invoke(targetObject, new object[] { });
 
@@ -85,7 +79,6 @@ namespace Livet.Behaviors
             Task.Factory.StartNew(arg =>
             {
                 var taskArg = (Tuple<Type, MethodInfo>) arg;
-
                 var paraTarget = Expression.Parameter(typeof(object), "target");
 
                 var method = Expression.Lambda<Action<object>>
@@ -106,6 +99,9 @@ namespace Livet.Behaviors
 
         private bool TryGetCacheFromMethodCacheDictionary(out Action<object> m)
         {
+            if (_targetObjectType == null) throw new InvalidOperationException($"{nameof(_targetObjectType)} is null.");
+            if (_methodName == null) throw new InvalidOperationException($"{nameof(_methodName)} is null.");
+
             m = null;
             var foundAction = false;
             if (MethodCacheDictionary.TryGetValue(_targetObjectType, out var actionDictionary))
