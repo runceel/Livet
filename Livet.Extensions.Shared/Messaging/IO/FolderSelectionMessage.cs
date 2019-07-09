@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Livet.Annotations;
 
 namespace Livet.Messaging.IO
 {
@@ -18,7 +19,7 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        public static readonly DependencyProperty DescriptionProperty =
+        [NotNull] public static readonly DependencyProperty DescriptionProperty =
             DependencyProperty.Register("Description", typeof(string), typeof(FolderSelectionMessage),
                 new UIPropertyMetadata(null));
 
@@ -28,7 +29,7 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        public static readonly DependencyProperty TitleProperty =
+        [NotNull] public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(FolderSelectionMessage),
                 new UIPropertyMetadata(string.Empty));
 
@@ -38,7 +39,7 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        public static readonly DependencyProperty SelectedPathProperty =
+        [NotNull] public static readonly DependencyProperty SelectedPathProperty =
             DependencyProperty.Register("SelectedPath", typeof(string), typeof(FolderSelectionMessage),
                 new UIPropertyMetadata(string.Empty));
 
@@ -48,7 +49,7 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        public static readonly DependencyProperty DialogPreferenceProperty =
+        [NotNull] public static readonly DependencyProperty DialogPreferenceProperty =
             DependencyProperty.Register("DialogPreference", typeof(FolderSelectionDialogPreference),
                 typeof(FileSelectionMessage), new UIPropertyMetadata(FolderSelectionDialogPreference.None));
 
@@ -116,7 +117,13 @@ namespace Livet.Messaging.IO
         /// </value>
         public FolderSelectionDialogPreference DialogPreference
         {
-            get { return (FolderSelectionDialogPreference) GetValue(DialogPreferenceProperty); }
+            get
+            {
+                var value = GetValue(DialogPreferenceProperty);
+                return value?.GetType() == typeof(FolderSelectionDialogPreference)
+                    ? (FolderSelectionDialogPreference) value
+                    : default;
+            }
             set { SetValue(DialogPreferenceProperty, value); }
         }
 
