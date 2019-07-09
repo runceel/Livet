@@ -60,8 +60,12 @@ namespace Livet.Dialogs
                 default:
                 {
                     throw new ArgumentException(
-                        string.Format(CultureInfo.CurrentCulture, Resources.UnsupportedEnumValue,
-                            typeof(FolderSelectionDialogPreference), preference, (int) preference),
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.UnsupportedEnumValue?? string.Empty,
+                            typeof(FolderSelectionDialogPreference), 
+                            preference,
+                            (int) preference),
                         nameof(preference)
                     );
                 }
