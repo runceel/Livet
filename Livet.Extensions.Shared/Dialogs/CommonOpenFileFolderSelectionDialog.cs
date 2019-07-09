@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Windows;
+using Livet.Annotations;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Livet.Dialogs
@@ -10,8 +11,8 @@ namespace Livet.Dialogs
     /// </summary>
     internal sealed class CommonOpenFileFolderSelectionDialog : FolderSelectionDialog
     {
-        private readonly CommonOpenFileDialog _commonOpenFileDialog;
-        private readonly string _defaultTitle;
+        [NotNull] private readonly CommonOpenFileDialog _commonOpenFileDialog;
+        [CanBeNull] private readonly string _defaultTitle;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CommonOpenFileFolderSelectionDialog" /> class.

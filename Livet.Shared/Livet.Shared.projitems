@@ -9,7 +9,6 @@
     <Import_RootNamespace>Livet.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Annotations\Annotations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AnonymousDisposable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ControlBinding\PasswordBoxBindingSupportBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ControlBinding\TextBoxBindingSupportBehavior.cs" />

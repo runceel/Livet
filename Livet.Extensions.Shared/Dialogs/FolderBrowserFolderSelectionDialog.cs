@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using Livet.Annotations;
 using IWin32Window = System.Windows.Forms.IWin32Window;
 
 namespace Livet.Dialogs
@@ -14,7 +15,7 @@ namespace Livet.Dialogs
     /// </summary>
     internal sealed class FolderBrowserFolderSelectionDialog : FolderSelectionDialog
     {
-        private readonly FolderBrowserDialog _folderBrowserDialog;
+        [NotNull] private readonly FolderBrowserDialog _folderBrowserDialog;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="FolderBrowserFolderSelectionDialog" /> class.
@@ -91,8 +92,10 @@ namespace Livet.Dialogs
         /// <returns>
         ///     The result of the dialog.
         /// </returns>
-        protected override bool? ShowDialogCore(Window hostWindow)
+        protected override bool? ShowDialogCore([NotNull] Window hostWindow)
         {
+            if (hostWindow == null) throw new ArgumentNullException(nameof(hostWindow));
+
             switch (_folderBrowserDialog.ShowDialog(
                 new WindowsFormsWin32Window(new WindowInteropHelper(hostWindow).EnsureHandle())))
             {

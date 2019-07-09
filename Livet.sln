@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LivetSnk", "LivetSnk", "{37550EC5-43CF-49E4-A463-85072B1C4B8D}"
 	ProjectSection(SolutionItems) = preProject
@@ -70,13 +70,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{94F1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewLayerSupport", "Samples\ViewLayerSupport\ViewLayerSupport.csproj", "{443F4FE1-5C3B-4847-BCBA-5F8E56F63DF6}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Annotations", "Livet.Annotations\Livet.Annotations.shproj", "{0E65806E-A604-4B5D-8022-B65DDD2714D1}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Livet.Annotations\Livet.Annotations.projitems*{0e65806e-a604-4b5d-8022-b65ddd2714d1}*SharedItemsImports = 13
+		Livet.Annotations\Livet.Annotations.projitems*{1e476a17-6c4d-4ad2-95b2-84bef4c96d67}*SharedItemsImports = 4
 		Livet.Generated\Livet.Generated.projitems*{1e476a17-6c4d-4ad2-95b2-84bef4c96d67}*SharedItemsImports = 4
 		Livet.Shared\Livet.Shared.projitems*{1e476a17-6c4d-4ad2-95b2-84bef4c96d67}*SharedItemsImports = 4
 		Livet.Extensions.Shared\Livet.Extensions.Shared.projitems*{825f403b-88f1-4bd2-87f6-2eae406be053}*SharedItemsImports = 13
 		Livet.Shared\Livet.Shared.projitems*{9510f365-2314-40d9-928b-ed5520dcdd0e}*SharedItemsImports = 13
 		Livet.Generated\Livet.Generated.projitems*{b55ae272-6941-4c19-b513-455c4989d9fa}*SharedItemsImports = 13
+		Livet.Annotations\Livet.Annotations.projitems*{ecf2f532-f29a-455b-856f-f259c7939705}*SharedItemsImports = 4
 		Livet.Extensions.Shared\Livet.Extensions.Shared.projitems*{ecf2f532-f29a-455b-856f-f259c7939705}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -77,5 +77,6 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\Livet.Extensions.Shared\Livet.Extensions.Shared.projitems" Label="Shared" />
+  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
