@@ -18,13 +18,11 @@ namespace Livet.Commands
             add { _canExecuteChangedHandlers.Add(new WeakReference<EventHandler>(value)); }
             remove
             {
-                foreach (var weakReference in _canExecuteChangedHandlers
-                    .Where(r =>
-                    {
-                        if (r.TryGetTarget(out var result) && result == value) return true;
-                        return false;
-                    }).ToArray())
-                    _canExecuteChangedHandlers.Remove(weakReference);
+                var weakReferences = _canExecuteChangedHandlers
+                    .Where(r => r != null && r.TryGetTarget(out var result) && result == value)
+                    .ToArray();
+
+                foreach (var weakReference in weakReferences) _canExecuteChangedHandlers.Remove(weakReference);
             }
         }
 
