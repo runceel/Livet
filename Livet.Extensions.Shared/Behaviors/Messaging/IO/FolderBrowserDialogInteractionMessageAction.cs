@@ -5,40 +5,37 @@ using Livet.Messaging.IO;
 
 namespace Livet.Behaviors.Messaging.IO
 {
-	/// <summary>
-	///		Show folder browser dialog.
-	///		<see cref="InteractionMessageAction{T}"/> for <see cref="FolderSelectionMessage"/>.
-	///		This object must be hosted by <see cref="FrameworkElement"/>.
-	/// </summary>
-	public class FolderBrowserDialogInteractionMessageAction : InteractionMessageAction<FrameworkElement>
-	{
-		/// <summary>
-		///		Invokes the action related to this class.
-		/// </summary>
-		/// <param name="m"><see cref="FolderSelectionMessage"/> specified to <see cref="InteractionMessenger"/> in the client.</param>
-		protected override void InvokeAction( InteractionMessage m )
-		{
-            if ( m is FolderSelectionMessage folderSelectionMessage )
-			{
-                Window hostWindow = Window.GetWindow(AssociatedObject);
-				if ( hostWindow == null )
-				{
-					return;
-				}
+    /// <summary>
+    ///     Show folder browser dialog.
+    ///     <see cref="InteractionMessageAction{T}" /> for <see cref="FolderSelectionMessage" />.
+    ///     This object must be hosted by <see cref="FrameworkElement" />.
+    /// </summary>
+    public class FolderBrowserDialogInteractionMessageAction : InteractionMessageAction<FrameworkElement>
+    {
+        /// <summary>
+        ///     Invokes the action related to this class.
+        /// </summary>
+        /// <param name="m"><see cref="FolderSelectionMessage" /> specified to <see cref="InteractionMessenger" /> in the client.</param>
+        protected override void InvokeAction(InteractionMessage m)
+        {
+            if (m is FolderSelectionMessage folderSelectionMessage)
+            {
+                var hostWindow = Window.GetWindow(AssociatedObject);
+                if (hostWindow == null) return;
 
-				using ( var dialog =
-					FolderSelectionDialogFactory.CreateDialog( folderSelectionMessage.DialogPreference )
-				)
-				{
-					dialog.Title = folderSelectionMessage.Title;
-					dialog.Description = folderSelectionMessage.Description;
-					dialog.SelectedPath = folderSelectionMessage.SelectedPath;
+                using (var dialog =
+                    FolderSelectionDialogFactory.CreateDialog(folderSelectionMessage.DialogPreference)
+                )
+                {
+                    dialog.Title = folderSelectionMessage.Title;
+                    dialog.Description = folderSelectionMessage.Description;
+                    dialog.SelectedPath = folderSelectionMessage.SelectedPath;
 
                     folderSelectionMessage.Response = dialog.ShowDialog(hostWindow).GetValueOrDefault()
                         ? dialog.SelectedPath
                         : null;
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 }
