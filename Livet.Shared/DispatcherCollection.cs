@@ -95,11 +95,7 @@ namespace Livet
         /// </summary>
         public bool IsSynchronized
         {
-            get
-            {
-                if (_sourceAsIList is ObservableSynchronizedCollection<T>) return true;
-                return false;
-            }
+            get { return _sourceAsIList is ObservableSynchronizedCollection<T>; }
         }
 
         /// <summary>
