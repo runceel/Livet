@@ -109,18 +109,16 @@ namespace Livet.Behaviors.Messaging
 
             var checkResult = false;
 
-            Action checkAction = () =>
+            void CheckAction()
             {
                 if (!IsEnable) return;
-
                 if (InvokeActionsOnlyWhileAttatchedObjectLoaded && !_loaded) return;
-
                 if (!(string.IsNullOrEmpty(MessageKey) || MessageKey == cloneMessage.MessageKey)) return;
 
                 checkResult = true;
-            };
+            }
 
-            DoActionOnDispatcher(checkAction);
+            DoActionOnDispatcher(CheckAction);
 
             if (!checkResult) return;
 
