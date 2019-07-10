@@ -48,20 +48,20 @@ namespace Livet.Messaging.IO
         /// <summary>
         ///     ダイアログタイトルを指定、または取得します。
         /// </summary>
-        [CanBeNull]
+        [NotNull]
         public string Title
         {
-            get { return (string) GetValue(TitleProperty); }
+            get { return (string) GetValue(TitleProperty) ?? string.Empty; }
             set { SetValue(TitleProperty, value); }
         }
 
         /// <summary>
         ///     ファイルの拡張子Filterを指定、または取得します。
         /// </summary>
-        [CanBeNull]
+        [NotNull]
         public string Filter
         {
-            get { return (string) GetValue(FilterProperty); }
+            get { return (string) GetValue(FilterProperty) ?? string.Empty; }
             set { SetValue(FilterProperty, value); }
         }
 
@@ -70,17 +70,17 @@ namespace Livet.Messaging.IO
         /// </summary>
         public bool AddExtension
         {
-            get { return (bool) GetValue(AddExtensionProperty); }
+            get { return (bool) (GetValue(AddExtensionProperty) ?? default(bool)); }
             set { SetValue(AddExtensionProperty, value); }
         }
 
         /// <summary>
         ///     ダイアログに表示される初期ディレクトリを指定、または取得します。
         /// </summary>
-        [CanBeNull]
+        [NotNull]
         public string InitialDirectory
         {
-            get { return (string) GetValue(InitialDirectoryProperty); }
+            get { return (string) GetValue(InitialDirectoryProperty) ?? string.Empty; }
             set { SetValue(InitialDirectoryProperty, value); }
         }
 
@@ -88,10 +88,10 @@ namespace Livet.Messaging.IO
         /// <summary>
         ///     ファイルダイアログで指定されたファイルのパスを含む文字列を指定、または取得します。
         /// </summary>
-        [CanBeNull]
+        [NotNull]
         public string FileName
         {
-            get { return (string) GetValue(FileNameProperty); }
+            get { return (string) GetValue(FileNameProperty) ?? string.Empty; }
             set { SetValue(FileNameProperty, value); }
         }
 
