@@ -57,11 +57,7 @@ namespace Livet.EventListeners.WeakEvents
             if (listenerWeakReference == null) throw new ArgumentNullException(nameof(listenerWeakReference));
 
             if (listenerWeakReference.TryGetTarget(out var listenerResult))
-            {
-                var handler = listenerResult._handler;
-
-                handler?.Invoke(sender, args);
-            }
+                listenerResult?._handler?.Invoke(sender, args);
         }
 
         private static THandler GetStaticHandler(
