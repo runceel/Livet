@@ -51,7 +51,7 @@ namespace Livet.Messaging.Windows
         /// </summary>
         public WindowAction Action
         {
-            get { return (WindowAction) GetValue(ActionProperty); }
+            get { return (WindowAction) (GetValue(ActionProperty) ?? default(WindowAction)); }
             set { SetValue(ActionProperty, value); }
         }
 
