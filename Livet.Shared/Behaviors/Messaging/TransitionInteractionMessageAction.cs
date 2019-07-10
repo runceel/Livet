@@ -130,6 +130,10 @@ namespace Livet.Behaviors.Messaging
                     }
 
                     break;
+                case TransitionMode.UnKnown:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
