@@ -125,7 +125,7 @@ namespace Livet.Messaging
         /// </summary>
         public TransitionMode Mode
         {
-            get { return (TransitionMode) GetValue(ModeProperty); }
+            get { return (TransitionMode) (GetValue(ModeProperty) ?? default(TransitionMode)); }
             set { SetValue(ModeProperty, value); }
         }
 
