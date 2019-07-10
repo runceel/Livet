@@ -24,8 +24,13 @@ namespace Livet.EventListeners
             if (source == null) throw new ArgumentNullException(nameof(source));
 
             _bag = new AnonymousCollectionChangedEventHandlerBag(source);
-            Initialize(h => source.CollectionChanged += h, h => source.CollectionChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => source.CollectionChanged += h,
+                h => source.CollectionChanged -= h,
+                (sender, e) =>
+                {
+                    if (e != null) _bag.ExecuteHandler(e);
+                });
         }
 
         /// <summary>
@@ -40,8 +45,13 @@ namespace Livet.EventListeners
             if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             _bag = new AnonymousCollectionChangedEventHandlerBag(source, handler);
-            Initialize(h => source.CollectionChanged += h, h => source.CollectionChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => source.CollectionChanged += h,
+                h => source.CollectionChanged -= h,
+                (sender, e) =>
+                {
+                    if (e != null) _bag.ExecuteHandler(e);
+                });
         }
 
         IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
@@ -95,8 +105,11 @@ namespace Livet.EventListeners
         }
 
 
-        public void Add(NotifyCollectionChangedAction action, params NotifyCollectionChangedEventHandler[] handlers)
+        public void Add(NotifyCollectionChangedAction action,
+            [NotNull] params NotifyCollectionChangedEventHandler[] handlers)
         {
+            if (handlers == null) throw new ArgumentNullException(nameof(handlers));
+
             _bag.Add(action, handlers);
         }
     }
