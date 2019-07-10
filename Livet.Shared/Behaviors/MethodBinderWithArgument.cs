@@ -25,14 +25,13 @@ namespace Livet.Behaviors
         private string _methodName;
         private Type _targetObjectType;
 
-        public void Invoke([NotNull] object targetObject, [NotNull] string methodName, [NotNull] object argument)
+        public void Invoke([NotNull] object targetObject, [NotNull] string methodName, [CanBeNull] object argument)
         {
             if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
             if (methodName == null) throw new ArgumentNullException(nameof(methodName));
-            if (argument == null) throw new ArgumentNullException(nameof(argument));
 
             var newTargetObjectType = targetObject.GetType();
-            var newArgumentType = argument.GetType();
+            var newArgumentType = argument?.GetType();
 
             if (_targetObjectType == newTargetObjectType &&
                 _methodName == methodName &&
@@ -46,7 +45,7 @@ namespace Livet.Behaviors
 
                 if (TryGetCacheFromMethodCacheDictionary(out _method))
                 {
-                    _method(targetObject, argument);
+                    _method?.Invoke(targetObject, argument);
                     return;
                 }
 
@@ -63,7 +62,7 @@ namespace Livet.Behaviors
 
             if (TryGetCacheFromMethodCacheDictionary(out _method))
             {
-                _method(targetObject, argument);
+                _method?.Invoke(targetObject, argument);
                 return;
             }
 
@@ -78,12 +77,11 @@ namespace Livet.Behaviors
 
                     if (parameters[0].ParameterType.IsInterface)
                     {
-                        if (!newArgumentType.GetInterfaces().Contains(parameters[0].ParameterType)) return false;
+                        if (_argumentType != null && !_argumentType.GetInterfaces().Contains(parameters[0].ParameterType)) return false;
                     }
                     else
                     {
-                        if (!_argumentType.IsSubclassOf(parameters[0].ParameterType) &&
-                            _argumentType != parameters[0].ParameterType) return false;
+                        if (_argumentType != null && !_argumentType.IsSubclassOf(parameters[0].ParameterType) && _argumentType != parameters[0].ParameterType) return false;
                     }
 
                     return method.ReturnType == typeof(void);
@@ -118,13 +116,17 @@ namespace Livet.Behaviors
                 ).Compile();
 
                 var dic = MethodCacheDictionary.GetOrAdd(taskArg.Item1,
-                    _ => new ConcurrentDictionary<string, Action<object, object>>());
+                              _ => new ConcurrentDictionary<string, Action<object, object>>())
+                          ?? throw new InvalidOperationException();
                 dic.TryAdd(taskArg.Item2.Name, method);
             }, taskArgument);
         }
 
         private bool TryGetCacheFromMethodCacheDictionary(out Action<object, object> m)
         {
+            if (_targetObjectType == null) throw new InvalidOperationException();
+            if (_methodName == null) throw new InvalidOperationException();
+
             m = null;
             var foundAction = false;
             if (MethodCacheDictionary.TryGetValue(_targetObjectType, out var actionDictionary))
