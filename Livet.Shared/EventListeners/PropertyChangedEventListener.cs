@@ -123,7 +123,8 @@ namespace Livet.EventListeners
             _bag.Add(propertyName, handlers);
         }
 
-        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression, [NotNull] PropertyChangedEventHandler handler)
+        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
+            [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
             if (handler == null) throw new ArgumentNullException(nameof(handler));
@@ -133,7 +134,8 @@ namespace Livet.EventListeners
         }
 
 
-        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression, [NotNull] params PropertyChangedEventHandler[] handlers)
+        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
+            [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
             if (handlers == null) throw new ArgumentNullException(nameof(handlers));

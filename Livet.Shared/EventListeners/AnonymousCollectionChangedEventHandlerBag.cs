@@ -113,7 +113,8 @@ namespace Livet.EventListeners
         }
 
 
-        internal void Add(NotifyCollectionChangedAction action, [NotNull] params NotifyCollectionChangedEventHandler[] handlers)
+        internal void Add(NotifyCollectionChangedAction action,
+            [NotNull] params NotifyCollectionChangedEventHandler[] handlers)
         {
             if (handlers == null) throw new ArgumentNullException(nameof(handlers));
 

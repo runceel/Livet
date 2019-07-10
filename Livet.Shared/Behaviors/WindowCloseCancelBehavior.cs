@@ -72,7 +72,7 @@ namespace Livet.Behaviors
         protected override void OnAttached()
         {
             var associatedObject = AssociatedObject;
-            if(associatedObject == null) throw new InvalidOperationException();
+            if (associatedObject == null) throw new InvalidOperationException();
 
             base.OnAttached();
             associatedObject.Closing += (sender, e) =>
@@ -82,7 +82,7 @@ namespace Livet.Behaviors
                 if (CanClose) return;
                 if (CloseCanceledCallbackCommand != null && CloseCanceledCallbackCommand.CanExecute(null))
                     CloseCanceledCallbackCommand.Execute(null);
-                
+
                 if (CloseCanceledCallbackMethodTarget != null && CloseCanceledCallbackMethodName != null)
                     _callbackMethod.Invoke(CloseCanceledCallbackMethodTarget, CloseCanceledCallbackMethodName);
 

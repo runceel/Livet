@@ -8,8 +8,8 @@ namespace Livet
     /// </summary>
     public class AnonymousDisposable : IDisposable
     {
-        private bool _disposed;
         [NotNull] private readonly Action _releaseAction;
+        private bool _disposed;
 
         /// <summary>
         ///     コンストラクタ

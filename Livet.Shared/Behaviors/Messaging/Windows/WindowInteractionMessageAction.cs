@@ -16,7 +16,7 @@ namespace Livet.Behaviors.Messaging.Windows
             {
                 var window = Window.GetWindow(AssociatedObject);
                 if (window == null) return;
-                
+
                 switch (windowMessage.Action)
                 {
                     case WindowAction.Close:

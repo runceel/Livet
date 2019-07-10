@@ -42,7 +42,7 @@ namespace Livet.Behaviors.ControlBinding
         {
             if (sender == null) throw new ArgumentNullException(nameof(sender));
             var pb = (PasswordBox) sender;
-            
+
             if (Password != pb.Password) Password = pb.Password;
         }
 

@@ -36,8 +36,8 @@ namespace Livet.Behaviors
 
         protected override string GetEventName()
         {
-            if(RoutedEvent == null) throw new InvalidOperationException();
-            
+            if (RoutedEvent == null) throw new InvalidOperationException();
+
             return RoutedEvent.Name;
         }
     }
