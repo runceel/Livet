@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Windows.Threading;
 using Livet.Annotations;
@@ -26,8 +27,19 @@ namespace Livet
         {
             _list = collection ?? throw new ArgumentNullException(nameof(collection));
 
-            _listeners.Add(new PropertyChangedEventListener(_list, (sender, e) => OnPropertyChanged(e)));
-            _listeners.Add(new CollectionChangedEventListener(_list, (sender, e) => OnCollectionChanged(e)));
+            _listeners.Add(new PropertyChangedEventListener(
+                _list,
+                (sender, e) =>
+                {
+                    if (e != null) OnPropertyChanged(e);
+                }));
+
+            _listeners.Add(new CollectionChangedEventListener(
+                _list,
+                (sender, e) =>
+                {
+                    if (e != null) OnCollectionChanged(e);
+                }));
         }
 
         /// <summary>
@@ -118,7 +130,7 @@ namespace Livet
                 _listeners.Dispose();
 
                 if (typeof(IDisposable).IsAssignableFrom(typeof(T)))
-                    foreach (IDisposable i in _list)
+                    foreach (var i in _list.OfType<IDisposable>())
                         i.Dispose();
             }
 
