@@ -23,7 +23,8 @@ namespace Livet
         {
             get
             {
-                if ((bool) DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue)
+                var metadata = DesignerProperties.IsInDesignModeProperty?.GetMetadata(typeof(DependencyObject));
+                if ((bool) (metadata?.DefaultValue ?? default(bool)))
                     _uiDispatcher = Dispatcher.CurrentDispatcher;
                 return _uiDispatcher;
             }
