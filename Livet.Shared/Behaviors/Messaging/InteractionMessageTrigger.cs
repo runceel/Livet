@@ -49,7 +49,7 @@ namespace Livet.Behaviors.Messaging
         /// </summary>
         public bool InvokeActionsOnlyWhileAttatchedObjectLoaded
         {
-            get { return (bool) GetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty); }
+            get { return (bool) (GetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty) ?? default(bool)); }
             set { SetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty, value); }
         }
 
@@ -59,7 +59,7 @@ namespace Livet.Behaviors.Messaging
         /// </summary>
         public bool IsEnable
         {
-            get { return (bool) GetValue(IsEnableProperty); }
+            get { return (bool) (GetValue(IsEnableProperty) ?? default(bool)); }
             set { SetValue(IsEnableProperty, value); }
         }
 
@@ -99,8 +99,10 @@ namespace Livet.Behaviors.Messaging
             }
         }
 
-        private void MessageReceived(object sender, InteractionMessageRaisedEventArgs e)
+        private void MessageReceived(object sender, [NotNull] InteractionMessageRaisedEventArgs e)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
+
             var message = e.Message;
 
             var cloneMessage = (InteractionMessage) message.Clone();
@@ -135,6 +137,7 @@ namespace Livet.Behaviors.Messaging
         private void DoActionOnDispatcher([NotNull] Action action)
         {
             if (action == null) throw new ArgumentNullException(nameof(action));
+            if (Dispatcher == null) throw new InvalidOperationException("Dispatcher is null.");
 
             if (Dispatcher.CheckAccess())
                 action();
