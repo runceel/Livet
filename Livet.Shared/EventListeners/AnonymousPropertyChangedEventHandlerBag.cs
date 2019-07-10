@@ -80,10 +80,11 @@ namespace Livet.EventListeners
             RegisterHandler(memberExpression.Member.Name, handler);
         }
 
-        internal void ExecuteHandler(PropertyChangedEventArgs e)
+        internal void ExecuteHandler([NotNull] PropertyChangedEventArgs e)
         {
-            var result = _source.TryGetTarget(out var sourceResult);
+            if (e == null) throw new ArgumentNullException(nameof(e));
 
+            var result = _source.TryGetTarget(out var sourceResult);
             if (!result) return;
 
             if (e.PropertyName != null)
