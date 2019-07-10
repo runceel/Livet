@@ -64,6 +64,8 @@ namespace Livet.Messaging
         public void Dispose()
         {
             Dispose(true);
+
+            // ReSharper disable once GCSuppressFinalizeForTypeWithoutDestructor
             GC.SuppressFinalize(this);
         }
 
@@ -83,13 +85,21 @@ namespace Livet.Messaging
         public void RegisterAction(Action<InteractionMessage> action)
         {
             ThrowExceptionIfDisposed();
-            _actionDictionary.GetOrAdd(string.Empty, _ => new ConcurrentBag<Action<InteractionMessage>>()).Add(action);
+            var dic = _actionDictionary.GetOrAdd(string.Empty, _ => new ConcurrentBag<Action<InteractionMessage>>())
+                      ?? throw new InvalidOperationException();
+
+            dic.Add(action);
         }
 
-        public void RegisterAction(string messageKey, Action<InteractionMessage> action)
+        public void RegisterAction([NotNull] string messageKey, Action<InteractionMessage> action)
         {
+            if (messageKey == null) throw new ArgumentNullException(nameof(messageKey));
+
             ThrowExceptionIfDisposed();
-            _actionDictionary.GetOrAdd(messageKey, _ => new ConcurrentBag<Action<InteractionMessage>>()).Add(action);
+            var dic = _actionDictionary.GetOrAdd(messageKey, _ => new ConcurrentBag<Action<InteractionMessage>>())
+                      ?? throw new InvalidOperationException();
+
+            dic.Add(action);
         }
 
         private void MessageReceived(object sender, [NotNull] InteractionMessageRaisedEventArgs e)
@@ -130,9 +140,10 @@ namespace Livet.Messaging
             }
 
             _actionDictionary.TryGetValue(string.Empty, out var allList);
-            if (allList != null)
-                foreach (var action in allList)
-                    action(cloneMessage);
+            if (allList == null) return;
+
+            foreach (var action in allList)
+                action(cloneMessage);
         }
 
         private void DoActionOnDispatcher([NotNull] Action action)
