@@ -176,6 +176,7 @@ namespace Livet.Behaviors.Messaging
             base.OnDetaching();
         }
 
+        // ReSharper disable once UnusedParameter.Global
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
