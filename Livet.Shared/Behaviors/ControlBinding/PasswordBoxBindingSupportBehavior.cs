@@ -30,20 +30,19 @@ namespace Livet.Behaviors.ControlBinding
 
         private static void SourcePasswordChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender is PasswordBoxBindingSupportBehavior thisObject)
-            {
-                if (thisObject.AssociatedObject == null) return;
+            var associatedObject = (sender as PasswordBoxBindingSupportBehavior)?.AssociatedObject;
+            if (associatedObject == null) return;
 
-                if (thisObject.AssociatedObject.Password != (string) e.NewValue)
-                    thisObject.AssociatedObject.Password = (string) e.NewValue ?? string.Empty;
-            }
+            var newValue = e.NewValue as string;
+            if (associatedObject.Password != newValue)
+                associatedObject.Password = newValue ?? string.Empty;
         }
 
-        private void ControlPasswordChanged(object sender, RoutedEventArgs e)
+        private void ControlPasswordChanged([NotNull] object sender, RoutedEventArgs e)
         {
-            var pb = sender as PasswordBox
-                     ?? throw new ArgumentException($"{nameof(sender)} is not a {nameof(PasswordBox)}.");
-
+            if (sender == null) throw new ArgumentNullException(nameof(sender));
+            var pb = (PasswordBox) sender;
+            
             if (Password != pb.Password) Password = pb.Password;
         }
 
