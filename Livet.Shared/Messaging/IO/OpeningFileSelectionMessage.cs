@@ -31,7 +31,7 @@ namespace Livet.Messaging.IO
         /// </summary>
         public bool MultiSelect
         {
-            get { return (bool) GetValue(MultiSelectProperty); }
+            get { return (bool) (GetValue(MultiSelectProperty) ?? default(bool)); }
             set { SetValue(MultiSelectProperty, value); }
         }
 
