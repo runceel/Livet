@@ -92,7 +92,8 @@ namespace Livet.Behaviors
                 ).Compile();
 
                 var dic = MethodCacheDictionary.GetOrAdd(taskArg.Item1,
-                    _ => new ConcurrentDictionary<string, Action<object>>());
+                              _ => new ConcurrentDictionary<string, Action<object>>())
+                          ?? throw new InvalidOperationException();
                 dic.TryAdd(taskArg.Item2.Name, method);
             }, taskArgument);
         }
