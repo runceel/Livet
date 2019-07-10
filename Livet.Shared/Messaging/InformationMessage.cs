@@ -79,7 +79,7 @@ namespace Livet.Messaging
         /// </summary>
         public MessageBoxImage Image
         {
-            get { return (MessageBoxImage) GetValue(ImageProperty); }
+            get { return (MessageBoxImage) (GetValue(ImageProperty) ?? default(MessageBoxImage)); }
             set { SetValue(ImageProperty, value); }
         }
 
