@@ -79,7 +79,6 @@ namespace Livet.EventListeners
             if (e == null) throw new ArgumentNullException(nameof(e));
 
             var result = _source.TryGetTarget(out var sourceResult);
-
             if (!result) return;
 
             List<NotifyCollectionChangedEventHandler> list;
@@ -96,9 +95,10 @@ namespace Livet.EventListeners
 
             lock (_allHandlerListLockObject)
             {
-                if (_allHandlerList.Any())
-                    foreach (var handler in _allHandlerList)
-                        handler(sourceResult, e);
+                if (!_allHandlerList.Any()) return;
+
+                foreach (var handler in _allHandlerList)
+                    handler(sourceResult, e);
             }
         }
 
