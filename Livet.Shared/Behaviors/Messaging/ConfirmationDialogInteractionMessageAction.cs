@@ -20,12 +20,20 @@ namespace Livet.Behaviors.Messaging
                     confirmMessage.DefaultResult
                 );
 
-                if (result == MessageBoxResult.Yes || result == MessageBoxResult.OK)
-                    confirmMessage.Response = true;
-                else if (result == MessageBoxResult.Cancel)
-                    confirmMessage.Response = null;
-                else
-                    confirmMessage.Response = false;
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                    case MessageBoxResult.OK:
+                        confirmMessage.Response = true;
+                        break;
+                    case MessageBoxResult.Cancel:
+                        confirmMessage.Response = null;
+                        break;
+                    default:
+                        confirmMessage.Response = false;
+                        break;
+                }
             }
         }
     }
