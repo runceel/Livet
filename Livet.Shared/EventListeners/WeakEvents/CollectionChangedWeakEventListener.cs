@@ -28,7 +28,10 @@ namespace Livet.EventListeners.WeakEvents
                 h => new NotifyCollectionChangedEventHandler(h),
                 h => source.CollectionChanged += h,
                 h => source.CollectionChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+                (sender, e) =>
+                {
+                    if (e != null) _bag.ExecuteHandler(e);
+                });
         }
 
         /// <summary>
@@ -47,7 +50,10 @@ namespace Livet.EventListeners.WeakEvents
                 h => new NotifyCollectionChangedEventHandler(h),
                 h => source.CollectionChanged += h,
                 h => source.CollectionChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+                (sender, e) =>
+                {
+                    if (e != null) _bag.ExecuteHandler(e);
+                });
         }
 
         IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
