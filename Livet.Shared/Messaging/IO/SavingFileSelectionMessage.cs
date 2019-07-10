@@ -36,7 +36,7 @@ namespace Livet.Messaging.IO
         /// </summary>
         public bool CreatePrompt
         {
-            get { return (bool) GetValue(CreatePromptProperty); }
+            get { return (bool) (GetValue(CreatePromptProperty) ?? default(bool)); }
             set { SetValue(CreatePromptProperty, value); }
         }
 
@@ -46,7 +46,7 @@ namespace Livet.Messaging.IO
         /// </summary>
         public bool OverwritePrompt
         {
-            get { return (bool) GetValue(OverwritePromptProperty); }
+            get { return (bool) (GetValue(OverwritePromptProperty) ?? default(bool)); }
             set { SetValue(OverwritePromptProperty, value); }
         }
 
