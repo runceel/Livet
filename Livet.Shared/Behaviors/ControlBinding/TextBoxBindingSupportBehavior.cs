@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 using Livet.Annotations;
@@ -43,7 +44,7 @@ namespace Livet.Behaviors.ControlBinding
         /// </summary>
         public int SelectionLength
         {
-            get { return (int) GetValue(SelectionLengthProperty); }
+            get { return (int) (GetValue(SelectionLengthProperty) ?? default(int)); }
             set { SetValue(SelectionLengthProperty, value); }
         }
 
@@ -53,7 +54,7 @@ namespace Livet.Behaviors.ControlBinding
         /// </summary>
         public int SelectionStart
         {
-            get { return (int) GetValue(SelectionStartProperty); }
+            get { return (int) (GetValue(SelectionStartProperty) ?? default(int)); }
             set { SetValue(SelectionStartProperty, value); }
         }
 
@@ -69,26 +70,27 @@ namespace Livet.Behaviors.ControlBinding
 
         private static void SourceSelectionLengthChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var thisObject = sender as TextBoxBindingSupportBehavior;
-            var associatedObject = thisObject?.AssociatedObject;
-
+            var associatedObject = (sender as TextBoxBindingSupportBehavior)?.AssociatedObject;
             if (associatedObject == null) return;
-            if (associatedObject.SelectionLength != (int) e.NewValue)
-                associatedObject.SelectionLength = (int) e.NewValue;
+
+            var newValue = (int) (e.NewValue ?? default(int));
+            if (associatedObject.SelectionLength != newValue)
+                associatedObject.SelectionLength = newValue;
         }
 
         private static void SourceSelectionStartChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var thisObject = (TextBoxBindingSupportBehavior) sender;
+            var associatedObject = (sender as TextBoxBindingSupportBehavior)?.AssociatedObject;
+            if (associatedObject == null) return;
 
-            if (thisObject.AssociatedObject == null) return;
-
-            if (thisObject.AssociatedObject.SelectionStart != (int) e.NewValue)
-                thisObject.AssociatedObject.SelectionStart = (int) e.NewValue;
+            var newValue = (int) (e.NewValue ?? default(int));
+            if (associatedObject.SelectionStart != newValue)
+                associatedObject.SelectionStart = newValue;
         }
 
-        private void ControlSelectedTextChanged(object sender, RoutedEventArgs e)
+        private void ControlSelectedTextChanged([NotNull] object sender, RoutedEventArgs e)
         {
+            if (sender == null) throw new ArgumentNullException(nameof(sender));
             var textBox = (TextBox) sender;
 
             if (SelectedText != textBox.SelectedText) SelectedText = textBox.SelectedText;
@@ -110,7 +112,7 @@ namespace Livet.Behaviors.ControlBinding
             SourceSelectionLengthChanged(this,
                 new DependencyPropertyChangedEventArgs(SelectionLengthProperty, null, SelectionLength));
 
-            AssociatedObject.SelectionChanged += ControlSelectedTextChanged;
+            if (AssociatedObject != null) AssociatedObject.SelectionChanged += ControlSelectedTextChanged;
         }
     }
 }
