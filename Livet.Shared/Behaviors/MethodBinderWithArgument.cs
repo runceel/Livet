@@ -90,11 +90,8 @@ namespace Livet.Behaviors
                 });
 
             if (_methodInfo == null)
-                throw new ArgumentException(string.Format(
-                    "{0} 型に {1} 型の引数を一つだけ持つメソッド {2} が見つかりません。",
-                    _targetObjectType.Name,
-                    _argumentType.Name,
-                    methodName));
+                throw new ArgumentException(
+                    $"{_targetObjectType.Name} 型に {_argumentType.Name} 型の引数を一つだけ持つメソッド {methodName} が見つかりません。");
 
             _methodInfo.Invoke(targetObject, new[] {argument});
 
