@@ -222,7 +222,7 @@ namespace Livet
             if (disposing)
                 lock (_lockObject)
                 {
-                    _targetLists.ForEach(item => item.Dispose());
+                    _targetLists.ForEach(item => item?.Dispose());
                 }
 
             _disposed = true;
