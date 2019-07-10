@@ -60,23 +60,21 @@ namespace Livet.Behaviors.ControlBinding
 
         private static void SourceSelectedTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var thisObject = (TextBoxBindingSupportBehavior) sender;
-
-            if (thisObject.AssociatedObject == null) return;
-
-            if (thisObject.AssociatedObject.SelectedText != (string) e.NewValue)
-                if ((string) e.NewValue != null)
-                    thisObject.AssociatedObject.SelectedText = (string) e.NewValue;
+            var thisObject = sender as TextBoxBindingSupportBehavior;
+            var associatedObject = thisObject?.AssociatedObject;
+            var s = e.NewValue as string;
+            if (associatedObject != null && associatedObject.SelectedText != s && s != null)
+                associatedObject.SelectedText = s;
         }
 
         private static void SourceSelectionLengthChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var thisObject = (TextBoxBindingSupportBehavior) sender;
+            var thisObject = sender as TextBoxBindingSupportBehavior;
+            var associatedObject = thisObject?.AssociatedObject;
 
-            if (thisObject.AssociatedObject == null) return;
-
-            if (thisObject.AssociatedObject.SelectionLength != (int) e.NewValue)
-                thisObject.AssociatedObject.SelectionLength = (int) e.NewValue;
+            if (associatedObject == null) return;
+            if (associatedObject.SelectionLength != (int) e.NewValue)
+                associatedObject.SelectionLength = (int) e.NewValue;
         }
 
         private static void SourceSelectionStartChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
