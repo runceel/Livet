@@ -76,27 +76,25 @@ namespace Livet.Behaviors.Messaging
             GC.SuppressFinalize(this);
         }
 
-        private static void MessengerChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static void MessengerChanged([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            if (d == null) throw new ArgumentNullException(nameof(d));
+            var thisReference = (InteractionMessageTrigger) d;
+
             if (e.OldValue == e.NewValue) return;
 
-            if (obj is InteractionMessageTrigger thisReference)
-            {
-                if (e.OldValue != null) thisReference._listener?.Dispose();
+            if (e.OldValue != null) thisReference._listener?.Dispose();
 
-                if (e.NewValue != null)
-                {
-                    var newMessenger = (InteractionMessenger) e.NewValue;
+            if (e.NewValue == null) return;
+            var newMessenger = (InteractionMessenger) e.NewValue;
 
-                    thisReference._listener =
-                        new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
-                            InteractionMessageRaisedEventArgs>(
-                            h => h,
-                            h => newMessenger.Raised += h,
-                            h => newMessenger.Raised -= h,
-                            thisReference.MessageReceived);
-                }
-            }
+            thisReference._listener =
+                new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
+                    InteractionMessageRaisedEventArgs>(
+                    h => h,
+                    h => newMessenger.Raised += h,
+                    h => newMessenger.Raised -= h,
+                    thisReference.MessageReceived);
         }
 
         private void MessageReceived(object sender, [NotNull] InteractionMessageRaisedEventArgs e)
@@ -149,11 +147,10 @@ namespace Livet.Behaviors.Messaging
         {
             base.OnAttached();
 
-            if (AssociatedObject != null)
-            {
-                AssociatedObject.Loaded += AssociatedObjectLoaded;
-                AssociatedObject.Unloaded += AssociatedObjectUnloaded;
-            }
+            if (AssociatedObject == null) return;
+
+            AssociatedObject.Loaded += AssociatedObjectLoaded;
+            AssociatedObject.Unloaded += AssociatedObjectUnloaded;
         }
 
         private void AssociatedObjectLoaded(object sender, RoutedEventArgs e)
