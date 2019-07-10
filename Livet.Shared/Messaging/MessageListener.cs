@@ -92,28 +92,30 @@ namespace Livet.Messaging
             _actionDictionary.GetOrAdd(messageKey, _ => new ConcurrentBag<Action<InteractionMessage>>()).Add(action);
         }
 
-        private void MessageReceived(object sender, InteractionMessageRaisedEventArgs e)
+        private void MessageReceived(object sender, [NotNull] InteractionMessageRaisedEventArgs e)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
             if (_disposed) return;
 
             var message = e.Message;
+            var clonedMessage = (InteractionMessage) message.Clone();
 
-            var cloneMessage = (InteractionMessage) message.Clone();
+            clonedMessage.Freeze();
 
-            cloneMessage.Freeze();
-
-            DoActionOnDispatcher(() => { GetValue(e, cloneMessage); });
+            DoActionOnDispatcher(() => { GetValue(e, clonedMessage); });
 
             var responsiveMessage = message as ResponsiveInteractionMessage;
 
             object response;
             if (responsiveMessage != null &&
-                (response = ((ResponsiveInteractionMessage) cloneMessage).Response) != null)
+                (response = ((ResponsiveInteractionMessage) clonedMessage).Response) != null)
                 responsiveMessage.Response = response;
         }
 
-        private void GetValue(InteractionMessageRaisedEventArgs e, InteractionMessage cloneMessage)
+        private void GetValue([NotNull] InteractionMessageRaisedEventArgs e, InteractionMessage cloneMessage)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
+
             var result = _source.TryGetTarget(out _);
 
             if (!result) return;
