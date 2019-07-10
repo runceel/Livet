@@ -48,6 +48,7 @@ namespace Livet
 
             ((INotifyPropertyChanged) collection).PropertyChanged += (sender, e) =>
             {
+                if (e == null) throw new ArgumentNullException(nameof(e));
                 if (!Dispatcher.CheckAccess())
                     Dispatcher.Invoke(CollectionChangedDispatcherPriority,
                         (Action) (() => OnPropertyChanged(e.PropertyName)));
