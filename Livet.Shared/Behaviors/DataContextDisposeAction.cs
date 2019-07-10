@@ -11,8 +11,7 @@ namespace Livet.Behaviors
     {
         protected override void Invoke(object parameter)
         {
-            var disposable = AssociatedObject.DataContext as IDisposable;
-
+            var disposable = AssociatedObject?.DataContext as IDisposable;
             disposable?.Dispose();
         }
     }
