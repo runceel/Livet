@@ -48,16 +48,10 @@ namespace Livet
         /// <param name="propertyName">プロパティ名</param>
         [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         [NotifyPropertyChangedInvocator]
-        protected virtual void RaisePropertyChanged([CallerMemberName] [NotNull] string propertyName = "")
+        protected virtual void RaisePropertyChanged([CallerMemberName] [CanBeNull] string propertyName = "")
         {
-            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
-
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
-            if (threadSafeHandler != null)
-            {
-                var e = EventArgsFactory.GetPropertyChangedEventArgs(propertyName);
-                threadSafeHandler(this, e);
-            }
+            threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
