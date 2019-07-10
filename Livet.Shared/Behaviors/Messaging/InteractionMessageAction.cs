@@ -59,13 +59,10 @@ namespace Livet.Behaviors.Messaging
             var window = Window.GetWindow(AssociatedObject);
             if (window == null) return;
             if (!window.IsActive && InvokeActionOnlyWhenWindowIsActive) return;
-            
-            if (message != null)
-            {
-                InvokeAction(message);
+            if (message == null) return;
 
-                DirectInteractionMessage?.InvokeCallbacks(message);
-            }
+            InvokeAction(message);
+            DirectInteractionMessage?.InvokeCallbacks(message);
         }
 
         protected abstract void InvokeAction(InteractionMessage message);
