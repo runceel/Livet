@@ -256,10 +256,9 @@ namespace Livet
             threadSafeHandler?.Invoke(this, args);
         }
 
-        protected void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CanBeNull] string propertyName)
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
-
             threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
     }
