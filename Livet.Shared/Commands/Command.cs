@@ -36,7 +36,7 @@ namespace Livet.Commands
 
             foreach (var handlerWeakReference in _canExecuteChangedHandlers.ToArray())
                 if (handlerWeakReference.TryGetTarget(out var result))
-                    uiDispatcher.InvokeAsync(() => result(this, EventArgs.Empty));
+                    uiDispatcher.InvokeAsync(() => result?.Invoke(this, EventArgs.Empty));
                 else
                     _canExecuteChangedHandlers.Remove(handlerWeakReference);
         }
