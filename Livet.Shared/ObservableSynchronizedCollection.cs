@@ -151,16 +151,17 @@ namespace Livet
             ReadAndWriteWithLockAction(() => _list.Count,
                 count =>
                 {
-                    if (count != 0) _list.Clear();
+                    if (count == 0) return;
+
+                    _list.Clear();
                 },
                 count =>
                 {
-                    if (count != 0)
-                    {
-                        OnPropertyChanged(nameof(Count));
-                        OnPropertyChanged(ItemsString);
-                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                    }
+                    if (count == 0) return;
+
+                    OnPropertyChanged(nameof(Count));
+                    OnPropertyChanged(ItemsString);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 });
         }
 
@@ -213,13 +214,12 @@ namespace Livet
                 index => { result = _list.Remove(item); },
                 index =>
                 {
-                    if (result)
-                    {
-                        OnPropertyChanged(nameof(Count));
-                        OnPropertyChanged(ItemsString);
-                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                            item, index));
-                    }
+                    if (!result) return;
+
+                    OnPropertyChanged(nameof(Count));
+                    OnPropertyChanged(ItemsString);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                        item, index));
                 });
 
             return result;
