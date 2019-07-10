@@ -129,7 +129,7 @@ namespace Livet.Messaging
         /// </summary>
         public MessageBoxImage Image
         {
-            get { return (MessageBoxImage) GetValue(ImageProperty); }
+            get { return (MessageBoxImage) (GetValue(ImageProperty) ?? default(MessageBoxImage)); }
             set { SetValue(ImageProperty, value); }
         }
 
@@ -139,7 +139,7 @@ namespace Livet.Messaging
         /// </summary>
         public MessageBoxButton Button
         {
-            get { return (MessageBoxButton) GetValue(ButtonProperty); }
+            get { return (MessageBoxButton) (GetValue(ButtonProperty) ?? default(MessageBoxButton)); }
             set { SetValue(ButtonProperty, value); }
         }
 
@@ -148,7 +148,7 @@ namespace Livet.Messaging
         /// </summary>
         public MessageBoxResult DefaultResult
         {
-            get { return (MessageBoxResult) GetValue(DefaultResultProperty); }
+            get { return (MessageBoxResult) (GetValue(DefaultResultProperty) ?? default(MessageBoxResult)); }
             set { SetValue(DefaultResultProperty, value); }
         }
 
