@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Threading;
 using Livet.Annotations;
 using Livet.EventListeners;
@@ -48,6 +49,7 @@ namespace Livet
 
             collectionChangedListener.RegisterHandler((sender, e) =>
             {
+                if (e == null) throw new ArgumentNullException(nameof(e));
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
@@ -70,7 +72,7 @@ namespace Livet
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
-                            foreach (IDisposable item in target)
+                            foreach (var item in target.OfType<IDisposable>())
                                 item.Dispose();
                         InvokeOnDispatcher(target.Clear, dispatcher);
                         break;
