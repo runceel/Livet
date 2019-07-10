@@ -105,11 +105,12 @@ namespace Livet.EventListeners
             lock (_handlerDictionaryLockObject)
             {
                 _handlerDictionary.TryGetValue(string.Empty, out var allList);
-                if (allList != null)
-                    lock (_lockObjectDictionary[allList])
-                    {
-                        foreach (var handler in allList) handler(sourceResult, e);
-                    }
+                if (allList == null) return;
+
+                lock (_lockObjectDictionary[allList])
+                {
+                    foreach (var handler in allList) handler(sourceResult, e);
+                }
             }
         }
 
