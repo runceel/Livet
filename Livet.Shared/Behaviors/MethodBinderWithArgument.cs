@@ -66,7 +66,7 @@ namespace Livet.Behaviors
                 return;
             }
 
-            _methodInfo = _targetObjectType.GetMethods()
+            _methodInfo = _targetObjectType?.GetMethods()
                 .FirstOrDefault(method =>
                 {
                     if (method.Name != methodName) return false;
@@ -89,7 +89,7 @@ namespace Livet.Behaviors
 
             if (_methodInfo == null)
                 throw new ArgumentException(
-                    $"{_targetObjectType.Name} 型に {_argumentType.Name} 型の引数を一つだけ持つメソッド {methodName} が見つかりません。");
+                    $"{_targetObjectType?.Name} 型に {_argumentType?.Name} 型の引数を一つだけ持つメソッド {methodName} が見つかりません。");
 
             _methodInfo.Invoke(targetObject, new[] {argument});
 
