@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using Livet.Annotations;
 
 namespace LivetControlBindingSupportGenerator
 {
     public class TypeInformation
     {
-        public TypeInformation(Type t)
+        public TypeInformation([NotNull] Type t)
         {
             if (t == null) throw new ArgumentNullException(nameof(t));
 
@@ -45,8 +46,8 @@ namespace LivetControlBindingSupportGenerator
         }
 
         public string TypeName { get; }
-        public Dictionary<string, Type> GetterHavingTargetProperties { get; }
-        public Dictionary<string, Type> SetterHavingTargetProperties { get; }
-        public IEnumerable<string> DependencyPropertyNames { get; }
+        [NotNull] public Dictionary<string, Type> GetterHavingTargetProperties { get; }
+        [NotNull] public Dictionary<string, Type> SetterHavingTargetProperties { get; }
+        [NotNull] public IEnumerable<string> DependencyPropertyNames { get; }
     }
 }
