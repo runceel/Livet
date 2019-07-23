@@ -10,6 +10,8 @@ namespace LivetControlBindingSupportGenerator
     {
         public TypeInformation(Type t)
         {
+            if (t == null) throw new ArgumentNullException(nameof(t));
+
             TypeName = t.Name;
 
             DependencyPropertyNames = t.GetFields(
@@ -19,9 +21,8 @@ namespace LivetControlBindingSupportGenerator
                 .Where(p => p.FieldType == typeof(DependencyProperty))
                 .Select(p => p.Name.Replace("Property", string.Empty));
 
-            var targetProperties = t.GetProperties(
-                    BindingFlags.Instance |
-                    BindingFlags.Public)
+            var targetProperties = t
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(
                     p =>
                         (!DependencyPropertyNames.Contains(p.Name) || DependencyPropertyNames.Contains(p.Name)
@@ -32,14 +33,15 @@ namespace LivetControlBindingSupportGenerator
                         && !p.GetCustomAttributes(typeof(ObsoleteAttribute), true).Any())
                 .ToList();
 
-            GetterHavingTargetProperties = new Dictionary<string, Type>();
-            SetterHavingTargetProperties = new Dictionary<string, Type>();
+            GetterHavingTargetProperties =
+                targetProperties
+                    .Where(p => p.GetGetMethod(false) != null)
+                    .ToDictionary(p => p.Name, p => p.PropertyType);
 
-            foreach (var p in targetProperties.Where(p => p.GetGetMethod(false) != null))
-                GetterHavingTargetProperties.Add(p.Name, p.PropertyType);
-
-            foreach (var p in targetProperties.Where(p => p.GetSetMethod(false) != null))
-                SetterHavingTargetProperties.Add(p.Name, p.PropertyType);
+            SetterHavingTargetProperties =
+                targetProperties
+                    .Where(p => p.GetSetMethod(false) != null)
+                    .ToDictionary(p => p.Name, p => p.PropertyType);
         }
 
         public string TypeName { get; }
