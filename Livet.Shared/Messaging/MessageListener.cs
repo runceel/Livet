@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Threading;
 using Livet.Annotations;
 using Livet.EventListeners.WeakEvents;
@@ -41,15 +42,16 @@ namespace Livet.Messaging
         }
 
         public MessageListener([NotNull] InteractionMessenger messenger, [CanBeNull] string messageKey,
-            Action<InteractionMessage> action)
+            [NotNull] Action<InteractionMessage> action)
             : this(messenger)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
             if (messageKey == null) messageKey = string.Empty;
 
             RegisterAction(messageKey, action);
         }
 
-        public MessageListener([NotNull] InteractionMessenger messenger, Action<InteractionMessage> action)
+        public MessageListener([NotNull] InteractionMessenger messenger, [NotNull] Action<InteractionMessage> action)
             : this(messenger, null, action)
         {
         }
@@ -82,8 +84,10 @@ namespace Livet.Messaging
             return _actionDictionary.GetEnumerator();
         }
 
-        public void RegisterAction(Action<InteractionMessage> action)
+        public void RegisterAction([NotNull] Action<InteractionMessage> action)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             ThrowExceptionIfDisposed();
             var dic = _actionDictionary.GetOrAdd(string.Empty, _ => new ConcurrentBag<Action<InteractionMessage>>())
                       ?? throw new InvalidOperationException();
@@ -91,9 +95,10 @@ namespace Livet.Messaging
             dic.Add(action);
         }
 
-        public void RegisterAction([NotNull] string messageKey, Action<InteractionMessage> action)
+        public void RegisterAction([NotNull] string messageKey, [NotNull] Action<InteractionMessage> action)
         {
             if (messageKey == null) throw new ArgumentNullException(nameof(messageKey));
+            if (action == null) throw new ArgumentNullException(nameof(action));
 
             ThrowExceptionIfDisposed();
             var dic = _actionDictionary.GetOrAdd(messageKey, _ => new ConcurrentBag<Action<InteractionMessage>>())
@@ -156,22 +161,28 @@ namespace Livet.Messaging
                 Dispatcher.Invoke(action);
         }
 
-        public void Add(Action<InteractionMessage> action)
+        public void Add([NotNull] Action<InteractionMessage> action)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             RegisterAction(action);
         }
 
-        public void Add(string messageKey, Action<InteractionMessage> action)
+        public void Add([NotNull] string messageKey, [NotNull] Action<InteractionMessage> action)
         {
+            if (messageKey == null) throw new ArgumentNullException(nameof(messageKey));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             RegisterAction(messageKey, action);
         }
 
 
-        public void Add(string messageKey, [NotNull] params Action<InteractionMessage>[] actions)
+        public void Add([NotNull] string messageKey, [NotNull] params Action<InteractionMessage>[] actions)
         {
+            if (messageKey == null) throw new ArgumentNullException(nameof(messageKey));
             if (actions == null) throw new ArgumentNullException(nameof(actions));
 
-            foreach (var action in actions) RegisterAction(messageKey, action);
+            foreach (var action in actions.Where(a => a != null)) RegisterAction(messageKey, action);
         }
 
         private void ThrowExceptionIfDisposed()
