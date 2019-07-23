@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using Livet.Annotations;
 
@@ -72,9 +73,10 @@ namespace Livet.EventListeners
         }
 
         internal void RegisterHandler<T>([NotNull] Expression<Func<T>> propertyExpression,
-            PropertyChangedEventHandler handler)
+            [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             if (!(propertyExpression.Body is MemberExpression))
                 throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 
@@ -137,7 +139,7 @@ namespace Livet.EventListeners
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             if (handlers == null) throw new ArgumentNullException(nameof(handlers));
 
-            foreach (var handler in handlers) RegisterHandler(propertyName, handler);
+            foreach (var handler in handlers.Where(h => h != null)) RegisterHandler(propertyName, handler);
         }
 
         internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
