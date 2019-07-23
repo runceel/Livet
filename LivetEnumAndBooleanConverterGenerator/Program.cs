@@ -20,7 +20,8 @@ namespace LivetEnumAndBooleanConverterGenerator
                         "WindowsBase"
                     }.Select(name =>
                         {
-                            var assemblyName = typeof(FrameworkElement).Assembly.GetName().Clone() as AssemblyName;
+                            var assemblyName = typeof(FrameworkElement).Assembly.GetName().Clone() as AssemblyName
+                                               ?? throw new InvalidOperationException();
                             assemblyName.Name = name;
                             assemblyName.SetPublicKey(typeof(FrameworkElement).Assembly.GetName().GetPublicKey());
                             assemblyName.ProcessorArchitecture = ProcessorArchitecture.None;
@@ -34,8 +35,8 @@ namespace LivetEnumAndBooleanConverterGenerator
                     })
                     .ToArray();
 
-            var enumsT4 = assemblies.SelectMany(a => a.GetTypes())
-                .Where(t => t.IsEnum && t.IsPublic)
+            var enumsT4 = assemblies.SelectMany(a => a?.GetTypes())
+                .Where(t => t != null && t.IsEnum && t.IsPublic)
                 .Select(t => new EnumToBooleanConverter {TypeName = t.Name, EnumMemberNames = t.GetEnumNames()});
 
             if (!Directory.Exists("Output")) Directory.CreateDirectory("Output");
