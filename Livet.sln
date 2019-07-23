@@ -75,15 +75,22 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Livet.Annotations\Livet.Annotations.projitems*{0e65806e-a604-4b5d-8022-b65ddd2714d1}*SharedItemsImports = 13
+		Livet.Annotations\Livet.Annotations.projitems*{1ab1f5d2-bd71-47a7-a5f7-1c199dc1ad52}*SharedItemsImports = 4
 		Livet.Annotations\Livet.Annotations.projitems*{1e476a17-6c4d-4ad2-95b2-84bef4c96d67}*SharedItemsImports = 4
 		Livet.Generated\Livet.Generated.projitems*{1e476a17-6c4d-4ad2-95b2-84bef4c96d67}*SharedItemsImports = 4
 		Livet.Shared\Livet.Shared.projitems*{1e476a17-6c4d-4ad2-95b2-84bef4c96d67}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{1e6a8600-faee-4a7b-8118-7366ec8e0582}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{37a0605c-c950-4446-9b2a-94e6b3d6c0b5}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{443f4fe1-5c3b-4847-bcba-5f8e56f63df6}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{7c69d055-0538-4f7c-a11f-623dfeeab1a7}*SharedItemsImports = 4
 		Livet.Extensions.Shared\Livet.Extensions.Shared.projitems*{825f403b-88f1-4bd2-87f6-2eae406be053}*SharedItemsImports = 13
 		Livet.Shared\Livet.Shared.projitems*{9510f365-2314-40d9-928b-ed5520dcdd0e}*SharedItemsImports = 13
 		Livet.Generated\Livet.Generated.projitems*{b55ae272-6941-4c19-b513-455c4989d9fa}*SharedItemsImports = 13
 		Livet.Annotations\Livet.Annotations.projitems*{cd564616-032a-4fb5-bcbd-b942a99864d8}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{e6999a6d-614b-4d41-bae2-14fb16d1bd2c}*SharedItemsImports = 4
 		Livet.Annotations\Livet.Annotations.projitems*{ecf2f532-f29a-455b-856f-f259c7939705}*SharedItemsImports = 4
 		Livet.Extensions.Shared\Livet.Extensions.Shared.projitems*{ecf2f532-f29a-455b-856f-f259c7939705}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{f2fc8969-7230-4098-977f-9c6d78a89fa2}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
