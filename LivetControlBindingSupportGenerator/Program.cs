@@ -10,7 +10,7 @@ namespace LivetControlBindingSupportGenerator
 {
     internal class Program
     {
-        private static readonly Func<Type, bool> typeFilter =
+        private static readonly Func<Type, bool> TypeFilter =
             t => t.IsSubclassOf(typeof(FrameworkElement)) && !t.IsAbstract && !t.IsGenericType && t.IsPublic;
 
         private static void Main(string[] args)
@@ -51,7 +51,7 @@ namespace LivetControlBindingSupportGenerator
                     })
                     .ToArray();
 
-            var targetTypes = assemblies.SelectMany(assembly => assembly.GetTypes().Where(typeFilter));
+            var targetTypes = assemblies.SelectMany(assembly => assembly.GetTypes().Where(TypeFilter));
 
             var typeInformations = targetTypes.ToList().Select(t => new TypeInformation(t)).ToList();
 
