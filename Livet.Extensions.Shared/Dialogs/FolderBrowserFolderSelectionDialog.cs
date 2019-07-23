@@ -96,6 +96,7 @@ namespace Livet.Dialogs
         {
             if (hostWindow == null) throw new ArgumentNullException(nameof(hostWindow));
 
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (_folderBrowserDialog.ShowDialog(
                 new WindowsFormsWin32Window(new WindowInteropHelper(hostWindow).EnsureHandle())))
             {
