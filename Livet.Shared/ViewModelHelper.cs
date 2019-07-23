@@ -53,7 +53,7 @@ namespace Livet
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        var vm = converter((TModel) e.NewItems[0]);
+                        var vm = converter((TModel) e.NewItems?[0]);
                         InvokeOnDispatcher(() => target.Insert(e.NewStartingIndex, vm), dispatcher);
                         break;
                     case NotifyCollectionChangedAction.Move:
@@ -61,13 +61,13 @@ namespace Livet
                         break;
                     case NotifyCollectionChangedAction.Remove:
                         if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
-                            ((IDisposable) target[e.OldStartingIndex]).Dispose();
+                            ((IDisposable) target[e.OldStartingIndex])?.Dispose();
                         InvokeOnDispatcher(() => target.RemoveAt(e.OldStartingIndex), dispatcher);
                         break;
                     case NotifyCollectionChangedAction.Replace:
                         if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
-                            ((IDisposable) target[e.NewStartingIndex]).Dispose();
-                        var replaceVm = converter((TModel) e.NewItems[0]);
+                            ((IDisposable) target[e.NewStartingIndex])?.Dispose();
+                        var replaceVm = converter((TModel) e.NewItems?[0]);
                         InvokeOnDispatcher(() => target[e.NewStartingIndex] = replaceVm, dispatcher);
                         break;
                     case NotifyCollectionChangedAction.Reset:
