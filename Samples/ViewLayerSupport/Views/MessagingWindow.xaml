@@ -52,7 +52,8 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:ConfirmationDialogInteractionMessageAction>
-                        <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView" CallbackMethodTarget="{Binding}">
+                        <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView"
+                                                    CallbackMethodTarget="{Binding}">
                             <l:ConfirmationMessage Caption="テスト" Text="これはテスト用メッセージです。" />
                         </l:DirectInteractionMessage>
                     </l:ConfirmationDialogInteractionMessageAction>
@@ -63,7 +64,8 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:FolderBrowserDialogInteractionMessageAction>
-                        <l:DirectInteractionMessage CallbackMethodName="FolderSelected" CallbackMethodTarget="{Binding}">
+                        <l:DirectInteractionMessage CallbackMethodName="FolderSelected"
+                                                    CallbackMethodTarget="{Binding}">
                             <l:FolderSelectionMessage Description="フォルダーの選択" DialogPreference="None" />
                         </l:DirectInteractionMessage>
                     </l:FolderBrowserDialogInteractionMessageAction>

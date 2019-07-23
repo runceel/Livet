@@ -11,7 +11,7 @@ namespace ViewLayerSupport.Views
      */
 
     /// <summary>
-    /// TextBoxBindingSupportBehaviorWindow.xaml の相互作用ロジック
+    ///     TextBoxBindingSupportBehaviorWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class TextBoxBindingSupportBehaviorWindow : Window
     {

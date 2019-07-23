@@ -11,7 +11,7 @@ namespace ViewLayerSupport.Views
      */
 
     /// <summary>
-    /// PasswordBoxBindingSupportBehaviorWindow.xaml の相互作用ロジック
+    ///     PasswordBoxBindingSupportBehaviorWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class PasswordBoxBindingSupportBehaviorWindow : Window
     {

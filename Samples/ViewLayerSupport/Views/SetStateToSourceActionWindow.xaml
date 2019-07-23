@@ -40,16 +40,19 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
                     <!--  IsMouseOver は本来バインドできないプロパティ  -->
-                    <l:ButtonSetStateToSourceAction Source="{Binding ButtonMouseOver, Mode=TwoWay}" Property="IsMouseOver" />
+                    <l:ButtonSetStateToSourceAction Source="{Binding ButtonMouseOver, Mode=TwoWay}"
+                                                    Property="IsMouseOver" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseLeave">
                     <!--  IsMouseOver は本来バインドできないプロパティ  -->
-                    <l:ButtonSetStateToSourceAction Source="{Binding ButtonMouseOver, Mode=TwoWay}" Property="IsMouseOver" />
+                    <l:ButtonSetStateToSourceAction Source="{Binding ButtonMouseOver, Mode=TwoWay}"
+                                                    Property="IsMouseOver" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
         <Viewbox>
-            <TextBlock HorizontalAlignment="Center" Text="{Binding ButtonMouseOver, StringFormat='ViewModelのButtonMouseOver プロパティは {0} です。'}" />
+            <TextBlock HorizontalAlignment="Center"
+                       Text="{Binding ButtonMouseOver, StringFormat='ViewModelのButtonMouseOver プロパティは {0} です。'}" />
         </Viewbox>
     </StackPanel>
 </Window>

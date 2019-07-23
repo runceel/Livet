@@ -11,7 +11,7 @@ namespace ViewLayerSupport.Views
      */
 
     /// <summary>
-    /// SetStateToSourceActionWindow.xaml の相互作用ロジック
+    ///     SetStateToSourceActionWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class SetStateToSourceActionWindow : Window
     {

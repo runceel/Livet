@@ -5,7 +5,6 @@ namespace LivetControlBindingSupportGenerator
 {
     public partial class SetStateToSourceAction
     {
-
         public string TypeName
         {
             get;

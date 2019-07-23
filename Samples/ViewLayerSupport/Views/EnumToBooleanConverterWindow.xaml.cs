@@ -11,7 +11,7 @@ namespace ViewLayerSupport.Views
      */
 
     /// <summary>
-    /// EnumToBooleanConverterWindow.xaml の相互作用ロジック
+    ///     EnumToBooleanConverterWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class EnumToBooleanConverterWindow : Window
     {

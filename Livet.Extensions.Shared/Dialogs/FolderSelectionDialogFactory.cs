@@ -51,10 +51,8 @@ namespace Livet.Dialogs
                 case FolderSelectionDialogPreference.CommonItemDialog:
                 {
                     if (!CanUseCommonItemDialog)
-                    {
                         throw new PlatformNotSupportedException(Resources
                             .FolderSelectionDialogFactory_CommonItemDialogIsSupportedFromWindowsNT6);
-                    }
 
                     return new CommonOpenFileFolderSelectionDialog();
                 }
@@ -64,8 +62,8 @@ namespace Livet.Dialogs
                     throw new ArgumentException(
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.UnsupportedEnumValue?? string.Empty,
-                            typeof(FolderSelectionDialogPreference), 
+                            Resources.UnsupportedEnumValue ?? string.Empty,
+                            typeof(FolderSelectionDialogPreference),
                             preference,
                             (int) preference),
                         nameof(preference)
