@@ -156,7 +156,7 @@ namespace Livet.EventListeners
         }
 
 
-        internal void Add<T>(Expression<Func<T>> propertyExpression,
+        internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
             [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
