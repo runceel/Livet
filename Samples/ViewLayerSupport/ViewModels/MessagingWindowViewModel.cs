@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Livet;
+using Livet.Annotations;
 using Livet.Messaging;
 using Livet.Messaging.IO;
 
@@ -68,13 +69,17 @@ namespace ViewLayerSupport.ViewModels
             OutputMessage = $"{DateTime.Now}: ConfirmFromViewModel: {message.Response ?? false}";
         }
 
-        public void ConfirmFromView(ConfirmationMessage message)
+        public void ConfirmFromView([NotNull] ConfirmationMessage message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
             OutputMessage = $"{DateTime.Now}: ConfirmFromView: {message.Response ?? false}";
         }
 
-        public void FolderSelected(FolderSelectionMessage message)
+        public void FolderSelected([NotNull] FolderSelectionMessage message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
             OutputMessage = $"{DateTime.Now}: FolderSelected: {message.Response ?? "未選択"}";
         }
 
