@@ -29,7 +29,7 @@ namespace LivetControlBindingSupportGenerator
                         (!DependencyPropertyNames.Contains(p.Name) || DependencyPropertyNames.Contains(p.Name)
                          && p.GetSetMethod(false) == null)
                         && p.Name != "Content"
-                        && !p.PropertyType.Namespace.StartsWith("System.Windows")
+                        && (!p.PropertyType.Namespace?.StartsWith("System.Windows") ?? false)
                         && !p.PropertyType.IsGenericType
                         && !p.GetCustomAttributes(typeof(ObsoleteAttribute), true).Any())
                 .ToList();
