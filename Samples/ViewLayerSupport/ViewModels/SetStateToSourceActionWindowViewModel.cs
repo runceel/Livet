@@ -51,8 +51,8 @@ namespace ViewLayerSupport.ViewModels
 
         public bool ButtonMouseOver
         {
-            get => _buttonMouseOver;
-            set => RaisePropertyChangedIfSet(ref _buttonMouseOver, value);
+            get { return _buttonMouseOver; }
+            set { RaisePropertyChangedIfSet(ref _buttonMouseOver, value); }
         }
 
 

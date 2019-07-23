@@ -49,33 +49,35 @@ namespace ViewLayerSupport.ViewModels
 
         private string _SelectedText;
 
-        public string SelectedText
-        {
-            get => _SelectedText;
-            set => RaisePropertyChangedIfSet(ref _SelectedText, value, nameof(Message));
-        }
-
 
         private int _SelectionLength;
-
-        public int SelectionLength
-        {
-            get => _SelectionLength;
-            set => RaisePropertyChangedIfSet(ref _SelectionLength, value, nameof(Message));
-        }
 
 
         private int _SelectionStart;
 
+        public string SelectedText
+        {
+            get { return _SelectedText; }
+            set { RaisePropertyChangedIfSet(ref _SelectedText, value, nameof(Message)); }
+        }
+
+        public int SelectionLength
+        {
+            get { return _SelectionLength; }
+            set { RaisePropertyChangedIfSet(ref _SelectionLength, value, nameof(Message)); }
+        }
+
         public int SelectionStart
         {
-            get => _SelectionStart;
-            set => RaisePropertyChangedIfSet(ref _SelectionStart, value, nameof(Message));
+            get { return _SelectionStart; }
+            set { RaisePropertyChangedIfSet(ref _SelectionStart, value, nameof(Message)); }
         }
 
 
-
-        public string Message => $"SelectedText: {SelectedText}, Start: {SelectionStart}, Length: {SelectionLength}";
+        public string Message
+        {
+            get { return $"SelectedText: {SelectedText}, Start: {SelectionStart}, Length: {SelectionLength}"; }
+        }
 
         public void Initialize()
         {

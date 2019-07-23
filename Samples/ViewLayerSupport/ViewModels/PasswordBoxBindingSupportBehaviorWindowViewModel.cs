@@ -51,11 +51,15 @@ namespace ViewLayerSupport.ViewModels
 
         public string Password
         {
-            get => _Password;
-            set => RaisePropertyChangedIfSet(ref _Password, value, nameof(Message));
+            get { return _Password; }
+            set { RaisePropertyChangedIfSet(ref _Password, value, nameof(Message)); }
         }
 
-        public string Message => $"入力したパスワードは {Password} です。";
+        public string Message
+        {
+            get { return $"入力したパスワードは {Password} です。"; }
+        }
+
         public void Initialize()
         {
         }
