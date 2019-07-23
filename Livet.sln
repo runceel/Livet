@@ -81,6 +81,7 @@ Global
 		Livet.Extensions.Shared\Livet.Extensions.Shared.projitems*{825f403b-88f1-4bd2-87f6-2eae406be053}*SharedItemsImports = 13
 		Livet.Shared\Livet.Shared.projitems*{9510f365-2314-40d9-928b-ed5520dcdd0e}*SharedItemsImports = 13
 		Livet.Generated\Livet.Generated.projitems*{b55ae272-6941-4c19-b513-455c4989d9fa}*SharedItemsImports = 13
+		Livet.Annotations\Livet.Annotations.projitems*{cd564616-032a-4fb5-bcbd-b942a99864d8}*SharedItemsImports = 4
 		Livet.Annotations\Livet.Annotations.projitems*{ecf2f532-f29a-455b-856f-f259c7939705}*SharedItemsImports = 4
 		Livet.Extensions.Shared\Livet.Extensions.Shared.projitems*{ecf2f532-f29a-455b-856f-f259c7939705}*SharedItemsImports = 4
 	EndGlobalSection
