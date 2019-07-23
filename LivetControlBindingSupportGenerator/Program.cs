@@ -10,9 +10,16 @@ namespace LivetControlBindingSupportGenerator
 {
     internal class Program
     {
-        private static readonly Func<Type, bool> TypeFilter =
-            t => t.IsSubclassOf(typeof(FrameworkElement)) && !t.IsAbstract && !t.IsGenericType && t.IsPublic;
+        private static bool TypeFilter(Type t)
+        {
+            return t != null
+                   && t.IsSubclassOf(typeof(FrameworkElement))
+                   && !t.IsAbstract
+                   && !t.IsGenericType
+                   && t.IsPublic;
+        }
 
+        // ReSharper disable once UnusedParameter.Local
         private static void Main(string[] args)
         {
             var assemblies =
