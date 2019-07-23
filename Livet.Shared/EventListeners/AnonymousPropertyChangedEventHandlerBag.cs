@@ -46,14 +46,17 @@ namespace Livet.EventListeners
             return _handlerDictionary.GetEnumerator();
         }
 
-        internal void RegisterHandler(PropertyChangedEventHandler handler)
+        internal void RegisterHandler([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             RegisterHandler(string.Empty, handler);
         }
 
-        internal void RegisterHandler([NotNull] string propertyName, PropertyChangedEventHandler handler)
+        internal void RegisterHandler([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             lock (_handlerDictionaryLockObject)
             {
@@ -114,8 +117,10 @@ namespace Livet.EventListeners
             }
         }
 
-        internal void Add(PropertyChangedEventHandler handler)
+        internal void Add([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             RegisterHandler(handler);
         }
 
