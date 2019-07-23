@@ -103,8 +103,11 @@ namespace Livet.Dialogs
         /// <returns>
         ///     The result of the dialog.
         /// </returns>
-        protected override bool? ShowDialogCore(Window hostWindow)
+        protected override bool? ShowDialogCore([NotNull] Window hostWindow)
         {
+            if (hostWindow == null) throw new ArgumentNullException(nameof(hostWindow));
+
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (_commonOpenFileDialog.ShowDialog(hostWindow))
             {
                 case CommonFileDialogResult.Ok:
