@@ -74,6 +74,7 @@ namespace LivetControlBindingSupportGenerator
                     Console.WriteLine(t.TypeName + "SetStateToSourceAction Generated !");
                 }
 
+                // ReSharper disable once InvertIf
                 if (t.SetterHavingTargetProperties.Any())
                 {
                     var result = new SetStateToControlBehavior

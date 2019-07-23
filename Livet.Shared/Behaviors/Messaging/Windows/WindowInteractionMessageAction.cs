@@ -12,6 +12,7 @@ namespace Livet.Behaviors.Messaging.Windows
     {
         protected override void InvokeAction(InteractionMessage message)
         {
+            // ReSharper disable once InvertIf
             if (message is WindowActionMessage windowMessage && AssociatedObject != null)
             {
                 var window = Window.GetWindow(AssociatedObject);

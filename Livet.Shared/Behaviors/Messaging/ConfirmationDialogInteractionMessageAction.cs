@@ -10,6 +10,7 @@ namespace Livet.Behaviors.Messaging
     {
         protected override void InvokeAction(InteractionMessage message)
         {
+            // ReSharper disable once InvertIf
             if (message is ConfirmationMessage confirmMessage)
             {
                 var result = MessageBox.Show(

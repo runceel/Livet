@@ -12,6 +12,7 @@ namespace Livet.Behaviors.Messaging.IO
     {
         protected override void InvokeAction(InteractionMessage message)
         {
+            // ReSharper disable once InvertIf
             if (message is SavingFileSelectionMessage saveFileMessage)
             {
                 var dialog = new SaveFileDialog

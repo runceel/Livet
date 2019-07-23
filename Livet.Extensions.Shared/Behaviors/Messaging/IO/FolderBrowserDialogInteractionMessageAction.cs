@@ -19,6 +19,7 @@ namespace Livet.Behaviors.Messaging.IO
         /// <param name="m"><see cref="FolderSelectionMessage" /> specified to <see cref="InteractionMessenger" /> in the client.</param>
         protected override void InvokeAction(InteractionMessage m)
         {
+            // ReSharper disable once InvertIf
             if (m is FolderSelectionMessage folderSelectionMessage)
             {
                 var hostWindow = Window.GetWindow(AssociatedObject ?? throw new InvalidOperationException());
