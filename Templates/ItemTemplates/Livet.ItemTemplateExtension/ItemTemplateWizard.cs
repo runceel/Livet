@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EnvDTE;
 using Livet.Annotations;
 using Microsoft.VisualStudio.TemplateWizard;
@@ -24,7 +25,8 @@ namespace Livet.ItemTemplateExtension
         {
         }
 
-        public void RunStarted([NotNull] object automationObject, [NotNull] Dictionary<string, string> replacementsDictionary,
+        public void RunStarted([NotNull] object automationObject,
+            [NotNull] Dictionary<string, string> replacementsDictionary,
             WizardRunKind runKind, [NotNull] object[] customParams)
         {
             if (automationObject == null) throw new ArgumentNullException(nameof(automationObject));
@@ -34,12 +36,13 @@ namespace Livet.ItemTemplateExtension
             try
             {
                 var dte = (_DTE) automationObject;
-                var project = (Project) ((object[]) dte.ActiveSolutionProjects)[0];
+                var project = (Project) ((object[]) dte.ActiveSolutionProjects)?[0];
                 string defaultNamespace = null;
 
-                foreach (Property property in project.Properties)
-                    if (property.Name.ToLower() == "defaultnamespace")
-                        defaultNamespace = (string) property.Value;
+                if (project?.Properties != null)
+                    foreach (var property in project.Properties?.OfType<Property>())
+                        if (property.Name?.ToLower() == "defaultnamespace")
+                            defaultNamespace = (string) property.Value;
 
                 replacementsDictionary.Add("$projectrootnamespace$", defaultNamespace);
             }
