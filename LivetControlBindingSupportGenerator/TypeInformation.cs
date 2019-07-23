@@ -9,7 +9,7 @@ namespace LivetControlBindingSupportGenerator
 {
     public class TypeInformation
     {
-        public TypeInformation([NotNull] Type t)
+        public TypeInformation(Type t)
         {
             if (t == null) throw new ArgumentNullException(nameof(t));
 
@@ -29,23 +29,24 @@ namespace LivetControlBindingSupportGenerator
                         (!DependencyPropertyNames.Contains(p.Name) || DependencyPropertyNames.Contains(p.Name)
                          && p.GetSetMethod(false) == null)
                         && p.Name != "Content"
-                        && (!p.PropertyType.Namespace?.StartsWith("System.Windows") ?? false)
+                        && p.PropertyType.Namespace != null
+                        && !p.PropertyType.Namespace.StartsWith("System.Windows")
                         && !p.PropertyType.IsGenericType
                         && !p.GetCustomAttributes(typeof(ObsoleteAttribute), true).Any())
                 .ToList();
 
             GetterHavingTargetProperties =
                 targetProperties
-                    .Where(p => p.GetGetMethod(false) != null)
+                    .Where(p => p?.GetGetMethod(false) != null)
                     .ToDictionary(p => p.Name, p => p.PropertyType);
 
             SetterHavingTargetProperties =
                 targetProperties
-                    .Where(p => p.GetSetMethod(false) != null)
+                    .Where(p => p?.GetSetMethod(false) != null)
                     .ToDictionary(p => p.Name, p => p.PropertyType);
         }
 
-        public string TypeName { get; }
+        [NotNull] public string TypeName { get; }
         [NotNull] public Dictionary<string, Type> GetterHavingTargetProperties { get; }
         [NotNull] public Dictionary<string, Type> SetterHavingTargetProperties { get; }
         [NotNull] public IEnumerable<string> DependencyPropertyNames { get; }
