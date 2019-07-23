@@ -31,7 +31,8 @@ namespace LivetControlBindingSupportGenerator
                         "ReachFramework"
                     }.Select(name =>
                         {
-                            var assemblyName = typeof(FrameworkElement).Assembly.GetName().Clone() as AssemblyName;
+                            var assemblyName = typeof(FrameworkElement).Assembly.GetName().Clone() as AssemblyName
+                                               ?? throw new InvalidOperationException();
                             assemblyName.Name = name;
                             assemblyName.SetPublicKey(typeof(FrameworkElement).Assembly.GetName().GetPublicKey());
                             assemblyName.ProcessorArchitecture = ProcessorArchitecture.None;
@@ -44,7 +45,8 @@ namespace LivetControlBindingSupportGenerator
                             "System.Windows.Presentation"
                         }.Select(name =>
                             {
-                                var assemblyName = typeof(object).Assembly.GetName().Clone() as AssemblyName;
+                                var assemblyName = typeof(object).Assembly.GetName().Clone() as AssemblyName
+                                                   ?? throw new InvalidOperationException();
                                 assemblyName.Name = name;
                                 assemblyName.ProcessorArchitecture = ProcessorArchitecture.None;
                                 return assemblyName;
@@ -68,6 +70,8 @@ namespace LivetControlBindingSupportGenerator
 
             typeInformations.ForEach(t =>
             {
+                if (t == null) throw new ArgumentNullException(nameof(t));
+
                 if (t.GetterHavingTargetProperties.Any())
                 {
                     var result = new SetStateToSourceAction
