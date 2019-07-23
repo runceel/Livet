@@ -71,6 +71,10 @@
 	<s:Boolean x:Key="/Default/Environment/ExcludedFiles/FilesAndFoldersThirdParty/=1AB1F5D2_002DBD71_002D47A7_002DA5F7_002D1C199DC1AD52/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/ExcludedFiles/FilesAndFoldersThirdParty/=CD564616_002D032A_002D4FB5_002DBCBD_002DB942A99864D8/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/ExcludedFiles/FilesAndFoldersToSkip/=794A2B28_002DE4AA_002D4CC8_002DBCD0_002DACF3D2068CDE_002Ff_003AWindow_002Examl/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpPlaceEmbeddedOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Abnt/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Adorner/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Attatched/@EntryIndexedValue">True</s:Boolean>
