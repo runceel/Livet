@@ -46,31 +46,26 @@ namespace ViewLayerSupport.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-
-        private string _SelectedText;
-
-
-        private int _SelectionLength;
-
-
-        private int _SelectionStart;
+        private string _selectedText;
+        private int _selectionLength;
+        private int _selectionStart;
 
         public string SelectedText
         {
-            get { return _SelectedText; }
-            set { RaisePropertyChangedIfSet(ref _SelectedText, value, nameof(Message)); }
+            get { return _selectedText; }
+            set { RaisePropertyChangedIfSet(ref _selectedText, value, nameof(Message)); }
         }
 
         public int SelectionLength
         {
-            get { return _SelectionLength; }
-            set { RaisePropertyChangedIfSet(ref _SelectionLength, value, nameof(Message)); }
+            get { return _selectionLength; }
+            set { RaisePropertyChangedIfSet(ref _selectionLength, value, nameof(Message)); }
         }
 
         public int SelectionStart
         {
-            get { return _SelectionStart; }
-            set { RaisePropertyChangedIfSet(ref _SelectionStart, value, nameof(Message)); }
+            get { return _selectionStart; }
+            set { RaisePropertyChangedIfSet(ref _selectionStart, value, nameof(Message)); }
         }
 
 
