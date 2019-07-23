@@ -58,7 +58,7 @@ namespace LivetControlBindingSupportGenerator
                     })
                     .ToArray();
 
-            var targetTypes = assemblies.SelectMany(assembly => assembly.GetTypes().Where(TypeFilter));
+            var targetTypes = assemblies.SelectMany(assembly => assembly?.GetTypes().Where(TypeFilter));
 
             var typeInformations = targetTypes.ToList().Select(t => new TypeInformation(t)).ToList();
 
