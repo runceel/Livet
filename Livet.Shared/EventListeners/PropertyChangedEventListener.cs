@@ -24,8 +24,10 @@ namespace Livet.EventListeners
             if (source == null) throw new ArgumentNullException(nameof(source));
 
             _bag = new AnonymousPropertyChangedEventHandlerBag(source);
-            Initialize(h => source.PropertyChanged += h, h => source.PropertyChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => source.PropertyChanged += h,
+                h => source.PropertyChanged -= h,
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         /// <summary>
@@ -40,8 +42,10 @@ namespace Livet.EventListeners
             if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             _bag = new AnonymousPropertyChangedEventHandlerBag(source, handler);
-            Initialize(h => source.PropertyChanged += h, h => source.PropertyChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => source.PropertyChanged += h,
+                h => source.PropertyChanged -= h,
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>>
@@ -63,8 +67,10 @@ namespace Livet.EventListeners
         ///     このリスナインスタンスに新たなハンドラを追加します。
         /// </summary>
         /// <param name="handler">PropertyChangedイベントハンドラ</param>
-        public void RegisterHandler(PropertyChangedEventHandler handler)
+        public void RegisterHandler([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.RegisterHandler(handler);
         }
@@ -98,8 +104,10 @@ namespace Livet.EventListeners
             _bag.RegisterHandler(propertyExpression, handler);
         }
 
-        public void Add(PropertyChangedEventHandler handler)
+        public void Add([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.Add(handler);
         }
