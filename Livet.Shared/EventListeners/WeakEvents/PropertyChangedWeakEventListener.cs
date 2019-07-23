@@ -26,10 +26,10 @@ namespace Livet.EventListeners.WeakEvents
 
             _bag = new AnonymousPropertyChangedEventHandlerBag(source);
             Initialize(
-                h => new PropertyChangedEventHandler(h),
+                h => new PropertyChangedEventHandler(h ?? throw new ArgumentNullException(nameof(h))),
                 h => source.PropertyChanged += h,
                 h => source.PropertyChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         /// <summary>
@@ -45,10 +45,10 @@ namespace Livet.EventListeners.WeakEvents
 
             _bag = new AnonymousPropertyChangedEventHandlerBag(source, handler);
             Initialize(
-                h => new PropertyChangedEventHandler(h),
+                h => new PropertyChangedEventHandler(h ?? throw new ArgumentNullException(nameof(h))),
                 h => source.PropertyChanged += h,
                 h => source.PropertyChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>>
@@ -70,8 +70,10 @@ namespace Livet.EventListeners.WeakEvents
         ///     このリスナインスタンスに新たなハンドラを追加します。
         /// </summary>
         /// <param name="handler">PropertyChangedイベントハンドラ</param>
-        public void RegisterHandler(PropertyChangedEventHandler handler)
+        public void RegisterHandler([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.RegisterHandler(handler);
         }
@@ -81,9 +83,10 @@ namespace Livet.EventListeners.WeakEvents
         /// </summary>
         /// <param name="propertyName">ハンドラを登録したいPropertyChangedEventArgs.PropertyNameの名前</param>
         /// <param name="handler">propertyNameで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
-        public void RegisterHandler([NotNull] string propertyName, PropertyChangedEventHandler handler)
+        public void RegisterHandler([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             ThrowExceptionIfDisposed();
             _bag.RegisterHandler(propertyName, handler);
@@ -95,16 +98,19 @@ namespace Livet.EventListeners.WeakEvents
         /// <param name="propertyExpression">() => プロパティ形式のラムダ式</param>
         /// <param name="handler">propertyExpressionで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
         public void RegisterHandler<T>([NotNull] Expression<Func<T>> propertyExpression,
-            PropertyChangedEventHandler handler)
+            [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             ThrowExceptionIfDisposed();
             _bag.RegisterHandler(propertyExpression, handler);
         }
 
-        public void Add(PropertyChangedEventHandler handler)
+        public void Add([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.Add(handler);
         }
