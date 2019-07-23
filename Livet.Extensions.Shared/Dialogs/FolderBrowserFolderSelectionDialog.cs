@@ -101,14 +101,9 @@ namespace Livet.Dialogs
             {
                 case DialogResult.OK:
                 case DialogResult.Yes:
-                {
                     return true;
-                }
-
                 default:
-                {
                     return null;
-                }
             }
         }
 
