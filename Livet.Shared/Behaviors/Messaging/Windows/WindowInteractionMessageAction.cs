@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Livet.Messaging;
 using Livet.Messaging.Windows;
 
@@ -11,29 +12,32 @@ namespace Livet.Behaviors.Messaging.Windows
     {
         protected override void InvokeAction(InteractionMessage message)
         {
-            if (message is WindowActionMessage windowMessage)
+            // ReSharper disable once InvertIf
+            if (message is WindowActionMessage windowMessage && AssociatedObject != null)
             {
                 var window = Window.GetWindow(AssociatedObject);
+                if (window == null) return;
 
-                if (window != null)
-                    switch (windowMessage.Action)
-                    {
-                        case WindowAction.Close:
-                            window.Close();
-                            break;
-                        case WindowAction.Maximize:
-                            window.WindowState = WindowState.Maximized;
-                            break;
-                        case WindowAction.Minimize:
-                            window.WindowState = WindowState.Minimized;
-                            break;
-                        case WindowAction.Normal:
-                            window.WindowState = WindowState.Normal;
-                            break;
-                        case WindowAction.Active:
-                            window.Activate();
-                            break;
-                    }
+                switch (windowMessage.Action)
+                {
+                    case WindowAction.Close:
+                        window.Close();
+                        break;
+                    case WindowAction.Maximize:
+                        window.WindowState = WindowState.Maximized;
+                        break;
+                    case WindowAction.Minimize:
+                        window.WindowState = WindowState.Minimized;
+                        break;
+                    case WindowAction.Normal:
+                        window.WindowState = WindowState.Normal;
+                        break;
+                    case WindowAction.Active:
+                        window.Activate();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
         }
     }

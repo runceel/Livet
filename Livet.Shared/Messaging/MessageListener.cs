@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Threading;
 using Livet.Annotations;
 using Livet.EventListeners.WeakEvents;
@@ -41,18 +42,17 @@ namespace Livet.Messaging
         }
 
         public MessageListener([NotNull] InteractionMessenger messenger, [CanBeNull] string messageKey,
-            Action<InteractionMessage> action)
+            [NotNull] Action<InteractionMessage> action)
             : this(messenger)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
             if (messageKey == null) messageKey = string.Empty;
 
             RegisterAction(messageKey, action);
         }
 
-        public MessageListener([NotNull] InteractionMessenger messenger, Action<InteractionMessage> action)
-            : this(messenger, null, action)
-        {
-        }
+        public MessageListener([NotNull] InteractionMessenger messenger, [NotNull] Action<InteractionMessage> action)
+            : this(messenger, null, action) { }
 
         [NotNull]
         public Dispatcher Dispatcher
@@ -64,6 +64,8 @@ namespace Livet.Messaging
         public void Dispose()
         {
             Dispose(true);
+
+            // ReSharper disable once GCSuppressFinalizeForTypeWithoutDestructor
             GC.SuppressFinalize(this);
         }
 
@@ -80,40 +82,53 @@ namespace Livet.Messaging
             return _actionDictionary.GetEnumerator();
         }
 
-        public void RegisterAction(Action<InteractionMessage> action)
+        public void RegisterAction([NotNull] Action<InteractionMessage> action)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             ThrowExceptionIfDisposed();
-            _actionDictionary.GetOrAdd(string.Empty, _ => new ConcurrentBag<Action<InteractionMessage>>()).Add(action);
+            var dic = _actionDictionary.GetOrAdd(string.Empty, _ => new ConcurrentBag<Action<InteractionMessage>>())
+                      ?? throw new InvalidOperationException();
+
+            dic.Add(action);
         }
 
-        public void RegisterAction(string messageKey, Action<InteractionMessage> action)
+        public void RegisterAction([NotNull] string messageKey, [NotNull] Action<InteractionMessage> action)
         {
+            if (messageKey == null) throw new ArgumentNullException(nameof(messageKey));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             ThrowExceptionIfDisposed();
-            _actionDictionary.GetOrAdd(messageKey, _ => new ConcurrentBag<Action<InteractionMessage>>()).Add(action);
+            var dic = _actionDictionary.GetOrAdd(messageKey, _ => new ConcurrentBag<Action<InteractionMessage>>())
+                      ?? throw new InvalidOperationException();
+
+            dic.Add(action);
         }
 
-        private void MessageReceived(object sender, InteractionMessageRaisedEventArgs e)
+        private void MessageReceived(object sender, [NotNull] InteractionMessageRaisedEventArgs e)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
             if (_disposed) return;
 
             var message = e.Message;
+            var clonedMessage = (InteractionMessage) message.Clone();
 
-            var cloneMessage = (InteractionMessage) message.Clone();
+            clonedMessage.Freeze();
 
-            cloneMessage.Freeze();
-
-            DoActionOnDispatcher(() => { GetValue(e, cloneMessage); });
+            DoActionOnDispatcher(() => { GetValue(e, clonedMessage); });
 
             var responsiveMessage = message as ResponsiveInteractionMessage;
 
             object response;
             if (responsiveMessage != null &&
-                (response = ((ResponsiveInteractionMessage) cloneMessage).Response) != null)
+                (response = ((ResponsiveInteractionMessage) clonedMessage).Response) != null)
                 responsiveMessage.Response = response;
         }
 
-        private void GetValue(InteractionMessageRaisedEventArgs e, InteractionMessage cloneMessage)
+        private void GetValue([NotNull] InteractionMessageRaisedEventArgs e, InteractionMessage cloneMessage)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
+
             var result = _source.TryGetTarget(out _);
 
             if (!result) return;
@@ -123,14 +138,17 @@ namespace Livet.Messaging
                 _actionDictionary.TryGetValue(e.Message.MessageKey, out var list);
 
                 if (list != null)
+                {
                     foreach (var action in list)
                         action(cloneMessage);
+                }
             }
 
             _actionDictionary.TryGetValue(string.Empty, out var allList);
-            if (allList != null)
-                foreach (var action in allList)
-                    action(cloneMessage);
+            if (allList == null) return;
+
+            foreach (var action in allList)
+                action(cloneMessage);
         }
 
         private void DoActionOnDispatcher([NotNull] Action action)
@@ -143,22 +161,27 @@ namespace Livet.Messaging
                 Dispatcher.Invoke(action);
         }
 
-        public void Add(Action<InteractionMessage> action)
+        public void Add([NotNull] Action<InteractionMessage> action)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             RegisterAction(action);
         }
 
-        public void Add(string messageKey, Action<InteractionMessage> action)
+        public void Add([NotNull] string messageKey, [NotNull] Action<InteractionMessage> action)
         {
+            if (messageKey == null) throw new ArgumentNullException(nameof(messageKey));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             RegisterAction(messageKey, action);
         }
 
-
-        public void Add(string messageKey, [NotNull] params Action<InteractionMessage>[] actions)
+        public void Add([NotNull] string messageKey, [NotNull] params Action<InteractionMessage>[] actions)
         {
+            if (messageKey == null) throw new ArgumentNullException(nameof(messageKey));
             if (actions == null) throw new ArgumentNullException(nameof(actions));
 
-            foreach (var action in actions) RegisterAction(messageKey, action);
+            foreach (var action in actions.Where(a => a != null)) RegisterAction(messageKey, action);
         }
 
         private void ThrowExceptionIfDisposed()

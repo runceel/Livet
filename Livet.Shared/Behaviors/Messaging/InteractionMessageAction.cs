@@ -41,31 +41,28 @@ namespace Livet.Behaviors.Messaging
         /// </summary>
         public bool InvokeActionOnlyWhenWindowIsActive
         {
-            get { return (bool) GetValue(InvokeActionOnlyWhenWindowIsActiveProperty); }
+            get { return (bool) (GetValue(InvokeActionOnlyWhenWindowIsActiveProperty) ?? default(bool)); }
             set { SetValue(InvokeActionOnlyWhenWindowIsActiveProperty, value); }
         }
 
         protected sealed override void Invoke(object parameter)
         {
-            if ((bool) DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))
-                .DefaultValue) return;
+            var metadata = DesignerProperties.IsInDesignModeProperty?.GetMetadata(typeof(DependencyObject));
+            if ((bool) (metadata?.DefaultValue ?? false)) return;
 
             var message = parameter as InteractionMessage;
 
             if (DirectInteractionMessage != null) message = DirectInteractionMessage.Message;
 
+            if (AssociatedObject == null) return;
+
             var window = Window.GetWindow(AssociatedObject);
-
             if (window == null) return;
-
             if (!window.IsActive && InvokeActionOnlyWhenWindowIsActive) return;
+            if (message == null) return;
 
-            if (message != null)
-            {
-                InvokeAction(message);
-
-                DirectInteractionMessage?.InvokeCallbacks(message);
-            }
+            InvokeAction(message);
+            DirectInteractionMessage?.InvokeCallbacks(message);
         }
 
         protected abstract void InvokeAction(InteractionMessage message);

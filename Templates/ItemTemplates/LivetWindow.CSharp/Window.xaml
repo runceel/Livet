@@ -7,20 +7,20 @@
         xmlns:v="clr-namespace:$projectrootnamespace$.Views"
         xmlns:vm="clr-namespace:$projectrootnamespace$.ViewModels"
         Title="$safeitemname$" Height="350" Width="525">
-    
+
     <Window.DataContext>
-        <vm:$safeitemname$ViewModel/>
+        <vm:$ safeitemname$ ViewModel />
     </Window.DataContext>
 
     <i:Interaction.Triggers>
         <!-- When ContentRendered event raised, Initialize method of ViewModel would be called. -->
         <i:EventTrigger EventName="ContentRendered">
-            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize" />
         </i:EventTrigger>
 
         <!-- Dispose method is called, when Window closing. -->
         <i:EventTrigger EventName="Closed">
-            <l:DataContextDisposeAction/>
+            <l:DataContextDisposeAction />
         </i:EventTrigger>
 
         <!-- If you make user choose 'OK or Cancel' closing Window, then please use Window Close cancel Behavior. -->
@@ -28,6 +28,6 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        
+
     </Grid>
 </Window>

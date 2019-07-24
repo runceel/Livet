@@ -21,13 +21,11 @@ namespace Livet.Messaging
             if (message == null) throw new ArgumentNullException(nameof(message));
 
             var threadSafeHandler = Interlocked.CompareExchange(ref Raised, null, null);
+            if (threadSafeHandler == null) return;
 
-            if (threadSafeHandler != null)
-            {
-                if (!message.IsFrozen) message.Freeze();
+            if (!message.IsFrozen) message.Freeze();
 
-                threadSafeHandler(this, new InteractionMessageRaisedEventArgs(message));
-            }
+            threadSafeHandler(this, new InteractionMessageRaisedEventArgs(message));
         }
 
         /// <summary>
@@ -36,22 +34,17 @@ namespace Livet.Messaging
         /// <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
         /// <param name="message">戻り値情報のある相互作用メッセージ</param>
         /// <returns>アクション実行後に、戻り情報を含んだ相互作用メッセージ</returns>
-        public T GetResponse<T>([NotNull] T message)
-            where T : ResponsiveInteractionMessage
+        public T GetResponse<T>([NotNull] T message) where T : ResponsiveInteractionMessage
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
 
             var threadSafeHandler = Interlocked.CompareExchange(ref Raised, null, null);
+            if (threadSafeHandler == null) return null;
 
-            if (threadSafeHandler != null)
-            {
-                if (!message.IsFrozen) message.Freeze();
+            if (!message.IsFrozen) message.Freeze();
 
-                threadSafeHandler(this, new InteractionMessageRaisedEventArgs(message));
-                return message;
-            }
-
-            return null;
+            threadSafeHandler(this, new InteractionMessageRaisedEventArgs(message));
+            return message;
         }
 
         /// <summary>
@@ -64,9 +57,9 @@ namespace Livet.Messaging
         /// </summary>
         /// <param name="message">相互作用メッセージ</param>
         [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
-        public async Task RaiseAsync(InteractionMessage message)
+        public async Task RaiseAsync([NotNull] InteractionMessage message)
         {
-            if (message == null) throw new ArgumentException("messageはnullにできません");
+            if (message == null) throw new ArgumentNullException(nameof(message));
 
             if (!message.IsFrozen) message.Freeze();
 
@@ -78,8 +71,7 @@ namespace Livet.Messaging
         /// </summary>
         /// <typeparam name="T">戻り値情報のある相互作用メッセージの型</typeparam>
         /// <param name="message">戻り値情報のある相互作用メッセージ</param>
-        public async Task<T> GetResponseAsync<T>([NotNull] T message)
-            where T : ResponsiveInteractionMessage
+        public async Task<T> GetResponseAsync<T>([NotNull] T message) where T : ResponsiveInteractionMessage
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
 
@@ -107,7 +99,6 @@ namespace Livet.Messaging
             return msg;
         }
     }
-
 
     /// <summary>
     ///     相互作用メッセージ送信時イベント用のイベント引数です。

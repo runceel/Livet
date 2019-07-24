@@ -43,20 +43,19 @@ namespace Livet.EventListeners
             IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>.
             GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
         internal void RegisterHandler(NotifyCollectionChangedEventHandler handler)
         {
-            lock (_allHandlerListLockObject)
-            {
-                _allHandlerList.Add(handler);
-            }
+            lock (_allHandlerListLockObject) { _allHandlerList.Add(handler); }
         }
 
         internal void RegisterHandler(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
@@ -79,26 +78,29 @@ namespace Livet.EventListeners
             if (e == null) throw new ArgumentNullException(nameof(e));
 
             var result = _source.TryGetTarget(out var sourceResult);
-
             if (!result) return;
 
             List<NotifyCollectionChangedEventHandler> list;
-            lock (_handlerDictionaryLockObject)
-            {
-                _handlerDictionary.TryGetValue(e.Action, out list);
-            }
+            lock (_handlerDictionaryLockObject) { _handlerDictionary.TryGetValue(e.Action, out list); }
 
             if (list != null)
-                lock (_lockObjectDictionary[list])
+            {
+                var lockObject = _lockObjectDictionary[list];
+                if (lockObject != null)
                 {
-                    foreach (var handler in list) handler(sourceResult, e);
+                    lock (lockObject)
+                    {
+                        foreach (var handler in list) handler(sourceResult, e);
+                    }
                 }
+            }
 
             lock (_allHandlerListLockObject)
             {
-                if (_allHandlerList.Any())
-                    foreach (var handler in _allHandlerList)
-                        handler(sourceResult, e);
+                if (!_allHandlerList.Any()) return;
+
+                foreach (var handler in _allHandlerList)
+                    handler(sourceResult, e);
             }
         }
 
@@ -112,8 +114,8 @@ namespace Livet.EventListeners
             RegisterHandler(action, handler);
         }
 
-
-        internal void Add(NotifyCollectionChangedAction action, [NotNull] params NotifyCollectionChangedEventHandler[] handlers)
+        internal void Add(NotifyCollectionChangedAction action,
+            [NotNull] params NotifyCollectionChangedEventHandler[] handlers)
         {
             if (handlers == null) throw new ArgumentNullException(nameof(handlers));
 

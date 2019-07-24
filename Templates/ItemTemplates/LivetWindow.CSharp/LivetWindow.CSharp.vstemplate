@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/vstemplate/2005">
+
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
     <Name>Livet WPF Window</Name>
     <Description>Create a Window class for Livet.</Description>
@@ -17,7 +20,7 @@
     <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.xaml">Window.xaml</ProjectItem>
     <ProjectItem ReplaceParameters="true" SubType="Code" TargetFileName="$fileinputname$.xaml.cs">Window.xaml.cs</ProjectItem>
     <CustomParameters>
-      <CustomParameter Name="$basename$" Value="$fileinputname$"/>
+      <CustomParameter Name="$basename$" Value="$fileinputname$" />
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>

@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Livet.Annotations;
 
@@ -19,6 +20,7 @@ namespace Livet
     public class ObservableSynchronizedCollection<T> : IList<T>, ICollection, INotifyCollectionChanged,
         INotifyPropertyChanged, IReadOnlyList<T>
     {
+        private const string ItemsString = "Item[]";
         [NotNull] private readonly IList<T> _list;
 
         [NonSerialized] [NotNull] private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
@@ -85,8 +87,8 @@ namespace Livet
             ReadAndWriteWithLockAction(() => _list.Insert(index, item),
                 () =>
                 {
-                    OnPropertyChanged("Count");
-                    OnPropertyChanged("Item[]");
+                    OnPropertyChanged(nameof(Count));
+                    OnPropertyChanged(ItemsString);
                     OnCollectionChanged(
                         new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
                 });
@@ -102,8 +104,8 @@ namespace Livet
                 removeItem => _list.RemoveAt(index),
                 removeItem =>
                 {
-                    OnPropertyChanged("Count");
-                    OnPropertyChanged("Item[]");
+                    OnPropertyChanged(nameof(Count));
+                    OnPropertyChanged(ItemsString);
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
                         removeItem, index));
                 });
@@ -118,7 +120,7 @@ namespace Livet
                     oldItem => { _list[index] = value; },
                     oldItem =>
                     {
-                        OnPropertyChanged("Item[]");
+                        OnPropertyChanged(ItemsString);
                         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,
                             _list[index], oldItem, index));
                     });
@@ -134,8 +136,8 @@ namespace Livet
             ReadAndWriteWithLockAction(() => _list.Add(item),
                 () =>
                 {
-                    OnPropertyChanged("Count");
-                    OnPropertyChanged("Item[]");
+                    OnPropertyChanged(nameof(Count));
+                    OnPropertyChanged(ItemsString);
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item,
                         _list.Count - 1));
                 });
@@ -149,16 +151,17 @@ namespace Livet
             ReadAndWriteWithLockAction(() => _list.Count,
                 count =>
                 {
-                    if (count != 0) _list.Clear();
+                    if (count == 0) return;
+
+                    _list.Clear();
                 },
                 count =>
                 {
-                    if (count != 0)
-                    {
-                        OnPropertyChanged("Count");
-                        OnPropertyChanged("Item[]");
-                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                    }
+                    if (count == 0) return;
+
+                    OnPropertyChanged(nameof(Count));
+                    OnPropertyChanged(ItemsString);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 });
         }
 
@@ -211,13 +214,12 @@ namespace Livet
                 index => { result = _list.Remove(item); },
                 index =>
                 {
-                    if (result)
-                    {
-                        OnPropertyChanged("Count");
-                        OnPropertyChanged("Item[]");
-                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                            item, index));
-                    }
+                    if (!result) return;
+
+                    OnPropertyChanged(nameof(Count));
+                    OnPropertyChanged(ItemsString);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                        item, index));
                 });
 
             return result;
@@ -229,7 +231,8 @@ namespace Livet
         /// <returns>列挙子</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return ReadWithLockAction(() => ((IEnumerable<T>) _list.ToArray()).GetEnumerator());
+            return ReadWithLockAction(() => ((IEnumerable<T>) _list.ToArray()).GetEnumerator())
+                   ?? Enumerable.Empty<T>().GetEnumerator();
         }
 
         /// <summary>
@@ -238,7 +241,7 @@ namespace Livet
         /// <returns>列挙子</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ReadWithLockAction(() => ((IEnumerable<T>) _list.ToArray()).GetEnumerator());
+            return GetEnumerator();
         }
 
         /// <summary>
@@ -268,7 +271,7 @@ namespace Livet
                 },
                 item =>
                 {
-                    OnPropertyChanged("Item[]");
+                    OnPropertyChanged(ItemsString);
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, item,
                         newIndex, oldIndex));
                 });
@@ -289,13 +292,12 @@ namespace Livet
         ///     PropertyChangedイベントを発生させます。
         /// </summary>
         /// <param name="propertyName">変更されたプロパティの名前</param>
-        protected void OnPropertyChanged(string propertyName)
+        [NotifyPropertyChangedInvocator]
+        protected void OnPropertyChanged([CallerMemberName] [CanBeNull] string propertyName = "")
         {
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
-
             threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
-
 
         private void ReadWithLockAction([NotNull] Action readAction)
         {
@@ -304,39 +306,23 @@ namespace Livet
             if (!_lock.IsReadLockHeld)
             {
                 _lock.EnterReadLock();
-                try
-                {
-                    readAction();
-                }
-                finally
-                {
-                    _lock.ExitReadLock();
-                }
+                try { readAction(); }
+                finally { _lock.ExitReadLock(); }
             }
             else
-            {
                 readAction();
-            }
         }
 
         private TResult ReadWithLockAction<TResult>([NotNull] Func<TResult> readAction)
         {
             if (readAction == null) throw new ArgumentNullException(nameof(readAction));
 
-            if (!_lock.IsReadLockHeld)
-            {
-                _lock.EnterReadLock();
-                try
-                {
-                    return readAction();
-                }
-                finally
-                {
-                    _lock.ExitReadLock();
-                }
-            }
+            if (_lock.IsReadLockHeld) return readAction();
 
-            return readAction();
+            _lock.EnterReadLock();
+
+            try { return readAction(); }
+            finally { _lock.ExitReadLock(); }
         }
 
         private void ReadAndWriteWithLockAction([NotNull] Action writeAction, [NotNull] Action readAfterWriteAction)
@@ -348,30 +334,15 @@ namespace Livet
             try
             {
                 _lock.EnterWriteLock();
-                try
-                {
-                    writeAction();
-                }
-                finally
-                {
-                    _lock.ExitWriteLock();
-                }
+                try { writeAction(); }
+                finally { _lock.ExitWriteLock(); }
 
                 _lock.EnterReadLock();
 
-                try
-                {
-                    readAfterWriteAction();
-                }
-                finally
-                {
-                    _lock.ExitReadLock();
-                }
+                try { readAfterWriteAction(); }
+                finally { _lock.ExitReadLock(); }
             }
-            finally
-            {
-                _lock.ExitUpgradeableReadLock();
-            }
+            finally { _lock.ExitUpgradeableReadLock(); }
         }
 
         private void ReadAndWriteWithLockAction<TResult>([NotNull] Func<TResult> readBeforeWriteAction,
@@ -388,30 +359,15 @@ namespace Livet
 
                 _lock.EnterWriteLock();
 
-                try
-                {
-                    writeAction(readActionResult);
-                }
-                finally
-                {
-                    _lock.ExitWriteLock();
-                }
+                try { writeAction(readActionResult); }
+                finally { _lock.ExitWriteLock(); }
 
                 _lock.EnterReadLock();
 
-                try
-                {
-                    readAfterWriteAction(readActionResult);
-                }
-                finally
-                {
-                    _lock.ExitReadLock();
-                }
+                try { readAfterWriteAction(readActionResult); }
+                finally { _lock.ExitReadLock(); }
             }
-            finally
-            {
-                _lock.ExitUpgradeableReadLock();
-            }
+            finally { _lock.ExitUpgradeableReadLock(); }
         }
     }
 }

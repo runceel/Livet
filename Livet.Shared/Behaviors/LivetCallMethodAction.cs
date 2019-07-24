@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Interactivity;
 using Livet.Annotations;
 
@@ -47,7 +48,6 @@ namespace Livet.Behaviors
             set { SetValue(MethodNameProperty, value); }
         }
 
-
         /// <summary>
         ///     呼び出すメソッドに渡す引数を指定、または取得します。
         /// </summary>
@@ -59,9 +59,12 @@ namespace Livet.Behaviors
 
         private static void OnMethodParameterChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var thisReference = (LivetCallMethodAction) sender;
+            var action = sender as LivetCallMethodAction
+                         ?? throw new ArgumentException(
+                             $"Value must be a {nameof(LivetCallMethodAction)}.",
+                             nameof(sender));
 
-            thisReference._parameterSet = true;
+            action._parameterSet = true;
         }
 
         protected override void Invoke(object parameter)

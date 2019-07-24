@@ -8,24 +8,29 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 // ReSharper disable All
+
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Text;
+
 namespace LivetControlBindingSupportGenerator
 {
     /// <summary>
-    /// Class to produce the template output
+    ///     Class to produce the template output
     /// </summary>
-    
-    #line 1 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
+#line 1 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+    [GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class MetaData : MetaDataBase
     {
-#line hidden
         /// <summary>
-        /// Create the template output
+        ///     Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            
-            #line 2 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+#line 2 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
 
 // You can remove full path from generated code in Visual Studio.
 // 1. Show [Find and Replace] dialog (generally ctrl+shift+H).
@@ -34,9 +39,8 @@ namespace LivetControlBindingSupportGenerator
 // 4. Specify search condition as 'Regular expressions'
 // 5. Click [Replace All]
 
-            
-            #line default
-            #line hidden
+#line default
+#line hidden
             this.Write(@"//このコードはT4 Templateによって自動生成されています。
 
 using System;
@@ -58,164 +62,164 @@ namespace Livet.Design
         {
 
 ");
-            
-            #line 30 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
 
-foreach(var generateTypeName in GeneratedTypeNames)
-{
+#line 30 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
 
-            
-            #line default
-            #line hidden
-            
-            #line 34 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+            foreach (var generateTypeName in GeneratedTypeNames)
+            {
+#line default
+#line hidden
 
-	if(generateTypeName.IndexOf("ToSourceAction") != -1)
-	{
+#line 34 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\tbuilder.AddCustomAttributes(\r\n                        typeof(");
-            
-            #line 39 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                        new ToolboxCategoryAttribute(Resources.ToolBoxCategor" +
-                    "y_ControlBindingSupport_OneWayToSource));\r\n\t\t\t\r\n\t\t\tbuilder.AddCustomAttributes(\r" +
-                    "\n                    typeof(");
-            
-            #line 43 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                    new DescriptionAttribute(Resources.ControlBindingSupport_" +
-                    "OneWayToSource_Description));\r\n\r\n\t\t\tbuilder.AddCustomAttributes(\r\n              " +
-                    "      typeof(");
-            
-            #line 47 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                    \"Property\",\r\n                    new DescriptionAttribute" +
-                    "(Resources.ControlBindingSupport_OneWayToSource_Property_Description));\r\n\r\n\t\t\tbu" +
-                    "ilder.AddCustomAttributes(\r\n                    typeof(");
-            
-            #line 52 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                    \"Source\",\r\n                    new DescriptionAttribute(R" +
-                    "esources.ControlBindingSupport_OneWayToSource_Source_Description));\r\n\r\n");
-            
-            #line 56 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                if (generateTypeName.IndexOf("ToSourceAction") != -1)
+                {
+#line default
+#line hidden
+                    this.Write("\t\t\tbuilder.AddCustomAttributes(\r\n                        typeof(");
 
-	}
+#line 39 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
 
-            
-            #line default
-            #line hidden
-            
-            #line 59 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+#line default
+#line hidden
+                    this.Write("),\r\n                        new ToolboxCategoryAttribute(Resources.ToolBoxCategor" +
+                               "y_ControlBindingSupport_OneWayToSource));\r\n\t\t\t\r\n\t\t\tbuilder.AddCustomAttributes(\r"
+                               +
+                               "\n                    typeof(");
 
-	else
-	{
+#line 43 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\tbuilder.AddCustomAttributes(\r\n                        typeof(");
-            
-            #line 64 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                        new ToolboxCategoryAttribute(Resources.ToolBoxCategor" +
-                    "y_ControlBindingSupport_OneWayToControl));\r\n\t\t\t\r\n\t\t\tbuilder.AddCustomAttributes(" +
-                    "\r\n                    typeof(");
-            
-            #line 68 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                    new DescriptionAttribute(Resources.ControlBindingSupport_" +
-                    "OneWayToControl_Description));\r\n\r\n\t\t\tbuilder.AddCustomAttributes(\r\n             " +
-                    "       typeof(");
-            
-            #line 72 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                    \"Property\",\r\n                    new DescriptionAttribute" +
-                    "(Resources.ControlBindingSupport_OneWayToControl_Property_Description));\r\n\r\n\t\t\tb" +
-                    "uilder.AddCustomAttributes(\r\n                    typeof(");
-            
-            #line 77 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("),\r\n                    \"Source\",\r\n                    new DescriptionAttribute(R" +
-                    "esources.ControlBindingSupport_OneWayToControl_Source_Description));\r\n\r\n\r\n");
-            
-            #line 82 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+#line default
+#line hidden
+                    this.Write("),\r\n                    new DescriptionAttribute(Resources.ControlBindingSupport_" +
+                               "OneWayToSource_Description));\r\n\r\n\t\t\tbuilder.AddCustomAttributes(\r\n              "
+                               +
+                               "      typeof(");
 
-	}
+#line 47 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
 
-            
-            #line default
-            #line hidden
-            this.Write("  \r\n");
-            
-            #line 85 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+#line default
+#line hidden
+                    this.Write("),\r\n                    \"Property\",\r\n                    new DescriptionAttribute"
+                               +
+                               "(Resources.ControlBindingSupport_OneWayToSource_Property_Description));\r\n\r\n\t\t\tbu"
+                               +
+                               "ilder.AddCustomAttributes(\r\n                    typeof(");
 
-}
+#line 52 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
 
-            
-            #line default
-            #line hidden
+#line default
+#line hidden
+                    this.Write("),\r\n                    \"Source\",\r\n                    new DescriptionAttribute(R"
+                               +
+                               "esources.ControlBindingSupport_OneWayToSource_Source_Description));\r\n\r\n");
+
+#line 56 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                }
+#line default
+#line hidden
+#line 59 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+
+                else
+                {
+#line default
+#line hidden
+                    this.Write("\t\t\tbuilder.AddCustomAttributes(\r\n                        typeof(");
+
+#line 64 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
+
+#line default
+#line hidden
+                    this.Write("),\r\n                        new ToolboxCategoryAttribute(Resources.ToolBoxCategor" +
+                               "y_ControlBindingSupport_OneWayToControl));\r\n\t\t\t\r\n\t\t\tbuilder.AddCustomAttributes("
+                               +
+                               "\r\n                    typeof(");
+
+#line 68 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
+
+#line default
+#line hidden
+                    this.Write("),\r\n                    new DescriptionAttribute(Resources.ControlBindingSupport_" +
+                               "OneWayToControl_Description));\r\n\r\n\t\t\tbuilder.AddCustomAttributes(\r\n             "
+                               +
+                               "       typeof(");
+
+#line 72 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
+
+#line default
+#line hidden
+                    this.Write("),\r\n                    \"Property\",\r\n                    new DescriptionAttribute"
+                               +
+                               "(Resources.ControlBindingSupport_OneWayToControl_Property_Description));\r\n\r\n\t\t\tb"
+                               +
+                               "uilder.AddCustomAttributes(\r\n                    typeof(");
+
+#line 77 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(generateTypeName));
+
+#line default
+#line hidden
+                    this.Write("),\r\n                    \"Source\",\r\n                    new DescriptionAttribute(R"
+                               +
+                               "esources.ControlBindingSupport_OneWayToControl_Source_Description));\r\n\r\n\r\n");
+
+#line 82 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+                }
+
+#line default
+#line hidden
+                this.Write("  \r\n");
+
+#line 85 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
+            }
+
+#line default
+#line hidden
             this.Write("\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
-    
-    #line default
-    #line hidden
+
+#line default
+#line hidden
+
     #region Base class
+
     /// <summary>
-    /// Base class for this transformation
+    ///     Base class for this transformation
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
+    [GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public class MetaDataBase
     {
         #region Fields
-        private global::System.Text.StringBuilder generationEnvironmentField;
-        private global::System.CodeDom.Compiler.CompilerErrorCollection errorsField;
-        private global::System.Collections.Generic.List<int> indentLengthsField;
+
+        private StringBuilder generationEnvironmentField;
+        private CompilerErrorCollection errorsField;
+        private List<int> indentLengthsField;
         private string currentIndentField = "";
         private bool endsWithNewline;
-        private global::System.Collections.Generic.IDictionary<string, object> sessionField;
+        private IDictionary<string, object> sessionField;
+
         #endregion
+
         #region Properties
+
         /// <summary>
-        /// The string builder that generation-time code is using to assemble generated output
+        ///     The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        protected StringBuilder GenerationEnvironment
         {
             get
             {
-                if ((this.generationEnvironmentField == null))
-                {
-                    this.generationEnvironmentField = new global::System.Text.StringBuilder();
-                }
+                if ((this.generationEnvironmentField == null)) this.generationEnvironmentField = new StringBuilder();
+
                 return this.generationEnvironmentField;
             }
             set
@@ -223,36 +227,35 @@ foreach(var generateTypeName in GeneratedTypeNames)
                 this.generationEnvironmentField = value;
             }
         }
+
         /// <summary>
-        /// The error collection for the generation process
+        ///     The error collection for the generation process
         /// </summary>
-        public System.CodeDom.Compiler.CompilerErrorCollection Errors
+        public CompilerErrorCollection Errors
         {
             get
             {
-                if ((this.errorsField == null))
-                {
-                    this.errorsField = new global::System.CodeDom.Compiler.CompilerErrorCollection();
-                }
+                if ((this.errorsField == null)) this.errorsField = new CompilerErrorCollection();
+
                 return this.errorsField;
             }
         }
+
         /// <summary>
-        /// A list of the lengths of each indent that was added with PushIndent
+        ///     A list of the lengths of each indent that was added with PushIndent
         /// </summary>
-        private System.Collections.Generic.List<int> indentLengths
+        private List<int> indentLengths
         {
             get
             {
-                if ((this.indentLengthsField == null))
-                {
-                    this.indentLengthsField = new global::System.Collections.Generic.List<int>();
-                }
+                if ((this.indentLengthsField == null)) this.indentLengthsField = new List<int>();
+
                 return this.indentLengthsField;
             }
         }
+
         /// <summary>
-        /// Gets the current indent we use when adding lines to the output
+        ///     Gets the current indent we use when adding lines to the output
         /// </summary>
         public string CurrentIndent
         {
@@ -261,10 +264,11 @@ foreach(var generateTypeName in GeneratedTypeNames)
                 return this.currentIndentField;
             }
         }
+
         /// <summary>
-        /// Current transformation session
+        ///     Current transformation session
         /// </summary>
-        public virtual global::System.Collections.Generic.IDictionary<string, object> Session
+        public virtual IDictionary<string, object> Session
         {
             get
             {
@@ -275,30 +279,30 @@ foreach(var generateTypeName in GeneratedTypeNames)
                 this.sessionField = value;
             }
         }
+
         #endregion
+
         #region Transform-time helpers
+
         /// <summary>
-        /// Write text directly into the generated output
+        ///     Write text directly into the generated output
         /// </summary>
         public void Write(string textToAppend)
         {
-            if (string.IsNullOrEmpty(textToAppend))
-            {
-                return;
-            }
+            if (string.IsNullOrEmpty(textToAppend)) return;
+
             // If we're starting off, or if the previous text ended with a newline,
             // we have to append the current indent first.
-            if (((this.GenerationEnvironment.Length == 0) 
-                        || this.endsWithNewline))
+            if (((this.GenerationEnvironment.Length == 0)
+                 || this.endsWithNewline))
             {
                 this.GenerationEnvironment.Append(this.currentIndentField);
                 this.endsWithNewline = false;
             }
+
             // Check if the current text ends with a newline
-            if (textToAppend.EndsWith(global::System.Environment.NewLine, global::System.StringComparison.CurrentCulture))
-            {
-                this.endsWithNewline = true;
-            }
+            if (textToAppend.EndsWith(Environment.NewLine, StringComparison.CurrentCulture)) this.endsWithNewline = true;
+
             // This is an optimization. If the current indent is "", then we don't have to do any
             // of the more complex stuff further down.
             if ((this.currentIndentField.Length == 0))
@@ -306,21 +310,22 @@ foreach(var generateTypeName in GeneratedTypeNames)
                 this.GenerationEnvironment.Append(textToAppend);
                 return;
             }
+
             // Everywhere there is a newline in the text, add an indent after it
-            textToAppend = textToAppend.Replace(global::System.Environment.NewLine, (global::System.Environment.NewLine + this.currentIndentField));
+            textToAppend = textToAppend.Replace(Environment.NewLine, (Environment.NewLine + this.currentIndentField));
             // If the text ends with a newline, then we should strip off the indent added at the very end
             // because the appropriate indent will be added when the next time Write() is called
             if (this.endsWithNewline)
             {
-                this.GenerationEnvironment.Append(textToAppend, 0, (textToAppend.Length - this.currentIndentField.Length));
+                this.GenerationEnvironment.Append(textToAppend, 0,
+                    (textToAppend.Length - this.currentIndentField.Length));
             }
             else
-            {
                 this.GenerationEnvironment.Append(textToAppend);
-            }
         }
+
         /// <summary>
-        /// Write text directly into the generated output
+        ///     Write text directly into the generated output
         /// </summary>
         public void WriteLine(string textToAppend)
         {
@@ -328,53 +333,57 @@ foreach(var generateTypeName in GeneratedTypeNames)
             this.GenerationEnvironment.AppendLine();
             this.endsWithNewline = true;
         }
+
         /// <summary>
-        /// Write formatted text directly into the generated output
+        ///     Write formatted text directly into the generated output
         /// </summary>
         public void Write(string format, params object[] args)
         {
-            this.Write(string.Format(global::System.Globalization.CultureInfo.CurrentCulture, format, args));
+            this.Write(string.Format(CultureInfo.CurrentCulture, format, args));
         }
+
         /// <summary>
-        /// Write formatted text directly into the generated output
+        ///     Write formatted text directly into the generated output
         /// </summary>
         public void WriteLine(string format, params object[] args)
         {
-            this.WriteLine(string.Format(global::System.Globalization.CultureInfo.CurrentCulture, format, args));
+            this.WriteLine(string.Format(CultureInfo.CurrentCulture, format, args));
         }
+
         /// <summary>
-        /// Raise an error
+        ///     Raise an error
         /// </summary>
         public void Error(string message)
         {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
+            CompilerError error = new CompilerError();
             error.ErrorText = message;
             this.Errors.Add(error);
         }
+
         /// <summary>
-        /// Raise a warning
+        ///     Raise a warning
         /// </summary>
         public void Warning(string message)
         {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
+            CompilerError error = new CompilerError();
             error.ErrorText = message;
             error.IsWarning = true;
             this.Errors.Add(error);
         }
+
         /// <summary>
-        /// Increase the indent
+        ///     Increase the indent
         /// </summary>
         public void PushIndent(string indent)
         {
-            if ((indent == null))
-            {
-                throw new global::System.ArgumentNullException(nameof(indent));
-            }
+            if ((indent == null)) throw new ArgumentNullException(nameof(indent));
+
             this.currentIndentField = (this.currentIndentField + indent);
             this.indentLengths.Add(indent.Length);
         }
+
         /// <summary>
-        /// Remove the last indent that was added with PushIndent
+        ///     Remove the last indent that was added with PushIndent
         /// </summary>
         public string PopIndent()
         {
@@ -386,70 +395,77 @@ foreach(var generateTypeName in GeneratedTypeNames)
                 if ((indentLength > 0))
                 {
                     returnValue = this.currentIndentField.Substring((this.currentIndentField.Length - indentLength));
-                    this.currentIndentField = this.currentIndentField.Remove((this.currentIndentField.Length - indentLength));
+                    this.currentIndentField =
+                        this.currentIndentField.Remove((this.currentIndentField.Length - indentLength));
                 }
             }
+
             return returnValue;
         }
+
         /// <summary>
-        /// Remove any indentation
+        ///     Remove any indentation
         /// </summary>
         public void ClearIndent()
         {
             this.indentLengths.Clear();
             this.currentIndentField = "";
         }
+
         #endregion
+
         #region ToString Helpers
+
         /// <summary>
-        /// Utility class to produce culture-oriented representation of an object as a string.
+        ///     Utility class to produce culture-oriented representation of an object as a string.
         /// </summary>
         public class ToStringInstanceHelper
         {
-            private System.IFormatProvider formatProviderField  = global::System.Globalization.CultureInfo.InvariantCulture;
+            private IFormatProvider formatProviderField = CultureInfo.InvariantCulture;
+
             /// <summary>
-            /// Gets or sets format provider to be used by ToStringWithCulture method.
+            ///     Gets or sets format provider to be used by ToStringWithCulture method.
             /// </summary>
-            public System.IFormatProvider FormatProvider
+            public IFormatProvider FormatProvider
             {
                 get
                 {
-                    return this.formatProviderField ;
+                    return this.formatProviderField;
                 }
                 set
                 {
-                    if ((value != null))
-                    {
-                        this.formatProviderField  = value;
-                    }
+                    if ((value != null)) this.formatProviderField = value;
                 }
             }
+
             /// <summary>
-            /// This is called from the compile/run appdomain to convert objects within an expression block to a string
+            ///     This is called from the compile/run appdomain to convert objects within an expression block to a string
             /// </summary>
             public string ToStringWithCulture(object objectToConvert)
             {
-                if ((objectToConvert == null))
+                if ((objectToConvert == null)) throw new ArgumentNullException(nameof(objectToConvert));
+
+                Type t = objectToConvert.GetType();
+                MethodInfo method = t.GetMethod("ToString", new Type[]
                 {
-                    throw new global::System.ArgumentNullException(nameof(objectToConvert));
-                }
-                System.Type t = objectToConvert.GetType();
-                System.Reflection.MethodInfo method = t.GetMethod("ToString", new System.Type[] {
-                            typeof(System.IFormatProvider)});
+                    typeof(IFormatProvider)
+                });
                 if ((method == null))
-                {
                     return objectToConvert.ToString();
-                }
                 else
                 {
-                    return ((string)(method.Invoke(objectToConvert, new object[] {
-                                this.formatProviderField })));
+                    return ((string) (method.Invoke(objectToConvert, new object[]
+                    {
+                        this.formatProviderField
+                    })));
                 }
             }
         }
+
         private ToStringInstanceHelper toStringHelperField = new ToStringInstanceHelper();
+
         /// <summary>
-        /// Helper to produce culture-oriented representation of an object as a string
+        ///     Helper to produce culture-oriented representation of an object as a string
         /// </summary>
         public ToStringInstanceHelper ToStringHelper
         {
@@ -458,7 +474,9 @@ foreach(var generateTypeName in GeneratedTypeNames)
                 return this.toStringHelperField;
             }
         }
+
         #endregion
     }
+
     #endregion
 }

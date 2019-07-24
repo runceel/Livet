@@ -10,7 +10,7 @@ namespace Livet.Behaviors
     {
         protected override void Invoke(object parameter)
         {
-            AssociatedObject.Focus();
+            AssociatedObject?.Focus();
         }
     }
 }

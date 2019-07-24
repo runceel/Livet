@@ -17,9 +17,7 @@ namespace Livet.EventListeners.WeakEvents
         [CanBeNull] private Action<THandler> _remove;
         [CanBeNull] private THandler _resultHandler;
 
-        protected LivetWeakEventListener()
-        {
-        }
+        protected LivetWeakEventListener() { }
 
         /// <summary>
         ///     コンストラクタ
@@ -57,11 +55,7 @@ namespace Livet.EventListeners.WeakEvents
             if (listenerWeakReference == null) throw new ArgumentNullException(nameof(listenerWeakReference));
 
             if (listenerWeakReference.TryGetTarget(out var listenerResult))
-            {
-                var handler = listenerResult._handler;
-
-                handler?.Invoke(sender, args);
-            }
+                listenerResult?._handler?.Invoke(sender, args);
         }
 
         private static THandler GetStaticHandler(

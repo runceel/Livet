@@ -1,11 +1,12 @@
 ﻿using System.Windows;
+using Livet.Annotations;
 
 namespace Livet.Messaging
 {
     public class GenericInteractionMessage<T> : InteractionMessage
     {
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueProperty =
+        [NotNull] public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(T), typeof(GenericInteractionMessage<T>),
                 new PropertyMetadata(default(T)));
 
@@ -14,9 +15,7 @@ namespace Livet.Messaging
             Value = value;
         }
 
-        public GenericInteractionMessage(T value) : this(value, null)
-        {
-        }
+        public GenericInteractionMessage(T value) : this(value, null) { }
 
         public T Value
         {

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using DataTrigger = Microsoft.Expression.Interactivity.Core.DataTrigger;
 
 namespace Livet.Behaviors
@@ -14,7 +15,7 @@ namespace Livet.Behaviors
 
             base.EvaluateBindingChange(
                 new DependencyPropertyChangedEventArgs(
-                    ValueProperty,
+                    ValueProperty ?? throw new InvalidOperationException(),
                     null,
                     Value));
         }

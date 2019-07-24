@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Windows;
 using Livet;
+using Livet.Annotations;
 using Livet.Messaging;
 using Livet.Messaging.IO;
-using System.Windows;
 
 namespace ViewLayerSupport.ViewModels
 {
@@ -50,37 +51,38 @@ namespace ViewLayerSupport.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-
-        private string _OutputMessage;
+        private string _outputMessage;
 
         public string OutputMessage
         {
-            get => _OutputMessage;
-            set => RaisePropertyChangedIfSet(ref _OutputMessage, value);
+            get { return _outputMessage; }
+            set { RaisePropertyChangedIfSet(ref _outputMessage, value); }
         }
 
         public async void ConfirmFromViewModel()
         {
             var message = new ConfirmationMessage("これはテスト用メッセージです。", "テスト", "MessageKey_Confirm")
             {
-                Button = MessageBoxButton.OKCancel,
+                Button = MessageBoxButton.OKCancel
             };
             await Messenger.RaiseAsync(message);
             OutputMessage = $"{DateTime.Now}: ConfirmFromViewModel: {message.Response ?? false}";
         }
 
-        public void ConfirmFromView(ConfirmationMessage message)
+        public void ConfirmFromView([NotNull] ConfirmationMessage message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
             OutputMessage = $"{DateTime.Now}: ConfirmFromView: {message.Response ?? false}";
         }
 
-        public void FolderSelected(FolderSelectionMessage message)
+        public void FolderSelected([NotNull] FolderSelectionMessage message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
             OutputMessage = $"{DateTime.Now}: FolderSelected: {message.Response ?? "未選択"}";
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
     }
 }

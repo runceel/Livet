@@ -25,10 +25,10 @@ namespace Livet.EventListeners.WeakEvents
 
             _bag = new AnonymousCollectionChangedEventHandlerBag(source);
             Initialize(
-                h => new NotifyCollectionChangedEventHandler(h),
+                h => new NotifyCollectionChangedEventHandler(h ?? throw new ArgumentNullException(nameof(h))),
                 h => source.CollectionChanged += h,
                 h => source.CollectionChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         /// <summary>
@@ -44,10 +44,10 @@ namespace Livet.EventListeners.WeakEvents
 
             _bag = new AnonymousCollectionChangedEventHandlerBag(source, handler);
             Initialize(
-                h => new NotifyCollectionChangedEventHandler(h),
+                h => new NotifyCollectionChangedEventHandler(h ?? throw new ArgumentNullException(nameof(h))),
                 h => source.CollectionChanged += h,
                 h => source.CollectionChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         IEnumerator<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>

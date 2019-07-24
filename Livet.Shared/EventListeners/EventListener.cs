@@ -10,6 +10,8 @@ namespace Livet.EventListeners
     public class EventListener<THandler> : IDisposable where THandler : class
     {
         private readonly bool _initialized;
+
+        // ReSharper disable once NotAccessedField.Local
         [CanBeNull] private Action<THandler> _add;
         private bool _disposed;
         [CanBeNull] private THandler _handler;
@@ -21,7 +23,8 @@ namespace Livet.EventListeners
         /// <param name="add">h => obj.Event += > h の様な形でイベントの購読を登録するためのAction。hはTHandler型です。</param>
         /// <param name="remove">h => obj.Event -= > h の様な形でイベントの購読を解除するためのAction。hはTHandler型です。</param>
         /// <param name="handler">イベントを受信した際に行いたいアクション</param>
-        public EventListener([NotNull] Action<THandler> add, [NotNull] Action<THandler> remove, [NotNull] THandler handler)
+        public EventListener([NotNull] Action<THandler> add, [NotNull] Action<THandler> remove,
+            [NotNull] THandler handler)
         {
             if (add == null) throw new ArgumentNullException(nameof(add));
             if (remove == null) throw new ArgumentNullException(nameof(remove));
@@ -31,9 +34,7 @@ namespace Livet.EventListeners
             _initialized = true;
         }
 
-        protected EventListener()
-        {
-        }
+        protected EventListener() { }
 
         /// <summary>
         ///     イベントハンドラの登録を解除します。
@@ -44,7 +45,8 @@ namespace Livet.EventListeners
             GC.SuppressFinalize(this);
         }
 
-        protected void Initialize([NotNull] Action<THandler> add, [NotNull] Action<THandler> remove, [NotNull] THandler handler)
+        protected void Initialize([NotNull] Action<THandler> add, [NotNull] Action<THandler> remove,
+            [NotNull] THandler handler)
         {
             if (_initialized) return;
 

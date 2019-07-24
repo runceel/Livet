@@ -57,5 +57,6 @@
   <ItemGroup>
     <None Include="Livet.snk" />
   </ItemGroup>
+  <Import Project="..\..\..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

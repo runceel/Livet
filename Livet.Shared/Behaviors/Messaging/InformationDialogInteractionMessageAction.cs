@@ -11,12 +11,14 @@ namespace Livet.Behaviors.Messaging
         protected override void InvokeAction(InteractionMessage message)
         {
             if (message is InformationMessage informationMessage)
+            {
                 MessageBox.Show(
                     informationMessage.Text,
                     informationMessage.Caption,
                     MessageBoxButton.OK,
                     informationMessage.Image
                 );
+            }
         }
     }
 }

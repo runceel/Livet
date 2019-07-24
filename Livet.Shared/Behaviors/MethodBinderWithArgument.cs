@@ -25,14 +25,13 @@ namespace Livet.Behaviors
         private string _methodName;
         private Type _targetObjectType;
 
-        public void Invoke([NotNull] object targetObject, [NotNull] string methodName, [NotNull] object argument)
+        public void Invoke([NotNull] object targetObject, [NotNull] string methodName, [CanBeNull] object argument)
         {
             if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
             if (methodName == null) throw new ArgumentNullException(nameof(methodName));
-            if (argument == null) throw new ArgumentNullException(nameof(argument));
 
             var newTargetObjectType = targetObject.GetType();
-            var newArgumentType = argument.GetType();
+            var newArgumentType = argument?.GetType();
 
             if (_targetObjectType == newTargetObjectType &&
                 _methodName == methodName &&
@@ -46,7 +45,7 @@ namespace Livet.Behaviors
 
                 if (TryGetCacheFromMethodCacheDictionary(out _method))
                 {
-                    _method(targetObject, argument);
+                    _method?.Invoke(targetObject, argument);
                     return;
                 }
 
@@ -63,11 +62,11 @@ namespace Livet.Behaviors
 
             if (TryGetCacheFromMethodCacheDictionary(out _method))
             {
-                _method(targetObject, argument);
+                _method?.Invoke(targetObject, argument);
                 return;
             }
 
-            _methodInfo = _targetObjectType.GetMethods()
+            _methodInfo = _targetObjectType?.GetMethods()
                 .FirstOrDefault(method =>
                 {
                     if (method.Name != methodName) return false;
@@ -76,25 +75,26 @@ namespace Livet.Behaviors
 
                     if (parameters.Length != 1) return false;
 
-                    if (parameters[0].ParameterType.IsInterface)
+                    var parameterType = parameters[0]?.ParameterType ?? throw new ArgumentException();
+                    if (parameterType.IsInterface)
                     {
-                        if (!newArgumentType.GetInterfaces().Contains(parameters[0].ParameterType)) return false;
+                        if (_argumentType != null
+                            && !_argumentType.GetInterfaces().Contains(parameterType)) return false;
                     }
                     else
                     {
-                        if (!_argumentType.IsSubclassOf(parameters[0].ParameterType) &&
-                            _argumentType != parameters[0].ParameterType) return false;
+                        if (_argumentType != null && !_argumentType.IsSubclassOf(parameterType)
+                                                  && _argumentType != parameterType) return false;
                     }
 
                     return method.ReturnType == typeof(void);
                 });
 
             if (_methodInfo == null)
-                throw new ArgumentException(string.Format(
-                    "{0} 型に {1} 型の引数を一つだけ持つメソッド {2} が見つかりません。",
-                    _targetObjectType.Name,
-                    _argumentType.Name,
-                    methodName));
+            {
+                throw new ArgumentException(
+                    $"{_targetObjectType?.Name} 型に {_argumentType?.Name} 型の引数を一つだけ持つメソッド {methodName} が見つかりません。");
+            }
 
             _methodInfo.Invoke(targetObject, new[] {argument});
 
@@ -103,6 +103,8 @@ namespace Livet.Behaviors
 
             Task.Factory.StartNew(arg =>
             {
+                if (arg == null) throw new ArgumentNullException(nameof(arg));
+
                 var taskArg = (Tuple<Type, MethodInfo, Type>) arg;
 
                 var paraTarget = Expression.Parameter(typeof(object), "target");
@@ -112,22 +114,26 @@ namespace Livet.Behaviors
                 (
                     Expression.Call
                     (
-                        Expression.Convert(paraTarget, taskArg.Item1),
-                        taskArg.Item2,
-                        Expression.Convert(paraMessage, taskArg.Item3)
+                        Expression.Convert(paraTarget, taskArg.Item1 ?? throw new ArgumentException()),
+                        taskArg.Item2 ?? throw new ArgumentException(),
+                        Expression.Convert(paraMessage, taskArg.Item3 ?? throw new ArgumentException())
                     ),
                     paraTarget,
                     paraMessage
                 ).Compile();
 
                 var dic = MethodCacheDictionary.GetOrAdd(taskArg.Item1,
-                    _ => new ConcurrentDictionary<string, Action<object, object>>());
+                              _ => new ConcurrentDictionary<string, Action<object, object>>())
+                          ?? throw new InvalidOperationException();
                 dic.TryAdd(taskArg.Item2.Name, method);
             }, taskArgument);
         }
 
         private bool TryGetCacheFromMethodCacheDictionary(out Action<object, object> m)
         {
+            if (_targetObjectType == null) throw new InvalidOperationException();
+            if (_methodName == null) throw new InvalidOperationException();
+
             m = null;
             var foundAction = false;
             if (MethodCacheDictionary.TryGetValue(_targetObjectType, out var actionDictionary))

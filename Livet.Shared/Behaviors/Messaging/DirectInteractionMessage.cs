@@ -79,8 +79,11 @@ namespace Livet.Behaviors.Messaging
             if (message == null) throw new ArgumentNullException(nameof(message));
 
             if (CallbackCommand != null)
+            {
                 if (CallbackCommand.CanExecute(message))
                     CallbackCommand.Execute(message);
+            }
+
             if (CallbackMethodTarget != null && CallbackMethodName != null)
                 _callbackMethod.Invoke(CallbackMethodTarget, CallbackMethodName, message);
         }

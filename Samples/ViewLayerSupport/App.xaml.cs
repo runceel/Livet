@@ -1,11 +1,10 @@
 ﻿using System.Windows;
-
 using Livet;
 
 namespace ViewLayerSupport
 {
     /// <summary>
-    /// App.xaml の相互作用ロジック
+    ///     App.xaml の相互作用ロジック
     /// </summary>
     public partial class App : Application
     {

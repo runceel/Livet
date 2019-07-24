@@ -46,18 +46,19 @@ namespace ViewLayerSupport.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-
-        private string _Password;
+        private string _password;
 
         public string Password
         {
-            get => _Password;
-            set => RaisePropertyChangedIfSet(ref _Password, value, nameof(Message));
+            get { return _password; }
+            set { RaisePropertyChangedIfSet(ref _password, value, nameof(Message)); }
         }
 
-        public string Message => $"入力したパスワードは {Password} です。";
-        public void Initialize()
+        public string Message
         {
+            get { return $"入力したパスワードは {Password} です。"; }
         }
+
+        public void Initialize() { }
     }
 }

@@ -46,18 +46,19 @@ namespace ViewLayerSupport.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-        private string _Message;
+        private string _message;
 
         public string Message
         {
-            get => _Message;
-            private set => RaisePropertyChangedIfSet(ref _Message, value);
+            get { return _message; }
+            private set { RaisePropertyChangedIfSet(ref _message, value); }
         }
 
-        public void TextChanged(string text) => Message = $"TextChanged: {text}";
-
-        public void Initialize()
+        public void TextChanged(string text)
         {
+            Message = $"TextChanged: {text}";
         }
+
+        public void Initialize() { }
     }
 }

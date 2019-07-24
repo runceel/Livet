@@ -15,9 +15,7 @@ namespace Livet.Messaging
             Value = value;
         }
 
-        public GenericResponsiveInteractionMessage(TValue value) : this(value, null)
-        {
-        }
+        public GenericResponsiveInteractionMessage(TValue value) : this(value, null) { }
 
         public TValue Value
         {

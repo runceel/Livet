@@ -36,13 +36,13 @@
     </i:Interaction.Triggers>
 
     <StackPanel Margin="10">
-        <TextBox x:Name="textBox">
+        <TextBox x:Name="TextBox">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <l:LivetCallMethodAction
                         MethodName="TextChanged"
                         MethodParameter="{Binding Text,
-                                                  ElementName=textBox}"
+                                                  ElementName=TextBox}"
                         MethodTarget="{Binding}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>

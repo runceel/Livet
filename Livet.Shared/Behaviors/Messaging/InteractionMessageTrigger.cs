@@ -43,26 +43,23 @@ namespace Livet.Behaviors.Messaging
             set { SetValue(MessengerProperty, value); }
         }
 
-
         /// <summary>
         ///     アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはfalseです。
         /// </summary>
         public bool InvokeActionsOnlyWhileAttatchedObjectLoaded
         {
-            get { return (bool) GetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty); }
+            get { return (bool) (GetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty) ?? default(bool)); }
             set { SetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty, value); }
         }
-
 
         /// <summary>
         ///     このトリガーが有効かどうかを指定、または取得します。デフォルトはtrueです。
         /// </summary>
         public bool IsEnable
         {
-            get { return (bool) GetValue(IsEnableProperty); }
+            get { return (bool) (GetValue(IsEnableProperty) ?? default(bool)); }
             set { SetValue(IsEnableProperty, value); }
         }
-
 
         /// <summary>
         ///     このトリガーが反応する相互作用メッセージのメッセージキーを指定、または取得します。<br />
@@ -76,31 +73,31 @@ namespace Livet.Behaviors.Messaging
             GC.SuppressFinalize(this);
         }
 
-        private static void MessengerChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static void MessengerChanged([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            if (d == null) throw new ArgumentNullException(nameof(d));
+            var thisReference = (InteractionMessageTrigger) d;
+
             if (e.OldValue == e.NewValue) return;
 
-            if (obj is InteractionMessageTrigger thisReference)
-            {
-                if (e.OldValue != null) thisReference._listener?.Dispose();
+            if (e.OldValue != null) thisReference._listener?.Dispose();
 
-                if (e.NewValue != null)
-                {
-                    var newMessenger = (InteractionMessenger) e.NewValue;
+            if (e.NewValue == null) return;
+            var newMessenger = (InteractionMessenger) e.NewValue;
 
-                    thisReference._listener =
-                        new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
-                            InteractionMessageRaisedEventArgs>(
-                            h => h,
-                            h => newMessenger.Raised += h,
-                            h => newMessenger.Raised -= h,
-                            thisReference.MessageReceived);
-                }
-            }
+            thisReference._listener =
+                new LivetWeakEventListener<EventHandler<InteractionMessageRaisedEventArgs>,
+                    InteractionMessageRaisedEventArgs>(
+                    h => h,
+                    h => newMessenger.Raised += h,
+                    h => newMessenger.Raised -= h,
+                    thisReference.MessageReceived);
         }
 
-        private void MessageReceived(object sender, InteractionMessageRaisedEventArgs e)
+        private void MessageReceived(object sender, [NotNull] InteractionMessageRaisedEventArgs e)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
+
             var message = e.Message;
 
             var cloneMessage = (InteractionMessage) message.Clone();
@@ -109,18 +106,16 @@ namespace Livet.Behaviors.Messaging
 
             var checkResult = false;
 
-            Action checkAction = () =>
+            void CheckAction()
             {
                 if (!IsEnable) return;
-
                 if (InvokeActionsOnlyWhileAttatchedObjectLoaded && !_loaded) return;
-
                 if (!(string.IsNullOrEmpty(MessageKey) || MessageKey == cloneMessage.MessageKey)) return;
 
                 checkResult = true;
-            };
+            }
 
-            DoActionOnDispatcher(checkAction);
+            DoActionOnDispatcher(CheckAction);
 
             if (!checkResult) return;
 
@@ -137,6 +132,7 @@ namespace Livet.Behaviors.Messaging
         private void DoActionOnDispatcher([NotNull] Action action)
         {
             if (action == null) throw new ArgumentNullException(nameof(action));
+            if (Dispatcher == null) throw new InvalidOperationException("Dispatcher is null.");
 
             if (Dispatcher.CheckAccess())
                 action();
@@ -148,11 +144,10 @@ namespace Livet.Behaviors.Messaging
         {
             base.OnAttached();
 
-            if (AssociatedObject != null)
-            {
-                AssociatedObject.Loaded += AssociatedObjectLoaded;
-                AssociatedObject.Unloaded += AssociatedObjectUnloaded;
-            }
+            if (AssociatedObject == null) return;
+
+            AssociatedObject.Loaded += AssociatedObjectLoaded;
+            AssociatedObject.Unloaded += AssociatedObjectUnloaded;
         }
 
         private void AssociatedObjectLoaded(object sender, RoutedEventArgs e)
@@ -178,6 +173,7 @@ namespace Livet.Behaviors.Messaging
             base.OnDetaching();
         }
 
+        // ReSharper disable once UnusedParameter.Global
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;

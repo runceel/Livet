@@ -7,13 +7,13 @@
     xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
     xmlns:v="clr-namespace:ViewLayerSupport.Views"
     xmlns:vm="clr-namespace:ViewLayerSupport.ViewModels"
-    x:Name="root"
+    x:Name="Root"
     Title="EnumToBooleanConverterWindow"
     Width="525"
     Height="350">
 
     <Window.WindowState>
-        <Binding ElementName="checkBox" Path="IsChecked">
+        <Binding ElementName="CheckBox" Path="IsChecked">
             <Binding.Converter>
                 <l:WindowStateAndBooleanConverter
                     ConvertBackDefaultBooleanValue="False"
@@ -25,6 +25,6 @@
     </Window.WindowState>
 
     <Grid>
-        <CheckBox x:Name="checkBox" Content="通常サイズ" />
+        <CheckBox x:Name="CheckBox" Content="通常サイズ" />
     </Grid>
 </Window>

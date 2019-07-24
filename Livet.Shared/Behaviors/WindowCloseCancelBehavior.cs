@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 using Livet.Annotations;
@@ -37,7 +38,7 @@ namespace Livet.Behaviors
         /// </summary>
         public bool CanClose
         {
-            get { return (bool) GetValue(CanCloseProperty); }
+            get { return (bool) (GetValue(CanCloseProperty) ?? default(bool)); }
             set { SetValue(CanCloseProperty, value); }
         }
 
@@ -70,20 +71,22 @@ namespace Livet.Behaviors
 
         protected override void OnAttached()
         {
+            var associatedObject = AssociatedObject;
+            if (associatedObject == null) throw new InvalidOperationException();
+
             base.OnAttached();
-            AssociatedObject.Closing += (sender, e) =>
+            associatedObject.Closing += (sender, e) =>
             {
-                if (!CanClose)
-                {
-                    if (CloseCanceledCallbackCommand != null && CloseCanceledCallbackCommand.CanExecute(null))
-                        CloseCanceledCallbackCommand.Execute(null);
+                if (e == null) throw new ArgumentNullException(nameof(e));
 
+                if (CanClose) return;
+                if (CloseCanceledCallbackCommand != null && CloseCanceledCallbackCommand.CanExecute(null))
+                    CloseCanceledCallbackCommand.Execute(null);
 
-                    if (CloseCanceledCallbackMethodTarget != null && CloseCanceledCallbackMethodName != null)
-                        _callbackMethod.Invoke(CloseCanceledCallbackMethodTarget, CloseCanceledCallbackMethodName);
+                if (CloseCanceledCallbackMethodTarget != null && CloseCanceledCallbackMethodName != null)
+                    _callbackMethod.Invoke(CloseCanceledCallbackMethodTarget, CloseCanceledCallbackMethodName);
 
-                    e.Cancel = true;
-                }
+                e.Cancel = true;
             };
         }
     }

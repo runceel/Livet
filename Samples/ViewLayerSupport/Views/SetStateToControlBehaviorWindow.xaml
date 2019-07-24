@@ -44,15 +44,21 @@
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBox Text="{Binding InputUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Column="1" Content="Navigate">
+        <TextBox Grid.Row="0" Text="{Binding InputUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="Navigate">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:LivetCallMethodAction MethodName="Navigate" MethodTarget="{Binding}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <WebBrowser Grid.Row="1" Grid.ColumnSpan="2">
+        <WebBrowser
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
             <i:Interaction.Behaviors>
                 <!--  Source は本来バインディング出来ないプロパティ  -->
                 <l:WebBrowserSetStateToControlBehavior Source="{Binding Url}" Property="Source" />

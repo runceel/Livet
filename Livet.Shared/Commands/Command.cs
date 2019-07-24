@@ -18,13 +18,11 @@ namespace Livet.Commands
             add { _canExecuteChangedHandlers.Add(new WeakReference<EventHandler>(value)); }
             remove
             {
-                foreach (var weakReference in _canExecuteChangedHandlers
-                    .Where(r =>
-                    {
-                        if (r.TryGetTarget(out var result) && result == value) return true;
-                        return false;
-                    }).ToArray())
-                    _canExecuteChangedHandlers.Remove(weakReference);
+                var weakReferences = _canExecuteChangedHandlers
+                    .Where(r => r != null && r.TryGetTarget(out var result) && result == value)
+                    .ToArray();
+
+                foreach (var weakReference in weakReferences) _canExecuteChangedHandlers.Remove(weakReference);
             }
         }
 
@@ -37,10 +35,12 @@ namespace Livet.Commands
                                ?? throw new InvalidOperationException("DispatcherHelper.UIDispatcher is null.");
 
             foreach (var handlerWeakReference in _canExecuteChangedHandlers.ToArray())
+            {
                 if (handlerWeakReference.TryGetTarget(out var result))
-                    uiDispatcher.InvokeAsync(() => result(this, EventArgs.Empty));
+                    uiDispatcher.InvokeAsync(() => result?.Invoke(this, EventArgs.Empty));
                 else
                     _canExecuteChangedHandlers.Remove(handlerWeakReference);
+            }
         }
     }
 }

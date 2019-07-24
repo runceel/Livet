@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Input;
 using Livet.Annotations;
@@ -7,21 +8,21 @@ using Livet.Annotations;
 namespace Livet.Commands
 {
     /// <summary>
-    /// ViewModelがViewに公開するコマンドを表します。
+    ///     ViewModelがViewに公開するコマンドを表します。
     /// </summary>
-    public sealed class ViewModelCommand :Command, ICommand,INotifyPropertyChanged
+    public sealed class ViewModelCommand : Command, ICommand, INotifyPropertyChanged
     {
-        [NotNull] private readonly Action _execute;
         [CanBeNull] private readonly Func<bool> _canExecute;
+        [NotNull] private readonly Action _execute;
 
         /// <summary>
-        /// コンストラクタ
+        ///     コンストラクタ
         /// </summary>
         /// <param name="execute">コマンドが実行するAction</param>
         public ViewModelCommand([NotNull] Action execute) : this(execute, null) { }
 
         /// <summary>
-        /// コンストラクタ
+        ///     コンストラクタ
         /// </summary>
         /// <param name="execute">コマンドが実行するAction</param>
         /// <param name="canExecute">コマンドが実行可能かどうかをあらわすFunc&lt;bool&gt;</param>
@@ -32,19 +33,11 @@ namespace Livet.Commands
         }
 
         /// <summary>
-        /// コマンドが実行可能かどうかを取得します。
+        ///     コマンドが実行可能かどうかを取得します。
         /// </summary>
         public bool CanExecute
         {
             get { return _canExecute?.Invoke() ?? true; }
-        }
-
-        /// <summary>
-        /// コマンドを実行します。
-        /// </summary>
-        public void Execute()
-        {
-            _execute();
         }
 
         void ICommand.Execute(object parameter)
@@ -58,9 +51,17 @@ namespace Livet.Commands
         }
 
         /// <summary>
-        /// コマンドが実行可能かどうかが変化した時に発生します。
+        ///     コマンドが実行可能かどうかが変化した時に発生します。
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        ///     コマンドを実行します。
+        /// </summary>
+        public void Execute()
+        {
+            _execute();
+        }
 
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged()
@@ -70,9 +71,9 @@ namespace Livet.Commands
         }
 
         /// <summary>
-        /// コマンドが実行可能かどうかが変化したことを通知します。
+        ///     コマンドが実行可能かどうかが変化したことを通知します。
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         public void RaiseCanExecuteChanged()
         {
             OnPropertyChanged();

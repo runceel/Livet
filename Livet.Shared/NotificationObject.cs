@@ -30,6 +30,7 @@ namespace Livet
         [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        [NotifyPropertyChangedInvocator]
         // ReSharper disable once UnusedParameter.Global
         protected virtual void RaisePropertyChanged<T>(ref T source, [NotNull] Expression<Func<T>> propertyExpression)
         {
@@ -48,16 +49,10 @@ namespace Livet
         /// <param name="propertyName">プロパティ名</param>
         [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         [NotifyPropertyChangedInvocator]
-        protected virtual void RaisePropertyChanged([CallerMemberName] [NotNull] string propertyName = "")
+        protected virtual void RaisePropertyChanged([CallerMemberName] [CanBeNull] string propertyName = "")
         {
-            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
-
             var threadSafeHandler = Interlocked.CompareExchange(ref PropertyChanged, null, null);
-            if (threadSafeHandler != null)
-            {
-                var e = EventArgsFactory.GetPropertyChangedEventArgs(propertyName);
-                threadSafeHandler(this, e);
-            }
+            threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
@@ -69,6 +64,7 @@ namespace Livet
         /// <param name="relatedProperties">このプロパティが変更されたときに PropertyChanged イベントを発行するプロパティの名前の配列</param>
         /// <param name="propertyName">プロパティ名</param>
         /// <returns>値の変更有無</returns>
+        [NotifyPropertyChangedInvocator]
         protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, string[] relatedProperties = null,
             [CallerMemberName] string propertyName = null)
         {
@@ -78,9 +74,10 @@ namespace Livet
 
             source = value;
             RaisePropertyChanged(propertyName);
-            if (relatedProperties != null)
-                foreach (var p in relatedProperties)
-                    RaisePropertyChanged(p);
+            if (relatedProperties == null) return true;
+
+            foreach (var p in relatedProperties)
+                RaisePropertyChanged(p);
 
             return true;
         }
@@ -94,6 +91,7 @@ namespace Livet
         /// <param name="relatedProperty">このプロパティが変更されたときに PropertyChanged イベントを発行するプロパティの名前</param>
         /// <param name="propertyName">プロパティ名</param>
         /// <returns>値の変更有無</returns>
+        [NotifyPropertyChangedInvocator]
         protected bool RaisePropertyChangedIfSet<T>(ref T source, T value, string relatedProperty,
             [CallerMemberName] string propertyName = null)
         {

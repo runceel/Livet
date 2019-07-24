@@ -11,7 +11,7 @@ namespace ViewLayerSupport.Views
      */
 
     /// <summary>
-    /// SetStateToControlBehaviorWindow.xaml の相互作用ロジック
+    ///     SetStateToControlBehaviorWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class SetStateToControlBehaviorWindow : Window
     {

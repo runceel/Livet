@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.ComponentModel;
 using Livet.Annotations;
 
@@ -10,11 +9,9 @@ namespace Livet
         [NotNull] private static readonly ConcurrentDictionary<string, PropertyChangedEventArgs>
             PropertyChangedEventArgsDictionary = new ConcurrentDictionary<string, PropertyChangedEventArgs>();
 
-        public static PropertyChangedEventArgs GetPropertyChangedEventArgs([NotNull] string propertyName)
+        public static PropertyChangedEventArgs GetPropertyChangedEventArgs([CanBeNull] string propertyName)
         {
-            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
-
-            return PropertyChangedEventArgsDictionary.GetOrAdd(propertyName,
+            return PropertyChangedEventArgsDictionary.GetOrAdd(propertyName ?? string.Empty,
                 name => new PropertyChangedEventArgs(name));
         }
     }

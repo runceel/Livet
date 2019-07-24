@@ -47,34 +47,26 @@ namespace ViewLayerSupport.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-
-        private string _InputUrl;
+        private string _inputUrl;
+        private Uri _url;
 
         public string InputUrl
         {
-            get => _InputUrl;
-            set => RaisePropertyChangedIfSet(ref _InputUrl, value);
+            get { return _inputUrl; }
+            set { RaisePropertyChangedIfSet(ref _inputUrl, value); }
         }
-
-
-        private Uri _Url;
 
         public Uri Url
         {
-            get => _Url;
-            private set => RaisePropertyChangedIfSet(ref _Url, value);
+            get { return _url; }
+            private set { RaisePropertyChangedIfSet(ref _url, value); }
         }
 
         public void Navigate()
         {
-            if (Uri.TryCreate(InputUrl, UriKind.Absolute, out var url))
-            {
-                Url = url;
-            }
+            if (Uri.TryCreate(InputUrl, UriKind.Absolute, out var url)) Url = url;
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
     }
 }

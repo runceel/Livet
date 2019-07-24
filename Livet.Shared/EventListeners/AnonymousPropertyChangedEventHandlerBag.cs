@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using Livet.Annotations;
 
@@ -38,22 +39,27 @@ namespace Livet.EventListeners
         IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>>
             IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>.GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
-        internal void RegisterHandler(PropertyChangedEventHandler handler)
+        internal void RegisterHandler([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             RegisterHandler(string.Empty, handler);
         }
 
-        internal void RegisterHandler([NotNull] string propertyName, PropertyChangedEventHandler handler)
+        internal void RegisterHandler([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             lock (_handlerDictionaryLockObject)
             {
@@ -69,9 +75,10 @@ namespace Livet.EventListeners
         }
 
         internal void RegisterHandler<T>([NotNull] Expression<Func<T>> propertyExpression,
-            PropertyChangedEventHandler handler)
+            [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             if (!(propertyExpression.Body is MemberExpression))
                 throw new NotSupportedException("このメソッドでは ()=>プロパティ の形式のラムダ式以外許可されません");
 
@@ -80,40 +87,54 @@ namespace Livet.EventListeners
             RegisterHandler(memberExpression.Member.Name, handler);
         }
 
-        internal void ExecuteHandler(PropertyChangedEventArgs e)
+        internal void ExecuteHandler([NotNull] PropertyChangedEventArgs e)
         {
-            var result = _source.TryGetTarget(out var sourceResult);
+            if (e == null) throw new ArgumentNullException(nameof(e));
 
+            var result = _source.TryGetTarget(out var sourceResult);
             if (!result) return;
 
             if (e.PropertyName != null)
             {
                 List<PropertyChangedEventHandler> list;
-                lock (_handlerDictionaryLockObject)
-                {
-                    _handlerDictionary.TryGetValue(e.PropertyName, out list);
-                }
+                lock (_handlerDictionaryLockObject) { _handlerDictionary.TryGetValue(e.PropertyName, out list); }
 
                 if (list != null)
-                    lock (_lockObjectDictionary[list])
+                {
+                    var lockObject = _lockObjectDictionary[list];
+                    if (lockObject != null)
                     {
-                        foreach (var handler in list) handler(sourceResult, e);
+                        lock (lockObject)
+                        {
+                            foreach (var handler in list) handler(sourceResult, e);
+                        }
                     }
+                }
             }
 
             lock (_handlerDictionaryLockObject)
             {
                 _handlerDictionary.TryGetValue(string.Empty, out var allList);
+                // ReSharper disable once InvertIf
                 if (allList != null)
-                    lock (_lockObjectDictionary[allList])
+                {
+                    var lockObject = _lockObjectDictionary[allList];
+                    // ReSharper disable once InvertIf
+                    if (lockObject != null)
                     {
-                        foreach (var handler in allList) handler(sourceResult, e);
+                        lock (lockObject)
+                        {
+                            foreach (var handler in allList) handler(sourceResult, e);
+                        }
                     }
+                }
             }
         }
 
-        internal void Add(PropertyChangedEventHandler handler)
+        internal void Add([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             RegisterHandler(handler);
         }
 
@@ -124,13 +145,12 @@ namespace Livet.EventListeners
             RegisterHandler(propertyName, handler);
         }
 
-
         internal void Add([NotNull] string propertyName, [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             if (handlers == null) throw new ArgumentNullException(nameof(handlers));
 
-            foreach (var handler in handlers) RegisterHandler(propertyName, handler);
+            foreach (var handler in handlers.Where(h => h != null)) RegisterHandler(propertyName, handler);
         }
 
         internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
@@ -146,8 +166,7 @@ namespace Livet.EventListeners
             Add(memberExpression.Member.Name, handler);
         }
 
-
-        internal void Add<T>(Expression<Func<T>> propertyExpression,
+        internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
             [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Threading;
 using Livet.Annotations;
 using Livet.EventListeners;
@@ -48,10 +49,11 @@ namespace Livet
 
             collectionChangedListener.RegisterHandler((sender, e) =>
             {
+                if (e == null) throw new ArgumentNullException(nameof(e));
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        var vm = converter((TModel) e.NewItems[0]);
+                        var vm = converter((TModel) e.NewItems?[0]);
                         InvokeOnDispatcher(() => target.Insert(e.NewStartingIndex, vm), dispatcher);
                         break;
                     case NotifyCollectionChangedAction.Move:
@@ -59,19 +61,22 @@ namespace Livet
                         break;
                     case NotifyCollectionChangedAction.Remove:
                         if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
-                            ((IDisposable) target[e.OldStartingIndex]).Dispose();
+                            ((IDisposable) target[e.OldStartingIndex])?.Dispose();
                         InvokeOnDispatcher(() => target.RemoveAt(e.OldStartingIndex), dispatcher);
                         break;
                     case NotifyCollectionChangedAction.Replace:
                         if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
-                            ((IDisposable) target[e.NewStartingIndex]).Dispose();
-                        var replaceVm = converter((TModel) e.NewItems[0]);
+                            ((IDisposable) target[e.NewStartingIndex])?.Dispose();
+                        var replaceVm = converter((TModel) e.NewItems?[0]);
                         InvokeOnDispatcher(() => target[e.NewStartingIndex] = replaceVm, dispatcher);
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
-                            foreach (IDisposable item in target)
+                        {
+                            foreach (var item in target.OfType<IDisposable>())
                                 item.Dispose();
+                        }
+
                         InvokeOnDispatcher(target.Clear, dispatcher);
                         break;
                     default:

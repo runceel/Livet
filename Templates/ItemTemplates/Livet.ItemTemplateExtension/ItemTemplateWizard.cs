@@ -1,46 +1,51 @@
-﻿using EnvDTE;
-using Microsoft.VisualStudio.TemplateWizard;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using EnvDTE;
+using Livet.Annotations;
+using Microsoft.VisualStudio.TemplateWizard;
 
 namespace Livet.ItemTemplateExtension
 {
     public class ItemTemplateWizard : IWizard
     {
-        public void BeforeOpeningFile(ProjectItem projectItem)
-        {
-        }
+        public void BeforeOpeningFile(ProjectItem projectItem) { }
 
-        public void ProjectFinishedGenerating(Project project)
-        {
-        }
+        public void ProjectFinishedGenerating(Project project) { }
 
-        public void ProjectItemFinishedGenerating(ProjectItem projectItem)
-        {
-        }
+        public void ProjectItemFinishedGenerating(ProjectItem projectItem) { }
 
-        public void RunFinished()
-        {
-        }
+        public void RunFinished() { }
 
-        public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
+        public void RunStarted([NotNull] object automationObject,
+            [NotNull] Dictionary<string, string> replacementsDictionary,
+            WizardRunKind runKind, [NotNull] object[] customParams)
         {
+            if (automationObject == null) throw new ArgumentNullException(nameof(automationObject));
+            if (replacementsDictionary == null) throw new ArgumentNullException(nameof(replacementsDictionary));
+            if (customParams == null) throw new ArgumentNullException(nameof(customParams));
+
             try
             {
-                var dte = (_DTE)automationObject;
-                var project = (Project)((object[])dte.ActiveSolutionProjects)[0];
+                var dte = (_DTE) automationObject;
+                var project = (Project) ((object[]) dte.ActiveSolutionProjects)?[0];
                 string defaultNamespace = null;
 
-                foreach (Property property in project.Properties)
+                if (project?.Properties != null)
                 {
-                    if (property.Name.ToLower() == "defaultnamespace")
+                    foreach (var property in project.Properties?.OfType<Property>())
                     {
-                        defaultNamespace = (string)property.Value;
+                        if (property.Name?.ToLower() == "defaultnamespace")
+                            defaultNamespace = (string) property.Value;
                     }
                 }
 
                 replacementsDictionary.Add("$projectrootnamespace$", defaultNamespace);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         public bool ShouldAddProjectItem(string filePath)

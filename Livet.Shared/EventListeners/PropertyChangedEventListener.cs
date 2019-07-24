@@ -24,8 +24,10 @@ namespace Livet.EventListeners
             if (source == null) throw new ArgumentNullException(nameof(source));
 
             _bag = new AnonymousPropertyChangedEventHandlerBag(source);
-            Initialize(h => source.PropertyChanged += h, h => source.PropertyChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => source.PropertyChanged += h,
+                h => source.PropertyChanged -= h,
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         /// <summary>
@@ -40,8 +42,10 @@ namespace Livet.EventListeners
             if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             _bag = new AnonymousPropertyChangedEventHandlerBag(source, handler);
-            Initialize(h => source.PropertyChanged += h, h => source.PropertyChanged -= h,
-                (sender, e) => _bag.ExecuteHandler(e));
+            Initialize(
+                h => source.PropertyChanged += h,
+                h => source.PropertyChanged -= h,
+                (sender, e) => _bag.ExecuteHandler(e ?? throw new ArgumentNullException(nameof(e))));
         }
 
         IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>>
@@ -63,8 +67,10 @@ namespace Livet.EventListeners
         ///     このリスナインスタンスに新たなハンドラを追加します。
         /// </summary>
         /// <param name="handler">PropertyChangedイベントハンドラ</param>
-        public void RegisterHandler(PropertyChangedEventHandler handler)
+        public void RegisterHandler([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.RegisterHandler(handler);
         }
@@ -74,8 +80,11 @@ namespace Livet.EventListeners
         /// </summary>
         /// <param name="propertyName">ハンドラを登録したいPropertyChangedEventArgs.PropertyNameの名前</param>
         /// <param name="handler">propertyNameで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
-        public void RegisterHandler(string propertyName, PropertyChangedEventHandler handler)
+        public void RegisterHandler([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.RegisterHandler(propertyName, handler);
         }
@@ -85,40 +94,58 @@ namespace Livet.EventListeners
         /// </summary>
         /// <param name="propertyExpression">() => プロパティ形式のラムダ式</param>
         /// <param name="handler">propertyExpressionで指定されたプロパティ用のPropertyChangedイベントハンドラ</param>
-        public void RegisterHandler<T>(Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
+        public void RegisterHandler<T>([NotNull] Expression<Func<T>> propertyExpression,
+            [NotNull] PropertyChangedEventHandler handler)
         {
+            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.RegisterHandler(propertyExpression, handler);
         }
 
-        public void Add(PropertyChangedEventHandler handler)
+        public void Add([NotNull] PropertyChangedEventHandler handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.Add(handler);
         }
 
-        public void Add(string propertyName, PropertyChangedEventHandler handler)
+        public void Add([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.Add(propertyName, handler);
         }
 
-
-        public void Add(string propertyName, params PropertyChangedEventHandler[] handlers)
+        public void Add([NotNull] string propertyName, [NotNull] params PropertyChangedEventHandler[] handlers)
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            if (handlers == null) throw new ArgumentNullException(nameof(handlers));
+
             ThrowExceptionIfDisposed();
             _bag.Add(propertyName, handlers);
         }
 
-        public void Add<T>(Expression<Func<T>> propertyExpression, PropertyChangedEventHandler handler)
+        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
+            [NotNull] PropertyChangedEventHandler handler)
         {
+            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             ThrowExceptionIfDisposed();
             _bag.Add(propertyExpression, handler);
         }
 
-
-        public void Add<T>(Expression<Func<T>> propertyExpression, params PropertyChangedEventHandler[] handlers)
+        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
+            [NotNull] params PropertyChangedEventHandler[] handlers)
         {
+            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (handlers == null) throw new ArgumentNullException(nameof(handlers));
+
             ThrowExceptionIfDisposed();
             _bag.Add(propertyExpression, handlers);
         }
