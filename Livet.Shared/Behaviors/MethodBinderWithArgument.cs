@@ -103,6 +103,8 @@ namespace Livet.Behaviors
 
             Task.Factory.StartNew(arg =>
             {
+                if (arg == null) throw new ArgumentNullException(nameof(arg));
+
                 var taskArg = (Tuple<Type, MethodInfo, Type>) arg;
 
                 var paraTarget = Expression.Parameter(typeof(object), "target");
@@ -112,9 +114,9 @@ namespace Livet.Behaviors
                 (
                     Expression.Call
                     (
-                        Expression.Convert(paraTarget, taskArg.Item1),
-                        taskArg.Item2,
-                        Expression.Convert(paraMessage, taskArg.Item3)
+                        Expression.Convert(paraTarget, taskArg.Item1 ?? throw new ArgumentException()),
+                        taskArg.Item2 ?? throw new ArgumentException(),
+                        Expression.Convert(paraMessage, taskArg.Item3 ?? throw new ArgumentException())
                     ),
                     paraTarget,
                     paraMessage
