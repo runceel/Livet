@@ -18,18 +18,14 @@ namespace Livet.Messaging.IO
             DependencyProperty.Register("OverwritePrompt", typeof(bool), typeof(SavingFileSelectionMessage),
                 new PropertyMetadata(true));
 
-        public SavingFileSelectionMessage()
-        {
-        }
+        public SavingFileSelectionMessage() { }
 
         /// <summary>
         ///     メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
         /// </summary>
         /// <param name="messageKey">メッセージキー</param>
         public SavingFileSelectionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
+            : base(messageKey) { }
 
         /// <summary>
         ///     ユーザーが存在しないファイルを指定した場合に、ファイルを作成することを確認するメッセージを表示するかどうかを指定、または取得します。デフォルトはfalseです。
@@ -39,7 +35,6 @@ namespace Livet.Messaging.IO
             get { return (bool) (GetValue(CreatePromptProperty) ?? default(bool)); }
             set { SetValue(CreatePromptProperty, value); }
         }
-
 
         /// <summary>
         ///     ユーザーが指定したファイルが存在する場合、上書き確認メッセージを表示するかどうかを指定、または取得します。デフォルトはtrueです。

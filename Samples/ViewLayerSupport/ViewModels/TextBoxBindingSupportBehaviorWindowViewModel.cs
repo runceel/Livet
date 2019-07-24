@@ -68,14 +68,11 @@ namespace ViewLayerSupport.ViewModels
             set { RaisePropertyChangedIfSet(ref _selectionStart, value, nameof(Message)); }
         }
 
-
         public string Message
         {
             get { return $"SelectedText: {SelectedText}, Start: {SelectionStart}, Length: {SelectionLength}"; }
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
     }
 }

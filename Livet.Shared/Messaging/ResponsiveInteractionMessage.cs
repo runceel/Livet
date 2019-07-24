@@ -7,14 +7,10 @@ namespace Livet.Messaging
     /// </summary>
     public abstract class ResponsiveInteractionMessage : InteractionMessage
     {
-        internal ResponsiveInteractionMessage()
-        {
-        }
+        internal ResponsiveInteractionMessage() { }
 
         internal ResponsiveInteractionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
+            : base(messageKey) { }
 
         internal object Response { get; set; }
     }
@@ -25,18 +21,14 @@ namespace Livet.Messaging
     /// <typeparam name="T"></typeparam>
     public class ResponsiveInteractionMessage<T> : ResponsiveInteractionMessage
     {
-        public ResponsiveInteractionMessage()
-        {
-        }
+        public ResponsiveInteractionMessage() { }
 
         /// <summary>
         ///     メッセージキーを使用して、戻り値のある新しい相互作用メッセージのインスタンスを生成します
         /// </summary>
         /// <param name="messageKey">メッセージキー</param>
         public ResponsiveInteractionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
+            : base(messageKey) { }
 
         /// <summary>
         ///     戻り値情報

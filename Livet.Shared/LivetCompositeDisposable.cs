@@ -41,19 +41,13 @@ namespace Livet
         public IEnumerator<IDisposable> GetEnumerator()
         {
             ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                return ((IEnumerable<IDisposable>) _targetLists.ToArray()).GetEnumerator();
-            }
+            lock (_lockObject) { return ((IEnumerable<IDisposable>) _targetLists.ToArray()).GetEnumerator(); }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                return ((IEnumerable<IDisposable>) _targetLists.ToArray()).GetEnumerator();
-            }
+            lock (_lockObject) { return ((IEnumerable<IDisposable>) _targetLists.ToArray()).GetEnumerator(); }
         }
 
         /// <summary>
@@ -65,10 +59,7 @@ namespace Livet
             if (item == null) throw new ArgumentNullException(nameof(item));
 
             ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                _targetLists.Add(item);
-            }
+            lock (_lockObject) { _targetLists.Add(item); }
         }
 
         /// <summary>
@@ -77,10 +68,7 @@ namespace Livet
         public void Clear()
         {
             ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                _targetLists.Clear();
-            }
+            lock (_lockObject) { _targetLists.Clear(); }
         }
 
         /// <summary>
@@ -93,10 +81,7 @@ namespace Livet
             if (item == null) throw new ArgumentNullException(nameof(item));
 
             ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                return _targetLists.Contains(item);
-            }
+            lock (_lockObject) { return _targetLists.Contains(item); }
         }
 
         /// <summary>
@@ -107,10 +92,7 @@ namespace Livet
         public void CopyTo(IDisposable[] array, int arrayIndex)
         {
             ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                _targetLists.CopyTo(array, arrayIndex);
-            }
+            lock (_lockObject) { _targetLists.CopyTo(array, arrayIndex); }
         }
 
         /// <summary>
@@ -121,10 +103,7 @@ namespace Livet
             get
             {
                 ThrowExceptionIfDisposed();
-                lock (_lockObject)
-                {
-                    return _targetLists.Count;
-                }
+                lock (_lockObject) { return _targetLists.Count; }
             }
         }
 
@@ -151,10 +130,7 @@ namespace Livet
 
             ThrowExceptionIfDisposed();
 
-            lock (_lockObject)
-            {
-                return _targetLists.Remove(item);
-            }
+            lock (_lockObject) { return _targetLists.Remove(item); }
         }
 
         /// <summary>
@@ -177,10 +153,7 @@ namespace Livet
 
             ThrowExceptionIfDisposed();
             var disposable = new AnonymousDisposable(releaseAction);
-            lock (_lockObject)
-            {
-                _targetLists.Add(disposable);
-            }
+            lock (_lockObject) { _targetLists.Add(disposable); }
         }
 
         /// <summary>
@@ -192,10 +165,7 @@ namespace Livet
             if (item == null) throw new ArgumentNullException(nameof(item));
 
             ThrowExceptionIfDisposed();
-            lock (_lockObject)
-            {
-                _targetLists.Insert(0, item);
-            }
+            lock (_lockObject) { _targetLists.Insert(0, item); }
         }
 
         /// <summary>
@@ -209,10 +179,7 @@ namespace Livet
 
             ThrowExceptionIfDisposed();
             var disposable = new AnonymousDisposable(releaseAction);
-            lock (_lockObject)
-            {
-                _targetLists.Insert(0, disposable);
-            }
+            lock (_lockObject) { _targetLists.Insert(0, disposable); }
         }
 
         protected virtual void Dispose(bool disposing)
@@ -220,10 +187,7 @@ namespace Livet
             if (_disposed) return;
 
             if (disposing)
-                lock (_lockObject)
-                {
-                    _targetLists.ForEach(item => item?.Dispose());
-                }
+                lock (_lockObject) { _targetLists.ForEach(item => item?.Dispose()); }
 
             _disposed = true;
         }

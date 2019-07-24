@@ -95,10 +95,7 @@ namespace Livet.EventListeners
             if (e.PropertyName != null)
             {
                 List<PropertyChangedEventHandler> list;
-                lock (_handlerDictionaryLockObject)
-                {
-                    _handlerDictionary.TryGetValue(e.PropertyName, out list);
-                }
+                lock (_handlerDictionaryLockObject) { _handlerDictionary.TryGetValue(e.PropertyName, out list); }
 
                 if (list != null)
                     lock (_lockObjectDictionary[list])
@@ -133,7 +130,6 @@ namespace Livet.EventListeners
             RegisterHandler(propertyName, handler);
         }
 
-
         internal void Add([NotNull] string propertyName, [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
@@ -154,7 +150,6 @@ namespace Livet.EventListeners
 
             Add(memberExpression.Member.Name, handler);
         }
-
 
         internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
             [NotNull] params PropertyChangedEventHandler[] handlers)

@@ -13,18 +13,14 @@ namespace Livet.Messaging.IO
             DependencyProperty.Register("MultiSelect", typeof(bool), typeof(OpeningFileSelectionMessage),
                 new PropertyMetadata(false));
 
-        public OpeningFileSelectionMessage()
-        {
-        }
+        public OpeningFileSelectionMessage() { }
 
         /// <summary>
         ///     メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
         /// </summary>
         /// <param name="messageKey">メッセージキー</param>
         public OpeningFileSelectionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
+            : base(messageKey) { }
 
         /// <summary>
         ///     複数ファイルを選択可能かを取得、または設定します。

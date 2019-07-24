@@ -9,21 +9,13 @@ namespace Livet.ItemTemplateExtension
 {
     public class ItemTemplateWizard : IWizard
     {
-        public void BeforeOpeningFile(ProjectItem projectItem)
-        {
-        }
+        public void BeforeOpeningFile(ProjectItem projectItem) { }
 
-        public void ProjectFinishedGenerating(Project project)
-        {
-        }
+        public void ProjectFinishedGenerating(Project project) { }
 
-        public void ProjectItemFinishedGenerating(ProjectItem projectItem)
-        {
-        }
+        public void ProjectItemFinishedGenerating(ProjectItem projectItem) { }
 
-        public void RunFinished()
-        {
-        }
+        public void RunFinished() { }
 
         public void RunStarted([NotNull] object automationObject,
             [NotNull] Dictionary<string, string> replacementsDictionary,

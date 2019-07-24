@@ -59,8 +59,6 @@ namespace ViewLayerSupport.ViewModels
             get { return $"入力したパスワードは {Password} です。"; }
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
     }
 }

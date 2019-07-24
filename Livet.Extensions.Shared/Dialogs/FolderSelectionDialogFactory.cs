@@ -43,10 +43,7 @@ namespace Livet.Dialogs
                     return new FolderBrowserFolderSelectionDialog();
                 }
 
-                case FolderSelectionDialogPreference.FolderBrowser:
-                {
-                    return new FolderBrowserFolderSelectionDialog();
-                }
+                case FolderSelectionDialogPreference.FolderBrowser: { return new FolderBrowserFolderSelectionDialog(); }
 
                 case FolderSelectionDialogPreference.CommonItemDialog:
                 {

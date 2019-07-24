@@ -43,7 +43,6 @@ namespace Livet.Behaviors.Messaging
             set { SetValue(MessengerProperty, value); }
         }
 
-
         /// <summary>
         ///     アタッチされたオブジェクトがロードされている期間(Loaded~Unloaded)だけActionを実行するかどうかを指定、または取得します。デフォルトはfalseです。
         /// </summary>
@@ -53,7 +52,6 @@ namespace Livet.Behaviors.Messaging
             set { SetValue(InvokeActionsOnlyWhileAttatchedObjectLoadedProperty, value); }
         }
 
-
         /// <summary>
         ///     このトリガーが有効かどうかを指定、または取得します。デフォルトはtrueです。
         /// </summary>
@@ -62,7 +60,6 @@ namespace Livet.Behaviors.Messaging
             get { return (bool) (GetValue(IsEnableProperty) ?? default(bool)); }
             set { SetValue(IsEnableProperty, value); }
         }
-
 
         /// <summary>
         ///     このトリガーが反応する相互作用メッセージのメッセージキーを指定、または取得します。<br />

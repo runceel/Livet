@@ -25,7 +25,6 @@ namespace Livet.Dialogs
         /// </value>
         public abstract string Description { get; set; }
 
-
         /// <summary>
         ///     Gets or sets the title of the dialog.
         /// </summary>
@@ -51,9 +50,7 @@ namespace Livet.Dialogs
         /// <param name="disposing">
         ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.
         /// </param>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         /// <summary>
         ///     Shows the dialog with specified <see cref="Window" /> as host window.

@@ -63,9 +63,7 @@ namespace Livet.Messaging
         /// <param name="messageKey">メッセージキー</param>
         public ConfirmationMessage(string text, string caption, MessageBoxImage image, MessageBoxButton button,
             string messageKey)
-            : this(text, caption, image, button, MessageBoxResult.OK, messageKey)
-        {
-        }
+            : this(text, caption, image, button, MessageBoxResult.OK, messageKey) { }
 
         /// <summary>
         ///     表示するメッセージ・キャプション・メッセージボックスイメージ・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
@@ -75,9 +73,7 @@ namespace Livet.Messaging
         /// <param name="image">メッセージボックスイメージ</param>
         /// <param name="messageKey">メッセージキー</param>
         public ConfirmationMessage(string text, string caption, MessageBoxImage image, string messageKey)
-            : this(text, caption, image, MessageBoxButton.OK, messageKey)
-        {
-        }
+            : this(text, caption, image, MessageBoxButton.OK, messageKey) { }
 
         /// <summary>
         ///     表示するメッセージ・キャプション・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
@@ -86,9 +82,7 @@ namespace Livet.Messaging
         /// <param name="caption">キャプション</param>
         /// <param name="messageKey">メッセージキー</param>
         public ConfirmationMessage(string text, string caption, string messageKey)
-            : this(text, caption, MessageBoxImage.None, messageKey)
-        {
-        }
+            : this(text, caption, MessageBoxImage.None, messageKey) { }
 
         /// <summary>
         ///     表示するメッセージ・キャプションを指定して、新しい相互作用メッセージのインスタンスを生成します。
@@ -96,13 +90,9 @@ namespace Livet.Messaging
         /// <param name="text">表示するメッセージ</param>
         /// <param name="caption">キャプション</param>
         public ConfirmationMessage(string text, string caption)
-            : this(text, caption, null)
-        {
-        }
+            : this(text, caption, null) { }
 
-        public ConfirmationMessage()
-        {
-        }
+        public ConfirmationMessage() { }
 
         /// <summary>
         ///     表示するメッセージを指定、または取得します。
@@ -113,7 +103,6 @@ namespace Livet.Messaging
             set { SetValue(TextProperty, value); }
         }
 
-
         /// <summary>
         ///     キャプションを指定、または取得します。
         /// </summary>
@@ -123,7 +112,6 @@ namespace Livet.Messaging
             set { SetValue(CaptionProperty, value); }
         }
 
-
         /// <summary>
         ///     メッセージボックスイメージを指定、または取得します。
         /// </summary>
@@ -132,7 +120,6 @@ namespace Livet.Messaging
             get { return (MessageBoxImage) (GetValue(ImageProperty) ?? default(MessageBoxImage)); }
             set { SetValue(ImageProperty, value); }
         }
-
 
         /// <summary>
         ///     メッセージボックスボタンを指定、または取得します。

@@ -96,10 +96,7 @@ namespace Livet.Behaviors.Messaging
                         targetWindow.Show();
                         transitionMessage.Response = null;
                     }
-                    else
-                    {
-                        transitionMessage.Response = targetWindow.ShowDialog();
-                    }
+                    else { transitionMessage.Response = targetWindow.ShowDialog(); }
 
                     break;
                 case TransitionMode.NewOrActive:

@@ -52,9 +52,7 @@ namespace Livet.Messaging
         }
 
         public MessageListener([NotNull] InteractionMessenger messenger, [NotNull] Action<InteractionMessage> action)
-            : this(messenger, null, action)
-        {
-        }
+            : this(messenger, null, action) { }
 
         [NotNull]
         public Dispatcher Dispatcher
@@ -175,7 +173,6 @@ namespace Livet.Messaging
 
             RegisterAction(messageKey, action);
         }
-
 
         public void Add([NotNull] string messageKey, [NotNull] params Action<InteractionMessage>[] actions)
         {

@@ -39,7 +39,6 @@ namespace LivetControlBindingSupportGenerator
 // 4. Specify search condition as 'Regular expressions'
 // 5. Click [Replace All]
 
-
 #line default
 #line hidden
             this.Write(@"//このコードはT4 Templateによって自動生成されています。
@@ -174,14 +173,12 @@ namespace Livet.Design
 #line 82 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
                 }
 
-
 #line default
 #line hidden
                 this.Write("  \r\n");
 
 #line 85 "C:\Repos\Livet\LivetControlBindingSupportGenerator\MetaData.tt"
             }
-
 
 #line default
 #line hidden
@@ -241,10 +238,7 @@ namespace Livet.Design
         {
             get
             {
-                if ((this.errorsField == null))
-                {
-                    this.errorsField = new CompilerErrorCollection();
-                }
+                if ((this.errorsField == null)) { this.errorsField = new CompilerErrorCollection(); }
 
                 return this.errorsField;
             }
@@ -257,10 +251,7 @@ namespace Livet.Design
         {
             get
             {
-                if ((this.indentLengthsField == null))
-                {
-                    this.indentLengthsField = new List<int>();
-                }
+                if ((this.indentLengthsField == null)) { this.indentLengthsField = new List<int>(); }
 
                 return this.indentLengthsField;
             }
@@ -301,10 +292,7 @@ namespace Livet.Design
         /// </summary>
         public void Write(string textToAppend)
         {
-            if (string.IsNullOrEmpty(textToAppend))
-            {
-                return;
-            }
+            if (string.IsNullOrEmpty(textToAppend)) { return; }
 
             // If we're starting off, or if the previous text ended with a newline,
             // we have to append the current indent first.
@@ -338,10 +326,7 @@ namespace Livet.Design
                 this.GenerationEnvironment.Append(textToAppend, 0,
                     (textToAppend.Length - this.currentIndentField.Length));
             }
-            else
-            {
-                this.GenerationEnvironment.Append(textToAppend);
-            }
+            else { this.GenerationEnvironment.Append(textToAppend); }
         }
 
         /// <summary>
@@ -396,10 +381,7 @@ namespace Livet.Design
         /// </summary>
         public void PushIndent(string indent)
         {
-            if ((indent == null))
-            {
-                throw new ArgumentNullException(nameof(indent));
-            }
+            if ((indent == null)) { throw new ArgumentNullException(nameof(indent)); }
 
             this.currentIndentField = (this.currentIndentField + indent);
             this.indentLengths.Add(indent.Length);
@@ -457,10 +439,7 @@ namespace Livet.Design
                 }
                 set
                 {
-                    if ((value != null))
-                    {
-                        this.formatProviderField = value;
-                    }
+                    if ((value != null)) { this.formatProviderField = value; }
                 }
             }
 
@@ -469,20 +448,14 @@ namespace Livet.Design
             /// </summary>
             public string ToStringWithCulture(object objectToConvert)
             {
-                if ((objectToConvert == null))
-                {
-                    throw new ArgumentNullException(nameof(objectToConvert));
-                }
+                if ((objectToConvert == null)) { throw new ArgumentNullException(nameof(objectToConvert)); }
 
                 Type t = objectToConvert.GetType();
                 MethodInfo method = t.GetMethod("ToString", new Type[]
                 {
                     typeof(IFormatProvider)
                 });
-                if ((method == null))
-                {
-                    return objectToConvert.ToString();
-                }
+                if ((method == null)) { return objectToConvert.ToString(); }
                 else
                 {
                     return ((string) (method.Invoke(objectToConvert, new object[]

@@ -73,7 +73,6 @@ namespace Livet.Behaviors
 
             _methodInfo.Invoke(targetObject, new object[] { });
 
-
             var taskArgument = new Tuple<Type, MethodInfo>(_targetObjectType, _methodInfo);
 
             Task.Factory.StartNew(arg =>

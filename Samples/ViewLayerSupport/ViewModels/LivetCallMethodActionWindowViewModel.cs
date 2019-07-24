@@ -59,8 +59,6 @@ namespace ViewLayerSupport.ViewModels
             Message = $"TextChanged: {text}";
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
     }
 }

@@ -48,7 +48,6 @@ namespace Livet.Behaviors
             set { SetValue(MethodNameProperty, value); }
         }
 
-
         /// <summary>
         ///     呼び出すメソッドに渡す引数を指定、または取得します。
         /// </summary>

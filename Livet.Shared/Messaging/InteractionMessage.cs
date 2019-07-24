@@ -14,9 +14,7 @@ namespace Livet.Messaging
             DependencyProperty.Register("MessageKey", typeof(string), typeof(InteractionMessage),
                 new PropertyMetadata(null));
 
-        public InteractionMessage()
-        {
-        }
+        public InteractionMessage() { }
 
         /// <summary>
         ///     メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。

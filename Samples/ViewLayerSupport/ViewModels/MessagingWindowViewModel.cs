@@ -83,8 +83,6 @@ namespace ViewLayerSupport.ViewModels
             OutputMessage = $"{DateTime.Now}: FolderSelected: {message.Response ?? "未選択"}";
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
     }
 }

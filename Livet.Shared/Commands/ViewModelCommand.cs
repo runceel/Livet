@@ -19,9 +19,7 @@ namespace Livet.Commands
         ///     コンストラクタ
         /// </summary>
         /// <param name="execute">コマンドが実行するAction</param>
-        public ViewModelCommand([NotNull] Action execute) : this(execute, null)
-        {
-        }
+        public ViewModelCommand([NotNull] Action execute) : this(execute, null) { }
 
         /// <summary>
         ///     コンストラクタ

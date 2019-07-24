@@ -13,18 +13,14 @@ namespace Livet.Messaging.Windows
             DependencyProperty.Register("Action", typeof(WindowAction), typeof(WindowActionMessage),
                 new PropertyMetadata());
 
-        public WindowActionMessage()
-        {
-        }
+        public WindowActionMessage() { }
 
         /// <summary>
         ///     メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
         /// </summary>
         /// <param name="messageKey">メッセージキー</param>
         public WindowActionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
+            : base(messageKey) { }
 
         /// <summary>
         ///     メッセージキーとWindowが遷移すべき状態を定義して、新しい相互作用メッセージのインスタンスを生成します。
@@ -42,9 +38,7 @@ namespace Livet.Messaging.Windows
         /// </summary>
         /// <param name="action">Windowが遷移すべき状態を表すWindowAction列挙体</param>
         public WindowActionMessage(WindowAction action)
-            : this(action, null)
-        {
-        }
+            : this(action, null) { }
 
         /// <summary>
         ///     Windowが遷移すべき状態を表すWindowAction列挙体を指定、または取得します。

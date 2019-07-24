@@ -104,7 +104,6 @@ namespace Livet.EventListeners
             _bag.Add(action, handler);
         }
 
-
         public void Add(NotifyCollectionChangedAction action,
             [NotNull] params NotifyCollectionChangedEventHandler[] handlers)
         {

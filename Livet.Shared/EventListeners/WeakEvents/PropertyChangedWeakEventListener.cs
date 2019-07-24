@@ -124,7 +124,6 @@ namespace Livet.EventListeners.WeakEvents
             _bag.Add(propertyName, handler);
         }
 
-
         public void Add([NotNull] string propertyName, [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
@@ -143,7 +142,6 @@ namespace Livet.EventListeners.WeakEvents
             ThrowExceptionIfDisposed();
             _bag.Add(propertyExpression, handler);
         }
-
 
         public void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
             [NotNull] params PropertyChangedEventHandler[] handlers)

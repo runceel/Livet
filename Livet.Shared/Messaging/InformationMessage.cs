@@ -22,9 +22,7 @@ namespace Livet.Messaging
             DependencyProperty.Register("Image", typeof(MessageBoxImage), typeof(InformationMessage),
                 new PropertyMetadata());
 
-        public InformationMessage()
-        {
-        }
+        public InformationMessage() { }
 
         /// <summary>
         ///     表示するメッセージ・キャプション・メッセージキーを指定して、新しい相互作用メッセージのインスタンスを生成します。
@@ -72,7 +70,6 @@ namespace Livet.Messaging
             get { return (string) GetValue(CaptionProperty); }
             set { SetValue(CaptionProperty, value); }
         }
-
 
         /// <summary>
         ///     メッセージボックスイメージを指定、または取得します。

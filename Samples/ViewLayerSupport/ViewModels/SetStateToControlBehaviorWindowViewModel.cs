@@ -67,8 +67,6 @@ namespace ViewLayerSupport.ViewModels
             if (Uri.TryCreate(InputUrl, UriKind.Absolute, out var url)) Url = url;
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
     }
 }

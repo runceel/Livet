@@ -100,7 +100,6 @@ namespace Livet.Messaging
         }
     }
 
-
     /// <summary>
     ///     相互作用メッセージ送信時イベント用のイベント引数です。
     /// </summary>

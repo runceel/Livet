@@ -57,9 +57,7 @@ namespace Livet.Messaging.IO
         ///     Initializes a new instance of the <see cref="FolderSelectionMessage" /> class
         ///     without message key.
         /// </summary>
-        public FolderSelectionMessage()
-        {
-        }
+        public FolderSelectionMessage() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="FolderSelectionMessage" /> class
@@ -67,9 +65,7 @@ namespace Livet.Messaging.IO
         /// </summary>
         /// <param name="messageKey">The message key to identify the message instance.</param>
         public FolderSelectionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
+            : base(messageKey) { }
 
         /// <summary>
         ///     Gets or sets the description for folder selection dialog.

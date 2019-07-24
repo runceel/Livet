@@ -15,9 +15,7 @@ namespace Livet.Messaging
             Value = value;
         }
 
-        public GenericInteractionMessage(T value) : this(value, null)
-        {
-        }
+        public GenericInteractionMessage(T value) : this(value, null) { }
 
         public T Value
         {

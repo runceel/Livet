@@ -17,9 +17,7 @@ namespace Livet.EventListeners.WeakEvents
         [CanBeNull] private Action<THandler> _remove;
         [CanBeNull] private THandler _resultHandler;
 
-        protected LivetWeakEventListener()
-        {
-        }
+        protected LivetWeakEventListener() { }
 
         /// <summary>
         ///     コンストラクタ

@@ -53,10 +53,7 @@ namespace Livet.EventListeners
 
         internal void RegisterHandler(NotifyCollectionChangedEventHandler handler)
         {
-            lock (_allHandlerListLockObject)
-            {
-                _allHandlerList.Add(handler);
-            }
+            lock (_allHandlerListLockObject) { _allHandlerList.Add(handler); }
         }
 
         internal void RegisterHandler(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
@@ -82,10 +79,7 @@ namespace Livet.EventListeners
             if (!result) return;
 
             List<NotifyCollectionChangedEventHandler> list;
-            lock (_handlerDictionaryLockObject)
-            {
-                _handlerDictionary.TryGetValue(e.Action, out list);
-            }
+            lock (_handlerDictionaryLockObject) { _handlerDictionary.TryGetValue(e.Action, out list); }
 
             if (list != null)
                 lock (_lockObjectDictionary[list])
@@ -111,7 +105,6 @@ namespace Livet.EventListeners
         {
             RegisterHandler(action, handler);
         }
-
 
         internal void Add(NotifyCollectionChangedAction action,
             [NotNull] params NotifyCollectionChangedEventHandler[] handlers)

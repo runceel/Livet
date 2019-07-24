@@ -25,9 +25,8 @@ namespace Livet
         ///     コンストラクタ
         /// </summary>
         /// <param name="dispatcher">UIDispatcher(通常はDispatcherHelper.UIDispatcher)</param>
-        public DispatcherCollection([NotNull] Dispatcher dispatcher) : this(new ObservableCollection<T>(), dispatcher)
-        {
-        }
+        public DispatcherCollection([NotNull] Dispatcher dispatcher) :
+            this(new ObservableCollection<T>(), dispatcher) { }
 
         /// <summary>
         ///     コンストラクタ

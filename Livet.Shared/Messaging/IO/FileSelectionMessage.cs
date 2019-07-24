@@ -35,15 +35,10 @@ namespace Livet.Messaging.IO
             DependencyProperty.Register("FileName", typeof(string), typeof(FileSelectionMessage),
                 new PropertyMetadata(null));
 
-        protected FileSelectionMessage()
-        {
-        }
+        protected FileSelectionMessage() { }
 
         protected FileSelectionMessage(string messageKey)
-            : base(messageKey)
-        {
-        }
-
+            : base(messageKey) { }
 
         /// <summary>
         ///     ダイアログタイトルを指定、または取得します。
@@ -83,7 +78,6 @@ namespace Livet.Messaging.IO
             get { return (string) GetValue(InitialDirectoryProperty) ?? string.Empty; }
             set { SetValue(InitialDirectoryProperty, value); }
         }
-
 
         /// <summary>
         ///     ファイルダイアログで指定されたファイルのパスを含む文字列を指定、または取得します。

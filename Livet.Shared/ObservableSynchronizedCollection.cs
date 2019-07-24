@@ -299,7 +299,6 @@ namespace Livet
             threadSafeHandler?.Invoke(this, EventArgsFactory.GetPropertyChangedEventArgs(propertyName));
         }
 
-
         private void ReadWithLockAction([NotNull] Action readAction)
         {
             if (readAction == null) throw new ArgumentNullException(nameof(readAction));
@@ -307,19 +306,10 @@ namespace Livet
             if (!_lock.IsReadLockHeld)
             {
                 _lock.EnterReadLock();
-                try
-                {
-                    readAction();
-                }
-                finally
-                {
-                    _lock.ExitReadLock();
-                }
+                try { readAction(); }
+                finally { _lock.ExitReadLock(); }
             }
-            else
-            {
-                readAction();
-            }
+            else { readAction(); }
         }
 
         private TResult ReadWithLockAction<TResult>([NotNull] Func<TResult> readAction)
@@ -330,14 +320,8 @@ namespace Livet
 
             _lock.EnterReadLock();
 
-            try
-            {
-                return readAction();
-            }
-            finally
-            {
-                _lock.ExitReadLock();
-            }
+            try { return readAction(); }
+            finally { _lock.ExitReadLock(); }
         }
 
         private void ReadAndWriteWithLockAction([NotNull] Action writeAction, [NotNull] Action readAfterWriteAction)
@@ -349,30 +333,15 @@ namespace Livet
             try
             {
                 _lock.EnterWriteLock();
-                try
-                {
-                    writeAction();
-                }
-                finally
-                {
-                    _lock.ExitWriteLock();
-                }
+                try { writeAction(); }
+                finally { _lock.ExitWriteLock(); }
 
                 _lock.EnterReadLock();
 
-                try
-                {
-                    readAfterWriteAction();
-                }
-                finally
-                {
-                    _lock.ExitReadLock();
-                }
+                try { readAfterWriteAction(); }
+                finally { _lock.ExitReadLock(); }
             }
-            finally
-            {
-                _lock.ExitUpgradeableReadLock();
-            }
+            finally { _lock.ExitUpgradeableReadLock(); }
         }
 
         private void ReadAndWriteWithLockAction<TResult>([NotNull] Func<TResult> readBeforeWriteAction,
@@ -389,30 +358,15 @@ namespace Livet
 
                 _lock.EnterWriteLock();
 
-                try
-                {
-                    writeAction(readActionResult);
-                }
-                finally
-                {
-                    _lock.ExitWriteLock();
-                }
+                try { writeAction(readActionResult); }
+                finally { _lock.ExitWriteLock(); }
 
                 _lock.EnterReadLock();
 
-                try
-                {
-                    readAfterWriteAction(readActionResult);
-                }
-                finally
-                {
-                    _lock.ExitReadLock();
-                }
+                try { readAfterWriteAction(readActionResult); }
+                finally { _lock.ExitReadLock(); }
             }
-            finally
-            {
-                _lock.ExitUpgradeableReadLock();
-            }
+            finally { _lock.ExitUpgradeableReadLock(); }
         }
     }
 }

@@ -20,9 +20,7 @@ namespace Livet.Commands
         ///     コンストラクタ
         /// </summary>
         /// <param name="execute">コマンドが実行するAction</param>
-        public ListenerCommand([NotNull] Action<T> execute) : this(execute, null)
-        {
-        }
+        public ListenerCommand([NotNull] Action<T> execute) : this(execute, null) { }
 
         /// <summary>
         ///     コンストラクタ

@@ -38,7 +38,6 @@ namespace Livet.Behaviors.ControlBinding
             set { SetValue(SelectedTextProperty, value); }
         }
 
-
         /// <summary>
         ///     選択された文字列の長さを取得、または設定します。
         /// </summary>
@@ -48,7 +47,6 @@ namespace Livet.Behaviors.ControlBinding
             set { SetValue(SelectionLengthProperty, value); }
         }
 
-
         /// <summary>
         ///     選択された文字列の先頭のインデックスを取得、または設定します。
         /// </summary>
@@ -57,7 +55,6 @@ namespace Livet.Behaviors.ControlBinding
             get { return (int) (GetValue(SelectionStartProperty) ?? default(int)); }
             set { SetValue(SelectionStartProperty, value); }
         }
-
 
         private static void SourceSelectedTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -99,7 +96,6 @@ namespace Livet.Behaviors.ControlBinding
 
             if (SelectionLength != textBox.SelectionLength) SelectionLength = textBox.SelectionLength;
         }
-
 
         protected override void OnAttached()
         {

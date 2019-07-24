@@ -34,9 +34,7 @@ namespace Livet.EventListeners
             _initialized = true;
         }
 
-        protected EventListener()
-        {
-        }
+        protected EventListener() { }
 
         /// <summary>
         ///     イベントハンドラの登録を解除します。

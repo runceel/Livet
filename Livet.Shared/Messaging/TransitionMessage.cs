@@ -26,17 +26,13 @@ namespace Livet.Messaging
             DependencyProperty.Register("WindowType", typeof(Type), typeof(TransitionMessage),
                 new PropertyMetadata(null));
 
-        public TransitionMessage()
-        {
-        }
+        public TransitionMessage() { }
 
         /// <summary>
         ///     メッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
         /// </summary>
         /// <param name="messageKey">メッセージキー</param>
-        public TransitionMessage(string messageKey) : base(messageKey)
-        {
-        }
+        public TransitionMessage(string messageKey) : base(messageKey) { }
 
         /// <summary>
         ///     新しいWindowのDataContextに設定するViewModelとメッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
@@ -44,9 +40,7 @@ namespace Livet.Messaging
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="messageKey">メッセージキー</param>
         public TransitionMessage(ViewModel transitionViewModel, string messageKey)
-            : this(null, transitionViewModel, TransitionMode.UnKnown, messageKey)
-        {
-        }
+            : this(null, transitionViewModel, TransitionMode.UnKnown, messageKey) { }
 
         /// <summary>
         ///     新しいWindowのDataContextに設定するViewModelと画面遷移モードとメッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
@@ -55,9 +49,7 @@ namespace Livet.Messaging
         /// <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
         /// <param name="messageKey">メッセージキー</param>
         public TransitionMessage(ViewModel transitionViewModel, TransitionMode mode, string messageKey)
-            : this(null, transitionViewModel, mode, messageKey)
-        {
-        }
+            : this(null, transitionViewModel, mode, messageKey) { }
 
         /// <summary>
         ///     新しいWindowの型と新しいWindowに設定するViewModel、画面遷移モードとメッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
@@ -84,9 +76,7 @@ namespace Livet.Messaging
         /// </summary>
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         public TransitionMessage(ViewModel transitionViewModel)
-            : this(null, transitionViewModel, TransitionMode.UnKnown, null)
-        {
-        }
+            : this(null, transitionViewModel, TransitionMode.UnKnown, null) { }
 
         /// <summary>
         ///     新しいWindowのDataContextに設定するViewModelと画面遷移モードを指定して新しい相互作用メッセージのインスタンスを生成します。
@@ -94,9 +84,7 @@ namespace Livet.Messaging
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
         public TransitionMessage(ViewModel transitionViewModel, TransitionMode mode)
-            : this(null, transitionViewModel, mode, null)
-        {
-        }
+            : this(null, transitionViewModel, mode, null) { }
 
         /// <summary>
         ///     新しいWindowの型と新しいWindowに設定するViewModel、画面遷移モードとメッセージキーを指定して新しい相互作用メッセージのインスタンスを生成します。
@@ -105,9 +93,7 @@ namespace Livet.Messaging
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
         public TransitionMessage(Type windowType, ViewModel transitionViewModel, TransitionMode mode)
-            : this(windowType, transitionViewModel, mode, null)
-        {
-        }
+            : this(windowType, transitionViewModel, mode, null) { }
 
         /// <summary>
         ///     新しいWindowのDataContextに設定するViewModelを指定、または取得します。
@@ -117,7 +103,6 @@ namespace Livet.Messaging
             get { return (ViewModel) GetValue(TransitionViewModelProperty); }
             set { SetValue(TransitionViewModelProperty, value); }
         }
-
 
         /// <summary>
         ///     新しいWindowの表示方法を決定するTransitionModeを指定、または取得します。<br />
@@ -129,7 +114,6 @@ namespace Livet.Messaging
             set { SetValue(ModeProperty, value); }
         }
 
-
         /// <summary>
         ///     新しいWindowの型を指定、または取得します。
         /// </summary>
@@ -138,7 +122,6 @@ namespace Livet.Messaging
             get { return (Type) GetValue(WindowTypeProperty); }
             set { SetValue(WindowTypeProperty, value); }
         }
-
 
         /// <summary>
         ///     派生クラスでは必ずオーバーライドしてください。Freezableオブジェクトとして必要な実装です。<br />
