@@ -75,15 +75,16 @@ namespace Livet.Behaviors
 
                     if (parameters.Length != 1) return false;
 
-                    if (parameters[0].ParameterType.IsInterface)
+                    var parameterType = parameters[0]?.ParameterType ?? throw new ArgumentException();
+                    if (parameterType.IsInterface)
                     {
                         if (_argumentType != null
-                            && !_argumentType.GetInterfaces().Contains(parameters[0].ParameterType)) return false;
+                            && !_argumentType.GetInterfaces().Contains(parameterType)) return false;
                     }
                     else
                     {
-                        if (_argumentType != null && !_argumentType.IsSubclassOf(parameters[0].ParameterType)
-                                                  && _argumentType != parameters[0].ParameterType) return false;
+                        if (_argumentType != null && !_argumentType.IsSubclassOf(parameterType)
+                                                  && _argumentType != parameterType) return false;
                     }
 
                     return method.ReturnType == typeof(void);
