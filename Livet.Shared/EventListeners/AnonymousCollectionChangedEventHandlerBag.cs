@@ -43,11 +43,13 @@ namespace Livet.EventListeners
             IEnumerable<KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>.
             GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
@@ -83,9 +85,13 @@ namespace Livet.EventListeners
 
             if (list != null)
             {
-                lock (_lockObjectDictionary[list])
+                var lockObject = _lockObjectDictionary[list];
+                if (lockObject != null)
                 {
-                    foreach (var handler in list) handler(sourceResult, e);
+                    lock (lockObject)
+                    {
+                        foreach (var handler in list) handler(sourceResult, e);
+                    }
                 }
             }
 
