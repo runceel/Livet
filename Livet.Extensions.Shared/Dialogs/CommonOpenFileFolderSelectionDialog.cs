@@ -62,7 +62,8 @@ namespace Livet.Dialogs
                 try { asDirectory = value != null ? new DirectoryInfo(value) : null; }
                 catch (ArgumentException) { }
 
-                if (asDirectory == null) { _commonOpenFileDialog.DefaultFileName = value; }
+                if (asDirectory == null)
+                    _commonOpenFileDialog.DefaultFileName = value;
                 else
                 {
                     //// Set parent.

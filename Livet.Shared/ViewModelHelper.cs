@@ -72,8 +72,11 @@ namespace Livet
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         if (typeof(IDisposable).IsAssignableFrom(typeof(TViewModel)))
+                        {
                             foreach (var item in target.OfType<IDisposable>())
                                 item.Dispose();
+                        }
+
                         InvokeOnDispatcher(target.Clear, dispatcher);
                         break;
                     default:

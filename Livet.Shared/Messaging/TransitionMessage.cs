@@ -65,8 +65,10 @@ namespace Livet.Messaging
             TransitionViewModel = transitionViewModel;
 
             if (windowType != null)
+            {
                 if (!windowType.IsSubclassOf(typeof(Window)))
                     throw new ArgumentException("Windowの派生クラスを指定してください。", nameof(windowType));
+            }
 
             WindowType = windowType;
         }

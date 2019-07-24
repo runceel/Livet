@@ -32,11 +32,13 @@ namespace Livet.ItemTemplateExtension
                 string defaultNamespace = null;
 
                 if (project?.Properties != null)
+                {
                     foreach (var property in project.Properties?.OfType<Property>())
                     {
                         if (property.Name?.ToLower() == "defaultnamespace")
                             defaultNamespace = (string) property.Value;
                     }
+                }
 
                 replacementsDictionary.Add("$projectrootnamespace$", defaultNamespace);
             }

@@ -49,8 +49,10 @@ namespace Livet
             {
                 if (e == null) throw new ArgumentNullException(nameof(e));
                 if (!Dispatcher.CheckAccess())
+                {
                     Dispatcher.Invoke(CollectionChangedDispatcherPriority,
                         (Action) (() => OnPropertyChanged(e.PropertyName)));
+                }
                 else
                     OnPropertyChanged(e.PropertyName);
             };
@@ -234,9 +236,7 @@ namespace Livet
         public void Move(int oldIndex, int newIndex)
         {
             if (_sourceAsIList is ObservableCollection<T> sourceAsObservableCollection)
-            {
                 sourceAsObservableCollection.Move(oldIndex, newIndex);
-            }
             else
             {
                 var sourceAsConcurrentObservableCollection = _sourceAsIList as ObservableSynchronizedCollection<T>;

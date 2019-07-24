@@ -98,10 +98,12 @@ namespace Livet.EventListeners
                 lock (_handlerDictionaryLockObject) { _handlerDictionary.TryGetValue(e.PropertyName, out list); }
 
                 if (list != null)
+                {
                     lock (_lockObjectDictionary[list])
                     {
                         foreach (var handler in list) handler(sourceResult, e);
                     }
+                }
             }
 
             lock (_handlerDictionaryLockObject)

@@ -130,8 +130,10 @@ namespace Livet
                 _listeners.Dispose();
 
                 if (typeof(IDisposable).IsAssignableFrom(typeof(T)))
+                {
                     foreach (var i in _list.OfType<IDisposable>())
                         i.Dispose();
+                }
             }
 
             _disposed = true;

@@ -138,8 +138,10 @@ namespace Livet.Messaging
                 _actionDictionary.TryGetValue(e.Message.MessageKey, out var list);
 
                 if (list != null)
+                {
                     foreach (var action in list)
                         action(cloneMessage);
+                }
             }
 
             _actionDictionary.TryGetValue(string.Empty, out var allList);

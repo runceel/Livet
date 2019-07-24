@@ -82,10 +82,12 @@ namespace Livet.EventListeners
             lock (_handlerDictionaryLockObject) { _handlerDictionary.TryGetValue(e.Action, out list); }
 
             if (list != null)
+            {
                 lock (_lockObjectDictionary[list])
                 {
                     foreach (var handler in list) handler(sourceResult, e);
                 }
+            }
 
             lock (_allHandlerListLockObject)
             {

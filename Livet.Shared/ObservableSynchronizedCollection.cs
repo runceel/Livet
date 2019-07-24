@@ -309,7 +309,8 @@ namespace Livet
                 try { readAction(); }
                 finally { _lock.ExitReadLock(); }
             }
-            else { readAction(); }
+            else
+                readAction();
         }
 
         private TResult ReadWithLockAction<TResult>([NotNull] Func<TResult> readAction)
