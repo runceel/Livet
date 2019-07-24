@@ -39,11 +39,13 @@ namespace Livet.EventListeners
         IEnumerator<KeyValuePair<string, List<PropertyChangedEventHandler>>>
             IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>.GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return _handlerDictionary.GetEnumerator();
         }
 
