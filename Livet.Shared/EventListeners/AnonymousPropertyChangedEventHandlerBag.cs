@@ -99,9 +99,13 @@ namespace Livet.EventListeners
 
                 if (list != null)
                 {
-                    lock (_lockObjectDictionary[list])
+                    var lockObject = _lockObjectDictionary[list];
+                    if (lockObject != null)
                     {
-                        foreach (var handler in list) handler(sourceResult, e);
+                        lock (lockObject)
+                        {
+                            foreach (var handler in list) handler(sourceResult, e);
+                        }
                     }
                 }
             }
@@ -109,11 +113,18 @@ namespace Livet.EventListeners
             lock (_handlerDictionaryLockObject)
             {
                 _handlerDictionary.TryGetValue(string.Empty, out var allList);
-                if (allList == null) return;
-
-                lock (_lockObjectDictionary[allList])
+                // ReSharper disable once InvertIf
+                if (allList != null)
                 {
-                    foreach (var handler in allList) handler(sourceResult, e);
+                    var lockObject = _lockObjectDictionary[allList];
+                    // ReSharper disable once InvertIf
+                    if (lockObject != null)
+                    {
+                        lock (lockObject)
+                        {
+                            foreach (var handler in allList) handler(sourceResult, e);
+                        }
+                    }
                 }
             }
         }
