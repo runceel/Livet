@@ -124,11 +124,19 @@ It is better performance than standard CallMethodAction, and it is passing a par
 
 #### Messenger
 
-At Livet.Behaviors.Messaging namespace, 
+At Livet.Behaviors.Messaging namespace, there is an action for receiving a message from Messenger of Livet.
+The action is not only receiving a message, it can fire an another action from EventTrigger and other triggers.
 
-Livet.Behaviors.Messaging 名前空間には Livet の Messenger などから送られたメッセージを受け取ることの出来る Action が用意されています。この Action は Messenger からメッセージを受け取るだけではなく、EventTrigger などから Action を起動することが出来るようになっています。
+So, it can simply show an another window, display a confirm dialog and more when triggered click event, don't throuth ViewModel layer.
+So, it can show an another window, display a confirm dialog and more when triggered click event, without go through ViewModel layer, simply.
 
-これにより、クリックイベントなどをきっかけにして別ウィンドウを表示したり、確認ダイアログを出したりといったことが ViewModel を経由せずに行えるためシンプルになります。
+```
+Reference information:
+At almost all libraries for MVVM pattern, when a button clicked and then displaying a confirm dialog, and process the result at ViewModel layer, it has to receive event using command at ViewModel, and sending a message to View layer, and then process the message, and passing the result using callback to ViewModel layer.
+
+Flow of usual MVVM libraries: View -> ViewModel -> View -> ViewModel
+Flow of Livet: View -> ViewModel
+```
 
 ```
 参考
