@@ -138,17 +138,9 @@ Flow of usual MVVM libraries: View -> ViewModel -> View -> ViewModel
 Flow of Livet: View -> ViewModel
 ```
 
-```
-参考
-ボタンクリックをきっかけに確認ダイアログを出して結果を元に ViewModel で処理しようとすると、一般的な MVVM をサポートするライブラリでは View でのイベントを ViewModel のコマンドで受けて、コマンドの処理の中でメッセンジャーを呼び出して View にメッセージを送って、View 側で処理を行い結果をコールバックで ViewModel に返すといった処理になります。
+And also, you can pass a return value to a ViewModel's method and command, when the message has a return value(for ex: message for showing confirmation dialog).
 
-一般的な MVVM ライブラリの処理の流れ: View -> ViewModel -> View -> ViewModel
-Livet の処理の流れ: View -> ViewModel
-```
-
-また、戻り値のあるメッセージ（確認ダイアログの表示メッセージなど）では、その戻り値を引数に渡して ViewModel のメソッドやコマンドの呼び出しにも対応しています。
-
-ViewModel 起点の場合は、まず View に InteractionMessageTrigger を設定して Action を指定します。
+A case of sending a message from ViewModel, first define InteractionMessageTrigger at View layer and set action to the message.
 
 ```xml
 <l:InteractionMessageTrigger MessageKey="MessageKey_Confirm" Messenger="{Binding Messenger}">
@@ -156,12 +148,12 @@ ViewModel 起点の場合は、まず View に InteractionMessageTrigger を設�
 </l:InteractionMessageTrigger>
 ```
 
-そして、ViewModel 側で Messenger を使用してメッセージを送ります。
+And, sending a message using Messenger from ViewModel.
 
 ```cs
 public async void ConfirmFromViewModel()
 {
-    var message = new ConfirmationMessage("これはテスト用メッセージです。", "テスト", "MessageKey_Confirm")
+    var message = new ConfirmationMessage("This is a test message.", "For test", "MessageKey_Confirm")
     {
         Button = MessageBoxButton.OKCancel,
     };
@@ -170,9 +162,9 @@ public async void ConfirmFromViewModel()
 }
 ```
 
-MessageKey_Confirm というメッセージキーを元にして、どの InteractionMessageTrigger が反応するかが決まります。
+Using `MessageKey_Confirm` as a message key, which deciding InteractionMessageTrigger is invoked.
 
-View 起点の場合は Action に対して DirectInteractionMessage を指定して、DirectInteractionMessage の中に実際のメッセージを定義します。例えば、ボタンをクリックしたら確認ダイアログを出す場合は以下のようになります。
+For view origin, defining DirectInteractionMessage to Action, and defining a message you use to a child of DirectInteractionMessage.
 
 ```xml
 <Button Content="ConfirmFromView">
@@ -180,7 +172,7 @@ View 起点の場合は Action に対して DirectInteractionMessage を指定�
         <i:EventTrigger EventName="Click">
             <l:ConfirmationDialogInteractionMessageAction>
                 <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView" CallbackMethodTarget="{Binding}">
-                    <l:ConfirmationMessage Caption="テスト" Text="これはテスト用メッセージです。" />
+                    <l:ConfirmationMessage Caption="For test" Text="This is a test message." />
                 </l:DirectInteractionMessage>
             </l:ConfirmationDialogInteractionMessageAction>
         </i:EventTrigger>
@@ -188,7 +180,8 @@ View 起点の場合は Action に対して DirectInteractionMessage を指定�
 </Button>
 ```
 
-上記の例では、Action の実行後に ViewModel の ConfirmFromView メソッドを呼ぶように指定しています。ConfirmFromView メソッドではメッセージを引数に受け取り処理を行えます。
+In the above example, after executing Action, setting to call ConfirmFromView method of ViewModel.
+At ConfirmFromView method, its can use the message.
 
 ```cs
 public void ConfirmFromView(ConfirmationMessage message)
@@ -197,9 +190,9 @@ public void ConfirmFromView(ConfirmationMessage message)
 }
 ```
 
-Livet に標準で定義されているメッセージとアクションの組み合わせには、確認・情報ダイアログ・ファイルダイアログ・画面遷移・フォルダーダイアログ(Windows API Code Packを参照しているため Livet.Extensions という別アセンブリに定義)などがあります。
+Actions and Messages are defined in Livet are confirmation dialog, information diealog, file dialog, navigating window, folder dialog(It references Windows API Code Pack, so, it is deferent package that is Livet.Extensions) and more.
 
-Livet.Extensions のフォルダー選択メッセージとアクションの使用例。
+A following code is an example to use folder selection dialog message of Livet.Extensions.
 
 ```xml
 <Button Content="Folder">
@@ -207,7 +200,7 @@ Livet.Extensions のフォルダー選択メッセージとアクションの使
         <i:EventTrigger EventName="Click">
             <l:FolderBrowserDialogInteractionMessageAction>
                 <l:DirectInteractionMessage CallbackMethodName="FolderSelected" CallbackMethodTarget="{Binding}">
-                    <l:FolderSelectionMessage Description="フォルダーの選択" DialogPreference="None" />
+                    <l:FolderSelectionMessage Description="Select folder" DialogPreference="None" />
                 </l:DirectInteractionMessage>
             </l:FolderBrowserDialogInteractionMessageAction>
         </i:EventTrigger>
@@ -215,9 +208,9 @@ Livet.Extensions のフォルダー選択メッセージとアクションの使
 </Button>
 ```
 
-#### 汎用 EnumToBooleanConverter
+#### General purpose EnumToBooleanConverter
 
-Livet では System.Windows 名前空間以下の全ての Enum 型を boolean と相互変換する IValueConverter を用意しています。
+In Livet, there are classes that implements IValueConverter to convert between boolean and enum that are all enum type under System.Windows namespace.
 
 ```xml
 <Window.WindowState>
@@ -233,11 +226,11 @@ Livet では System.Windows 名前空間以下の全ての Enum 型を boolean �
 </Window.WindowState>
 ```
 
-#### その他の View 機能
+#### Other view features
 
-Blend SDK の DataTrigger は初期値に対応していません。その対処として初期値に対応する LivetDataTrigger、フォーカスを制御する SetFocusAction 、Window のクローズキャンセルや、クローズキャンセル可否判断を ViewModel に委譲する事が出来る WindowCloseCancelBehavior、RoutedEventTrigger、DataContext が IDisposable であった場合 DataContext を Dispose する DataContextDisposeAction などを用意してあります。
+DataTrigger of Blend SDK don't support initial value. So, LivetDataTrigger that can set initial value, and also, there are SetFocusAction to manage focus, WindowCloseCancelBehavior that cancel Window close and delegate canceling logic to ViewModel, DataContextDisposeAction that is to call Dispose method of DataContext when Window closing, and more.
 
-## ViewModel サポート
+## ViewModel support
 
 Livet は Presentation Domain Separation(PDS) に沿って開発されることを前提としています。その前提の上では ViewModel にはあまりコードが書かれないという考えの上で ViewModel サポートの機能を提供しています。
 
