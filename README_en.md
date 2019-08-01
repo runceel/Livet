@@ -138,17 +138,9 @@ Flow of usual MVVM libraries: View -> ViewModel -> View -> ViewModel
 Flow of Livet: View -> ViewModel
 ```
 
-```
-参考
-ボタンクリックをきっかけに確認ダイアログを出して結果を元に ViewModel で処理しようとすると、一般的な MVVM をサポートするライブラリでは View でのイベントを ViewModel のコマンドで受けて、コマンドの処理の中でメッセンジャーを呼び出して View にメッセージを送って、View 側で処理を行い結果をコールバックで ViewModel に返すといった処理になります。
+And also, you can pass a return value to a ViewModel's method and command, when the message has a return value(for ex: message for showing confirmation dialog).
 
-一般的な MVVM ライブラリの処理の流れ: View -> ViewModel -> View -> ViewModel
-Livet の処理の流れ: View -> ViewModel
-```
-
-また、戻り値のあるメッセージ（確認ダイアログの表示メッセージなど）では、その戻り値を引数に渡して ViewModel のメソッドやコマンドの呼び出しにも対応しています。
-
-ViewModel 起点の場合は、まず View に InteractionMessageTrigger を設定して Action を指定します。
+A case of sending a message from ViewModel, first define InteractionMessageTrigger at View layer and set action to the message.
 
 ```xml
 <l:InteractionMessageTrigger MessageKey="MessageKey_Confirm" Messenger="{Binding Messenger}">
@@ -156,12 +148,12 @@ ViewModel 起点の場合は、まず View に InteractionMessageTrigger を設�
 </l:InteractionMessageTrigger>
 ```
 
-そして、ViewModel 側で Messenger を使用してメッセージを送ります。
+And, sending a message using Messenger from ViewModel.
 
 ```cs
 public async void ConfirmFromViewModel()
 {
-    var message = new ConfirmationMessage("これはテスト用メッセージです。", "テスト", "MessageKey_Confirm")
+    var message = new ConfirmationMessage("This is a test message.", "For test", "MessageKey_Confirm")
     {
         Button = MessageBoxButton.OKCancel,
     };
@@ -170,9 +162,9 @@ public async void ConfirmFromViewModel()
 }
 ```
 
-MessageKey_Confirm というメッセージキーを元にして、どの InteractionMessageTrigger が反応するかが決まります。
+Using `MessageKey_Confirm` as a message key, which deciding InteractionMessageTrigger is invoked.
 
-View 起点の場合は Action に対して DirectInteractionMessage を指定して、DirectInteractionMessage の中に実際のメッセージを定義します。例えば、ボタンをクリックしたら確認ダイアログを出す場合は以下のようになります。
+For view origin, defining DirectInteractionMessage to Action, and defining a message you use to a child of DirectInteractionMessage.
 
 ```xml
 <Button Content="ConfirmFromView">
@@ -180,7 +172,7 @@ View 起点の場合は Action に対して DirectInteractionMessage を指定�
         <i:EventTrigger EventName="Click">
             <l:ConfirmationDialogInteractionMessageAction>
                 <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView" CallbackMethodTarget="{Binding}">
-                    <l:ConfirmationMessage Caption="テスト" Text="これはテスト用メッセージです。" />
+                    <l:ConfirmationMessage Caption="For test" Text="This is a test message." />
                 </l:DirectInteractionMessage>
             </l:ConfirmationDialogInteractionMessageAction>
         </i:EventTrigger>
@@ -188,7 +180,9 @@ View 起点の場合は Action に対して DirectInteractionMessage を指定�
 </Button>
 ```
 
-上記の例では、Action の実行後に ViewModel の ConfirmFromView メソッドを呼ぶように指定しています。ConfirmFromView メソッドではメッセージを引数に受け取り処理を行えます。
+In the above example, after executing Action, setting to call ConfirmFromView method of ViewModel.
+At ConfirmFromView method, its can use the message.
+
 
 ```cs
 public void ConfirmFromView(ConfirmationMessage message)
