@@ -183,7 +183,6 @@ For view origin, defining DirectInteractionMessage to Action, and defining a mes
 In the above example, after executing Action, setting to call ConfirmFromView method of ViewModel.
 At ConfirmFromView method, its can use the message.
 
-
 ```cs
 public void ConfirmFromView(ConfirmationMessage message)
 {
@@ -191,9 +190,9 @@ public void ConfirmFromView(ConfirmationMessage message)
 }
 ```
 
-Livet に標準で定義されているメッセージとアクションの組み合わせには、確認・情報ダイアログ・ファイルダイアログ・画面遷移・フォルダーダイアログ(Windows API Code Packを参照しているため Livet.Extensions という別アセンブリに定義)などがあります。
+Actions and Messages are defined in Livet are confirmation dialog, information diealog, file dialog, navigating window, folder dialog(It references Windows API Code Pack, so, it is deferent package that is Livet.Extensions) and more.
 
-Livet.Extensions のフォルダー選択メッセージとアクションの使用例。
+A following code is an example to use folder selection dialog message of Livet.Extensions.
 
 ```xml
 <Button Content="Folder">
@@ -201,7 +200,7 @@ Livet.Extensions のフォルダー選択メッセージとアクションの使
         <i:EventTrigger EventName="Click">
             <l:FolderBrowserDialogInteractionMessageAction>
                 <l:DirectInteractionMessage CallbackMethodName="FolderSelected" CallbackMethodTarget="{Binding}">
-                    <l:FolderSelectionMessage Description="フォルダーの選択" DialogPreference="None" />
+                    <l:FolderSelectionMessage Description="Select folder" DialogPreference="None" />
                 </l:DirectInteractionMessage>
             </l:FolderBrowserDialogInteractionMessageAction>
         </i:EventTrigger>
@@ -209,9 +208,9 @@ Livet.Extensions のフォルダー選択メッセージとアクションの使
 </Button>
 ```
 
-#### 汎用 EnumToBooleanConverter
+#### General purpose EnumToBooleanConverter
 
-Livet では System.Windows 名前空間以下の全ての Enum 型を boolean と相互変換する IValueConverter を用意しています。
+In Livet, there are classes that implements IValueConverter to convert between boolean and enum that are all enum type under System.Windows namespace.
 
 ```xml
 <Window.WindowState>
@@ -227,11 +226,11 @@ Livet では System.Windows 名前空間以下の全ての Enum 型を boolean �
 </Window.WindowState>
 ```
 
-#### その他の View 機能
+#### Other view features
 
-Blend SDK の DataTrigger は初期値に対応していません。その対処として初期値に対応する LivetDataTrigger、フォーカスを制御する SetFocusAction 、Window のクローズキャンセルや、クローズキャンセル可否判断を ViewModel に委譲する事が出来る WindowCloseCancelBehavior、RoutedEventTrigger、DataContext が IDisposable であった場合 DataContext を Dispose する DataContextDisposeAction などを用意してあります。
+DataTrigger of Blend SDK don't support initial value. So, LivetDataTrigger that can set initial value, and also, there are SetFocusAction to manage focus, WindowCloseCancelBehavior that cancel Window close and delegate canceling logic to ViewModel, DataContextDisposeAction that is to call Dispose method of DataContext when Window closing, and more.
 
-## ViewModel サポート
+## ViewModel support
 
 Livet は Presentation Domain Separation(PDS) に沿って開発されることを前提としています。その前提の上では ViewModel にはあまりコードが書かれないという考えの上で ViewModel サポートの機能を提供しています。
 
