@@ -7,7 +7,7 @@
                   Publisher="Kazuki Ohta" />
         <DisplayName>Livet</DisplayName>
         <Description xml:space="preserve">Provide a project template, item templates and code snippets for development WPF app using Livet and C#.</Description>
-        <MoreInfo>https://github.com/ugaya40/Livet</MoreInfo>
+        <MoreInfo>https://github.com/runceel/Livet</MoreInfo>
         <License>license-jp.rtf</License>
         <Icon>Livet.ico</Icon>
         <PreviewImage>Livet.png</PreviewImage>
