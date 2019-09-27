@@ -2,8 +2,7 @@
     x:Class="$safeprojectname$.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
     xmlns:v="clr-namespace:$safeprojectname$.Views"
     xmlns:vm="clr-namespace:$safeprojectname$.ViewModels"
@@ -15,20 +14,20 @@
         <vm:MainWindowViewModel />
     </Window.DataContext>
 
-    <i:Interaction.Triggers>
+    <behaviors:Interaction.Triggers>
         <!--  When ContentRendered event raised, Initialize method of ViewModel would be called.  -->
-        <i:EventTrigger EventName="ContentRendered">
+        <behaviors:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodName="Initialize" MethodTarget="{Binding}" />
-        </i:EventTrigger>
+        </behaviors:EventTrigger>
 
         <!--  Dispose method is called, when Window closing.  -->
-        <i:EventTrigger EventName="Closed">
+        <behaviors:EventTrigger EventName="Closed">
             <l:DataContextDisposeAction />
-        </i:EventTrigger>
+        </behaviors:EventTrigger>
 
         <!--  If you make user choose 'OK or Cancel' closing Window, then please use Window Close cancel Behavior.  -->
 
-    </i:Interaction.Triggers>
+    </behaviors:Interaction.Triggers>
 
     <Grid />
 </Window>

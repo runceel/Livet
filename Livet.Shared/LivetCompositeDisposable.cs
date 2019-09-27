@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+#if !NETCOREAPP
 using Livet.Annotations;
+#endif
 
 namespace Livet
 {

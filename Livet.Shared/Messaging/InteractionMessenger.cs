@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Livet.Annotations;
@@ -15,7 +14,7 @@ namespace Livet.Messaging
         ///     指定された相互作用メッセージを同期的に送信します。
         /// </summary>
         /// <param name="message">相互作用メッセージ</param>
-        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         public void Raise([NotNull] InteractionMessage message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
@@ -56,7 +55,7 @@ namespace Livet.Messaging
         ///     指定された相互作用メッセージを非同期で送信します。
         /// </summary>
         /// <param name="message">相互作用メッセージ</param>
-        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         public async Task RaiseAsync([NotNull] InteractionMessage message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));

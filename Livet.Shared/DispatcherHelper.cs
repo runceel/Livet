@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Threading;
 using Livet.Annotations;
@@ -18,7 +17,7 @@ namespace Livet
         ///     UIDispatcherを指定、または取得します。通常このプロパティはApp_StartUpで指定されます。
         /// </summary>
         [CanBeNull]
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
         public static Dispatcher UIDispatcher
         {
             get

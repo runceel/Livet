@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using DataTrigger = Microsoft.Expression.Interactivity.Core.DataTrigger;
+using DataTrigger = Microsoft.Xaml.Behaviors.Core.DataTrigger;
 
 namespace Livet.Behaviors
 {

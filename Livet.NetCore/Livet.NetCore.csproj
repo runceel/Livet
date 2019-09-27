@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>2.0.0-pre3</Version>
+    <Version>3.0.0-pre1</Version>
     <Authors>Livet project</Authors>
     <Company />
     <Product />
     <PackageId>LivetCask.NetCore</PackageId>
-    <Description>LivetCask package for .NET Core 3.0 preview</Description>
+    <Description>LivetCask package for .NET Core 3.0</Description>
     <Copyright>Livet Project</Copyright>
     <PackageLicenseUrl>https://github.com/ugaya40/Livet/blob/master/license-en.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ugaya40/Livet</PackageProjectUrl>
@@ -16,15 +16,16 @@
     <RepositoryUrl>https://github.com/ugaya40/Livet</RepositoryUrl>
     <PackageReleaseNotes>Livet for .NET Core 3.0</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <Import Project="..\Livet.Generated\Livet.Generated.projitems" Label="Shared" />
 
   <Import Project="..\Livet.Shared\Livet.Shared.projitems" Label="Shared" />
 
+  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
+
   <ItemGroup>
-    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525">
-      <NoWarn>NU1701</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1" />
   </ItemGroup>
 </Project>

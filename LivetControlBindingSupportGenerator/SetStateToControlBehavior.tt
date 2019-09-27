@@ -21,7 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Interactivity;
+using Microsoft.Xaml.Behaviors;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.ComponentModel;
