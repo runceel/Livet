@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Threading;
 using Livet.Annotations;
@@ -24,7 +23,7 @@ namespace Livet
         /// <param name="converter">TModel型のインスタンスをTViewModel型のインスタンスに変換するFunc</param>
         /// <param name="dispatcher">生成する連動コレクションが変更通知を行うDispatcher</param>
         /// <returns>生成された連動コレクション</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
         public static ReadOnlyDispatcherCollection<TViewModel> CreateReadOnlyDispatcherCollection<TModel, TViewModel>(
             [NotNull] IList<TModel> source, [NotNull] Func<TModel, TViewModel> converter,
             [NotNull] Dispatcher dispatcher)

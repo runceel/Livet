@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interactivity;
+using Microsoft.Xaml.Behaviors;
+#if !NETCOREAPP
 using Livet.Annotations;
+#endif
 
 namespace Livet.Behaviors.ControlBinding
 {

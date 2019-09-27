@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>LivetCask</id>
-    <version>2.2.2</version>
+    <version>3.0.1</version>
     <title>Livet Cask</title>
     <authors>Livet Project</authors>
     <licenseUrl>https://github.com/ugaya40/Livet/blob/master/license-jp.txt</licenseUrl>
@@ -18,6 +18,9 @@
     <copyright>Copyright (c) 2010-2019 Livet Project</copyright>
     <language>en-US</language>
     <tags>MVVM,WPF</tags>
+    <dependencies>
+      <dependency id="Microsoft.Xaml.Behaviors.Wpf" version="1.0.1" />
+    </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="PresentationCore" />
       <frameworkAssembly assemblyName="PresentationFramework" />
@@ -25,8 +28,6 @@
       <frameworkAssembly assemblyName="System.Core" />
       <frameworkAssembly assemblyName="System.Xaml" />
       <frameworkAssembly assemblyName="WindowsBase" />
-      <frameworkAssembly assemblyName="Microsoft.Expression.Interactions" />
-      <frameworkAssembly assemblyName="System.Windows.Interactivity" />
     </frameworkAssemblies>
   </metadata>
   <files>

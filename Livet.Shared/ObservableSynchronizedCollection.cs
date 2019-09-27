@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -15,7 +14,7 @@ namespace Livet
     ///     スレッドセーフな変更通知コレクションです。
     /// </summary>
     /// <typeparam name="T">コレクションアイテムの型</typeparam>
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [Serializable]
     public class ObservableSynchronizedCollection<T> : IList<T>, ICollection, INotifyCollectionChanged,
         INotifyPropertyChanged, IReadOnlyList<T>

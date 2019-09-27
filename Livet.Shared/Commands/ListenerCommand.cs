@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Input;
 using Livet.Annotations;
@@ -78,7 +77,7 @@ namespace Livet.Commands
         /// <summary>
         ///     コマンドが実行可能かどうかが変化したことを通知します。
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         public void RaiseCanExecuteChanged()
         {
             OnPropertyChanged();

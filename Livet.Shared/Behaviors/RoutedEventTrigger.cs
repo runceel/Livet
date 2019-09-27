@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Interactivity;
+using Microsoft.Xaml.Behaviors;
 using Livet.Annotations;
 
 namespace Livet.Behaviors
