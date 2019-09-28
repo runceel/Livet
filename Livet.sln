@@ -52,27 +52,31 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.ProjectTemplate.CShar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{94F1F017-53B5-4CA6-9706-3C9C23BABB1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewLayerSupport", "Samples\ViewLayerSupport\ViewLayerSupport.csproj", "{443F4FE1-5C3B-4847-BCBA-5F8E56F63DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewLayerSupport", "Samples\ViewLayerSupport\ViewLayerSupport.csproj", "{443F4FE1-5C3B-4847-BCBA-5F8E56F63DF6}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Livet.Annotations", "Livet.Annotations\Livet.Annotations.shproj", "{0E65806E-A604-4B5D-8022-B65DDD2714D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask", "LivetCask\LivetCask.csproj", "{1CB68812-5436-42FF-A0A0-7CC98E915547}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask", "LivetCask\LivetCask.csproj", "{1CB68812-5436-42FF-A0A0-7CC98E915547}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Behaviors", "LivetCask.Behaviors\LivetCask.Behaviors.csproj", "{309087EE-6654-4A5A-9E5B-769B2BA20A0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Behaviors", "LivetCask.Behaviors\LivetCask.Behaviors.csproj", "{309087EE-6654-4A5A-9E5B-769B2BA20A0F}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LivetCask.Generated.Behaviors", "LivetCask.Generated.Behaviors\LivetCask.Generated.Behaviors.shproj", "{38377602-36A4-4ACD-9545-FE272557B1F3}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LivetCask.Generated.Converters", "LivetCask.Generated.Converters\LivetCask.Generated.Converters.shproj", "{9190F512-1964-4C9F-8E48-4F1F51DD0CDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Converters", "LivetCask.Converters\LivetCask.Converters.csproj", "{AE6F03F5-0F2F-4528-83FF-C4B2B2D6B86A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Converters", "LivetCask.Converters\LivetCask.Converters.csproj", "{AE6F03F5-0F2F-4528-83FF-C4B2B2D6B86A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratedFiles", "GeneratedFiles", "{284906C0-C12F-42E4-A583-B28FCD180570}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.EventListeners", "LivetCask.EventListeners\LivetCask.EventListeners.csproj", "{D940DD13-E826-46E9-AAAF-D7FEAC31014D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.EventListeners", "LivetCask.EventListeners\LivetCask.EventListeners.csproj", "{D940DD13-E826-46E9-AAAF-D7FEAC31014D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livet.Test", "Livet.Test\Livet.Test.csproj", "{3D8FB6D7-6414-4F6E-92C5-FD1C6C201F28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livet.Test", "Livet.Test\Livet.Test.csproj", "{3D8FB6D7-6414-4F6E-92C5-FD1C6C201F28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Extensions", "LivetCask.Extensions\LivetCask.Extensions.csproj", "{DCFBB350-CFBD-4265-B5D7-8265040D6252}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Extensions", "LivetCask.Extensions\LivetCask.Extensions.csproj", "{DCFBB350-CFBD-4265-B5D7-8265040D6252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Messaging", "LivetCask.Messaging\LivetCask.Messaging.csproj", "{184A9460-EF9A-475E-A063-FB1B67725BD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Core", "LivetCask.Core\LivetCask.Core.csproj", "{08D2B468-ACB2-4917-ABE0-3587E6F174AB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -231,6 +235,22 @@ Global
 		{DCFBB350-CFBD-4265-B5D7-8265040D6252}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DCFBB350-CFBD-4265-B5D7-8265040D6252}.Release|x86.ActiveCfg = Release|Any CPU
 		{DCFBB350-CFBD-4265-B5D7-8265040D6252}.Release|x86.Build.0 = Release|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Debug|x86.Build.0 = Debug|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Release|x86.ActiveCfg = Release|Any CPU
+		{184A9460-EF9A-475E-A063-FB1B67725BD2}.Release|x86.Build.0 = Release|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Debug|x86.Build.0 = Debug|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{08D2B468-ACB2-4917-ABE0-3587E6F174AB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

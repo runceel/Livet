@@ -6,9 +6,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using Livet.Annotations;
 
-namespace Livet.EventListeners
+namespace Livet.EventListeners.Internals
 {
-    internal class
+    public class
         AnonymousPropertyChangedEventHandlerBag : IEnumerable<KeyValuePair<string, List<PropertyChangedEventHandler>>>
     {
         [NotNull] private readonly Dictionary<string, List<PropertyChangedEventHandler>> _handlerDictionary =
@@ -21,14 +21,14 @@ namespace Livet.EventListeners
 
         [NotNull] private readonly WeakReference<INotifyPropertyChanged> _source;
 
-        internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source)
+        public AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
 
             _source = new WeakReference<INotifyPropertyChanged>(source);
         }
 
-        internal AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source,
+        public AnonymousPropertyChangedEventHandlerBag(INotifyPropertyChanged source,
             PropertyChangedEventHandler handler)
             : this(source)
         {
@@ -49,14 +49,14 @@ namespace Livet.EventListeners
             return _handlerDictionary.GetEnumerator();
         }
 
-        internal void RegisterHandler([NotNull] PropertyChangedEventHandler handler)
+        public void RegisterHandler([NotNull] PropertyChangedEventHandler handler)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             RegisterHandler(string.Empty, handler);
         }
 
-        internal void RegisterHandler([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
+        public void RegisterHandler([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             if (handler == null) throw new ArgumentNullException(nameof(handler));
@@ -74,7 +74,7 @@ namespace Livet.EventListeners
             }
         }
 
-        internal void RegisterHandler<T>([NotNull] Expression<Func<T>> propertyExpression,
+        public void RegisterHandler<T>([NotNull] Expression<Func<T>> propertyExpression,
             [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
@@ -87,7 +87,7 @@ namespace Livet.EventListeners
             RegisterHandler(memberExpression.Member.Name, handler);
         }
 
-        internal void ExecuteHandler([NotNull] PropertyChangedEventArgs e)
+        public void ExecuteHandler([NotNull] PropertyChangedEventArgs e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
 
@@ -131,21 +131,21 @@ namespace Livet.EventListeners
             }
         }
 
-        internal void Add([NotNull] PropertyChangedEventHandler handler)
+        public void Add([NotNull] PropertyChangedEventHandler handler)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
 
             RegisterHandler(handler);
         }
 
-        internal void Add([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
+        public void Add([NotNull] string propertyName, [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
 
             RegisterHandler(propertyName, handler);
         }
 
-        internal void Add([NotNull] string propertyName, [NotNull] params PropertyChangedEventHandler[] handlers)
+        public void Add([NotNull] string propertyName, [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             if (handlers == null) throw new ArgumentNullException(nameof(handlers));
@@ -153,7 +153,7 @@ namespace Livet.EventListeners
             foreach (var handler in handlers.Where(h => h != null)) RegisterHandler(propertyName, handler);
         }
 
-        internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
+        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
             [NotNull] PropertyChangedEventHandler handler)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
@@ -166,7 +166,7 @@ namespace Livet.EventListeners
             Add(memberExpression.Member.Name, handler);
         }
 
-        internal void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
+        public void Add<T>([NotNull] Expression<Func<T>> propertyExpression,
             [NotNull] params PropertyChangedEventHandler[] handlers)
         {
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));

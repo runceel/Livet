@@ -1,15 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\Livet.props" />
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <RootNamespace>Livet</RootNamespace>
-    <AssemblyName>Livet</AssemblyName>
-    <PackageId>LivetCask</PackageId>
+    <AssemblyName>Livet.Core</AssemblyName>
+    <PackageId>LivetCask.Core</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Livet Project</Authors>
-    <Description>Livet is the infrastructure of MVVM pattern on WPF.
-It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/libpng.</Description>
+    <Description>
+      Livet is the infrastructure of MVVM pattern on WPF.
+      It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/libpng.
+
+      This package is for core features for Livet.
+    </Description>
     <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
     <PackageLicenseFile>license-en.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/runceel/Livet</PackageProjectUrl>
@@ -43,13 +48,5 @@ It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/l
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\LivetCask.Behaviors\LivetCask.Behaviors.csproj" />
-    <ProjectReference Include="..\LivetCask.Converters\LivetCask.Converters.csproj" />
-    <ProjectReference Include="..\LivetCask.EventListeners\LivetCask.EventListeners.csproj" />
-    <ProjectReference Include="..\LivetCask.Messaging\LivetCask.Messaging.csproj" />
-  </ItemGroup>
-  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
 
 </Project>

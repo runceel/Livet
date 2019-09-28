@@ -48,6 +48,10 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LivetCask.Core\LivetCask.Core.csproj" />
+  </ItemGroup>
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\LivetCask.Generated.Behaviors\LivetCask.Generated.Behaviors.projitems" Label="Shared" />
 

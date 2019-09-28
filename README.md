@@ -222,7 +222,7 @@ Livet では System.Windows 名前空間以下の全ての Enum 型を boolean �
 
 #### その他の View 機能
 
-Blend SDK の DataTrigger は初期値に対応していません。その対処として初期値に対応する LivetDataTrigger、フォーカスを制御する SetFocusAction 、Window のクローズキャンセルや、クローズキャンセル可否判断を ViewModel に委譲する事が出来る WindowCloseCancelBehavior、RoutedEventTrigger、DataContext が IDisposable であった場合 DataContext を Dispose する DataContextDisposeAction などを用意してあります。
+Microsoft.Xaml.Behaviors.Wpf の DataTrigger は初期値に対応していません。その対処として初期値に対応する LivetDataTrigger、フォーカスを制御する SetFocusAction 、Window のクローズキャンセルや、クローズキャンセル可否判断を ViewModel に委譲する事が出来る WindowCloseCancelBehavior、RoutedEventTrigger、DataContext が IDisposable であった場合 DataContext を Dispose する DataContextDisposeAction などを用意してあります。
 
 ## ViewModel サポート
 
@@ -428,6 +428,12 @@ WPF 関連の enum と bool 間の変換をサポートするコンバーター�
 ##### LivetCask.EventListeners
 
 `PropertyChangedEventListener`/`CollectionChangedEventListener`/`EventListener` が含まれます。
+
+##### LivetCask.Messaging
+
+Livet の `Messenger` クラスや、関連する様々な `Message` クラスと、それを処理するための `Behavior` などが含まれます。
+
+特に View 起点のメッセージは、他の MVVM フレームワークでは、あまり見ない機能になります。
 
 ##### LivetExtensions
 

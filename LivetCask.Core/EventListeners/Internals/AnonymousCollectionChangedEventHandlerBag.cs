@@ -5,9 +5,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using Livet.Annotations;
 
-namespace Livet.EventListeners
+namespace Livet.EventListeners.Internals
 {
-    internal class AnonymousCollectionChangedEventHandlerBag : IEnumerable<
+    public class AnonymousCollectionChangedEventHandlerBag : IEnumerable<
         KeyValuePair<NotifyCollectionChangedAction, List<NotifyCollectionChangedEventHandler>>>
     {
         [NotNull] private readonly List<NotifyCollectionChangedEventHandler> _allHandlerList =
@@ -26,13 +26,13 @@ namespace Livet.EventListeners
 
         [NotNull] private readonly WeakReference<INotifyCollectionChanged> _source;
 
-        internal AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source)
+        public AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             _source = new WeakReference<INotifyCollectionChanged>(source);
         }
 
-        internal AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source,
+        public AnonymousCollectionChangedEventHandlerBag(INotifyCollectionChanged source,
             NotifyCollectionChangedEventHandler handler) : this(source)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
@@ -53,12 +53,12 @@ namespace Livet.EventListeners
             return _handlerDictionary.GetEnumerator();
         }
 
-        internal void RegisterHandler(NotifyCollectionChangedEventHandler handler)
+        public void RegisterHandler(NotifyCollectionChangedEventHandler handler)
         {
             lock (_allHandlerListLockObject) { _allHandlerList.Add(handler); }
         }
 
-        internal void RegisterHandler(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
+        public void RegisterHandler(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
         {
             lock (_handlerDictionaryLockObject)
             {
@@ -73,7 +73,7 @@ namespace Livet.EventListeners
             }
         }
 
-        internal void ExecuteHandler([NotNull] NotifyCollectionChangedEventArgs e)
+        public void ExecuteHandler([NotNull] NotifyCollectionChangedEventArgs e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
 
@@ -104,17 +104,17 @@ namespace Livet.EventListeners
             }
         }
 
-        internal void Add(NotifyCollectionChangedEventHandler handler)
+        public void Add(NotifyCollectionChangedEventHandler handler)
         {
             RegisterHandler(handler);
         }
 
-        internal void Add(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
+        public void Add(NotifyCollectionChangedAction action, NotifyCollectionChangedEventHandler handler)
         {
             RegisterHandler(action, handler);
         }
 
-        internal void Add(NotifyCollectionChangedAction action,
+        public void Add(NotifyCollectionChangedAction action,
             [NotNull] params NotifyCollectionChangedEventHandler[] handlers)
         {
             if (handlers == null) throw new ArgumentNullException(nameof(handlers));

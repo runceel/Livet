@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Markup;
 using Livet.Annotations;
@@ -13,7 +14,7 @@ namespace Livet.Messaging
     {
         // Using a DependencyProperty as the backing store for TransitionViewModel.  This enables animation, styling, binding, etc...
         [NotNull] public static readonly DependencyProperty TransitionViewModelProperty =
-            DependencyProperty.Register("TransitionViewModel", typeof(ViewModel), typeof(TransitionMessage),
+            DependencyProperty.Register("TransitionViewModel", typeof(INotifyPropertyChanged), typeof(TransitionMessage),
                 new PropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for Mode.  This enables animation, styling, binding, etc...
@@ -39,7 +40,7 @@ namespace Livet.Messaging
         /// </summary>
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="messageKey">メッセージキー</param>
-        public TransitionMessage(ViewModel transitionViewModel, string messageKey)
+        public TransitionMessage(INotifyPropertyChanged transitionViewModel, string messageKey)
             : this(null, transitionViewModel, TransitionMode.UnKnown, messageKey) { }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace Livet.Messaging
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
         /// <param name="messageKey">メッセージキー</param>
-        public TransitionMessage(ViewModel transitionViewModel, TransitionMode mode, string messageKey)
+        public TransitionMessage(INotifyPropertyChanged transitionViewModel, TransitionMode mode, string messageKey)
             : this(null, transitionViewModel, mode, messageKey) { }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace Livet.Messaging
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
         /// <param name="messageKey">メッセージキー</param>
-        public TransitionMessage(Type windowType, ViewModel transitionViewModel, TransitionMode mode, string messageKey)
+        public TransitionMessage(Type windowType, INotifyPropertyChanged transitionViewModel, TransitionMode mode, string messageKey)
             : base(messageKey)
         {
             Mode = mode;
@@ -77,7 +78,7 @@ namespace Livet.Messaging
         ///     新しいWindowのDataContextに設定するViewModelを指定して新しい相互作用メッセージのインスタンスを生成します。
         /// </summary>
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
-        public TransitionMessage(ViewModel transitionViewModel)
+        public TransitionMessage(INotifyPropertyChanged transitionViewModel)
             : this(null, transitionViewModel, TransitionMode.UnKnown, null) { }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace Livet.Messaging
         /// </summary>
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
-        public TransitionMessage(ViewModel transitionViewModel, TransitionMode mode)
+        public TransitionMessage(INotifyPropertyChanged transitionViewModel, TransitionMode mode)
             : this(null, transitionViewModel, mode, null) { }
 
         /// <summary>
@@ -94,15 +95,15 @@ namespace Livet.Messaging
         /// <param name="windowType">新しいWindowの型</param>
         /// <param name="transitionViewModel">新しいWindowのDataContextに設定するViewModel</param>
         /// <param name="mode">画面遷移の方法を決定するTransitionMode列挙体。初期値はUnKnownです。</param>
-        public TransitionMessage(Type windowType, ViewModel transitionViewModel, TransitionMode mode)
+        public TransitionMessage(Type windowType, INotifyPropertyChanged transitionViewModel, TransitionMode mode)
             : this(windowType, transitionViewModel, mode, null) { }
 
         /// <summary>
         ///     新しいWindowのDataContextに設定するViewModelを指定、または取得します。
         /// </summary>
-        public ViewModel TransitionViewModel
+        public INotifyPropertyChanged TransitionViewModel
         {
-            get { return (ViewModel) GetValue(TransitionViewModelProperty); }
+            get { return (INotifyPropertyChanged) GetValue(TransitionViewModelProperty); }
             set { SetValue(TransitionViewModelProperty, value); }
         }
 
