@@ -20,10 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C1429347
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{E9939869-6A92-4752-ADA7-EA21AABA293B}"
 	ProjectSection(SolutionItems) = preProject
-		NuGet\LivetCask.nuspec = NuGet\LivetCask.nuspec
-		NuGet\LivetExtensions.nuspec = NuGet\LivetExtensions.nuspec
 		NuGet\nuget.exe = NuGet\nuget.exe
-		NuGet\pack.bat = NuGet\pack.bat
 		NuGet\push.bat = NuGet\push.bat
 	EndProjectSection
 EndProject
