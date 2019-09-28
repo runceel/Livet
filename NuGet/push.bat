@@ -1,6 +1,6 @@
 @echo off
 cd /d %~dp0
-set PACKAGEVERSION=3.1.0
+set PACKAGEVERSION=3.2.0
 dotnet build ..\Livet.Code.sln -c=Release
 rem API Key ‚Í nuget.org ‚©‚çŽæ“¾‚µ‚Ä nuget setApiKey xxxx ‚ÅƒZƒbƒg‚µ‚Ä‚­‚¾‚³‚¢
 dotnet nuget push ..\LivetCask.Extensions\bin\Release\LivetExtensions.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package

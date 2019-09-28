@@ -9,7 +9,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Livet Project</Authors>
     <Description>Livet is the infrastructure of MVVM pattern on WPF.
-It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/libpng.</Description>
+It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/libpng.
+    </Description>
     <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
     <PackageLicenseFile>license-en.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/runceel/Livet</PackageProjectUrl>
@@ -46,6 +47,7 @@ It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/l
 
   <ItemGroup>
     <ProjectReference Include="..\LivetCask.Behaviors\LivetCask.Behaviors.csproj" />
+    <ProjectReference Include="..\LivetCask.Collections\LivetCask.Collections.csproj" />
     <ProjectReference Include="..\LivetCask.Converters\LivetCask.Converters.csproj" />
     <ProjectReference Include="..\LivetCask.EventListeners\LivetCask.EventListeners.csproj" />
     <ProjectReference Include="..\LivetCask.Messaging\LivetCask.Messaging.csproj" />

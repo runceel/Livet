@@ -1,18 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\Livet.props" />
-
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
-    <UseWpf>true</UseWpf>
-    <RootNamespace>Livet.Converters</RootNamespace>
-    <AssemblyName>Livet.Converters</AssemblyName>
-    <PackageId>LivetCask.Converters</PackageId>
+    <TargetFrameworks>net45;netcoreapp3.0;netstandard2.0</TargetFrameworks>
+    <RootNamespace>Livet.Collections</RootNamespace>
+    <AssemblyName>Livet.Collections</AssemblyName>
+    <PackageId>LivetCask.Collections</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Livet Project</Authors>
     <Description>
       Livet is the infrastructure of MVVM pattern on WPF.
-It supports .NET Framework 4.5.2 or later and .NET Core 3.0, and licensed as zlib/libpng.
-This package is for useful converters for MVVM pattern.
+It supports .NET Framework 4.5.2 or later, .NET Core 3.0 and .NET Standard 2.0, and licensed as zlib/libpng.
+This package is for useful collections for MVVM pattern.
     </Description>
     <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
     <PackageLicenseFile>license-en.txt</PackageLicenseFile>
@@ -29,18 +27,6 @@ This package is for useful converters for MVVM pattern.
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="PresentationCore" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1">
-    </PackageReference>
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\license-en.txt">
@@ -48,7 +34,4 @@ This package is for useful converters for MVVM pattern.
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
-  <Import Project="..\LivetCask.Generated.Converters\LivetCask.Generated.Converters.projitems" Label="Shared" />
-
 </Project>

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-#if !NETCOREAPP
 using Livet.Annotations;
-#endif
 
 namespace Livet
 {
@@ -148,7 +145,7 @@ namespace Livet
         ///     IDisposableの代わりに、リソースを解放するActionを末尾に追加します。
         /// </summary>
         /// <param name="releaseAction">リソースを解放するためのAction</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
         public void Add([NotNull] Action releaseAction)
         {
             if (releaseAction == null) throw new ArgumentNullException(nameof(releaseAction));
@@ -174,7 +171,7 @@ namespace Livet
         ///     IDisposableの代わりに、リソースを解放するActionを先頭に追加します。
         /// </summary>
         /// <param name="releaseAction">リソースを解放するためのAction</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
         public void AddFirst([NotNull] Action releaseAction)
         {
             if (releaseAction == null) throw new ArgumentNullException(nameof(releaseAction));
