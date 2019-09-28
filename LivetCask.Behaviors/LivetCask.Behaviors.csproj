@@ -36,9 +36,6 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\LivetCask\XmlDefinitions.cs" Link="XmlDefinitions.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1">
