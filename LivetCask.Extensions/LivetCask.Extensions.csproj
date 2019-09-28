@@ -26,7 +26,6 @@
     <Version>$(Version)</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
@@ -45,12 +44,10 @@
     <Compile Include="..\LivetCask\XmlDefinitions.cs" Link="XmlDefinitions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Microsoft.WindowsAPICodePack.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Microsoft.WindowsAPICodePack.Shell.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\net452" />
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\net452"/>
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\netcoreapp3.0" />
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\netcoreapp3.0"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -93,11 +90,4 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
-  
-  <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
-    <ItemGroup>
-      <BuildOutputInPackage Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" />
-      <BuildOutputInPackage Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" />
-    </ItemGroup>
-  </Target>
-</Project>
+  </Project>
