@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
-using Livet.Collections.EventListeners.WeakEvents;
+using Livet.EventListeners;
 
 namespace Livet.Collections
 {
@@ -16,7 +16,7 @@ namespace Livet.Collections
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
 
-            EventListeners = new MultipleDisposable();
+            EventListeners = new LivetCompositeDisposable();
 
             _isDisposableType = typeof(IDisposable).GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo());
 
@@ -24,14 +24,14 @@ namespace Livet.Collections
             {
                 SourceCollection = collection;
 
-                EventListeners.Add(new PropertyChangedWeakEventListener(SourceCollection, (sender, e) => OnPropertyChanged(e)));
-                EventListeners.Add(new CollectionChangedWeakEventListener(SourceCollection, (sender, e) => OnCollectionChanged(e)));
+                EventListeners.Add(new PropertyChangedEventListener(SourceCollection, (sender, e) => OnPropertyChanged(e)));
+                EventListeners.Add(new CollectionChangedEventListener(SourceCollection, (sender, e) => OnCollectionChanged(e)));
             }
         }
 
         public ISynchronizableNotifyChangedCollection<T> SourceCollection { get;}
 
-        public MultipleDisposable EventListeners { get;}
+        public LivetCompositeDisposable EventListeners { get;}
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 

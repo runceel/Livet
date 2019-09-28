@@ -1,9 +1,9 @@
-﻿using Livet.Collections.EventListeners.WeakEvents;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
+using Livet.EventListeners;
 
 namespace Livet.Collections
 {
@@ -21,7 +21,7 @@ namespace Livet.Collections
 
     public static class SynchronizableNotifyChangedCollectionHelper
     {
-        public static CollectionChangedWeakEventListener CreateSynchronizableCollectionChangedEventListener
+        public static CollectionChangedEventListener CreateSynchronizableCollectionChangedEventListener
             <TSource, TResult>(
             ISynchronizableNotifyChangedCollection<TSource> source,
             ISynchronizableNotifyChangedCollection<TResult> target,
@@ -34,7 +34,7 @@ namespace Livet.Collections
         {
             var isDisposableType = typeof(IDisposable).GetTypeInfo().IsAssignableFrom(typeof(TResult).GetTypeInfo());
 
-            var collectionChangedListener = new CollectionChangedWeakEventListener(source);
+            var collectionChangedListener = new CollectionChangedEventListener(source);
             collectionChangedListener.RegisterHandler((sender, e) =>
             {
                 switch (e.Action)

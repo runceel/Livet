@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-#if !NETCOREAPP
 using Livet.Annotations;
-#endif
 
 namespace Livet.Behaviors
 {

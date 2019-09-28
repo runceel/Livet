@@ -18,7 +18,7 @@ namespace Livet.Collections
 
         public IList<T> CurrentCollection { get; }
 
-        public MultipleDisposable EventListeners { get; } = new MultipleDisposable();
+        public LivetCompositeDisposable EventListeners { get; } = new LivetCompositeDisposable();
 
         public object LockObject { get; } = new object();
 

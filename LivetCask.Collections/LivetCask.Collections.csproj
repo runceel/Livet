@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\Livet.props" />
   <PropertyGroup>
-    <TargetFrameworks>net45;netcoreapp3.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;net452;netstandard2.0</TargetFrameworks>
     <RootNamespace>Livet.Collections</RootNamespace>
     <AssemblyName>Livet.Collections</AssemblyName>
     <PackageId>LivetCask.Collections</PackageId>
@@ -33,5 +34,10 @@ This package is for useful collections for MVVM pattern.
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\LivetCask.EventListeners\LivetCask.EventListeners.csproj" />
   </ItemGroup>
 </Project>

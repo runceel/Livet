@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\Livet.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;net452;netstandard2.0</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <RootNamespace>Livet</RootNamespace>
     <AssemblyName>Livet.Core</AssemblyName>
@@ -28,18 +28,6 @@ This package is for core features for Livet.
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-
-  <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="PresentationCore" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\license-en.txt">
