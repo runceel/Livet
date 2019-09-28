@@ -409,6 +409,34 @@ public string Hoge
 }
 ```
 
+## 他の MVVM フレームワークとの併用
+
+Livet 3.0.3 以降 Livet のパッケージは機能単位に分割されました。
+
+##### LivetCask
+
+Livet のコア機能及び、LivetExtensions パッケージを除くすべてのパッケージへの依存関係が含まれます。
+
+##### LivetCask.Behaviors
+
+Livet で提供している `LivetInvokeMethodAction` などのビヘイビアーや、そのほかのバインドできないプロパティへのバインドをサポートするビヘイビアーが含まれます。
+
+##### LivetCask.Converters
+
+WPF 関連の enum と bool 間の変換をサポートするコンバーターが含まれます。
+
+##### LivetCask.EventListeners
+
+`PropertyChangedEventListener`/`CollectionChangedEventListener`/`EventListener` が含まれます。
+
+##### LivetExtensions
+
+フォルダーダイアログが含まれます。また Windows API Code Pack のアセンブリも同梱されています。
+
+### 併用方法
+
+他の MVVM フレームワークを利用しているケースでも Livet のビヘイビアーが使いたい、コンバーターが使いたいといった場合は該当パッケージのみを NuGet から導入していただくことで、その機能だけを利用することが可能です。
+
 ## オリジナルドキュメント
 
 本ドキュメントは下記のオリジナルドキュメントを元に加筆修正を行ったものです。
