@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <Import Project="..\Livet.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
+    <UseWpf>true</UseWpf>
+    <RootNamespace>Livet.EventListeners</RootNamespace>
+    <AssemblyName>Livet.EventListeners</AssemblyName>
+    <PackageId>LivetCask.EventListeners</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Livet Project</Authors>
+    <Description>
+      Livet is the infrastructure of MVVM pattern on WPF.
+      It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/libpng.
+
+      This package is for useful event listeners using weak event pattern for MVVM pattern.
+    </Description>
+    <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
+    <PackageLicenseFile>license-en.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/runceel/Livet</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/ugaya40/Livet/master/Images/Livet.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/runceel/Livet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>MVVM WPF</PackageTags>
+    <NeutralLanguage />
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <Version>$(Version)</Version>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="PresentationCore" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1">
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\license-en.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
+
+</Project>

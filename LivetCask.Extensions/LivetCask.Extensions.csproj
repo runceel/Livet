@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <Import Project="..\Livet.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
+    <UseWpf>true</UseWpf>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>Livet</RootNamespace>
+    <AssemblyName>Livet.Extensions</AssemblyName>
+    <PackageId>LivetExtensions</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Livet Project</Authors>
+    <Description>
+      An assembly for Livet extension. Currently, there is folder browser features.
+    </Description>
+    <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
+    <PackageLicenseFile>license-en.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/runceel/Livet</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/ugaya40/Livet/master/Images/Livet.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/runceel/Livet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>MVVM WPF</PackageTags>
+    <NeutralLanguage />
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <Version>$(Version)</Version>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="PresentationCore" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\LivetCask\XmlDefinitions.cs" Link="XmlDefinitions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1">
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\license-en.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LivetCask\LivetCask.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
+
+</Project>

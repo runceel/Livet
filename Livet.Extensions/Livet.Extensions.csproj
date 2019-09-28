@@ -71,9 +71,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Livet\Livet.csproj">
-      <Project>{1e476a17-6c4d-4ad2-95b2-84bef4c96d67}</Project>
-      <Name>Livet</Name>
+    <ProjectReference Include="..\LivetCask\LivetCask.csproj">
+      <Project>{1cb68812-5436-42ff-a0a0-7cc98e915547}</Project>
+      <Name>LivetCask</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\Livet.Extensions.Shared\Livet.Extensions.Shared.projitems" Label="Shared" />
