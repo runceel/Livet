@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Livet.Collections
+namespace Livet.StatefulModel
 {
     public sealed class FilteredObservableCollection<T> : NotifyChangedCollection<T>, ISynchronizableNotifyChangedCollection<T>
     { 

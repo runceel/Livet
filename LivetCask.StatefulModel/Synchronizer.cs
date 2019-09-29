@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Livet.Collections
+namespace Livet.StatefulModel
 {
     public class Synchronizer<T> : IDisposable
     {

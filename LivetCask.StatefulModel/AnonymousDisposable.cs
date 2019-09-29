@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Livet.Collections
+namespace Livet.StatefulModel
 {
     public class AnonymousDisposable : IDisposable
     {

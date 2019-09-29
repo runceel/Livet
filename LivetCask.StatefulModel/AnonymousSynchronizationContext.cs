@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Livet.Collections
+namespace Livet.StatefulModel
 {
     public class AnonymousSynchronizationContext : SynchronizationContext
     {

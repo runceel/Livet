@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace Livet.Collections
+namespace Livet.StatefulModel
 {
     public sealed class SynchronizationContextCollection<T> : NotifyChangedCollection<T>,ISynchronizableNotifyChangedCollection<T>
     {

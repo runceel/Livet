@@ -1,18 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\Livet.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
-    <UseWpf>true</UseWpf>
-    <RootNamespace>Livet</RootNamespace>
-    <AssemblyName>Livet.Messaging</AssemblyName>
-    <PackageId>LivetCask.Messaging</PackageId>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <RootNamespace>Livet.StatefulModel</RootNamespace>
+    <AssemblyName>Livet.StatefulModel</AssemblyName>
+    <PackageId>LivetCask.StatefulModel</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Livet Project</Authors>
     <Description>
       Livet is the infrastructure of MVVM pattern on WPF.
-It supports .NET Framework 4.5.2 or later and .NET Core 3.0, and licensed as zlib/libpng.
-This package is for useful messaging features between View layer and ViewModel layer for MVVM pattern.
+It supports .NET Framework 4.5.2 or later, .NET Core 3.0 and .NET Standard 2.0, and licensed as zlib/libpng.
+This package is for useful collections for MVVM pattern.
     </Description>
     <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
     <PackageLicenseFile>license-en.txt</PackageLicenseFile>
@@ -29,17 +28,6 @@ This package is for useful messaging features between View layer and ViewModel l
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="PresentationCore" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\license-en.txt">
@@ -48,8 +36,8 @@ This package is for useful messaging features between View layer and ViewModel l
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LivetCask.Core\LivetCask.Core.csproj" />
-  </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LivetCask.EventListeners\LivetCask.EventListeners.csproj" />
+  </ItemGroup>
 </Project>

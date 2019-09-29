@@ -2,8 +2,7 @@
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\Livet.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net452;netstandard2.0</TargetFrameworks>
-    <UseWpf>true</UseWpf>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <RootNamespace>Livet</RootNamespace>
     <AssemblyName>Livet.Core</AssemblyName>
     <PackageId>LivetCask.Core</PackageId>
@@ -24,7 +23,7 @@ This package is for core features for Livet.
     <NeutralLanguage />
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
-    <Version>$(Version)</Version>
+    <Version>$(PackageVersion)</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

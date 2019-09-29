@@ -21,7 +21,7 @@ It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/l
     <NeutralLanguage />
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
-    <Version>$(Version)</Version>
+    <Version>$(PackageVersion)</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -51,6 +51,7 @@ It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/l
     <ProjectReference Include="..\LivetCask.Converters\LivetCask.Converters.csproj" />
     <ProjectReference Include="..\LivetCask.EventListeners\LivetCask.EventListeners.csproj" />
     <ProjectReference Include="..\LivetCask.Messaging\LivetCask.Messaging.csproj" />
+    <ProjectReference Include="..\LivetCask.Mvvm\LivetCask.Mvvm.csproj" />
   </ItemGroup>
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
 

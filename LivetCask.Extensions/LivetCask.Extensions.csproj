@@ -23,7 +23,7 @@
     <NeutralLanguage />
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
-    <Version>$(Version)</Version>
+    <Version>$(PackageVersion)</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -41,13 +41,10 @@
     <None Remove="Microsoft.WindowsAPICodePack.Shell.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\LivetCask\XmlDefinitions.cs" Link="XmlDefinitions.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\net452" />
-    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\net452"/>
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\net452" />
     <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\netcoreapp3.0" />
-    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\netcoreapp3.0"/>
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\netcoreapp3.0" />
   </ItemGroup>
 
   <ItemGroup>

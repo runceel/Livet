@@ -2,8 +2,7 @@
   <Import Project="..\Livet.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net452;netstandard2.0</TargetFrameworks>
-    <UseWpf>true</UseWpf>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <RootNamespace>Livet.EventListeners</RootNamespace>
     <AssemblyName>Livet.EventListeners</AssemblyName>
     <PackageId>LivetCask.EventListeners</PackageId>
@@ -24,7 +23,7 @@ This package is for useful event listeners using weak event pattern for MVVM pat
     <NeutralLanguage />
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
-    <Version>$(Version)</Version>
+    <Version>$(PackageVersion)</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Livet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

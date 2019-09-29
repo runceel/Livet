@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Livet.Collections
+namespace Livet.StatefulModel
 {
     public class AnonymousComparer<T> : IComparer<T>
     {

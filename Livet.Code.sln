@@ -1,23 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask", "LivetCask\LivetCask.csproj", "{6A4E6038-17ED-4CBA-8261-359A4436F9E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask", "LivetCask\LivetCask.csproj", "{6A4E6038-17ED-4CBA-8261-359A4436F9E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Behaviors", "LivetCask.Behaviors\LivetCask.Behaviors.csproj", "{9CE78389-63DA-4681-98F1-DEDBE7982E58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Behaviors", "LivetCask.Behaviors\LivetCask.Behaviors.csproj", "{9CE78389-63DA-4681-98F1-DEDBE7982E58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Converters", "LivetCask.Converters\LivetCask.Converters.csproj", "{E216160C-7A4E-41D8-BE64-DFF869B2FB32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Converters", "LivetCask.Converters\LivetCask.Converters.csproj", "{E216160C-7A4E-41D8-BE64-DFF869B2FB32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Core", "LivetCask.Core\LivetCask.Core.csproj", "{74FFEBB4-5DE7-4F0B-BB8A-4915A1034383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Core", "LivetCask.Core\LivetCask.Core.csproj", "{74FFEBB4-5DE7-4F0B-BB8A-4915A1034383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.EventListeners", "LivetCask.EventListeners\LivetCask.EventListeners.csproj", "{BD64E000-2725-4AD9-8505-C8E29C9A5D85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.EventListeners", "LivetCask.EventListeners\LivetCask.EventListeners.csproj", "{BD64E000-2725-4AD9-8505-C8E29C9A5D85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Extensions", "LivetCask.Extensions\LivetCask.Extensions.csproj", "{2A113BF2-287B-4BF3-A4AC-2BF53153AE1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Extensions", "LivetCask.Extensions\LivetCask.Extensions.csproj", "{2A113BF2-287B-4BF3-A4AC-2BF53153AE1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Messaging", "LivetCask.Messaging\LivetCask.Messaging.csproj", "{94C5EDA8-AEAF-49C2-AA45-9F99A0A3907A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Messaging", "LivetCask.Messaging\LivetCask.Messaging.csproj", "{94C5EDA8-AEAF-49C2-AA45-9F99A0A3907A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Collections", "LivetCask.Collections\LivetCask.Collections.csproj", "{D9CCD1BF-29E4-4FA8-9F97-9A035FF14DAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Collections", "LivetCask.Collections\LivetCask.Collections.csproj", "{D9CCD1BF-29E4-4FA8-9F97-9A035FF14DAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.StatefulModel", "LivetCask.StatefulModel\LivetCask.StatefulModel.csproj", "{710B9565-86D5-4473-8E64-70343D4F4021}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Mvvm", "LivetCask.Mvvm\LivetCask.Mvvm.csproj", "{C56DF371-8683-4023-8D86-C49252229838}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6A4E6038-17ED-4CBA-8261-359A4436F9E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -128,5 +129,35 @@ Global
 		{D9CCD1BF-29E4-4FA8-9F97-9A035FF14DAB}.Release|x64.Build.0 = Release|Any CPU
 		{D9CCD1BF-29E4-4FA8-9F97-9A035FF14DAB}.Release|x86.ActiveCfg = Release|Any CPU
 		{D9CCD1BF-29E4-4FA8-9F97-9A035FF14DAB}.Release|x86.Build.0 = Release|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Debug|x64.Build.0 = Debug|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Debug|x86.Build.0 = Debug|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Release|x64.ActiveCfg = Release|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Release|x64.Build.0 = Release|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Release|x86.ActiveCfg = Release|Any CPU
+		{710B9565-86D5-4473-8E64-70343D4F4021}.Release|x86.Build.0 = Release|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Debug|x64.Build.0 = Debug|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Debug|x86.Build.0 = Debug|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Release|x64.ActiveCfg = Release|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Release|x64.Build.0 = Release|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Release|x86.ActiveCfg = Release|Any CPU
+		{C56DF371-8683-4023-8D86-C49252229838}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0AE35214-2220-49A3-B3E2-0316B3C80891}
 	EndGlobalSection
 EndGlobal

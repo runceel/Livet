@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Reflection;
 using Livet.EventListeners;
 
-namespace Livet.Collections
+namespace Livet.StatefulModel
 {
     public sealed class ReadOnlyNotifyChangedCollection<T> : ReadOnlyCollection<T>, INotifyCollectionChanged, INotifyPropertyChanged, IDisposable
     {
