@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Livet.EventListeners.WeakEvents;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
-using Livet.EventListeners;
 
 namespace Livet.StatefulModel
 {
@@ -24,8 +24,8 @@ namespace Livet.StatefulModel
             {
                 SourceCollection = collection;
 
-                EventListeners.Add(new PropertyChangedEventListener(SourceCollection, (sender, e) => OnPropertyChanged(e)));
-                EventListeners.Add(new CollectionChangedEventListener(SourceCollection, (sender, e) => OnCollectionChanged(e)));
+                EventListeners.Add(new PropertyChangedWeakEventListener(SourceCollection, (sender, e) => OnPropertyChanged(e)));
+                EventListeners.Add(new CollectionChangedWeakEventListener(SourceCollection, (sender, e) => OnCollectionChanged(e)));
             }
         }
 

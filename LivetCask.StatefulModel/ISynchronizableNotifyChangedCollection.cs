@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
-using Livet.EventListeners;
+using Livet.EventListeners.WeakEvents;
 
 namespace Livet.StatefulModel
 {
@@ -21,7 +21,7 @@ namespace Livet.StatefulModel
 
     public static class SynchronizableNotifyChangedCollectionHelper
     {
-        public static CollectionChangedEventListener CreateSynchronizableCollectionChangedEventListener
+        public static CollectionChangedWeakEventListener CreateSynchronizableCollectionChangedEventListener
             <TSource, TResult>(
             ISynchronizableNotifyChangedCollection<TSource> source,
             ISynchronizableNotifyChangedCollection<TResult> target,
@@ -34,7 +34,7 @@ namespace Livet.StatefulModel
         {
             var isDisposableType = typeof(IDisposable).GetTypeInfo().IsAssignableFrom(typeof(TResult).GetTypeInfo());
 
-            var collectionChangedListener = new CollectionChangedEventListener(source);
+            var collectionChangedListener = new CollectionChangedWeakEventListener(source);
             collectionChangedListener.RegisterHandler((sender, e) =>
             {
                 switch (e.Action)
