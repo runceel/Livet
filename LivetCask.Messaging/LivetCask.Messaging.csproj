@@ -50,6 +50,7 @@ This package is for useful messaging features between View layer and ViewModel l
 
   <ItemGroup>
     <ProjectReference Include="..\LivetCask.Core\LivetCask.Core.csproj" />
+    <ProjectReference Include="..\LivetCask.EventListeners\LivetCask.EventListeners.csproj" />
   </ItemGroup>
 
 </Project>
