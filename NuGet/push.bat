@@ -1,6 +1,6 @@
 @echo off
 cd /d %~dp0
-set PACKAGEVERSION=3.2.1-pre2
+set PACKAGEVERSION=3.2.1
 dotnet build ..\Livet.Code.sln -c=Release
 rem Please get an API Key from nuget.org, and set the key using nuget setApiKey xxxx command
 dotnet nuget push ..\LivetCask.Extensions\bin\Release\LivetExtensions.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
@@ -11,7 +11,9 @@ dotnet nuget push ..\LivetCask.Converters\bin\Release\LivetCask.Converters.%PACK
 dotnet nuget push ..\LivetCask.Behaviors\bin\Release\LivetCask.Behaviors.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
 dotnet nuget push ..\LivetCask.Mvvm\bin\Release\LivetCask.Mvvm.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
 dotnet nuget push ..\LivetCask.StatefulModel\bin\Release\LivetCask.StatefulModel.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
+dotnet nuget push ..\LivetCask.Collections\bin\Release\LivetCask.Collections.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
 dotnet nuget push ..\LivetCask\bin\Release\LivetCask.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
+dotnet nuget push ..\LivetCask2\bin\Release\LivetCask2.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
 
 mkdir dist
 mkdir dist\%PACKAGEVERSION%
@@ -22,6 +24,8 @@ copy ..\LivetCask.EventListeners\bin\Release\LivetCask.EventListeners.%PACKAGEVE
 copy ..\LivetCask.Converters\bin\Release\LivetCask.Converters.%PACKAGEVERSION%.nupkg .\dist\%PACKAGEVERSION%
 copy ..\LivetCask.Behaviors\bin\Release\LivetCask.Behaviors.%PACKAGEVERSION%.nupkg .\dist\%PACKAGEVERSION%
 copy ..\LivetCask.Mvvm\bin\Release\LivetCask.Mvvm.%PACKAGEVERSION%.nupkg .\dist\%PACKAGEVERSION%
+copy ..\LivetCask.Collections\bin\Release\LivetCask.Collections.%PACKAGEVERSION%.nupkg .\dist\%PACKAGEVERSION%
 copy ..\LivetCask.StatefulModel\bin\Release\LivetCask.StatefulModel.%PACKAGEVERSION%.nupkg .\dist\%PACKAGEVERSION%
 copy ..\LivetCask\bin\Release\LivetCask.%PACKAGEVERSION%.nupkg .\dist\%PACKAGEVERSION%
+copy ..\LivetCask2\bin\Release\LivetCask2.%PACKAGEVERSION%.nupkg .\dist\%PACKAGEVERSION%
  

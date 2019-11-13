@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using System.Windows.Interactivity;
-
 using Livet.Messaging;
 using Livet.Behaviors.Messaging;
 

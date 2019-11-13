@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		license-jp.txt = license-jp.txt
 		Livet.props = Livet.props
 		README.md = README.md
-		README_COLLECTIONS.md = README_COLLECTIONS.md
+		README.StatefulModel.md = README.StatefulModel.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C1429347-55CC-4FE8-B3F8-AFB5F4E87AD3}"
@@ -81,9 +81,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Core", "LivetCask
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.StatefulModel", "LivetCask.StatefulModel\LivetCask.StatefulModel.csproj", "{CA4BC629-774E-40FB-87D7-E3EC96E87744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Collections", "LivetCask.Collections\LivetCask.Collections.csproj", "{A0BBA5C9-CB69-480E-96EC-9359214DDC5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Collections", "LivetCask.Collections\LivetCask.Collections.csproj", "{A0BBA5C9-CB69-480E-96EC-9359214DDC5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivetCask.Mvvm", "LivetCask.Mvvm\LivetCask.Mvvm.csproj", "{7BD47B69-E85C-40BF-B2B8-4EF1E3DACF9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Mvvm", "LivetCask.Mvvm\LivetCask.Mvvm.csproj", "{7BD47B69-E85C-40BF-B2B8-4EF1E3DACF9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask2", "LivetCask2\LivetCask2.csproj", "{6D6D481B-C134-4FA5-8EB3-16982A100913}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -282,6 +284,14 @@ Global
 		{7BD47B69-E85C-40BF-B2B8-4EF1E3DACF9F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7BD47B69-E85C-40BF-B2B8-4EF1E3DACF9F}.Release|x86.ActiveCfg = Release|Any CPU
 		{7BD47B69-E85C-40BF-B2B8-4EF1E3DACF9F}.Release|x86.Build.0 = Release|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D6D481B-C134-4FA5-8EB3-16982A100913}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

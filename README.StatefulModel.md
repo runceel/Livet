@@ -1,7 +1,7 @@
-## Livet.Collections
+## Livet.StatefulModel
 
-Livet collections is a copy of StatefulModel.
-Original is using `StatefulModel` namespace, this package is using `Livet.Collections` namespace.
+Livet.StatefulModel collections is a copy of StatefulModel.
+Original is using `StatefulModel` namespace, this package is using `Livet.StatefulModel` namespace.
 
 ### NotifyCollections
 

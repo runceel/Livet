@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.StatefulModel", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask.Mvvm", "LivetCask.Mvvm\LivetCask.Mvvm.csproj", "{C56DF371-8683-4023-8D86-C49252229838}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask2", "LivetCask2\LivetCask2.csproj", "{007BAE8A-60B0-4E86-866F-383321DC1233}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,18 @@ Global
 		{C56DF371-8683-4023-8D86-C49252229838}.Release|x64.Build.0 = Release|Any CPU
 		{C56DF371-8683-4023-8D86-C49252229838}.Release|x86.ActiveCfg = Release|Any CPU
 		{C56DF371-8683-4023-8D86-C49252229838}.Release|x86.Build.0 = Release|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Debug|x64.Build.0 = Debug|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Debug|x86.Build.0 = Debug|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Release|x64.ActiveCfg = Release|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Release|x64.Build.0 = Release|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Release|x86.ActiveCfg = Release|Any CPU
+		{007BAE8A-60B0-4E86-866F-383321DC1233}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
