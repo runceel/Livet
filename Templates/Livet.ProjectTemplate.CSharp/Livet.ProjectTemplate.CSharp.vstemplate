@@ -13,6 +13,7 @@
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>LivetApp</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
+    <CreateInPlace>true</CreateInPlace>
   </TemplateData>
   <TemplateContent>
     <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
