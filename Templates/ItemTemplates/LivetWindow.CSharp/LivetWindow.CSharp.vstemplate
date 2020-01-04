@@ -7,9 +7,8 @@
     <Name>Livet WPF Window</Name>
     <Description>Create a Window class for Livet.</Description>
     <ProjectType>CSharp</ProjectType>
-    <ProjectSubType>Windows</ProjectSubType>
+    <ProjectSubType>WPF</ProjectSubType>
     <SortOrder>0</SortOrder>
-    <RequiredFrameworkVersion>4.5.2</RequiredFrameworkVersion>
     <DefaultName>Window.xaml</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <Icon>LivetWindow.ico</Icon>

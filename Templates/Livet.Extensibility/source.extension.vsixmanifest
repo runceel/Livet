@@ -3,7 +3,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
                  xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Livet.Extensibility.084f01b5-62d7-4528-8c21-e58fe0e6ba24" Version="3.2.1.1" Language="en-US"
+        <Identity Id="Livet.Extensibility.084f01b5-62d7-4528-8c21-e58fe0e6ba24" Version="3.2.1.2" Language="en-US"
                   Publisher="Kazuki Ohta" />
         <DisplayName>Livet</DisplayName>
         <Description xml:space="preserve">Provide a project template, item templates and code snippets for development WPF app using Livet and C#.</Description>
