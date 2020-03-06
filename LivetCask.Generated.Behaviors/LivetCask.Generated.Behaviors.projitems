@@ -55,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)FlowDocumentReaderSetStateToSourceAction.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FlowDocumentScrollViewerSetStateToSourceAction.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FrameSetStateToSourceAction.generated.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FrameworkElementSetStateToSourceAction.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlyphsSetStateToSourceAction.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GridSetStateToSourceAction.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GridSplitterSetStateToSourceAction.generated.cs" />

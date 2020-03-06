@@ -1,6 +1,6 @@
 @echo off
 cd /d %~dp0
-set PACKAGEVERSION=3.2.2
+set PACKAGEVERSION=3.2.2.1
 dotnet build ..\Livet.Code.sln -c=Release
 rem Please get an API Key from nuget.org, and set the key using nuget setApiKey xxxx command
 dotnet nuget push ..\LivetCask.Extensions\bin\Release\LivetExtensions.%PACKAGEVERSION%.nupkg -s https://www.nuget.org/api/v2/package
