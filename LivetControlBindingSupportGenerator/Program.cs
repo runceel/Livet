@@ -13,7 +13,7 @@ namespace LivetControlBindingSupportGenerator
         private static bool TypeFilter(Type t)
         {
             return t != null
-                   && t.IsSubclassOf(typeof(FrameworkElement))
+                   && (t.IsSubclassOf(typeof(FrameworkElement)) || t == typeof(FrameworkElement))
                    && !t.IsAbstract
                    && !t.IsGenericType
                    && t.IsPublic;
