@@ -260,7 +260,7 @@ CompositeDisposable.Add(someResource);
 
 #### DispatcherCollectionとReadOnlyDispatcherCollection
 
-DispatcherCollection は、既存の変更通知コレクションをコンストラクタの引数にとり、その変更通知を指定された Dispatcher 上で行うコレクションです。ReadOnlyDispatcherCollection、DispatcherCollection をコンストラクタの引数にとる読み取り専用ラッパーとなります。
+DispatcherCollection は、既存の変更通知コレクションをコンストラクタの引数にとり、その変更通知を指定された Dispatcher 上で行うコレクションです。ReadOnlyDispatcherCollectionは、DispatcherCollection をコンストラクタの引数にとる読み取り専用ラッパーとなります。
 
 #### ViewModelHelper.CreateReadOnlyDispatcherCollection<TModel,TViewModel>
 
