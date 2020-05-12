@@ -102,16 +102,27 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <Button Margin="5" Content="EnumToBooleanConverter">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <l:TransitionInteractionMessageAction>
-                        <l:DirectInteractionMessage>
-                            <l:TransitionMessage WindowType="{x:Type v:EnumToBooleanConverterWindow}" />
-                        </l:DirectInteractionMessage>
-                    </l:TransitionInteractionMessageAction>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
-    </StackPanel>
+      <Button Margin="5" Content="EnumToBooleanConverter">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:TransitionInteractionMessageAction>
+                  <l:DirectInteractionMessage>
+                     <l:TransitionMessage WindowType="{x:Type v:EnumToBooleanConverterWindow}" />
+                  </l:DirectInteractionMessage>
+               </l:TransitionInteractionMessageAction>
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+      <Button Margin="5" Content="CursorToBooleanConverter">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:TransitionInteractionMessageAction>
+                  <l:DirectInteractionMessage>
+                     <l:TransitionMessage WindowType="{x:Type v:CursorTypeToBooleanConverterWindow}" />
+                  </l:DirectInteractionMessage>
+               </l:TransitionInteractionMessageAction>
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+   </StackPanel>
 </Window>
