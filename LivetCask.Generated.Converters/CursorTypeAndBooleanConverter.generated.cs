@@ -50,14 +50,14 @@ namespace Livet.Converters
             {
                 if (_isConvertWhenTrueSet)
                 {
-                    return ConvertWhenTrue;
+                    return ConvertWhenTrue.ToString();
                 }
             }
             else
             {
                 if (_isConvertWhenFalseSet)
                 {
-                    return ConvertWhenFalse;
+                    return ConvertWhenFalse.ToString();
                 }
             }
 
@@ -103,11 +103,11 @@ namespace Livet.Converters
         //View→VM
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (!(value is CursorType)) throw new ArgumentException();
+            if (!(value is Cursor)) throw new ArgumentException();
 
-            var enumValue = (CursorType)value;
+            var cursorValue = (Cursor)value;
 
-			switch(enumValue.ToString())
+            switch (cursorValue.ToString())
 			{
 				case "None":
 					if (_isConvertBackWhenNoneSet)
