@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
 
 namespace LivetEnumAndBooleanConverterGenerator
 {
@@ -12,6 +13,11 @@ namespace LivetEnumAndBooleanConverterGenerator
         // ReSharper disable once UnusedParameter.Local
         private static void Main(string[] args)
         {
+            var excludeTypes = new[]
+            {
+                typeof(CursorType),
+            };
+
             var assemblies =
                 new[]
                     {
@@ -37,6 +43,7 @@ namespace LivetEnumAndBooleanConverterGenerator
 
             var enumsT4 = assemblies.SelectMany(a => a?.GetTypes())
                 .Where(t => t != null && t.IsEnum && t.IsPublic)
+                .Where(x => !excludeTypes.Contains(x))
                 .Select(t => new EnumToBooleanConverter {TypeName = t.Name, EnumMemberNames = t.GetEnumNames()});
 
             if (!Directory.Exists("Output")) Directory.CreateDirectory("Output");
