@@ -30,7 +30,7 @@ jobs:
         dotnet build Livet.Code.sln -p:Configuration=Release -p:Platform="Any CPU"
         dotnet pack Livet.Code.sln -p:Configuration=Release -p:Platform="Any CPU"
     - name: Test
-      run: dotnet test Livet.Test\Livet.Test.csproj --no-restore --verbosity normal
+      run: dotnet test Livet.Test\Livet.Test.csproj --verbosity normal
     - name: Copy package files
       run: |
         mkdir dist
