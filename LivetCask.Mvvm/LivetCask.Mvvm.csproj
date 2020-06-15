@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <Import Project="..\Livet.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net452</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <RootNamespace>Livet</RootNamespace>
     <AssemblyName>Livet.Mvvm</AssemblyName>
@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Livet Project</Authors>
     <Description>Livet is the infrastructure of MVVM pattern on WPF.
-It supports .NET Framework 4.5.2 or later, .NET Core 3.0, and licensed as zlib/libpng.
+It supports .NET Framework 4.5.2 or later, .NET Core 3.1, and licensed as zlib/libpng.
     </Description>
     <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
     <PackageLicenseFile>license-en.txt</PackageLicenseFile>
