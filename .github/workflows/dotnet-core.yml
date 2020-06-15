@@ -24,10 +24,12 @@ jobs:
         $doc.Save('Livet.props')
     - name: Install dependencies
       run: dotnet restore Livet.Code.sln
-    - name: Build
-      run: msbuild Livet.sln -p:Configuration=Release -p:Platform="Any CPU"
+    - name: Package
+      run: |
+        dotnet build Livet.Code.sln -p:Configuration=Release -p:Platform="Any CPU"
+        dotnet pack Livet.Code.sln -p:Configuration=Release -p:Platform="Any CPU"
     - name: Test
-      run: dotnet test Livet.sln --no-restore --verbosity normal
+      run: dotnet test Livet.Test\Livet.Test.csproj --no-restore --verbosity normal
     - name: Copy package files
       run: |
         mkdir dist
