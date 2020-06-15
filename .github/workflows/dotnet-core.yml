@@ -28,7 +28,7 @@ jobs:
     - name: Package
       run: |
         dotnet build Livet.Code.sln -p:Configuration=Release -p:Platform="Any CPU"
-        dotnet pack Livet.Code.sln -p:Configuration=Release -p:Platform="Any CPU"
+        dotnet pack Livet.Code.sln -p:Configuration=Release -p:Platform="Any CPU"--include-symbols -p:SymbolPackageFormat=snupkg
     - name: Test
       run: dotnet test Livet.Test\Livet.Test.csproj --verbosity normal
       continue-on-error: true
