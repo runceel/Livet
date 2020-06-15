@@ -40,7 +40,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ColumnSpaceDistributionAndBooleanConverter.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CompressionOptionAndBooleanConverter.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContentRightAndBooleanConverter.generated.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CursorTypeAndBooleanConverter.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)D3DResourceTypeAndBooleanConverter.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataGridClipboardCopyModeAndBooleanConverter.generated.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataGridEditActionAndBooleanConverter.generated.cs" />
