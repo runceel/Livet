@@ -10,7 +10,7 @@
     <Authors>Livet Project</Authors>
     <Description>
       Livet is the infrastructure of MVVM pattern on WPF.
-It supports .NET Framework 4.5.2 or later and .NET Core 3.0, and licensed as zlib/libpng.
+It supports .NET Framework 4.5.2 or later and .NET Core 3.1, and licensed as zlib/libpng.
 This package is for useful event listeners using weak event pattern for MVVM pattern.
     </Description>
     <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
