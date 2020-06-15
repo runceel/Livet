@@ -1,0 +1,53 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ master, pre-release, release ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Update version number
+      if: github.ref != 'refs/heads/release'
+      shell: pwsh
+      run: |
+        $doc = [XML](Get-Content 'Livet.props')
+        $doc.Project.PropertyGroup.Version += '-pre' + (Get-Date).ToString("yyyyMMddHHmm")
+        $doc.Save('Livet.props')
+    - name: Install dependencies
+      run: dotnet restore Livet.Code.sln
+    - name: Build
+      run: msbuild Livet.sln -p:Configuration=Release -p:Platform="Any CPU"
+    - name: Test
+      run: dotnet test Livet.sln --no-restore --verbosity normal
+    - name: Copy package files
+      run: |
+        mkdir dist
+        Copy-Item (Get-ChildItem -Path "**/Livet*.nupkg" -Recurse) -Destination dist
+        Copy-Item (Get-ChildItem -Path "**/Livet*.snupkg" -Recurse) -Destination dist
+      shell: pwsh
+    - name: Archive NuGet packages
+      uses: actions/upload-artifact@v1
+      with:
+        name: dist
+        path: dist
+
+  release-to-nuget:
+    runs-on: windows-latest
+    needs: [build]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/pre-release' || github.ref == 'refs/heads/release')
+    steps:
+      - name: Download archives
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+      - name: Publish packages
+        run: dotnet nuget push **/*.nupkg --skip-duplicate -k ${{ secrets.NUGET_APIKEY }} -s https://api.nuget.org/v3/index.json
