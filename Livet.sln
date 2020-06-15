@@ -89,14 +89,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivetCask2", "LivetCask2\Li
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Livet.Annotations\Livet.Annotations.projitems*{08d2b468-acb2-4917-abe0-3587e6f174ab}*SharedItemsImports = 5
 		Livet.Annotations\Livet.Annotations.projitems*{0e65806e-a604-4b5d-8022-b65ddd2714d1}*SharedItemsImports = 13
+		Livet.Annotations\Livet.Annotations.projitems*{184a9460-ef9a-475e-a063-fb1b67725bd2}*SharedItemsImports = 5
 		Livet.Annotations\Livet.Annotations.projitems*{1ab1f5d2-bd71-47a7-a5f7-1c199dc1ad52}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{1cb68812-5436-42ff-a0a0-7cc98e915547}*SharedItemsImports = 5
 		Livet.Annotations\Livet.Annotations.projitems*{1e6a8600-faee-4a7b-8118-7366ec8e0582}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{309087ee-6654-4a5a-9e5b-769b2ba20a0f}*SharedItemsImports = 5
+		LivetCask.Generated.Behaviors\LivetCask.Generated.Behaviors.projitems*{309087ee-6654-4a5a-9e5b-769b2ba20a0f}*SharedItemsImports = 5
 		Livet.Annotations\Livet.Annotations.projitems*{37a0605c-c950-4446-9b2a-94e6b3d6c0b5}*SharedItemsImports = 4
 		LivetCask.Generated.Behaviors\LivetCask.Generated.Behaviors.projitems*{38377602-36a4-4acd-9545-fe272557b1f3}*SharedItemsImports = 13
+		Livet.Annotations\Livet.Annotations.projitems*{443f4fe1-5c3b-4847-bcba-5f8e56f63df6}*SharedItemsImports = 5
+		Livet.Annotations\Livet.Annotations.projitems*{6d6d481b-c134-4fa5-8eb3-16982a100913}*SharedItemsImports = 5
+		Livet.Annotations\Livet.Annotations.projitems*{7bd47b69-e85c-40bf-b2b8-4ef1e3dacf9f}*SharedItemsImports = 5
 		Livet.Annotations\Livet.Annotations.projitems*{7c69d055-0538-4f7c-a11f-623dfeeab1a7}*SharedItemsImports = 4
 		LivetCask.Generated.Converters\LivetCask.Generated.Converters.projitems*{9190f512-1964-4c9f-8e48-4f1f51dd0cdf}*SharedItemsImports = 13
+		Livet.Annotations\Livet.Annotations.projitems*{a0bba5c9-cb69-480e-96ec-9359214ddc5a}*SharedItemsImports = 5
+		Livet.Annotations\Livet.Annotations.projitems*{ae6f03f5-0f2f-4528-83ff-c4b2b2d6b86a}*SharedItemsImports = 5
+		LivetCask.Generated.Converters\LivetCask.Generated.Converters.projitems*{ae6f03f5-0f2f-4528-83ff-c4b2b2d6b86a}*SharedItemsImports = 5
+		Livet.Annotations\Livet.Annotations.projitems*{ca4bc629-774e-40fb-87d7-e3ec96e87744}*SharedItemsImports = 5
 		Livet.Annotations\Livet.Annotations.projitems*{cd564616-032a-4fb5-bcbd-b942a99864d8}*SharedItemsImports = 4
+		Livet.Annotations\Livet.Annotations.projitems*{d940dd13-e826-46e9-aaaf-d7feac31014d}*SharedItemsImports = 5
+		Livet.Annotations\Livet.Annotations.projitems*{dcfbb350-cfbd-4265-b5d7-8265040d6252}*SharedItemsImports = 5
 		Livet.Annotations\Livet.Annotations.projitems*{e6999a6d-614b-4d41-bae2-14fb16d1bd2c}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
