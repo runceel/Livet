@@ -20,9 +20,9 @@ jobs:
       shell: pwsh
       run: |
         $doc = [XML](Get-Content 'Livet.props')
-        $doc.Project.PropertyGroup.Version += '-pre' + (Get-Date).ToString("yyyyMMddHHmm")
+        $doc.Project.PropertyGroup.PackageVersion = $doc.Project.PropertyGroup.Version
+        $doc.Project.PropertyGroup.PackageVersion += '-pre' + (Get-Date).ToString("yyyyMMddHHmm")
         $doc.Save('Livet.props')
-        echo $doc
     - name: Install dependencies
       run: dotnet restore Livet.Code.sln
     - name: Package
