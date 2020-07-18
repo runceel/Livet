@@ -43,8 +43,8 @@
   <ItemGroup>
     <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\net452" />
     <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\net452" />
-    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\netcoreapp3.0" />
-    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\netcoreapp3.0" />
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\netcoreapp3.1" />
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\netcoreapp3.1" />
   </ItemGroup>
 
   <ItemGroup>
