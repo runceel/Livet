@@ -1,75 +1,109 @@
 ﻿<Window
-    x:Class="ViewLayerSupport.Views.MessagingWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
-    xmlns:v="clr-namespace:ViewLayerSupport.Views"
-    xmlns:vm="clr-namespace:ViewLayerSupport.ViewModels"
-    Title="MessagingWindow"
-    Width="525"
-    Height="350">
+   x:Class="ViewLayerSupport.Views.MessagingWindow"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+   xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+   xmlns:v="clr-namespace:ViewLayerSupport.Views"
+   xmlns:vm="clr-namespace:ViewLayerSupport.ViewModels"
+   Title="MessagingWindow"
+   Width="525"
+   Height="350">
 
-    <Window.DataContext>
-        <vm:MessagingWindowViewModel />
-    </Window.DataContext>
+   <Window.DataContext>
+      <vm:MessagingWindowViewModel />
+   </Window.DataContext>
 
-    <i:Interaction.Triggers>
+   <i:Interaction.Triggers>
 
-        <!--  Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう  -->
-        <!--  Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります  -->
-        <!--  Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventListenerサポートが追加されています  -->
+      <!--  Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう  -->
+      <!--  Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります  -->
+      <!--  Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventListenerサポートが追加されています  -->
 
-        <!--  WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます  -->
-        <i:EventTrigger EventName="ContentRendered">
-            <l:LivetCallMethodAction MethodName="Initialize" MethodTarget="{Binding}" />
-        </i:EventTrigger>
+      <!--  WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます  -->
+      <i:EventTrigger EventName="ContentRendered">
+         <l:LivetCallMethodAction MethodName="Initialize" MethodTarget="{Binding}" />
+      </i:EventTrigger>
 
-        <!--  Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます  -->
-        <i:EventTrigger EventName="Closed">
-            <l:DataContextDisposeAction />
-        </i:EventTrigger>
+      <!--  Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます  -->
+      <i:EventTrigger EventName="Closed">
+         <l:DataContextDisposeAction />
+      </i:EventTrigger>
 
-        <!--  WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください  -->
-        <l:InteractionMessageTrigger MessageKey="MessageKey_Confirm" Messenger="{Binding Messenger}">
-            <l:ConfirmationDialogInteractionMessageAction />
-        </l:InteractionMessageTrigger>
-    </i:Interaction.Triggers>
+      <!--  WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください  -->
+      <l:InteractionMessageTrigger MessageKey="MessageKey_Confirm" Messenger="{Binding Messenger}">
+         <l:ConfirmationDialogInteractionMessageAction />
+      </l:InteractionMessageTrigger>
+   </i:Interaction.Triggers>
 
-    <StackPanel>
-        <Viewbox>
-            <TextBlock Text="{Binding OutputMessage}" />
-        </Viewbox>
-        <Button Content="ConfirmFromViewModel">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <l:LivetCallMethodAction MethodName="ConfirmFromViewModel" MethodTarget="{Binding}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
-        <Button Content="ConfirmFromView">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <l:ConfirmationDialogInteractionMessageAction>
-                        <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView"
-                                                    CallbackMethodTarget="{Binding}">
-                            <l:ConfirmationMessage Caption="テスト" Text="これはテスト用メッセージです。" />
-                        </l:DirectInteractionMessage>
-                    </l:ConfirmationDialogInteractionMessageAction>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
-        <Button Content="Folder">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <l:FolderBrowserDialogInteractionMessageAction>
-                        <l:DirectInteractionMessage CallbackMethodName="FolderSelected"
-                                                    CallbackMethodTarget="{Binding}">
-                            <l:FolderSelectionMessage Description="フォルダーの選択" DialogPreference="None" />
-                        </l:DirectInteractionMessage>
-                    </l:FolderBrowserDialogInteractionMessageAction>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
-    </StackPanel>
+   <StackPanel>
+      <Viewbox>
+         <TextBlock Text="{Binding OutputMessage}" />
+      </Viewbox>
+      <Button Content="ConfirmFromViewModel">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:LivetCallMethodAction MethodName="ConfirmFromViewModel" MethodTarget="{Binding}" />
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+      <Button Content="ConfirmFromView">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:ConfirmationDialogInteractionMessageAction>
+                  <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView" CallbackMethodTarget="{Binding}">
+                     <l:ConfirmationMessage Caption="テスト" Text="これはテスト用メッセージです。" />
+                  </l:DirectInteractionMessage>
+               </l:ConfirmationDialogInteractionMessageAction>
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+      <Button Content="Single FileDialog">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:OpenFileDialogInteractionMessageAction>
+                  <l:DirectInteractionMessage CallbackMethodName="FileSelected" CallbackMethodTarget="{Binding}">
+                     <l:OpeningFileSelectionMessage Title="ファイルの選択" />
+                  </l:DirectInteractionMessage>
+               </l:OpenFileDialogInteractionMessageAction>
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+      <Button Content="Multi FileDialog">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:OpenFileDialogInteractionMessageAction>
+                  <l:DirectInteractionMessage CallbackMethodName="FileSelected" CallbackMethodTarget="{Binding}">
+                     <l:OpeningFileSelectionMessage Title="ファイルの選択" MultiSelect="True" />
+                  </l:DirectInteractionMessage>
+               </l:OpenFileDialogInteractionMessageAction>
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+      <Button Content="Single FolderDialog">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:FolderBrowserDialogInteractionMessageAction>
+                  <l:DirectInteractionMessage CallbackMethodName="FolderSelected" CallbackMethodTarget="{Binding}">
+                     <l:FolderSelectionMessage Description="フォルダーの選択" DialogPreference="None" />
+                  </l:DirectInteractionMessage>
+               </l:FolderBrowserDialogInteractionMessageAction>
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+      <Button Content="Multi FolderDialog">
+         <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+               <l:FolderBrowserDialogInteractionMessageAction>
+                  <l:DirectInteractionMessage CallbackMethodName="FolderSelected" CallbackMethodTarget="{Binding}">
+                     <l:FolderSelectionMessage
+                        Description="フォルダーの選択"
+                        DialogPreference="None"
+                        Multiselect="True" />
+                  </l:DirectInteractionMessage>
+               </l:FolderBrowserDialogInteractionMessageAction>
+            </i:EventTrigger>
+         </i:Interaction.Triggers>
+      </Button>
+   </StackPanel>
 </Window>
