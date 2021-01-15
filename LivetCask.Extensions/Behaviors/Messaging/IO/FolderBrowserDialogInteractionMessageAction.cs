@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using Livet.Dialogs;
 using Livet.Messaging;
@@ -32,10 +33,17 @@ namespace Livet.Behaviors.Messaging.IO
                     dialog.Title = folderSelectionMessage.Title;
                     dialog.Description = folderSelectionMessage.Description;
                     dialog.SelectedPath = folderSelectionMessage.SelectedPath;
+                    dialog.Multiselect = folderSelectionMessage.Multiselect;
 
-                    folderSelectionMessage.Response = dialog.ShowDialog(hostWindow).GetValueOrDefault()
-                        ? dialog.SelectedPath
-                        : null;
+                    if (dialog.ShowDialog(hostWindow).GetValueOrDefault())
+                    {
+                        folderSelectionMessage.SelectedPaths = dialog.SelectedPaths;
+                        folderSelectionMessage.Response = folderSelectionMessage.SelectedPaths.FirstOrDefault();
+                    }
+                    else
+                    {
+                        folderSelectionMessage.Response = null;
+                    }
                 }
             }
         }
