@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace Livet.Dialogs
@@ -34,6 +35,17 @@ namespace Livet.Dialogs
         ///     The <c>null</c> or empty indicates using default title.
         /// </value>
         public abstract string Title { get; set; }
+
+
+        /// <summary>
+        ///  Gets or sets whether the multi selection is enabled on the folder browser dialog.
+        /// </summary>
+        public abstract bool Multiselect { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the selected paths.
+        /// </summary>
+        public abstract string[] SelectedPaths { get; }
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

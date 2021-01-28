@@ -19,7 +19,8 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        [NotNull] public static readonly DependencyProperty DescriptionProperty =
+        [NotNull]
+        public static readonly DependencyProperty DescriptionProperty =
             DependencyProperty.Register("Description", typeof(string), typeof(FolderSelectionMessage),
                 new UIPropertyMetadata(null));
 
@@ -29,7 +30,8 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        [NotNull] public static readonly DependencyProperty TitleProperty =
+        [NotNull]
+        public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(FolderSelectionMessage),
                 new UIPropertyMetadata(string.Empty));
 
@@ -39,9 +41,21 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        [NotNull] public static readonly DependencyProperty SelectedPathProperty =
+        [NotNull]
+        public static readonly DependencyProperty SelectedPathProperty =
             DependencyProperty.Register("SelectedPath", typeof(string), typeof(FolderSelectionMessage),
                 new UIPropertyMetadata(string.Empty));
+
+        /// <summary>
+        ///     Defines <see cref="SelectedPaths" /> dependency property.
+        /// </summary>
+        /// <value>
+        ///     <see cref="DependencyProperty" />.
+        /// </value>
+        [NotNull]
+        public static readonly DependencyProperty SelectedPathsProperty =
+            DependencyProperty.Register("SelectedPaths", typeof(string[]), typeof(FolderSelectionMessage),
+                new UIPropertyMetadata(new[] { string.Empty }));
 
         /// <summary>
         ///     Defines <see cref="SelectedPath" /> dependency property.
@@ -49,9 +63,22 @@ namespace Livet.Messaging.IO
         /// <value>
         ///     <see cref="DependencyProperty" />.
         /// </value>
-        [NotNull] public static readonly DependencyProperty DialogPreferenceProperty =
+        [NotNull]
+        public static readonly DependencyProperty DialogPreferenceProperty =
             DependencyProperty.Register("DialogPreference", typeof(FolderSelectionDialogPreference),
                 typeof(FileSelectionMessage), new UIPropertyMetadata(FolderSelectionDialogPreference.None));
+        /// <summary>
+        ///     Defines <see cref="Multiselect" /> dependency property.
+        /// </summary>
+        /// <value>
+        ///     <see cref="DependencyProperty" />.
+        /// </value>
+        [NotNull]
+        public static readonly DependencyProperty MultiselectProperty =
+            DependencyProperty.Register("Multiselect", typeof(bool),
+                typeof(FileSelectionMessage), new UIPropertyMetadata(false));
+
+
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="FolderSelectionMessage" /> class
@@ -93,6 +120,15 @@ namespace Livet.Messaging.IO
         }
 
         /// <summary>
+        ///     Gets or sets whether the multi selection is enabled on the folder browser dialog.
+        /// </summary>
+        public bool Multiselect
+        {
+            get { return (bool)GetValue(MultiselectProperty); }
+            set { SetValue(MultiselectProperty, value); }
+        }
+
+        /// <summary>
         ///     Gets or sets the selected path on the folder selection dialog.
         /// </summary>
         /// <value>
@@ -103,6 +139,18 @@ namespace Livet.Messaging.IO
         {
             get { return GetValue(SelectedPathProperty) as string; }
             set { SetValue(SelectedPathProperty, value); }
+        }
+
+        /// <summary>
+        ///     Gets or sets the selected paths on the folder selection dialog.
+        /// </summary>
+        /// <value>
+        ///     The selected paths on the folder selection dialog.
+        /// </value>
+        public string[] SelectedPaths
+        {
+            get { return GetValue(SelectedPathsProperty) as string[]; }
+            set { SetValue(SelectedPathsProperty, value); }
         }
 
         /// <summary>
@@ -117,7 +165,7 @@ namespace Livet.Messaging.IO
             {
                 var value = GetValue(DialogPreferenceProperty);
                 return value?.GetType() == typeof(FolderSelectionDialogPreference)
-                    ? (FolderSelectionDialogPreference) value
+                    ? (FolderSelectionDialogPreference)value
                     : default;
             }
             set { SetValue(DialogPreferenceProperty, value); }

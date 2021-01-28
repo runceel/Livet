@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -69,6 +70,26 @@ namespace Livet.Dialogs
         {
             get { return string.Empty; }
             set { }
+        }
+
+
+        /// <summary>
+        ///     This property is not supported.
+        /// </summary>
+        /// <value>Always false.</value>
+        public override bool Multiselect
+        {
+            get { return false; }
+            set { }
+        }
+
+        /// <summary>
+        ///     Gets or sets the selected paths.
+        /// </summary>
+        /// <value>Always return SelectedPath.</value>
+        public override string[] SelectedPaths
+        {
+            get { return new[] { SelectedPath }; }
         }
 
         /// <summary>
