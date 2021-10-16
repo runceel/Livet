@@ -5,7 +5,7 @@
 ## Livet とは
 
 Livet(リベット) は WPF のための MVVM(Model/View/ViewModel) パターン用インフラストラクチャです。
-.NET Framework 4.5.2 及び .NET Core 3.0(現在はプレビュー版です) 以上で動作し zlib/libpng ライセンスで提供しています。
+.NET Framework 4.5.2 以上及び .NET Core 3.1, .NET 6 で動作し zlib/libpng ライセンスで提供しています。
 zlib/libpng ライセンスでは、ライブラリとしての利用にとどめるのであれば再配布時にも著作権表示などの義務はありません。
 
 しかし、ソースコードを改変しての再配布にはその旨の明示が義務付けられます。
@@ -21,7 +21,7 @@ zlib/libpng ライセンスでは、ライブラリとしての利用にとど�
 
 ## 導入
 
-Livet は Visual Studio 2019 の拡張機能を使用することでプロジェクトテンプレートやアイテムテンプレートやコードスニペットが追加され生産性が一番高い状態で開発が出来るように設計されています。
+Livet は Visual Studio 2022 の拡張機能を使用することでプロジェクトテンプレートやアイテムテンプレートやコードスニペットが追加され生産性が一番高い状態で開発が出来るように設計されています。
 拡張機能は Visual Studio の拡張機能と更新プログラム でオンラインカテゴリーで Livet と検索するインストールすることが出来ます。
 
 ![](Images/2018-12-26-09-29-56.png)
@@ -29,27 +29,27 @@ Livet は Visual Studio 2019 の拡張機能を使用することでプロジェ
 また、ライブラリは以下 NuGet に公開しています。
 
 - [LivetCask](https://www.nuget.org/packages/LivetCask/)
-	- 従来通りの Livet の機能セット
+    - 従来通りの Livet の機能セット
 - [LivetCask2](https://www.nuget.org/packages/LivetCask2/)
-	- Livet のコレクションを StatefulModel ベースのコレクションに置き換えたパッケージ
+    - Livet のコレクションを StatefulModel ベースのコレクションに置き換えたパッケージ
 - [LivetExtensions](https://www.nuget.org/packages/LivetExtensions/)
 
 さらに、Livet のフル機能は利用しないが一部の機能を利用したい場合に対応するため、機能単位のパッケージを提供しています。上記の LivetCask と LivetCask2 は、下記のパッケージを束ねたものになります。
 
 - [LivetCask.Behaviors](https://www.nuget.org/packages/LivetCask.Behaviors/)
-	- Livet の Behavior 機能のみのパッケージ
+    - Livet の Behavior 機能のみのパッケージ
 - [LivetCask.Collections](https://www.nuget.org/packages/LivetCask.Collections/)
-	- Livet のコレクションのパッケージ
+    - Livet のコレクションのパッケージ
 - [LivetCask.Converters](https://www.nuget.org/packages/LivetCask.Converters/)
-	- Livet の Converter 機能のみのパッケージ
+    - Livet の Converter 機能のみのパッケージ
 - [LivetCask.EventListeners](https://www.nuget.org/packages/LivetCask.EventListeners/)
-	- Livet の EventListener 系のみのパッケージ
+    - Livet の EventListener 系のみのパッケージ
 - [LivetCask.Messaging](https://www.nuget.org/packages/LivetCask.Messaging/)
-	- Livet の Messenger 系のみのパッケージ
+    - Livet の Messenger 系のみのパッケージ
 - [LivetCask.Mvvm](https://www.nuget.org/packages/LivetCask.Mvvm/)
-	- Livet の MVVM の基本クラス（NotificationObject やコマンド系) のみのパッケージ
+    - Livet の MVVM の基本クラス（NotificationObject やコマンド系) のみのパッケージ
 - [LivetCask.StatefulModel](https://www.nuget.org/packages/LivetCask.StatefulModel/)
-	- Livet.Collections を置き換える新しいコレクションのパッケージ。詳細については [StatefulModel](./README.StatefulModel.md) を参照してください。
+    - Livet.Collections を置き換える新しいコレクションのパッケージ。詳細については [StatefulModel](./README.StatefulModel.md) を参照してください。
 
 ## Visual Studio との親和性
 

@@ -9,9 +9,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Livet Project</Authors>
     <Description>Livet is the infrastructure of MVVM pattern on WPF.
-It supports .NET Framework 4.5.2 or later, .NET Core 3.1, and licensed as zlib/libpng.
+It supports .NET Framework 4.5.2 or later, .NET Core 3.1, .NET 6 and licensed as zlib/libpng.
     </Description>
-    <Copyright>Copyright (c) 2010-2019 Livet Project</Copyright>
+    <Copyright>Copyright (c) 2010-2021 Livet Project</Copyright>
     <PackageLicenseFile>license-en.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/runceel/Livet</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/ugaya40/Livet/master/Images/Livet.png</PackageIconUrl>
