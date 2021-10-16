@@ -11,7 +11,7 @@ namespace Livet.Messaging.IO
     ///     when you set each of them,
     ///     because some platform only supports one of them.
     /// </remarks>
-    public sealed class FolderSelectionMessage : ResponsiveInteractionMessage<string>
+    public sealed class FolderSelectionMessage : ResponsiveInteractionMessage<string[]>
     {
         /// <summary>
         ///     Defines <see cref="Description" /> dependency property.
@@ -45,17 +45,6 @@ namespace Livet.Messaging.IO
         public static readonly DependencyProperty SelectedPathProperty =
             DependencyProperty.Register("SelectedPath", typeof(string), typeof(FolderSelectionMessage),
                 new UIPropertyMetadata(string.Empty));
-
-        /// <summary>
-        ///     Defines <see cref="SelectedPaths" /> dependency property.
-        /// </summary>
-        /// <value>
-        ///     <see cref="DependencyProperty" />.
-        /// </value>
-        [NotNull]
-        public static readonly DependencyProperty SelectedPathsProperty =
-            DependencyProperty.Register("SelectedPaths", typeof(string[]), typeof(FolderSelectionMessage),
-                new UIPropertyMetadata(new[] { string.Empty }));
 
         /// <summary>
         ///     Defines <see cref="SelectedPath" /> dependency property.
@@ -139,18 +128,6 @@ namespace Livet.Messaging.IO
         {
             get { return GetValue(SelectedPathProperty) as string; }
             set { SetValue(SelectedPathProperty, value); }
-        }
-
-        /// <summary>
-        ///     Gets or sets the selected paths on the folder selection dialog.
-        /// </summary>
-        /// <value>
-        ///     The selected paths on the folder selection dialog.
-        /// </value>
-        public string[] SelectedPaths
-        {
-            get { return GetValue(SelectedPathsProperty) as string[]; }
-            set { SetValue(SelectedPathsProperty, value); }
         }
 
         /// <summary>

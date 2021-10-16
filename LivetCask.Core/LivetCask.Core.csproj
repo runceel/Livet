@@ -2,7 +2,7 @@
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\Livet.props" />
   <PropertyGroup>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net452;netstandard2.0</TargetFrameworks>
     <RootNamespace>Livet</RootNamespace>
     <AssemblyName>Livet.Core</AssemblyName>
     <PackageId>LivetCask.Core</PackageId>

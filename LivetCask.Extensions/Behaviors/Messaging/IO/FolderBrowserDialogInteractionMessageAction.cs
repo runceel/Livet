@@ -37,8 +37,7 @@ namespace Livet.Behaviors.Messaging.IO
 
                     if (dialog.ShowDialog(hostWindow).GetValueOrDefault())
                     {
-                        folderSelectionMessage.SelectedPaths = dialog.SelectedPaths;
-                        folderSelectionMessage.Response = folderSelectionMessage.SelectedPaths.FirstOrDefault();
+                        folderSelectionMessage.Response = dialog.SelectedPaths;
                     }
                     else
                     {
