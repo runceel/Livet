@@ -92,7 +92,7 @@ namespace ViewLayerSupport.ViewModels
 
             string selectedPaths = message.Response == null
                 ? "未選択"
-                : String.Join(";", message.SelectedPaths);
+                : String.Join(";", message.Response);
 
             OutputMessage = $"{DateTime.Now}: FolderSelected: {selectedPaths}";
         }
