@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\Livet.Annotations\Livet.Annotations.projitems" Label="Shared" />
   <Import Project="..\Livet.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net452</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;netcoreapp3.1;net452</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <RootNamespace>Livet</RootNamespace>
     <AssemblyName>Livet.Messaging</AssemblyName>
