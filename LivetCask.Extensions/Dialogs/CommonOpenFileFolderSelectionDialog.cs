@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using Livet.Annotations;
 using Microsoft.WindowsAPICodePack.Dialogs;
@@ -19,7 +21,7 @@ namespace Livet.Dialogs
         /// </summary>
         public CommonOpenFileFolderSelectionDialog()
         {
-            _commonOpenFileDialog = new CommonOpenFileDialog {IsFolderPicker = true, Multiselect = false};
+            _commonOpenFileDialog = new CommonOpenFileDialog { IsFolderPicker = true, Multiselect = false };
             _defaultTitle = _commonOpenFileDialog.Title;
         }
 
@@ -45,6 +47,16 @@ namespace Livet.Dialogs
         {
             get { return string.Empty; }
             set { }
+        }
+
+        /// <summary>
+        ///  Gets or sets whether the multi selection is enabled on the folder browser dialog.
+        /// </summary>
+        public override bool Multiselect
+        {
+            get { return _commonOpenFileDialog.Multiselect; }
+
+            set { _commonOpenFileDialog.Multiselect = value; }
         }
 
         /// <summary>
@@ -74,6 +86,14 @@ namespace Livet.Dialogs
                                                              ?? "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";
                 }
             }
+        }
+
+        /// <summary>
+        ///     Gets or sets the selected paths.
+        /// </summary>
+        public override string[] SelectedPaths
+        {
+            get { return _commonOpenFileDialog.FileNames.ToArray(); }
         }
 
         /// <summary>

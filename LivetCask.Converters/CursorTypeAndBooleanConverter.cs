@@ -36,7 +36,7 @@ using System.Diagnostics;
 
 namespace Livet.Converters
 {
-	/// <summary>
+    /// <summary>
     /// CursorType列挙体とbool値の相互変換を行うIValueConverterです。
     /// </summary>
     public class CursorTypeAndBooleanConverter : IValueConverter
@@ -66,7 +66,7 @@ namespace Livet.Converters
 
         private bool _isConvertWhenTrueSet;
         private CursorType _convertWhenTrue;
-		/// <summary>
+        /// <summary>
         /// ソース値がTrueの際にどのCursorType列挙体メンバーに変換するかを指定、または取得します。
         /// </summary>
         public CursorType ConvertWhenTrue
@@ -84,7 +84,7 @@ namespace Livet.Converters
 
         private bool _isConvertWhenFalseSet;
         private CursorType _convertWhenFalse;
-		/// <summary>
+        /// <summary>
         /// ソース値がFalseの際にどのCursorType列挙体メンバーに変換するかを指定、または取得します。
         /// </summary>
         public CursorType ConvertWhenFalse
@@ -108,178 +108,178 @@ namespace Livet.Converters
             var cursorValue = (Cursor)value;
 
             switch (cursorValue.ToString())
-			{
-				case "None":
-					if (_isConvertBackWhenNoneSet)
-					{
-						return ConvertBackWhenNone;
-					}
-					break;
-				case "No":
-					if (_isConvertBackWhenNoSet)
-					{
-						return ConvertBackWhenNo;
-					}
-					break;
-				case "Arrow":
-					if (_isConvertBackWhenArrowSet)
-					{
-						return ConvertBackWhenArrow;
-					}
-					break;
-				case "AppStarting":
-					if (_isConvertBackWhenAppStartingSet)
-					{
-						return ConvertBackWhenAppStarting;
-					}
-					break;
-				case "Cross":
-					if (_isConvertBackWhenCrossSet)
-					{
-						return ConvertBackWhenCross;
-					}
-					break;
-				case "Help":
-					if (_isConvertBackWhenHelpSet)
-					{
-						return ConvertBackWhenHelp;
-					}
-					break;
-				case "IBeam":
-					if (_isConvertBackWhenIBeamSet)
-					{
-						return ConvertBackWhenIBeam;
-					}
-					break;
-				case "SizeAll":
-					if (_isConvertBackWhenSizeAllSet)
-					{
-						return ConvertBackWhenSizeAll;
-					}
-					break;
-				case "SizeNESW":
-					if (_isConvertBackWhenSizeNESWSet)
-					{
-						return ConvertBackWhenSizeNESW;
-					}
-					break;
-				case "SizeNS":
-					if (_isConvertBackWhenSizeNSSet)
-					{
-						return ConvertBackWhenSizeNS;
-					}
-					break;
-				case "SizeNWSE":
-					if (_isConvertBackWhenSizeNWSESet)
-					{
-						return ConvertBackWhenSizeNWSE;
-					}
-					break;
-				case "SizeWE":
-					if (_isConvertBackWhenSizeWESet)
-					{
-						return ConvertBackWhenSizeWE;
-					}
-					break;
-				case "UpArrow":
-					if (_isConvertBackWhenUpArrowSet)
-					{
-						return ConvertBackWhenUpArrow;
-					}
-					break;
-				case "Wait":
-					if (_isConvertBackWhenWaitSet)
-					{
-						return ConvertBackWhenWait;
-					}
-					break;
-				case "Hand":
-					if (_isConvertBackWhenHandSet)
-					{
-						return ConvertBackWhenHand;
-					}
-					break;
-				case "Pen":
-					if (_isConvertBackWhenPenSet)
-					{
-						return ConvertBackWhenPen;
-					}
-					break;
-				case "ScrollNS":
-					if (_isConvertBackWhenScrollNSSet)
-					{
-						return ConvertBackWhenScrollNS;
-					}
-					break;
-				case "ScrollWE":
-					if (_isConvertBackWhenScrollWESet)
-					{
-						return ConvertBackWhenScrollWE;
-					}
-					break;
-				case "ScrollAll":
-					if (_isConvertBackWhenScrollAllSet)
-					{
-						return ConvertBackWhenScrollAll;
-					}
-					break;
-				case "ScrollN":
-					if (_isConvertBackWhenScrollNSet)
-					{
-						return ConvertBackWhenScrollN;
-					}
-					break;
-				case "ScrollS":
-					if (_isConvertBackWhenScrollSSet)
-					{
-						return ConvertBackWhenScrollS;
-					}
-					break;
-				case "ScrollW":
-					if (_isConvertBackWhenScrollWSet)
-					{
-						return ConvertBackWhenScrollW;
-					}
-					break;
-				case "ScrollE":
-					if (_isConvertBackWhenScrollESet)
-					{
-						return ConvertBackWhenScrollE;
-					}
-					break;
-				case "ScrollNW":
-					if (_isConvertBackWhenScrollNWSet)
-					{
-						return ConvertBackWhenScrollNW;
-					}
-					break;
-				case "ScrollNE":
-					if (_isConvertBackWhenScrollNESet)
-					{
-						return ConvertBackWhenScrollNE;
-					}
-					break;
-				case "ScrollSW":
-					if (_isConvertBackWhenScrollSWSet)
-					{
-						return ConvertBackWhenScrollSW;
-					}
-					break;
-				case "ScrollSE":
-					if (_isConvertBackWhenScrollSESet)
-					{
-						return ConvertBackWhenScrollSE;
-					}
-					break;
-				case "ArrowCD":
-					if (_isConvertBackWhenArrowCDSet)
-					{
-						return ConvertBackWhenArrowCD;
-					}
-					break;
-				default:
-					throw new ArgumentException();
-			}
+            {
+                case "None":
+                    if (_isConvertBackWhenNoneSet)
+                    {
+                        return ConvertBackWhenNone;
+                    }
+                    break;
+                case "No":
+                    if (_isConvertBackWhenNoSet)
+                    {
+                        return ConvertBackWhenNo;
+                    }
+                    break;
+                case "Arrow":
+                    if (_isConvertBackWhenArrowSet)
+                    {
+                        return ConvertBackWhenArrow;
+                    }
+                    break;
+                case "AppStarting":
+                    if (_isConvertBackWhenAppStartingSet)
+                    {
+                        return ConvertBackWhenAppStarting;
+                    }
+                    break;
+                case "Cross":
+                    if (_isConvertBackWhenCrossSet)
+                    {
+                        return ConvertBackWhenCross;
+                    }
+                    break;
+                case "Help":
+                    if (_isConvertBackWhenHelpSet)
+                    {
+                        return ConvertBackWhenHelp;
+                    }
+                    break;
+                case "IBeam":
+                    if (_isConvertBackWhenIBeamSet)
+                    {
+                        return ConvertBackWhenIBeam;
+                    }
+                    break;
+                case "SizeAll":
+                    if (_isConvertBackWhenSizeAllSet)
+                    {
+                        return ConvertBackWhenSizeAll;
+                    }
+                    break;
+                case "SizeNESW":
+                    if (_isConvertBackWhenSizeNESWSet)
+                    {
+                        return ConvertBackWhenSizeNESW;
+                    }
+                    break;
+                case "SizeNS":
+                    if (_isConvertBackWhenSizeNSSet)
+                    {
+                        return ConvertBackWhenSizeNS;
+                    }
+                    break;
+                case "SizeNWSE":
+                    if (_isConvertBackWhenSizeNWSESet)
+                    {
+                        return ConvertBackWhenSizeNWSE;
+                    }
+                    break;
+                case "SizeWE":
+                    if (_isConvertBackWhenSizeWESet)
+                    {
+                        return ConvertBackWhenSizeWE;
+                    }
+                    break;
+                case "UpArrow":
+                    if (_isConvertBackWhenUpArrowSet)
+                    {
+                        return ConvertBackWhenUpArrow;
+                    }
+                    break;
+                case "Wait":
+                    if (_isConvertBackWhenWaitSet)
+                    {
+                        return ConvertBackWhenWait;
+                    }
+                    break;
+                case "Hand":
+                    if (_isConvertBackWhenHandSet)
+                    {
+                        return ConvertBackWhenHand;
+                    }
+                    break;
+                case "Pen":
+                    if (_isConvertBackWhenPenSet)
+                    {
+                        return ConvertBackWhenPen;
+                    }
+                    break;
+                case "ScrollNS":
+                    if (_isConvertBackWhenScrollNSSet)
+                    {
+                        return ConvertBackWhenScrollNS;
+                    }
+                    break;
+                case "ScrollWE":
+                    if (_isConvertBackWhenScrollWESet)
+                    {
+                        return ConvertBackWhenScrollWE;
+                    }
+                    break;
+                case "ScrollAll":
+                    if (_isConvertBackWhenScrollAllSet)
+                    {
+                        return ConvertBackWhenScrollAll;
+                    }
+                    break;
+                case "ScrollN":
+                    if (_isConvertBackWhenScrollNSet)
+                    {
+                        return ConvertBackWhenScrollN;
+                    }
+                    break;
+                case "ScrollS":
+                    if (_isConvertBackWhenScrollSSet)
+                    {
+                        return ConvertBackWhenScrollS;
+                    }
+                    break;
+                case "ScrollW":
+                    if (_isConvertBackWhenScrollWSet)
+                    {
+                        return ConvertBackWhenScrollW;
+                    }
+                    break;
+                case "ScrollE":
+                    if (_isConvertBackWhenScrollESet)
+                    {
+                        return ConvertBackWhenScrollE;
+                    }
+                    break;
+                case "ScrollNW":
+                    if (_isConvertBackWhenScrollNWSet)
+                    {
+                        return ConvertBackWhenScrollNW;
+                    }
+                    break;
+                case "ScrollNE":
+                    if (_isConvertBackWhenScrollNESet)
+                    {
+                        return ConvertBackWhenScrollNE;
+                    }
+                    break;
+                case "ScrollSW":
+                    if (_isConvertBackWhenScrollSWSet)
+                    {
+                        return ConvertBackWhenScrollSW;
+                    }
+                    break;
+                case "ScrollSE":
+                    if (_isConvertBackWhenScrollSESet)
+                    {
+                        return ConvertBackWhenScrollSE;
+                    }
+                    break;
+                case "ArrowCD":
+                    if (_isConvertBackWhenArrowCDSet)
+                    {
+                        return ConvertBackWhenArrowCD;
+                    }
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
 
             if (_isConvertBackDefaultBooleanValueSet)
             {
@@ -291,7 +291,7 @@ namespace Livet.Converters
 
         private bool _isConvertBackDefaultBooleanValueSet;
         private bool _convertBackDefaultBooleanValue;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値をbool値に変換する際のデフォルト値を指定、または取得します。
         /// </summary>
         public bool ConvertBackDefaultBooleanValue
@@ -303,13 +303,13 @@ namespace Livet.Converters
             set
             {
                 _convertBackDefaultBooleanValue = value;
-				_isConvertBackDefaultBooleanValueSet = true;
+                _isConvertBackDefaultBooleanValueSet = true;
             }
         }
 
         private bool _isConvertBackWhenNoneSet;
         private bool _convertBackWhenNone;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がNoneの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -327,7 +327,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenNoSet;
         private bool _convertBackWhenNo;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がNoの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -345,7 +345,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenArrowSet;
         private bool _convertBackWhenArrow;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がArrowの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -363,7 +363,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenAppStartingSet;
         private bool _convertBackWhenAppStarting;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がAppStartingの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -381,7 +381,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenCrossSet;
         private bool _convertBackWhenCross;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がCrossの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -399,7 +399,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenHelpSet;
         private bool _convertBackWhenHelp;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がHelpの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -417,7 +417,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenIBeamSet;
         private bool _convertBackWhenIBeam;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がIBeamの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -435,7 +435,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenSizeAllSet;
         private bool _convertBackWhenSizeAll;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がSizeAllの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -453,7 +453,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenSizeNESWSet;
         private bool _convertBackWhenSizeNESW;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がSizeNESWの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -471,7 +471,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenSizeNSSet;
         private bool _convertBackWhenSizeNS;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がSizeNSの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -489,7 +489,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenSizeNWSESet;
         private bool _convertBackWhenSizeNWSE;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がSizeNWSEの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -507,7 +507,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenSizeWESet;
         private bool _convertBackWhenSizeWE;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がSizeWEの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -525,7 +525,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenUpArrowSet;
         private bool _convertBackWhenUpArrow;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がUpArrowの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -543,7 +543,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenWaitSet;
         private bool _convertBackWhenWait;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がWaitの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -561,7 +561,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenHandSet;
         private bool _convertBackWhenHand;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がHandの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -579,7 +579,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenPenSet;
         private bool _convertBackWhenPen;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がPenの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -597,7 +597,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollNSSet;
         private bool _convertBackWhenScrollNS;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollNSの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -615,7 +615,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollWESet;
         private bool _convertBackWhenScrollWE;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollWEの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -633,7 +633,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollAllSet;
         private bool _convertBackWhenScrollAll;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollAllの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -651,7 +651,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollNSet;
         private bool _convertBackWhenScrollN;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollNの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -669,7 +669,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollSSet;
         private bool _convertBackWhenScrollS;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollSの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -687,7 +687,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollWSet;
         private bool _convertBackWhenScrollW;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollWの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -705,7 +705,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollESet;
         private bool _convertBackWhenScrollE;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollEの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -723,7 +723,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollNWSet;
         private bool _convertBackWhenScrollNW;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollNWの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -741,7 +741,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollNESet;
         private bool _convertBackWhenScrollNE;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollNEの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -759,7 +759,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollSWSet;
         private bool _convertBackWhenScrollSW;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollSWの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -777,7 +777,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenScrollSESet;
         private bool _convertBackWhenScrollSE;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がScrollSEの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>
@@ -795,7 +795,7 @@ namespace Livet.Converters
         }
         private bool _isConvertBackWhenArrowCDSet;
         private bool _convertBackWhenArrowCD;
-		/// <summary>
+        /// <summary>
         /// CursorTypeの値がArrowCDの際True/Falseいずれに変換するのかを指定、または取得します。<br/>
         /// この値が設定されておらず、ConvertBackDefaultBooleanValueが設定されている場合はConvertBackDefaultBooleanValueに従います。
         /// </summary>

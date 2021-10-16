@@ -1,14 +1,14 @@
 ﻿<Window
-    x:Class="ViewLayerSupport.Views.MessagingWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
-    xmlns:v="clr-namespace:ViewLayerSupport.Views"
-    xmlns:vm="clr-namespace:ViewLayerSupport.ViewModels"
-    Title="MessagingWindow"
-    Width="525"
-    Height="350">
+   x:Class="ViewLayerSupport.Views.MessagingWindow"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+   xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+   xmlns:v="clr-namespace:ViewLayerSupport.Views"
+   xmlns:vm="clr-namespace:ViewLayerSupport.ViewModels"
+   Title="MessagingWindow"
+   Width="525"
+   Height="350">
 
     <Window.DataContext>
         <vm:MessagingWindowViewModel />
@@ -37,9 +37,6 @@
     </i:Interaction.Triggers>
 
     <StackPanel>
-        <Viewbox>
-            <TextBlock Text="{Binding OutputMessage}" />
-        </Viewbox>
         <Button Content="ConfirmFromViewModel">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
@@ -51,25 +48,60 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:ConfirmationDialogInteractionMessageAction>
-                        <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView"
-                                                    CallbackMethodTarget="{Binding}">
+                        <l:DirectInteractionMessage CallbackMethodName="ConfirmFromView" CallbackMethodTarget="{Binding}">
                             <l:ConfirmationMessage Caption="テスト" Text="これはテスト用メッセージです。" />
                         </l:DirectInteractionMessage>
                     </l:ConfirmationDialogInteractionMessageAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <Button Content="Folder">
+        <Button Content="Single FileDialog">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <l:OpenFileDialogInteractionMessageAction>
+                        <l:DirectInteractionMessage CallbackMethodName="FileSelected" CallbackMethodTarget="{Binding}">
+                            <l:OpeningFileSelectionMessage Title="ファイルの選択" />
+                        </l:DirectInteractionMessage>
+                    </l:OpenFileDialogInteractionMessageAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button Content="Multi FileDialog">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <l:OpenFileDialogInteractionMessageAction>
+                        <l:DirectInteractionMessage CallbackMethodName="FileSelected" CallbackMethodTarget="{Binding}">
+                            <l:OpeningFileSelectionMessage Title="ファイルの選択" MultiSelect="True" />
+                        </l:DirectInteractionMessage>
+                    </l:OpenFileDialogInteractionMessageAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button Content="Single FolderDialog">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:FolderBrowserDialogInteractionMessageAction>
-                        <l:DirectInteractionMessage CallbackMethodName="FolderSelected"
-                                                    CallbackMethodTarget="{Binding}">
+                        <l:DirectInteractionMessage CallbackMethodName="FolderSelected" CallbackMethodTarget="{Binding}">
                             <l:FolderSelectionMessage Description="フォルダーの選択" DialogPreference="None" />
                         </l:DirectInteractionMessage>
                     </l:FolderBrowserDialogInteractionMessageAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
+        <Button Content="Multi FolderDialog">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <l:FolderBrowserDialogInteractionMessageAction>
+                        <l:DirectInteractionMessage CallbackMethodName="FolderSelected" CallbackMethodTarget="{Binding}">
+                            <l:FolderSelectionMessage
+                        Description="フォルダーの選択"
+                        DialogPreference="None"
+                        Multiselect="True" />
+                        </l:DirectInteractionMessage>
+                    </l:FolderBrowserDialogInteractionMessageAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <TextBlock Text="{Binding OutputMessage}" TextWrapping="Wrap" />
     </StackPanel>
 </Window>
