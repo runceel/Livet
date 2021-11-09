@@ -3,7 +3,7 @@
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005"
             xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
   <TemplateData>
-    <Name>Livet project template(.NET Core)(C#)</Name>
+    <Name>Livet project template(.NET 6)(C#)</Name>
     <Description>To create a MVVM application using Livet on WPF(.NET Core)</Description>
     <Icon>Livet.ProjectTemplate.CSharp.NETCore.ico</Icon>
     <ProjectType>CSharp</ProjectType>
