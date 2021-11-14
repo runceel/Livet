@@ -46,8 +46,8 @@
 		<Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\net452" />
     <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\netcoreapp3.1" />
     <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\netcoreapp3.1" />
-    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\net6.0-windows" />
-    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\net6.0-windows" />
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.dll" Pack="true" PackagePath="lib\net6.0-windows7" />
+    <Content Include="..\ReferenceAssemblies\Microsoft.WindowsAPICodePack.Shell.dll" Pack="true" PackagePath="lib\net6.0-windows7" />
   </ItemGroup>
 
 	<ItemGroup>
