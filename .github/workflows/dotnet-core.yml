@@ -52,7 +52,7 @@ jobs:
     if: github.event_name == 'push' && (github.ref == 'refs/heads/pre-release' || github.ref == 'refs/heads/release')
     steps:
       - name: Download archives
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: dist
       - name: Publish packages
